@@ -1,32 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ha">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Center App AI - Chat</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
+
   <h1>🤖 Center App AI</h1>
+  <p>Yi magana da AI</p>
 
   <div id="chatBox">
-    <p><b>AI:</b> Sannu! Me kake so in taimaka maka ka ƙirƙira?</p>
+    <p><b>AI:</b> Sannu! Me zan taimaka maka?</p>
   </div>
 
-  <textarea id="prompt" placeholder="Rubuta abin da kake so AI ya yi..."></textarea>
+  <textarea
+    id="prompt"
+    placeholder="Rubuta saƙonka a nan..."
+    rows="4">
+  </textarea>
 
   <br><br>
 
-  <button id="sendBtn">Aika</button>
+  <button id="sendBtn">Aika 🚀</button>
 
   <br><br>
 
   <a href="dashboard.html">⬅ Komawa Dashboard</a>
+
 </div>
 
-<script src="app.js" type="module"></script>
+<script type="module">
+const WORKER_URL = "https://center-ap-ai.daninna422.workers.dev";
+
+const promptInput = document.getElementById("prompt");
+const sendBtn = document.getElementById("sendBtn");
+const chatBox = document.getElementById("chatBox");
+
+sendBtn.addEventListener("click", async () => {
+
+  const message = promptInput.value.trim();
+
+  if (!message) {
+    alert("Rubuta saƙo tukuna.");
+    return;
+  }
+
+  chatBox.innerHTML += `<p><b>You:</b> ${message}</p>`;
+
+  sendBtn.disabled = true;
+  sendBtn.textContent = "Ana aikawa...";
+
+  try {
+
+    const response = await fetch(WORKER_URL + "/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: message
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.reply) {
+      chatBox.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+    } else {
+      chatBox.innerHTML += `<p><b>Error:</b> An sami matsala.</p>`;
+    }
+
+  } catch (error) {
+
+    chatBox.innerHTML +=
+      `<p><b>Error:</b> Ba a iya haɗawa da backend ba.</p>`;
+
+  }
+
+  promptInput.value = "";
+  sendBtn.disabled = false;
+  sendBtn.textContent = "Aika 🚀";
+
+});
+</script>
 
 </body>
 </html>
