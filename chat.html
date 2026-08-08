@@ -3,91 +3,237 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Center App AI - Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Center App AI</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 30px 15px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #1261d6;
+      font-size: 32px;
+    }
+
+    .robot {
+      font-size: 45px;
+    }
+
+    #chatBox {
+      text-align: left;
+      margin-top: 25px;
+      line-height: 1.6;
+    }
+
+    .ai {
+      margin: 12px 0;
+    }
+
+    .you {
+      margin: 12px 0;
+    }
+
+    .error {
+      color: red;
+      margin: 12px 0;
+    }
+
+    textarea {
+      width: 90%;
+      min-height: 100px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 14px 35px;
+      background: #1261d6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #999;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      color: #1261d6;
+      font-size: 18px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <h1>🤖 Center App AI</h1>
-  <p>Yi magana da AI</p>
+    <div class="robot">🤖</div>
 
-  <div id="chatBox">
-    <p><b>AI:</b> Sannu! Me zan taimaka maka?</p>
+    <h1>Center App AI</h1>
+
+    <h2>Yi magana da AI</h2>
+
+    <div id="chatBox">
+
+      <div class="ai">
+        <strong>AI:</strong>
+        <span>Sannu! Me zan taimaka maka?</span>
+      </div>
+
+    </div>
+
+    <textarea
+      id="message"
+      placeholder="Rubuta sakonka a nan..."
+    ></textarea>
+
+    <br>
+
+    <button id="sendButton" onclick="sendMessage()">
+      Aika 🚀
+    </button>
+
+    <br>
+
+    <a class="back" href="dashboard.html">
+      ⬅ Komawa Dashboard
+    </a>
+
   </div>
 
-  <textarea
-    id="prompt"
-    placeholder="Rubuta saƙonka a nan..."
-    rows="4">
-  </textarea>
+  <script>
 
-  <br><br>
+    const BACKEND_URL =
+      "https://center-ap-ai.daninna422.workers.dev/chat";
 
-  <button id="sendBtn">Aika 🚀</button>
+    async function sendMessage() {
 
-  <br><br>
+      const messageBox =
+        document.getElementById("message");
 
-  <a href="dashboard.html">⬅ Komawa Dashboard</a>
+      const sendButton =
+        document.getElementById("sendButton");
 
-</div>
+      const chatBox =
+        document.getElementById("chatBox");
 
-<script type="module">
-const WORKER_URL = "https://center-ap-ai.daninna422.workers.dev";
+      const message =
+        messageBox.value.trim();
 
-const promptInput = document.getElementById("prompt");
-const sendBtn = document.getElementById("sendBtn");
-const chatBox = document.getElementById("chatBox");
+      if (!message) {
+        alert("Rubuta saƙonka tukuna.");
+        return;
+      }
 
-sendBtn.addEventListener("click", async () => {
+      chatBox.innerHTML += `
+        <div class="you">
+          <strong>You:</strong> ${escapeHtml(message)}
+        </div>
+      `;
 
-  const message = promptInput.value.trim();
+      messageBox.value = "";
 
-  if (!message) {
-    alert("Rubuta saƙo tukuna.");
-    return;
-  }
+      sendButton.disabled = true;
+      sendButton.textContent = "Ana aikawa...";
 
-  chatBox.innerHTML += `<p><b>You:</b> ${message}</p>`;
+      try {
 
-  sendBtn.disabled = true;
-  sendBtn.textContent = "Ana aikawa...";
+        const response = await fetch(
+          BACKEND_URL,
+          {
+            method: "POST",
 
-  try {
+            headers: {
+              "Content-Type": "application/json"
+            },
 
-    const response = await fetch(WORKER_URL + "/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: message
-      })
-    });
+            body: JSON.stringify({
+              message: message
+            })
+          }
+        );
 
-    const data = await response.json();
+        if (!response.ok) {
+          throw new Error(
+            "Backend ya dawo da error: " +
+            response.status
+          );
+        }
 
-    if (data.reply) {
-      chatBox.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
-    } else {
-      chatBox.innerHTML += `<p><b>Error:</b> An sami matsala.</p>`;
+        const data =
+          await response.json();
+
+        if (data.reply) {
+
+          chatBox.innerHTML += `
+            <div class="ai">
+              <strong>AI:</strong>
+              ${escapeHtml(data.reply)}
+            </div>
+          `;
+
+        } else {
+
+          chatBox.innerHTML += `
+            <div class="error">
+              <strong>Error:</strong>
+              Backend bai dawo da amsa ba.
+            </div>
+          `;
+        }
+
+      } catch (error) {
+
+        chatBox.innerHTML += `
+          <div class="error">
+            <strong>Error:</strong>
+            Ba a iya haɗawa da backend ba.
+          </div>
+        `;
+
+        console.error(error);
+
+      } finally {
+
+        sendButton.disabled = false;
+        sendButton.textContent = "Aika 🚀";
+      }
     }
 
-  } catch (error) {
 
-    chatBox.innerHTML +=
-      `<p><b>Error:</b> Ba a iya haɗawa da backend ba.</p>`;
+    function escapeHtml(text) {
 
-  }
+      const div =
+        document.createElement("div");
 
-  promptInput.value = "";
-  sendBtn.disabled = false;
-  sendBtn.textContent = "Aika 🚀";
+      div.textContent = text;
 
-});
-</script>
+      return div.innerHTML;
+    }
+
+  </script>
 
 </body>
 </html>
