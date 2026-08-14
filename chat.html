@@ -203,18 +203,17 @@
           `;
         }
 
-      } catch (error) {
+      }catch (error) {
 
-        chatBox.innerHTML += `
-          <div class="error">
-            <strong>Error:</strong>
-            Ba a iya haɗawa da backend ba.
-          </div>
-        `;
+  chatBox.innerHTML += `
+    <div class="error">
+      <strong>Error:</strong>
+      ${escapeHtml(error.message)}
+    </div>
+  `;
 
-        console.error(error);
-
-      } finally {
+  console.error("CHAT ERROR:", error);
+}  finally {
 
         sendButton.disabled = false;
         sendButton.textContent = "Aika 🚀";
