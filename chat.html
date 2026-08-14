@@ -175,9 +175,10 @@
         );
 
         if (!response.ok) {
+  const text = await response.text();
+
   throw new Error(
-    "Backend ya dawo da error: " +
-    response.status
+    "HTTP " + response.status + ": " + text
   );
 }
 
