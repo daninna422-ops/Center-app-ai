@@ -67,12 +67,12 @@ export default async function handler(req, res) {
     }
 
     if (!response.ok) {
-      return res.status(500).json({
-        error:
-          data?.error?.message ||
-          `Gemini API error: ${response.status}`
-      });
-    }
+  return res.status(response.status).json({
+    error:
+      data?.error?.message ||
+      `Gemini API error: ${response.status}`
+  });
+}
 
     const reply =
       data?.candidates?.[0]?.content?.parts
