@@ -36,19 +36,30 @@
       text-align: left;
       margin-top: 25px;
       line-height: 1.6;
+      max-height: 500px;
+      overflow-y: auto;
     }
 
     .ai {
       margin: 12px 0;
+      padding: 10px;
+      background: #eef5ff;
+      border-radius: 8px;
     }
 
     .you {
       margin: 12px 0;
+      padding: 10px;
+      background: #f1f1f1;
+      border-radius: 8px;
     }
 
     .error {
       color: red;
       margin: 12px 0;
+      padding: 10px;
+      background: #fff0f0;
+      border-radius: 8px;
     }
 
     textarea {
@@ -125,6 +136,7 @@
 
   <script>
 
+    // Wannan shi ne Vercel API ɗinmu
     const BACKEND_URL = "/api/chat";
 
     async function sendMessage() {
@@ -148,7 +160,8 @@
 
       chatBox.innerHTML += `
         <div class="you">
-          <strong>You:</strong> ${escapeHtml(message)}
+          <strong>You:</strong>
+          ${escapeHtml(message)}
         </div>
       `;
 
@@ -174,14 +187,17 @@
           }
         );
 
+        // Karɓi error ɗin backend idan akwai
         if (!response.ok) {
-  const errorData = await response.json().catch(() => ({}));
 
-  throw new Error(
-    errorData.error ||
-    "HTTP Error: " + response.status
-  );
-    }
+          const errorData =
+            await response.json().catch(() => ({}));
+
+          throw new Error(
+            errorData.error ||
+            "HTTP Error: " + response.status
+          );
+        }
 
         const data =
           await response.json();
@@ -205,17 +221,24 @@
           `;
         }
 
-      }catch (error) {
+        chatBox.scrollTop =
+          chatBox.scrollHeight;
 
-  chatBox.innerHTML += `
-    <div class="error">
-      <strong>Error:</strong>
-      ${escapeHtml(error.message)}
-    </div>
-  `;
+      } catch (error) {
 
-  console.error("CHAT ERROR:", error);
-}  finally {
+        chatBox.innerHTML += `
+          <div class="error">
+            <strong>Error:</strong>
+            ${escapeHtml(error.message)}
+          </div>
+        `;
+
+        console.error(
+          "Center App AI Error:",
+          error
+        );
+
+      } finally {
 
         sendButton.disabled = false;
         sendButton.textContent = "Aika 🚀";
