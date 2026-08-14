@@ -175,11 +175,11 @@
         );
 
         if (!response.ok) {
-          throw new Error(
-            "Backend ya dawo da error: " +
-            response.status
-          );
-        }
+  throw new Error(
+    "Backend ya dawo da error: " +
+    response.status
+  );
+}
 
         const data =
           await response.json();
