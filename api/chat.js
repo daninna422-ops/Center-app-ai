@@ -1,6 +1,4 @@
-
 export default async function handler(req, res) {
-  // Only allow POST requests
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed"
@@ -10,14 +8,12 @@ export default async function handler(req, res) {
   try {
     const { message } = req.body || {};
 
-    // Check message
     if (!message || typeof message !== "string") {
       return res.status(400).json({
         error: "An aika da babu saƙo."
       });
     }
 
-    // Get Gemini API key from Vercel Environment Variables
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
@@ -26,7 +22,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // Call Gemini
     const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
       {
@@ -36,48 +31,49 @@ export default async function handler(req, res) {
           "x-goog-api-key": apiKey
         },
         body: JSON.stringify({
-          systemInstruction: {
-            parts: [
-              {
-                text:
-                  "Kai ne Center App AI. " +
-                  "Ka kasance mai taimako da ladabi. " +
-                  "Idan mai amfani ya yi Hausa, ka amsa da Hausa. " +
-                  "Idan ya yi Turanci, ka amsa da Turanci. " +
-                  "Ka yi bayani cikin sauki kuma a sarari."
-              }
-            ]
-          },
           contents: [
             {
               role: "user",
               parts: [
                 {
-                  text: message
+                  text:
+                    "Kai ne Center App AI. " +
+                    "Ka amsa cikin sauki. " +
+                    "Idan mai amfani ya yi Hausa, ka amsa Hausa. " +
+                    "Idan Turanci ne, ka amsa Turanci.\n\n" +
+                    message
                 }
               ]
             }
           ],
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 1024
+            maxOutputTokens: 2048
           }
         })
       }
     );
 
-    const data = await response.json();
+    const rawText = await response.text();
 
-    // Gemini returned an error
+    let data;
+
+    try {
+      data = JSON.parse(rawText);
+    } catch {
+      return res.status(500).json({
+        error: "Gemini bai dawo da JSON ba: " + rawText
+      });
+    }
+
     if (!response.ok) {
       return res.status(500).json({
         error:
           data?.error?.message ||
-          "Gemini API ya dawo da kuskure."
+          `Gemini API error: ${response.status}`
       });
     }
 
-    // Get AI response
     const reply =
       data?.candidates?.[0]?.content?.parts
         ?.map(part => part.text || "")
@@ -86,17 +82,18 @@ export default async function handler(req, res) {
 
     if (!reply) {
       return res.status(500).json({
-        error: "Gemini bai dawo da amsa ba."
+        error:
+          data?.promptFeedback?.blockReason ||
+          "Gemini bai dawo da amsa ba."
       });
     }
 
-    // Send response back to chat.html
     return res.status(200).json({
-      reply: reply
+      reply
     });
 
   } catch (error) {
-    console.error("Center App AI error:", error);
+    console.error("Center App AI:", error);
 
     return res.status(500).json({
       error: "Server error: " + (error?.message || "Unknown error")
