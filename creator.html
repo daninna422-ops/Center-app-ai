@@ -1,27 +1,550 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ha">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Center App AI - Creator</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Creator App AI</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    .header {
+      background: #1261d6;
+      color: white;
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    .header .icon {
+      font-size: 45px;
+    }
+
+    .header h1 {
+      margin: 8px 0 5px;
+      font-size: 28px;
+    }
+
+    .header p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #1261d6;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 15px 0 8px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd3df;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #1261d6;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .feature {
+      border: 1px solid #d9deea;
+      padding: 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      background: #fafbfe;
+    }
+
+    .feature input {
+      width: auto;
+      margin-right: 7px;
+    }
+
+    .button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #1261d6;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #0d4fae;
+    }
+
+    .button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    #result {
+      display: none;
+    }
+
+    .result-box {
+      background: #f7f9fc;
+      border: 1px solid #dce2ed;
+      border-radius: 10px;
+      padding: 15px;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .success {
+      color: #087f3e;
+      font-weight: bold;
+    }
+
+    .error {
+      color: #d00000;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 25px 0;
+      color: #1261d6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 500px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
-<h1>📱 Center App AI Creator</h1>
+  <div class="header">
+    <div class="icon">🛠️</div>
 
-<textarea id="appPrompt" placeholder="Describe the app you want to create..."></textarea>
+    <h1>Creator App AI</h1>
 
-<br><br>
+    <p>Gina app tare da taimakon AI</p>
+  </div>
 
-<button>Create App</button>
 
-<br><br>
+  <div class="container">
 
-<a href="dashboard.html">⬅ Back to Dashboard</a>
+    <div class="card">
 
-</div>
+      <h2>🚀 Ƙirƙiri sabon app</h2>
+
+      <p>
+        Bayyana app ɗin da kake son ƙirƙira.
+        Creator App AI zai taimaka maka tsara shi.
+      </p>
+
+
+      <label for="appName">
+        Sunan App
+      </label>
+
+      <input
+        id="appName"
+        type="text"
+        placeholder="Misali: Mubarak Bank"
+      >
+
+
+      <label for="appDescription">
+        Menene app ɗin zai yi?
+      </label>
+
+      <textarea
+        id="appDescription"
+        placeholder="Misali: Ina son app na banki wanda zai samu login, balance, transfer da transaction history."
+      ></textarea>
+
+
+      <label for="category">
+        Nau'in App
+      </label>
+
+      <select id="category">
+
+        <option value="General">
+          General App
+        </option>
+
+        <option value="Banking">
+          Banking
+        </option>
+
+        <option value="Business">
+          Business
+        </option>
+
+        <option value="Social Media">
+          Social Media
+        </option>
+
+        <option value="Education">
+          Education
+        </option>
+
+        <option value="Entertainment">
+          Entertainment
+        </option>
+
+        <option value="AI">
+          AI App
+        </option>
+
+      </select>
+
+
+      <label>
+        Features da kake so
+      </label>
+
+
+      <div class="features">
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Login"
+            class="featureCheck"
+          >
+          Login
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Dashboard"
+            class="featureCheck"
+          >
+          Dashboard
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Database"
+            class="featureCheck"
+          >
+          Database
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Chat AI"
+            class="featureCheck"
+          >
+          Chat AI
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Payment"
+            class="featureCheck"
+          >
+          Payment
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="User Profile"
+            class="featureCheck"
+          >
+          User Profile
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Notifications"
+            class="featureCheck"
+          >
+          Notifications
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="API"
+            class="featureCheck"
+          >
+          API
+        </label>
+
+      </div>
+
+
+      <button
+        class="button"
+        id="createButton"
+        onclick="createApp()"
+      >
+        ✨ Fara Ƙirƙirar App
+      </button>
+
+      <div
+        id="error"
+        class="error"
+      ></div>
+
+    </div>
+
+
+    <div
+      class="card"
+      id="result"
+    >
+
+      <h2>📱 Tsarin App ɗinka</h2>
+
+      <p class="success">
+        An shirya bayanan app ɗinka.
+      </p>
+
+      <div
+        id="resultBox"
+        class="result-box"
+      ></div>
+
+    </div>
+
+
+    <a
+      class="back"
+      href="dashboard.html"
+    >
+      ⬅ Komawa Dashboard
+    </a>
+
+  </div>
+
+
+  <script>
+
+    async function createApp() {
+
+      const appName =
+        document.getElementById("appName").value.trim();
+
+      const description =
+        document.getElementById("appDescription").value.trim();
+
+      const category =
+        document.getElementById("category").value;
+
+      const button =
+        document.getElementById("createButton");
+
+      const errorBox =
+        document.getElementById("error");
+
+      const result =
+        document.getElementById("result");
+
+      const resultBox =
+        document.getElementById("resultBox");
+
+
+      errorBox.textContent = "";
+
+      if (!appName) {
+
+        errorBox.textContent =
+          "Rubuta sunan app ɗinka.";
+
+        return;
+      }
+
+
+      if (!description) {
+
+        errorBox.textContent =
+          "Bayyana abin da app ɗin zai yi.";
+
+        return;
+      }
+
+
+      const selectedFeatures =
+        Array.from(
+          document.querySelectorAll(".featureCheck:checked")
+        )
+        .map(item => item.value);
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "Ana shirya app ɗinka...";
+
+
+      try {
+
+        const features =
+          selectedFeatures.length > 0
+            ? selectedFeatures.join(", ")
+            : "Babu takamaiman features";
+
+
+        const prompt = `
+Kai ne Creator App AI.
+
+Mai amfani yana son ƙirƙirar app.
+
+Sunan app:
+${appName}
+
+Nau'in app:
+${category}
+
+Bayani:
+${description}
+
+Features:
+${features}
+
+Ka tsara masa taƙaitaccen tsarin app ɗin da ya haɗa da:
+
+1. Sunan app
+2. Manufar app
+3. Muhimman pages
+4. Features
+5. Database da ake bukata
+6. APIs da ake bukata
+7. Matakan gina app
+
+Ka amsa da Hausa cikin sauƙi.
+`;
+
+
+        const response =
+          await fetch(
+            "/api/chat",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json"
+              },
+
+              body: JSON.stringify({
+                message: prompt
+              })
+            }
+          );
+
+
+        const data =
+          await response.json().catch(
+            () => ({})
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            "An samu kuskure daga backend."
+          );
+        }
+
+
+        if (!data.reply) {
+
+          throw new Error(
+            "AI bai dawo da amsa ba."
+          );
+        }
+
+
+        resultBox.textContent =
+          data.reply;
+
+        result.style.display =
+          "block";
+
+
+        result.scrollIntoView({
+          behavior: "smooth"
+        });
+
+
+      } catch (error) {
+
+        errorBox.textContent =
+          error.message;
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "✨ Fara Ƙirƙirar App";
+      }
+
+    }
+
+  </script>
 
 </body>
-</html>
+        </html>
