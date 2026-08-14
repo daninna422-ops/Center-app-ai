@@ -92,11 +92,11 @@ export default async function handler(req, res) {
       reply
     });
 
-  } catch (error) {
-    console.error("Center App AI:", error);
+     } catch (error) {
+  console.error("Center App AI ERROR:", error);
 
-    return res.status(500).json({
-      error: "Server error: " + (error?.message || "Unknown error")
-    });
-  }
+  return res.status(500).json({
+    error: "SERVER_ERROR",
+    details: error?.message || String(error)
+  });
 }
