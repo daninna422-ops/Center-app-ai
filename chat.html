@@ -175,12 +175,13 @@
         );
 
         if (!response.ok) {
-  const text = await response.text();
+  const errorData = await response.json().catch(() => ({}));
 
   throw new Error(
-    "HTTP " + response.status + ": " + text
+    errorData.error ||
+    "HTTP Error: " + response.status
   );
-}
+    }
 
         const data =
           await response.json();
