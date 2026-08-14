@@ -8,9 +8,9 @@ export default async function handler(req, res) {
   try {
     const { message } = req.body || {};
 
-    if (!message || typeof message !== "string") {
+    if (!message) {
       return res.status(400).json({
-        error: "An aika da babu saƙo."
+        error: "Rubuta saƙo tukuna."
       });
     }
 
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
     if (!apiKey) {
       return res.status(500).json({
-        error: "GEMINI_API_KEY ba a samu a Vercel ba."
+        error: "GEMINI_API_KEY ba a saita a Vercel ba."
       });
     }
 
@@ -38,9 +38,8 @@ export default async function handler(req, res) {
                 {
                   text:
                     "Kai ne Center App AI. " +
-                    "Ka amsa cikin sauki. " +
-                    "Idan mai amfani ya yi Hausa, ka amsa Hausa. " +
-                    "Idan Turanci ne, ka amsa Turanci.\n\n" +
+                    "Ka amsa cikin sauki da Hausa idan mai amfani ya yi Hausa. " +
+                    "Idan ya yi Turanci, ka amsa Turanci.\n\n" +
                     message
                 }
               ]
@@ -48,43 +47,41 @@ export default async function handler(req, res) {
           ],
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 512
+            maxOutputTokens: 1024
           }
         })
       }
     );
 
-    const rawText = await response.text();
+    const data = await response.json();
 
-    let data;
-
-    try {
-      data = JSON.parse(rawText);
-    } catch {
-      return res.status(500).json({
-        error: "Gemini bai dawo da JSON ba: " + rawText
+    if (!response.ok) {
+      return res.status(response.status).json({
+        error:
+          data?.error?.message ||
+          "Gemini API ya dawo da kuskure."
       });
     }
 
-    if (!response.ok) {
-  return res.status(response.status).json({
-    error:
-      data?.error?.message ||
-      `Gemini API error: ${response.status}`
-  });
-}
+    let reply = "";
 
-    const reply =
-      data?.candidates?.[0]?.content?.parts
-        ?.map(part => part.text || "")
-        .join("")
-        .trim();
+    if (data?.candidates?.length) {
+      for (const candidate of data.candidates) {
+        if (candidate?.content?.parts) {
+          for (const part of candidate.content.parts) {
+            if (part?.text) {
+              reply += part.text;
+            }
+          }
+        }
+      }
+    }
+
+    reply = reply.trim();
 
     if (!reply) {
-      return res.status(500).json({
-        error:
-          data?.promptFeedback?.blockReason ||
-          "Gemini bai dawo da amsa ba."
+      return res.status(200).json({
+        reply: "Na karɓi saƙonka, amma Gemini bai samar da rubutu ba."
       });
     }
 
@@ -92,11 +89,11 @@ export default async function handler(req, res) {
       reply
     });
 
-     } catch (error) {
-  console.error("Center App AI ERROR:", error);
+  } catch (error) {
+    console.error("Center App AI Error:", error);
 
-  return res.status(500).json({
-    error: "SERVER_ERROR",
-    details: error?.message || String(error)
-  });
+    return res.status(500).json({
+      error: error?.message || "Server error"
+    });
+  }
 }
