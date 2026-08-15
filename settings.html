@@ -22,7 +22,7 @@
     .header {
       background: #1261d6;
       color: white;
-      padding: 25px 18px;
+      padding: 25px 15px;
       text-align: center;
     }
 
@@ -35,11 +35,6 @@
       font-size: 28px;
     }
 
-    .header p {
-      margin: 0;
-      opacity: 0.9;
-    }
-
     .container {
       max-width: 650px;
       margin: 25px auto;
@@ -48,23 +43,24 @@
 
     .card {
       background: white;
-      border-radius: 16px;
       padding: 20px;
       margin-bottom: 18px;
+      border-radius: 16px;
       box-shadow: 0 3px 15px rgba(0,0,0,0.08);
     }
 
     .card h2 {
-      color: #1261d6;
       margin-top: 0;
+      color: #1261d6;
+      font-size: 20px;
     }
 
     .setting {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 0;
-      border-bottom: 1px solid #e5e8ee;
+      padding: 15px 0;
+      border-bottom: 1px solid #e5e8ef;
       gap: 15px;
     }
 
@@ -84,35 +80,138 @@
     .setting-description {
       color: #687386;
       font-size: 13px;
-      margin-top: 5px;
-      line-height: 1.4;
+      margin-top: 4px;
     }
 
+    input[type="text"],
+    input[type="email"],
     select {
-      padding: 10px;
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
       border: 1px solid #ccd3df;
       border-radius: 8px;
-      background: white;
-      font-size: 14px;
+      font-size: 15px;
     }
 
-    /* Toggle */
+    .save-button,
+    .logout-button,
+    .back-button {
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 9px;
+      padding: 14px;
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .save-button {
+      background: #1261d6;
+      color: white;
+    }
+
+    .logout-button {
+      background: #dc3545;
+      color: white;
+    }
+
+    .back-button {
+      background: #e9eef7;
+      color: #1261d6;
+    }
+
     .switch {
       position: relative;
-      display: inline-block;
-      width: 52px;
-      height: 29px;
+      width: 50px;
+      height: 28px;
       flex-shrink: 0;
     }
 
     .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
+      display: none;
     }
 
     .slider {
       position: absolute;
-      cursor: pointer;
       inset: 0;
-      background: #c9ced8
+      background: #bbb;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      left: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .switch input:checked + .slider {
+      background: #1261d6;
+    }
+
+    .switch input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+
+    .message {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #e8fff1;
+      color: #087f3e;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    body.dark {
+      background: #101522;
+      color: white;
+    }
+
+    body.dark .card {
+      background: #1b2333;
+      color: white;
+    }
+
+    body.dark .setting {
+      border-color: #303a4d;
+    }
+
+    body.dark .setting-description {
+      color: #aeb8ca;
+    }
+
+    body.dark input,
+    body.dark select {
+      background: #101522;
+      color: white;
+      border-color: #3b465c;
+    }
+
+    body.dark .back-button {
+      background: #293449;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+
+    <div class="icon">⚙️</div>
+
+    <h1>Settings
