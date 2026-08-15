@@ -140,6 +140,8 @@
       white-space: pre-wrap;
       line-height: 1.6;
       text-align: left;
+      max-height: 500px;
+      overflow-y: auto;
     }
 
     .success {
@@ -151,6 +153,7 @@
       color: #d00000;
       margin-top: 15px;
       text-align: center;
+      white-space: pre-wrap;
     }
 
     .back {
@@ -159,6 +162,53 @@
       margin: 25px 0;
       color: #1261d6;
       text-decoration: none;
+      font-weight: bold;
+    }
+
+    .download-area {
+      margin-top: 15px;
+      display: none;
+    }
+
+    .download-button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #087f3e;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .download-button:hover {
+      background: #066b34;
+    }
+
+    .open-button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #1261d6;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .status {
+      display: none;
+      background: #eef6ff;
+      border: 1px solid #b9d8ff;
+      color: #1261d6;
+      padding: 12px;
+      border-radius: 9px;
+      margin-top: 15px;
+      text-align: center;
       font-weight: bold;
     }
 
@@ -173,11 +223,13 @@
 <body>
 
   <div class="header">
+
     <div class="icon">🛠️</div>
 
     <h1>Creator App AI</h1>
 
     <p>Gina app tare da taimakon AI</p>
+
   </div>
 
 
@@ -200,7 +252,7 @@
       <input
         id="appName"
         type="text"
-        placeholder="Misali: Mubarak Bank"
+        placeholder="Misali: Ai9974"
       >
 
 
@@ -210,7 +262,7 @@
 
       <textarea
         id="appDescription"
-        placeholder="Misali: Ina son app na banki wanda zai samu login, balance, transfer da transaction history."
+        placeholder="Misali: Ina son app na AI wanda zai taimaka wajen ƙirƙirar video."
       ></textarea>
 
 
@@ -341,6 +393,15 @@
         ✨ Fara Ƙirƙirar App
       </button>
 
+
+      <div
+        id="status"
+        class="status"
+      >
+        🤖 Ana magana da AI...
+      </div>
+
+
       <div
         id="error"
         class="error"
@@ -349,21 +410,51 @@
     </div>
 
 
+    <!-- RESULT -->
+
     <div
       class="card"
       id="result"
     >
 
-      <h2>📱 Tsarin App ɗinka</h2>
+      <h2>
+        📱 An Ƙirƙiri App ɗinka
+      </h2>
 
       <p class="success">
-        An shirya bayanan app ɗinka.
+        🎉 AI ta gama tsara app ɗinka!
       </p>
+
 
       <div
         id="resultBox"
         class="result-box"
       ></div>
+
+
+      <!-- DOWNLOAD -->
+
+      <div
+        id="downloadArea"
+        class="download-area"
+      >
+
+        <button
+          class="download-button"
+          onclick="downloadApp()"
+        >
+          💾 Sauke App ɗin
+        </button>
+
+
+        <button
+          class="open-button"
+          onclick="openApp()"
+        >
+          🌐 Buɗe App
+        </button>
+
+      </div>
 
     </div>
 
@@ -378,77 +469,175 @@
   </div>
 
 
-  <script>
+<script>
 
-    async function createApp() {
+  /*
+  =====================================================
+  GLOBAL VARIABLES
+  =====================================================
+  */
 
-      const appName =
-        document.getElementById("appName").value.trim();
+  let generatedApp = "";
 
-      const description =
-        document.getElementById("appDescription").value.trim();
-
-      const category =
-        document.getElementById("category").value;
-
-      const button =
-        document.getElementById("createButton");
-
-      const errorBox =
-        document.getElementById("error");
-
-      const result =
-        document.getElementById("result");
-
-      const resultBox =
-        document.getElementById("resultBox");
+  let generatedAppName = "my-app";
 
 
-      errorBox.textContent = "";
+  /*
+  =====================================================
+  CREATE APP
+  =====================================================
+  */
 
-      if (!appName) {
+  async function createApp() {
 
-        errorBox.textContent =
-          "Rubuta sunan app ɗinka.";
-
-        return;
-      }
-
-
-      if (!description) {
-
-        errorBox.textContent =
-          "Bayyana abin da app ɗin zai yi.";
-
-        return;
-      }
+    const appName =
+      document
+        .getElementById("appName")
+        .value
+        .trim();
 
 
-      const selectedFeatures =
-        Array.from(
-          document.querySelectorAll(".featureCheck:checked")
+    const description =
+      document
+        .getElementById("appDescription")
+        .value
+        .trim();
+
+
+    const category =
+      document
+        .getElementById("category")
+        .value;
+
+
+    const button =
+      document
+        .getElementById("createButton");
+
+
+    const errorBox =
+      document
+        .getElementById("error");
+
+
+    const result =
+      document
+        .getElementById("result");
+
+
+    const resultBox =
+      document
+        .getElementById("resultBox");
+
+
+    const status =
+      document
+        .getElementById("status");
+
+
+    const downloadArea =
+      document
+        .getElementById("downloadArea");
+
+
+    /*
+    CLEAR OLD DATA
+    */
+
+    errorBox.textContent = "";
+
+    result.style.display = "none";
+
+    downloadArea.style.display = "none";
+
+
+    /*
+    VALIDATE APP NAME
+    */
+
+    if (!appName) {
+
+      errorBox.textContent =
+        "Rubuta sunan app ɗinka.";
+
+      return;
+
+    }
+
+
+    /*
+    VALIDATE DESCRIPTION
+    */
+
+    if (!description) {
+
+      errorBox.textContent =
+        "Bayyana abin da app ɗin zai yi.";
+
+      return;
+
+    }
+
+
+    /*
+    GET FEATURES
+    */
+
+    const selectedFeatures =
+      Array.from(
+        document.querySelectorAll(
+          ".featureCheck:checked"
         )
-        .map(item => item.value);
+      )
+      .map(
+        item => item.value
+      );
 
 
-      button.disabled = true;
-
-      button.textContent =
-        "Ana shirya app ɗinka...";
-
-
-      try {
-
-        const features =
-          selectedFeatures.length > 0
-            ? selectedFeatures.join(", ")
-            : "Babu takamaiman features";
+    const features =
+      selectedFeatures.length > 0
+        ? selectedFeatures.join(", ")
+        : "Babu takamaiman features";
 
 
-        const prompt = `
+    /*
+    SAVE APP NAME
+    */
+
+    generatedAppName =
+      appName;
+
+
+    /*
+    BUTTON LOADING
+    */
+
+    button.disabled = true;
+
+    button.textContent =
+      "⏳ Ana ƙirƙirar app...";
+
+
+    status.style.display =
+      "block";
+
+
+    status.textContent =
+      "🤖 Creator App AI tana aiki...";
+
+
+    try {
+
+      /*
+      ================================================
+      PROMPT
+      ================================================
+      */
+
+      const prompt = `
 Kai ne Creator App AI.
 
-Mai amfani yana son ƙirƙirar app.
+Mai amfani yana son ƙirƙirar frontend application.
 
 Sunan app:
 ${appName}
@@ -462,88 +651,595 @@ ${description}
 Features:
 ${features}
 
-Ka tsara masa taƙaitaccen tsarin app ɗin da ya haɗa da:
+Ka tsara cikakken bayani na application ɗin.
+
+Ka haɗa:
 
 1. Sunan app
 2. Manufar app
 3. Muhimman pages
 4. Features
-5. Database da ake bukata
-6. APIs da ake bukata
+5. Database
+6. APIs
 7. Matakan gina app
+8. User interface
+9. Login idan an zaɓa
+10. Dashboard idan an zaɓa
+11. Chat AI idan an zaɓa
+12. Payment idan an zaɓa
 
 Ka amsa da Hausa cikin sauƙi.
+
+Kada ka yi ƙarya cewa an haɗa real API idan ba a ba ka API ba.
 `;
 
 
-        const response =
-          await fetch(
-            "/api/chat",
-            {
-              method: "POST",
+      /*
+      ================================================
+      SEND TO BACKEND
+      ================================================
+      */
 
-              headers: {
-                "Content-Type": "application/json"
-              },
+      const response =
+        await fetch(
+          "/api/chat",
+          {
 
-              body: JSON.stringify({
-                message: prompt
-              })
-            }
-          );
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+
+              message:
+                prompt
+
+            })
+
+          }
+        );
 
 
-        const data =
-          await response.json().catch(
+      /*
+      ================================================
+      READ RESPONSE
+      ================================================
+      */
+
+      const data =
+        await response
+          .json()
+          .catch(
             () => ({})
           );
 
 
-        if (!response.ok) {
+      /*
+      ================================================
+      BACKEND ERROR
+      ================================================
+      */
 
-          throw new Error(
-            data.error ||
-            "An samu kuskure daga backend."
-          );
-        }
+      if (!response.ok) {
 
+        throw new Error(
 
-        if (!data.reply) {
+          data.error ||
 
-          throw new Error(
-            "AI bai dawo da amsa ba."
-          );
-        }
+          "An samu kuskure daga backend."
 
+        );
 
-        resultBox.textContent =
-          data.reply;
-
-        result.style.display =
-          "block";
-
-
-        result.scrollIntoView({
-          behavior: "smooth"
-        });
-
-
-      } catch (error) {
-
-        errorBox.textContent =
-          error.message;
-
-      } finally {
-
-        button.disabled = false;
-
-        button.textContent =
-          "✨ Fara Ƙirƙirar App";
       }
+
+
+      /*
+      ================================================
+      CHECK AI RESPONSE
+      ================================================
+      */
+
+      if (!data.reply) {
+
+        throw new Error(
+          "AI bai dawo da amsa ba."
+        );
+
+      }
+
+
+      /*
+      ================================================
+      SHOW RESULT
+      ================================================
+      */
+
+      resultBox.textContent =
+        data.reply;
+
+
+      result.style.display =
+        "block";
+
+
+      /*
+      ================================================
+      CREATE DOWNLOADABLE HTML APP
+      ================================================
+      */
+
+      generatedApp =
+        createDownloadableApp(
+
+          appName,
+          data.reply
+
+        );
+
+
+      /*
+      SHOW DOWNLOAD BUTTON
+      */
+
+      downloadArea.style.display =
+        "block";
+
+
+      status.style.display =
+        "none";
+
+
+      /*
+      SCROLL TO RESULT
+      */
+
+      result.scrollIntoView({
+
+        behavior: "smooth"
+
+      });
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      status.style.display =
+        "none";
+
+
+      errorBox.textContent =
+        "❌ " +
+        (
+          error.message ||
+          "An samu matsala."
+        );
+
+
+    } finally {
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "✨ Fara Ƙirƙirar App";
 
     }
 
-  </script>
+  }
+
+
+  /*
+  =====================================================
+  CREATE DOWNLOADABLE APP
+  =====================================================
+  */
+
+  function createDownloadableApp(
+    appName,
+    aiResponse
+  ) {
+
+    /*
+    Escape HTML
+    */
+
+    const safeName =
+      escapeHtml(appName);
+
+
+    const safeResponse =
+      escapeHtml(aiResponse);
+
+
+    /*
+    COMPLETE GENERATED APP
+    */
+
+    const html = `
+<!DOCTYPE html>
+
+<html lang="ha">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>${safeName}</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+
+  margin: 0;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  background:
+    #f4f7fb;
+
+  color:
+    #172033;
+
+}
+
+.header {
+
+  background:
+    #1261d6;
+
+  color:
+    white;
+
+  padding:
+    25px 18px;
+
+  text-align:
+    center;
+
+}
+
+.header h1 {
+
+  margin:
+    0 0 8px;
+
+}
+
+.container {
+
+  max-width:
+    700px;
+
+  margin:
+    25px auto;
+
+  padding:
+    15px;
+
+}
+
+.card {
+
+  background:
+    white;
+
+  border-radius:
+    16px;
+
+  padding:
+    22px;
+
+  box-shadow:
+    0 3px 15px
+    rgba(0,0,0,.08);
+
+}
+
+pre {
+
+  white-space:
+    pre-wrap;
+
+  word-wrap:
+    break-word;
+
+  line-height:
+    1.7;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+}
+
+button {
+
+  width:
+    100%;
+
+  padding:
+    14px;
+
+  border:
+    none;
+
+  border-radius:
+    10px;
+
+  background:
+    #1261d6;
+
+  color:
+    white;
+
+  font-size:
+    16px;
+
+  font-weight:
+    bold;
+
+  cursor:
+    pointer;
+
+  margin-top:
+    15px;
+
+}
+
+button:hover {
+
+  background:
+    #0d4fae;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+<h1>
+${safeName}
+</h1>
+
+<p>
+An ƙirƙira ta Creator App AI
+</p>
+
+</div>
+
+
+<div class="container">
+
+<div class="card">
+
+<h2>
+📱 Game da App
+</h2>
+
+<pre>
+${safeResponse}
+</pre>
+
+
+<button
+onclick="history.back()"
+>
+⬅ Komawa
+</button>
+
+</div>
+
+</div>
+
 
 </body>
+
+</html>
+`;
+
+
+    return html;
+
+  }
+
+
+  /*
+  =====================================================
+  ESCAPE HTML
+  =====================================================
+  */
+
+  function escapeHtml(
+    text
+  ) {
+
+    return String(text)
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  /*
+  =====================================================
+  DOWNLOAD APP
+  =====================================================
+  */
+
+  function downloadApp() {
+
+    if (!generatedApp) {
+
+      alert(
+        "Da farko ka ƙirƙiri app."
+      );
+
+      return;
+
+    }
+
+
+    const blob =
+      new Blob(
+        [
+          generatedApp
+        ],
+        {
+          type:
+            "text/html;charset=utf-8"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(
+        blob
+      );
+
+
+    const link =
+      document.createElement(
+        "a"
+      );
+
+
+    const cleanName =
+      generatedAppName
+        .replace(
+          /[^a-z0-9-_]/gi,
+          "-"
+        )
+        .toLowerCase();
+
+
+    link.href =
+      url;
+
+
+    link.download =
+      cleanName +
+      ".html";
+
+
+    document.body.appendChild(
+      link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+      link
+    );
+
+
+    setTimeout(
+      () => {
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      },
+      1000
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  OPEN APP
+  =====================================================
+  */
+
+  function openApp() {
+
+    if (!generatedApp) {
+
+      alert(
+        "Da farko ka ƙirƙiri app."
+      );
+
+      return;
+
+    }
+
+
+    const blob =
+      new Blob(
+        [
+          generatedApp
+        ],
+        {
+          type:
+            "text/html"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(
+        blob
+      );
+
+
+    window.open(
+      url,
+      "_blank"
+    );
+
+  }
+
+</script>
+
+</body>
+
 </html>
