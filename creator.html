@@ -156,6 +156,22 @@
       white-space: pre-wrap;
       line-height: 1.7;
       text-align: left;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .preview-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #16803c;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .back {
@@ -170,6 +186,10 @@
     @media (max-width: 500px) {
       .features {
         grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 25px;
       }
     }
   </style>
@@ -196,7 +216,7 @@
 
       <p>
         Bayyana app ɗin da kake son ƙirƙira.
-        Creator App AI zai taimaka maka tsara tsarin app ɗin.
+        Creator App AI zai taimaka maka ƙirƙirar frontend ɗin app ɗin.
       </p>
 
 
@@ -350,7 +370,7 @@
 
 
       <div id="loading" class="loading">
-        🤖 Creator App AI yana tsara app ɗinka...
+        🤖 Creator App AI yana ƙirƙirar app ɗinka...
       </div>
 
 
@@ -364,12 +384,20 @@
       class="card"
     >
 
-      <h2>📱 Tsarin App ɗinka</h2>
+      <h2>📱 An Ƙirƙiri App ɗinka</h2>
 
       <div
         id="resultBox"
         class="result-box"
       ></div>
+
+      <button
+        id="previewButton"
+        class="preview-btn"
+        onclick="previewApp()"
+      >
+        👁️ Duba Preview
+      </button>
 
     </div>
 
@@ -385,6 +413,13 @@
 
 
   <script>
+
+    let generatedApp = {
+      html: "",
+      css: "",
+      js: ""
+    };
+
 
     async function createApp() {
 
@@ -441,7 +476,9 @@
 
       const selectedFeatures =
         Array.from(
-          document.querySelectorAll(".featureCheck:checked")
+          document.querySelectorAll(
+            ".featureCheck:checked"
+          )
         ).map(
           checkbox => checkbox.value
         );
@@ -456,7 +493,7 @@
       const prompt = `
 Kai ne Creator App AI na Center App AI.
 
-Mai amfani yana son ƙirƙirar app.
+Mai amfani yana son ƙirƙirar application.
 
 SUNAN APP:
 ${appName}
@@ -470,36 +507,63 @@ ${description}
 FEATURES:
 ${features}
 
-Ka taimaka masa tsara app ɗin.
+KA'IDOJI:
 
-Ka ba shi:
+1. Ƙirƙiri cikakken frontend application.
 
-1. Sunan app
-2. Manufar app
-3. Muhimman pages/screens
-4. Features
-5. Yadda pages ɗin za su haɗu
-6. Database da ake bukata
-7. APIs da ake bukata
-8. Login/Auth idan ana bukata
-9. Matakan gina app
-10. Shawarar yadda za a fara
+2. Application ɗin ya kasance modern,
+   professional kuma responsive ga Android.
 
-Ka amsa cikin Hausa mai sauƙin fahimta.
+3. HTML ya kasance page body kawai.
+   Kada ka saka html, head ko body tags.
+
+4. CSS ya ƙunshi duk styling da ake bukata.
+
+5. JavaScript ya ƙunshi functionality
+   da application ɗin yake bukata.
+
+6. Buttons da forms su yi aiki.
+
+7. Kada ka yi amfani da external libraries
+   sai idan ya zama dole.
+
+8. Idan application ɗin yana buƙatar backend,
+   database, payment ko API wanda ba a bayar ba,
+   ƙirƙiri frontend DEMO kawai.
+
+9. Kada ka ƙirƙiri real banking transactions
+   ko real payment transactions.
+
+10. Ka dawo da JSON kawai.
+
+JSON ɗin dole ya kasance da fields guda uku:
+
+{
+  "html": "...",
+  "css": "...",
+  "js": "..."
+}
+
+Ka tabbatar JSON ɗin valid ne.
+
+Ka samar da app ɗin yanzu.
 `;
 
 
       button.disabled = true;
-      button.textContent = "Ana ƙirƙirawa...";
 
-      loading.style.display = "block";
+      button.textContent =
+        "Ana ƙirƙirawa...";
+
+      loading.style.display =
+        "block";
 
 
       try {
 
         const response =
           await fetch(
-            "/api/chat",
+            "/api/create-app",
             {
               method: "POST",
 
@@ -508,7 +572,7 @@ Ka amsa cikin Hausa mai sauƙin fahimta.
               },
 
               body: JSON.stringify({
-                message: prompt
+                prompt: prompt
               })
             }
           );
@@ -527,19 +591,50 @@ Ka amsa cikin Hausa mai sauƙin fahimta.
             "Backend ya dawo da error: " +
             response.status
           );
+
         }
 
 
-        if (!data.reply) {
+        if (
+          typeof data.html !== "string" ||
+          typeof data.css !== "string" ||
+          typeof data.js !== "string"
+        ) {
 
           throw new Error(
-            "AI bai dawo da amsa ba."
+            "AI bai dawo da HTML, CSS da JavaScript daidai ba."
           );
+
         }
+
+
+        generatedApp.html =
+          data.html;
+
+        generatedApp.css =
+          data.css;
+
+        generatedApp.js =
+          data.js;
 
 
         resultBox.textContent =
-          data.reply;
+`APP: ${appName}
+
+================ HTML ================
+
+${data.html}
+
+
+================ CSS ================
+
+${data.css}
+
+
+================ JAVASCRIPT ================
+
+${data.js}`;
+
 
         result.style.display =
           "block";
@@ -553,19 +648,122 @@ Ka amsa cikin Hausa mai sauƙin fahimta.
       } catch (error) {
 
         showError(
-          error.message
+          error.message ||
+          "An samu matsala wajen ƙirƙirar app."
         );
 
       } finally {
 
-        button.disabled = false;
+        button.disabled =
+          false;
 
         button.textContent =
           "✨ Fara Ƙirƙirar App";
 
         loading.style.display =
           "none";
+
       }
+
+    }
+
+
+    function previewApp() {
+
+      if (
+        !generatedApp.html ||
+        !generatedApp.css
+      ) {
+
+        showError(
+          "Babu app da aka ƙirƙira tukuna."
+        );
+
+        return;
+      }
+
+
+      const previewWindow =
+        window.open(
+          "",
+          "_blank"
+        );
+
+
+      if (!previewWindow) {
+
+        showError(
+          "Browser ya hana buɗe Preview. Ka ba browser izinin buɗe sabon shafi."
+        );
+
+        return;
+      }
+
+
+      const safeHTML =
+        generatedApp.html;
+
+      const safeCSS =
+        generatedApp.css;
+
+      const safeJS =
+        generatedApp.js;
+
+
+      previewWindow.document.open();
+
+
+      previewWindow.document.write(`
+<!DOCTYPE html>
+<html lang="ha">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>App Preview</title>
+
+  <style>
+
+    ${safeCSS}
+
+  </style>
+
+</head>
+
+<body>
+
+  ${safeHTML}
+
+  <script>
+
+    try {
+
+      ${safeJS}
+
+    } catch (error) {
+
+      console.error(
+        "Preview JavaScript Error:",
+        error
+      );
+
+    }
+
+  <\/script>
+
+</body>
+
+</html>
+      `);
+
+
+      previewWindow.document.close();
 
     }
 
@@ -573,13 +771,16 @@ Ka amsa cikin Hausa mai sauƙin fahimta.
     function showError(message) {
 
       const errorBox =
-        document.getElementById("error");
+        document.getElementById(
+          "error"
+        );
 
       errorBox.textContent =
         "Error: " + message;
 
       errorBox.style.display =
         "block";
+
     }
 
   </script>
