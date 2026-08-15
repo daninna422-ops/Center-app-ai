@@ -175,25 +175,10 @@ Ka dawo da JSON kawai mai:
 
     button.disabled = false;
 
-    button.textContent =
-      "✨ Fara Ƙirƙirar App";
+    button.<a href="creator.html" class="create-app-button">
+  ✨ Fara Ƙirƙirar App
+</a>
 
     loading.style.display = "none";
   }
 }
-document.addEventListener("DOMContentLoaded", function () {
-
-  const createAppBtn =
-    document.getElementById("createAppBtn");
-
-  if (createAppBtn) {
-
-    createAppBtn.addEventListener("click", function () {
-
-      window.location.href = "creator.html";
-
-    });
-
-  }
-
-});
