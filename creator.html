@@ -19,14 +19,14 @@
     }
 
     .header {
-      background: linear-gradient(135deg, #1261d6, #0645a5);
+      background: #1261d6;
       color: white;
       padding: 25px 18px;
       text-align: center;
     }
 
-    .logo {
-      font-size: 50px;
+    .robot {
+      font-size: 48px;
     }
 
     .header h1 {
@@ -36,84 +36,78 @@
 
     .header p {
       margin: 0;
-      opacity: 0.9;
     }
 
     .container {
       max-width: 720px;
-      margin: 22px auto;
+      margin: 25px auto;
       padding: 0 15px;
     }
 
     .card {
       background: white;
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 22px;
       margin-bottom: 18px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
     }
 
-    .card h2 {
+    h2 {
       color: #1261d6;
       margin-top: 0;
     }
 
-    .welcome {
-      line-height: 1.7;
-    }
-
-    .chat-box {
-      max-height: 520px;
-      overflow-y: auto;
-      padding: 5px;
-      margin-bottom: 15px;
-    }
-
-    .message {
-      padding: 13px;
-      margin: 10px 0;
-      border-radius: 12px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-
-    .ai {
-      background: #edf4ff;
-      border-left: 4px solid #1261d6;
-    }
-
-    .user {
-      background: #f0f0f0;
-      border-right: 4px solid #777;
-    }
-
-    .message strong {
+    label {
       display: block;
-      margin-bottom: 5px;
+      font-weight: bold;
+      margin: 15px 0 8px;
     }
 
-    textarea {
+    input,
+    textarea,
+    select {
       width: 100%;
-      min-height: 100px;
       padding: 13px;
-      border: 1px solid #cbd3df;
-      border-radius: 10px;
+      border: 1px solid #ccd3df;
+      border-radius: 9px;
       font-size: 16px;
-      resize: vertical;
       outline: none;
     }
 
-    textarea:focus {
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
       border-color: #1261d6;
     }
 
-    button {
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .feature {
+      background: #f8faff;
+      border: 1px solid #dce2ed;
+      padding: 12px;
+      border-radius: 9px;
+    }
+
+    .feature input {
+      width: auto;
+    }
+
+    .button {
       width: 100%;
+      margin-top: 20px;
+      padding: 15px;
       border: none;
       border-radius: 10px;
-      padding: 15px;
-      margin-top: 12px;
       background: #1261d6;
       color: white;
       font-size: 17px;
@@ -121,71 +115,76 @@
       cursor: pointer;
     }
 
-    button:disabled {
+    .button:disabled {
       background: #999;
-      cursor: not-allowed;
-    }
-
-    .secondary {
-      background: #e9eef7;
-      color: #1261d6;
-    }
-
-    .danger {
-      background: #d62828;
-    }
-
-    .upload-area {
-      border: 2px dashed #b8c4d6;
-      padding: 20px;
-      text-align: center;
-      border-radius: 12px;
-      margin-top: 15px;
-      background: #fafcff;
-    }
-
-    .upload-area input {
-      margin-top: 12px;
-      width: 100%;
-    }
-
-    .file-name {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .summary {
-      display: none;
-    }
-
-    .summary-item {
-      background: #f7f9fc;
-      padding: 13px;
-      border-radius: 9px;
-      margin: 9px 0;
-    }
-
-    .summary-item strong {
-      color: #1261d6;
     }
 
     .status {
-      text-align: center;
+      margin-top: 15px;
       padding: 12px;
-      border-radius: 9px;
-      margin-top: 12px;
+      border-radius: 8px;
       display: none;
     }
 
-    .success {
-      background: #e9f8ef;
-      color: #08783e;
+    .ai-status {
+      background: #eaf2ff;
+      color: #1261d6;
+    }
+
+    .offline-status {
+      background: #fff7df;
+      color: #8a6500;
     }
 
     .error {
-      background: #fff0f0;
-      color: #c40000;
+      background: #ffecec;
+      color: #c00000;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    #result {
+      display: none;
+    }
+
+    .result-box {
+      background: #f7f9fc;
+      border: 1px solid #dce2ed;
+      border-radius: 10px;
+      padding: 18px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .app-preview {
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .preview-header {
+      background: #1261d6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .preview-body {
+      padding: 20px;
+    }
+
+    .preview-button {
+      display: inline-block;
+      padding: 10px 14px;
+      margin: 5px;
+      border-radius: 8px;
+      background: #1261d6;
+      color: white;
+      font-size: 14px;
     }
 
     .back {
@@ -197,10 +196,10 @@
       font-weight: bold;
     }
 
-    .small {
-      color: #667085;
-      font-size: 14px;
-      line-height: 1.6;
+    @media (max-width: 500px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -209,1016 +208,817 @@
 
   <div class="header">
 
-    <div class="logo">🛠️🤖</div>
+    <div class="robot">🤖</div>
 
     <h1>Creator App AI</h1>
 
-    <p>Ka bayyana app ɗinka, AI zai taimaka maka tsara shi.</p>
+    <p>Gina app tare da taimakon AI</p>
 
   </div>
 
 
   <div class="container">
 
-    <!-- WELCOME -->
-
     <div class="card">
 
-      <h2>🚀 Gina App ɗinka</h2>
+      <h2>🚀 Ƙirƙiri sabon app</h2>
 
-      <div class="welcome">
-
-        <p>
-          Babu buƙatar ka san programming.
-          Ka gaya wa Creator App AI irin app ɗin da kake son ginawa.
-        </p>
-
-        <p>
-          AI zai yi maka tambayoyi domin fahimtar app ɗin,
-          kamar features, users, login, database, API, payment,
-          logo da sauran abubuwan da app ɗin yake bukata.
-        </p>
-
-        <p>
-          <strong>Misali:</strong>
-          "Ina son app na taxi."
-        </p>
-
-      </div>
-
-    </div>
+      <p>
+        Bayyana app ɗin da kake son ginawa.
+        AI zai taimaka, kuma idan Gemini baya aiki,
+        Offline Creator zai ci gaba da tsara app ɗin.
+      </p>
 
 
-    <!-- AI INTERVIEW -->
+      <label>Sunan App</label>
 
-    <div class="card">
-
-      <h2>🤖 AI Interview</h2>
-
-      <div
-        id="chatBox"
-        class="chat-box"
+      <input
+        id="appName"
+        type="text"
+        placeholder="Misali: OpeyB+"
       >
 
-        <div class="message ai">
 
-          <strong>🤖 Creator App AI</strong>
-
-          Sannu! 👋
-
-          Wane irin app kake son ƙirƙira?
-
-          Ka bayyana min app ɗin da kake so da kalmominka.
-          Ba sai ka san programming ba.
-
-        </div>
-
-      </div>
-
+      <label>Bayyana App ɗinka</label>
 
       <textarea
-        id="message"
-        placeholder="Misali: Ina son app na taxi wanda mutane zasu iya neman mota..."
+        id="appDescription"
+        placeholder="Misali: Ina son app din Banki ne mai suna OpeyB+. Ya zama shafi fari, maballai da gumaka su zama blue..."
       ></textarea>
 
 
-      <button
-        id="sendButton"
-        onclick="sendMessage()"
-      >
-        Aika 🚀
-      </button>
+      <label>Nau'in App</label>
+
+      <select id="category">
+
+        <option value="General">
+          General App
+        </option>
+
+        <option value="Banking">
+          🏦 Banking
+        </option>
+
+        <option value="Business">
+          💼 Business
+        </option>
+
+        <option value="Social Media">
+          📱 Social Media
+        </option>
+
+        <option value="Education">
+          📚 Education
+        </option>
+
+        <option value="Entertainment">
+          🎬 Entertainment
+        </option>
+
+        <option value="AI">
+          🤖 AI App
+        </option>
+
+      </select>
+
+
+      <label>Features</label>
+
+      <div class="features">
+
+        <label class="feature">
+          <input type="checkbox"
+                 value="Login"
+                 class="featureCheck">
+          👤 Login
+        </label>
+
+        <label class="feature">
+          <input type="checkbox"
+                 value="Dashboard"
+                 class="featureCheck">
+          🏠 Dashboard
+        </label>
+
+        <label class="feature">
+          <input type="checkbox"
+                 value="Database"
+                 class="featureCheck">
+          🗄️ Database
+        </label>
+
+        <label class="feature">
+          <input type="checkbox"
+                 value="Chat AI"
+                 class="featureCheck">
+          🤖 Chat AI
+        </label>
+
+        <label class="feature">
+          <input type="checkbox"
+                 value="Payment"
+                 class="featureCheck">
+          💳 Payment
+        </label>
+
+        <label class="feature">
+          <input type="checkbox"
+                 value="User Profile"
+                 class="featureCheck">
+          👤 Profile
+        </label>
+
+        <label class="feature">
+          <input type="checkbox"
+                 value="Notifications"
+                 class="featureCheck">
+          🔔 Notifications
+        </label>
+
+        <label class="feature">
+          <input type="checkbox"
+                 value="API"
+                 class="featureCheck">
+          🔑 API
+        </label>
+
+      </div>
 
 
       <button
-        class="secondary"
-        onclick="startNewProject()"
-      >
-        🆕 Fara Sabon Project
+        class="button"
+        id="createButton"
+        onclick="createApp()">
+
+        ✨ Fara Ƙirƙirar App
+
       </button>
 
 
       <div
         id="status"
-        class="status"
-      ></div>
-
-    </div>
-
-
-    <!-- UPLOADS -->
-
-    <div class="card">
-
-      <h2>📎 Abubuwan da App ɗin yake bukata</h2>
-
-      <p class="small">
-        Idan AI ya bukaci logo, hoto ko wani file,
-        za ka iya zaɓar shi a nan.
-      </p>
-
-
-      <div class="upload-area">
-
-        <strong>🖼️ Upload Logo ko Hoto</strong>
-
-        <br>
-
-        <input
-          type="file"
-          id="imageFile"
-          accept="image/*"
-          onchange="showFileName('imageFile','imageName')"
-        >
-
-        <div
-          id="imageName"
-          class="file-name"
-        ></div>
-
+        class="status">
       </div>
 
-
-      <div class="upload-area">
-
-        <strong>📄 Upload Document</strong>
-
-        <br>
-
-        <input
-          type="file"
-          id="documentFile"
-          accept=".pdf,.doc,.docx,.txt"
-          onchange="showFileName('documentFile','documentName')"
-        >
-
-        <div
-          id="documentName"
-          class="file-name"
-        ></div>
-
-      </div>
-
-      <p class="small">
-        ⚠️ Kada ka upload BVN, NIN, password, API key ko
-        wani sirrin banki a wannan matakin. Za mu gina
-        secure integration kafin a haɗa irin waɗannan bayanai.
-      </p>
-
-    </div>
-
-
-    <!-- PROJECT SUMMARY -->
-
-    <div
-      id="summary"
-      class="card summary"
-    >
-
-      <h2>📱 Project Summary</h2>
 
       <div
-        id="summaryContent"
-      ></div>
+        id="error"
+        class="error">
+      </div>
+
+    </div>
 
 
-      <button
-        onclick="saveProject()"
-      >
-        💾 Ajiye Project
-      </button>
+    <div
+      class="card"
+      id="result">
+
+      <h2>📱 Tsarin App ɗinka</h2>
+
+      <div
+        id="resultBox"
+        class="result-box">
+      </div>
 
 
-      <button
-        onclick="prepareBuild()"
-      >
-        🏗️ Shirya App Builder
-      </button>
+      <div
+        id="preview"
+        class="app-preview">
+      </div>
 
     </div>
 
 
     <a
       class="back"
-      href="dashboard.html"
-    >
+      href="dashboard.html">
+
       ⬅ Komawa Dashboard
+
     </a>
 
   </div>
 
 
-  <script>
+<script>
 
-    /*
-      =====================================================
-      CREATOR APP AI
-      =====================================================
+async function createApp() {
 
-      API ɗin yana cikin Vercel:
+  const appName =
+    document.getElementById("appName")
+      .value.trim();
 
-      /api/chat
+  const description =
+    document.getElementById("appDescription")
+      .value.trim();
 
-      Ba a saka GEMINI_API_KEY a frontend ba.
-    */
+  const category =
+    document.getElementById("category")
+      .value;
 
+  const button =
+    document.getElementById("createButton");
 
-    const BACKEND_URL = "/api/chat";
+  const status =
+    document.getElementById("status");
 
+  const error =
+    document.getElementById("error");
 
-    let conversation = [];
+  const result =
+    document.getElementById("result");
 
-    let project = {
+  const resultBox =
+    document.getElementById("resultBox");
 
-      appName: "",
+  const preview =
+    document.getElementById("preview");
 
-      description: "",
 
-      category: "",
+  status.style.display = "none";
+  error.style.display = "none";
 
-      users: [],
 
-      features: [],
+  if (!appName) {
 
-      pages: [],
+    error.textContent =
+      "Rubuta sunan app ɗinka.";
 
-      database: [],
+    error.style.display = "block";
 
-      apis: [],
+    return;
+  }
 
-      payments: [],
 
-      authentication: [],
+  if (!description) {
 
-      files: [],
+    error.textContent =
+      "Bayyana abin da app ɗin zai yi.";
 
-      extraRequirements: ""
+    error.style.display = "block";
 
-    };
+    return;
+  }
 
 
-    /*
-      =====================================================
-      SEND MESSAGE
-      =====================================================
-    */
+  const selectedFeatures =
+    Array.from(
+      document.querySelectorAll(".featureCheck:checked")
+    ).map(item => item.value);
 
-    async function sendMessage() {
 
-      const input =
-        document.getElementById("message");
+  button.disabled = true;
 
-      const button =
-        document.getElementById("sendButton");
+  button.textContent =
+    "⏳ Ana ƙirƙira...";
 
-      const message =
-        input.value.trim();
 
+  /*
+    ========================================
+    TRY AI FIRST
+    ========================================
+  */
 
-      if (!message) {
+  try {
 
-        showStatus(
-          "Rubuta saƙonka tukuna.",
-          "error"
-        );
+    status.className =
+      "status ai-status";
 
-        return;
-      }
+    status.textContent =
+      "🤖 Ana neman taimakon AI...";
 
+    status.style.display =
+      "block";
 
-      addMessage(
-        "user",
-        message
-      );
 
+    const prompt = `
+Kai ne Creator App AI.
 
-      input.value = "";
+Ka taimaka wa mai amfani tsara app.
 
-      button.disabled = true;
+Sunan App:
+${appName}
 
-      button.textContent =
-        "🤖 AI yana tunani...";
-
-
-      try {
-
-        /*
-          Wannan prompt yana gaya wa AI
-          cewa shi ne Creator App AI.
-        */
-
-        const creatorPrompt = `
-
-Kai ne "Creator App AI", wani AI App Builder.
-
-Aikin ka ba wai bada code kawai ba ne.
-
-Aikin ka shi ne taimaka wa mai amfani ya tsara
-kowane irin application da yake son ginawa.
-
-Mai amfani zai iya son:
-
-- Banking app
-- Wallet
-- E-commerce
-- Social media
-- Education
-- Taxi
-- Delivery
-- Hospital
-- Business
-- Movie
-- Entertainment
-- AI app
-- News
-- Game
-- Real estate
-- ko kowane irin app.
-
-MUHIMMIN TSARI:
-
-1. Ka fara fahimtar irin app ɗin da yake so.
-
-2. Ka tambaye shi tambaya ɗaya ko kaɗan a lokaci guda,
-   kada ka jefa masa tambayoyi masu yawa lokaci guda.
-
-3. Ka tambayi abubuwan da app ɗin yake bukata
-   bisa irin app ɗin.
-
-4. Tambayoyin na iya kasancewa:
-
-- Menene sunan app?
-- Waɗanne mutane za su yi amfani da shi?
-- Menene babban aikin app?
-- Login?
-- Phone number?
-- OTP?
-- Database?
-- Payment?
-- API?
-- Notifications?
-- Location/GPS?
-- Admin dashboard?
-- User dashboard?
-- Logo?
-- Images?
-- Documents?
-- Sauran requirements?
-
-5. Kada ka tambayi BVN, NIN, ID card ko wasu sensitive
-   documents sai idan aikin app ɗin yana bukatar
-   official verification.
-
-6. Idan ana buƙatar API, ka gaya wa mai amfani
-   cewa za a haɗa shi ta secure backend.
-   Kada ka nemi mai amfani ya saka secret API key
-   cikin chat idan za a iya amfani da secure integration.
-
-7. Idan an gama tattara requirements,
-   ka nuna PROJECT SUMMARY.
-
-8. Kada ka yi iƙirarin cewa an riga an gina APK
-   idan ba a yi build ba.
-
-9. A wannan matakin manufarmu ita ce:
-   REQUIREMENTS → APP PLAN → APP BUILDER.
-
-10. Ka yi magana da Hausa idan mai amfani ya yi Hausa.
-    Ka yi Turanci idan mai amfani ya yi Turanci.
-
-Bayanin project na yanzu:
-
-${JSON.stringify(project)}
-
-Conversation:
-
-${JSON.stringify(conversation)}
-
-Sabon saƙon mai amfani:
-
-${message}
-
-Ka amsa kai tsaye ga mai amfani.
+Nau'in App:
+${category}
+
+Bayani:
+${description}
+
+Features:
+${selectedFeatures.join(", ") || "Babu"}
+
+Ka ba da cikakken tsarin app cikin Hausa.
+
+Ka bayyana:
+1. Sunan app
+2. Manufarsa
+3. Launin UI
+4. Pages
+5. Buttons
+6. Icons
+7. Features
+8. Database
+9. APIs
+10. Matakan gina app.
+
+Idan app ɗin banki ne,
+ka yi la'akari da Login, Balance,
+Deposit, Withdraw, Transfer,
+Transaction History da Profile.
 `;
 
 
-        const response =
-          await fetch(
-            BACKEND_URL,
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type": "application/json"
-              },
-
-              body: JSON.stringify({
-                message: creatorPrompt
-              })
-            }
-          );
-
-
-        const data =
-          await response.json()
-            .catch(() => ({}));
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            data.error ||
-            "HTTP Error: " +
-            response.status
-          );
-
-        }
-
-
-        if (!data.reply) {
-
-          throw new Error(
-            "AI bai dawo da amsa ba."
-          );
-
-        }
-
-
-        const reply =
-          data.reply;
-
-
-        conversation.push({
-
-          role: "user",
-
-          text: message
-
-        });
-
-
-        conversation.push({
-
-          role: "ai",
-
-          text: reply
-
-        });
-
-
-        addMessage(
-          "ai",
-          reply
-        );
-
-
-        /*
-          Gwada gano wasu bayanai daga
-          amsar AI domin summary.
-        */
-
-        updateProjectFromConversation(
-          message,
-          reply
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Creator App AI:",
-          error
-        );
-
-
-        addMessage(
-          "ai",
-          "❌ An samu matsala: " +
-          error.message
-        );
-
-
-        showStatus(
-          error.message,
-          "error"
-        );
-
-      } finally {
-
-        button.disabled = false;
-
-        button.textContent =
-          "Aika 🚀";
-
-      }
-
-    }
-
-
-    /*
-      =====================================================
-      ADD MESSAGE
-      =====================================================
-    */
-
-    function addMessage(
-      type,
-      text
-    ) {
-
-      const chatBox =
-        document.getElementById("chatBox");
-
-
-      const div =
-        document.createElement("div");
-
-
-      div.className =
-        "message " +
-        (type === "ai"
-          ? "ai"
-          : "user");
-
-
-      const title =
-        type === "ai"
-          ? "🤖 Creator App AI"
-          : "👤 Kai";
-
-
-      div.innerHTML =
-        "<strong>" +
-        title +
-        "</strong>" +
-        escapeHtml(text);
-
-
-      chatBox.appendChild(div);
-
-
-      chatBox.scrollTop =
-        chatBox.scrollHeight;
-
-    }
-
-
-    /*
-      =====================================================
-      PROJECT INFORMATION
-      =====================================================
-    */
-
-    function updateProjectFromConversation(
-      userMessage,
-      aiReply
-    ) {
-
-      /*
-        Wannan simple parser ne na farko.
-        Daga baya za mu mayar da shi
-        zuwa real structured AI output.
-      */
-
-
-      if (!project.description) {
-
-        project.description =
-          userMessage;
-
-      }
-
-
-      const lower =
-        userMessage.toLowerCase();
-
-
-      if (
-        lower.includes("bank")
-      ) {
-
-        project.category =
-          "Banking";
-
-      } else if (
-        lower.includes("taxi")
-      ) {
-
-        project.category =
-          "Taxi / Transport";
-
-      } else if (
-        lower.includes("shop") ||
-        lower.includes("shopping")
-      ) {
-
-        project.category =
-          "E-commerce";
-
-      } else if (
-        lower.includes("school") ||
-        lower.includes("education")
-      ) {
-
-        project.category =
-          "Education";
-
-      } else if (
-        lower.includes("hospital")
-      ) {
-
-        project.category =
-          "Healthcare";
-
-      } else if (
-        lower.includes("social")
-      ) {
-
-        project.category =
-          "Social Media";
-
-      } else if (
-        lower.includes("ai")
-      ) {
-
-        project.category =
-          "AI";
-
-      }
-
-
-      showSummary();
-
-    }
-
-
-    /*
-      =====================================================
-      SHOW SUMMARY
-      =====================================================
-    */
-
-    function showSummary() {
-
-      const summary =
-        document.getElementById("summary");
-
-
-      const content =
-        document.getElementById(
-          "summaryContent"
-        );
-
-
-      content.innerHTML = `
-
-        <div class="summary-item">
-          <strong>Bayani:</strong><br>
-          ${escapeHtml(
-            project.description ||
-            "Ba a kammala ba tukuna."
-          )}
-        </div>
-
-        <div class="summary-item">
-          <strong>Nau'in App:</strong><br>
-          ${escapeHtml(
-            project.category ||
-            "AI zai gano."
-          )}
-        </div>
-
-        <div class="summary-item">
-          <strong>Requirements:</strong><br>
-          Ana ci gaba da tattarawa ta AI Interview.
-        </div>
-
-      `;
-
-
-      summary.style.display =
-        "block";
-
-    }
-
-
-    /*
-      =====================================================
-      SAVE PROJECT
-      =====================================================
-    */
-
-    function saveProject() {
-
-      const projectData = {
-
-        ...project,
-
-        conversation:
-          conversation,
-
-        savedAt:
-          new Date().toISOString()
-
-      };
-
-
-      localStorage.setItem(
-        "creatorAppProject",
-        JSON.stringify(projectData)
-      );
-
-
-      showStatus(
-        "✅ An ajiye project ɗin a wannan browser.",
-        "success"
-      );
-
-    }
-
-
-    /*
-      =====================================================
-      PREPARE BUILD
-      =====================================================
-    */
-
-    function prepareBuild() {
-
-      saveProject();
-
-
-      showStatus(
-        "🏗️ An shirya project ɗin domin App Builder. Mataki na gaba zai haɗa Preview da Build.",
-        "success"
-      );
-
-    }
-
-
-    /*
-      =====================================================
-      NEW PROJECT
-      =====================================================
-    */
-
-    function startNewProject() {
-
-      if (
-        !confirm(
-          "Kana son fara sabon project?"
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      conversation = [];
-
-
-      project = {
-
-        appName: "",
-
-        description: "",
-
-        category: "",
-
-        users: [],
-
-        features: [],
-
-        pages: [],
-
-        database: [],
-
-        apis: [],
-
-        payments: [],
-
-        authentication: [],
-
-        files: [],
-
-        extraRequirements: ""
-
-      };
-
-
-      document.getElementById(
-        "chatBox"
-      ).innerHTML = `
-
-        <div class="message ai">
-
-          <strong>
-            🤖 Creator App AI
-          </strong>
-
-          Sannu! 👋
-
-          Wane irin app kake son ƙirƙira?
-
-          Ka bayyana min app ɗin da kake so da kalmominka.
-
-        </div>
-
-      `;
-
-
-      document.getElementById(
-        "summary"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "message"
-      ).value = "";
-
-
-      showStatus(
-        "An fara sabon project.",
-        "success"
-      );
-
-    }
-
-
-    /*
-      =====================================================
-      FILE NAME
-      =====================================================
-    */
-
-    function showFileName(
-      inputId,
-      outputId
-    ) {
-
-      const input =
-        document.getElementById(
-          inputId
-        );
-
-
-      const output =
-        document.getElementById(
-          outputId
-        );
-
-
-      if (
-        input.files &&
-        input.files.length > 0
-      ) {
-
-        output.textContent =
-          "An zaɓa: " +
-          input.files[0].name;
-
-      } else {
-
-        output.textContent =
-          "";
-
-      }
-
-    }
-
-
-    /*
-      =====================================================
-      STATUS
-      =====================================================
-    */
-
-    function showStatus(
-      message,
-      type
-    ) {
-
-      const status =
-        document.getElementById(
-          "status"
-        );
-
-
-      status.textContent =
-        message;
-
-
-      status.className =
-        "status " +
-        type;
-
-
-      status.style.display =
-        "block";
-
-    }
-
-
-    /*
-      =====================================================
-      SECURITY
-      =====================================================
-    */
-
-    function escapeHtml(
-      text
-    ) {
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.textContent =
-        text;
-
-
-      return div.innerHTML;
-
-    }
-
-
-    /*
-      =====================================================
-      ENTER KEY
-      =====================================================
-    */
-
-    document
-      .getElementById("message")
-      .addEventListener(
-        "keydown",
-        function(event) {
-
-          if (
-            event.key === "Enter" &&
-            !event.shiftKey
-          ) {
-
-            event.preventDefault();
-
-            sendMessage();
-
-          }
-
+    const response =
+      await fetch(
+        "/api/chat",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            message: prompt
+          })
         }
       );
 
 
+    const data =
+      await response.json()
+        .catch(() => ({}));
+
+
+    if (!response.ok) {
+      throw new Error(
+        data.error ||
+        "AI backend error"
+      );
+    }
+
+
+    if (!data.reply) {
+      throw new Error(
+        "AI bai dawo da amsa ba."
+      );
+    }
+
+
     /*
-      =====================================================
-      LOAD SAVED PROJECT
-      =====================================================
+      AI SUCCESS
     */
 
-    try {
-
-      const saved =
-        localStorage.getItem(
-          "creatorAppProject"
-        );
-
-
-      if (saved) {
-
-        const data =
-          JSON.parse(saved);
+    showResult(
+      data.reply,
+      appName,
+      category,
+      selectedFeatures
+    );
 
 
-        if (data.conversation) {
+    status.className =
+      "status ai-status";
 
-          conversation =
-            data.conversation;
+    status.textContent =
+      "🤖 AI ya tsara app ɗinka.";
 
-        }
+    status.style.display =
+      "block";
 
 
-        if (data.description) {
+  } catch (aiError) {
 
-          project =
-            data;
+    /*
+      =====================================
+      AI FAILED → OFFLINE FALLBACK
+      =====================================
+    */
 
+    console.log(
+      "AI failed, using offline fallback:",
+      aiError
+    );
+
+
+    status.className =
+      "status offline-status";
+
+    status.textContent =
+      "📴 Gemini baya samuwa yanzu. Offline Creator yana aiki.";
+
+    status.style.display =
+      "block";
+
+
+    const offlineResult =
+      offlineCreator(
+        appName,
+        description,
+        category,
+        selectedFeatures
+      );
+
+
+    showResult(
+      offlineResult.text,
+      appName,
+      category,
+      offlineResult.features
+    );
+
+  }
+
+
+  button.disabled = false;
+
+  button.textContent =
+    "✨ Fara Ƙirƙirar App";
+
+}
+
+
+/*
+========================================
+OFFLINE CREATOR
+========================================
+*/
+
+function offlineCreator(
+  appName,
+  description,
+  category,
+  selectedFeatures
+) {
+
+  const text =
+    description.toLowerCase();
+
+
+  let features =
+    [...selectedFeatures];
+
+
+  /*
+    BANK DETECTION
+  */
+
+  if (
+    category === "Banking" ||
+    text.includes("bank") ||
+    text.includes("banki")
+  ) {
+
+    const bankFeatures = [
+      "Login",
+      "Dashboard",
+      "Account Balance",
+      "Deposit",
+      "Withdraw",
+      "Transfer",
+      "Transaction History",
+      "User Profile",
+      "Notifications"
+    ];
+
+
+    bankFeatures.forEach(
+      feature => {
+
+        if (!features.includes(feature)) {
+          features.push(feature);
         }
 
       }
+    );
 
-    } catch (error) {
+  }
 
-      console.log(
-        "No saved project."
-      );
+
+  /*
+    SOCIAL MEDIA
+  */
+
+  if (
+    category === "Social Media" ||
+    text.includes("social") ||
+    text.includes("facebook") ||
+    text.includes("tiktok")
+  ) {
+
+    [
+      "Login",
+      "Home Feed",
+      "Profile",
+      "Posts",
+      "Messages",
+      "Notifications"
+    ].forEach(feature => {
+
+      if (!features.includes(feature)) {
+        features.push(feature);
+      }
+
+    });
+
+  }
+
+
+  /*
+    AI APP
+  */
+
+  if (
+    category === "AI" ||
+    text.includes("ai")
+  ) {
+
+    [
+      "Login",
+      "Chat AI",
+      "AI History",
+      "User Profile"
+    ].forEach(feature => {
+
+      if (!features.includes(feature)) {
+        features.push(feature);
+      }
+
+    });
+
+  }
+
+
+  /*
+    DEFAULT
+  */
+
+  if (features.length === 0) {
+
+    features = [
+      "Home",
+      "Dashboard",
+      "User Profile",
+      "Settings"
+    ];
+
+  }
+
+
+  let pages = [
+    "Home",
+    "Dashboard"
+  ];
+
+
+  if (features.includes("Login")) {
+    pages.unshift("Login");
+  }
+
+
+  features.forEach(feature => {
+
+    if (
+      !pages.includes(feature) &&
+      feature !== "Login"
+    ) {
+
+      pages.push(feature);
 
     }
 
-  </script>
+  });
+
+
+  /*
+    COLORS
+  */
+
+  let colors =
+    "Fari background + Blue buttons da icons";
+
+
+  if (
+    text.includes("green") ||
+    text.includes("kore")
+  ) {
+
+    colors =
+      "Fari background + Green buttons da icons";
+
+  }
+
+
+  if (
+    text.includes("red") ||
+    text.includes("ja")
+  ) {
+
+    colors =
+      "Fari background + Red buttons da icons";
+
+  }
+
+
+  if (
+    text.includes("black") ||
+    text.includes("baki")
+  ) {
+
+    colors =
+      "Fari background + Black buttons da icons";
+
+  }
+
+
+  const result =
+
+`CENTER APP AI
+━━━━━━━━━━━━━━━━━━━━
+
+📱 SUNAN APP:
+${appName}
+
+🏷️ NAU'IN APP:
+${category}
+
+🎯 MANUFAR APP:
+${description}
+
+🎨 UI / COLORS:
+${colors}
+
+📄 PAGES:
+${pages.map(
+  (page, i) =>
+    `${i + 1}. ${page}`
+).join("\n")}
+
+⚙️ FEATURES:
+${features.map(
+  feature =>
+    "• " + feature
+).join("\n")}
+
+🔘 BUTTONS:
+• Primary Button
+• Secondary Button
+• Navigation Buttons
+• Action Buttons
+
+🔵 ICONS:
+• Home
+• User
+• Settings
+• Notifications
+• Back
+• Menu
+
+🗄️ DATABASE:
+• Users
+• Profiles
+• App Settings
+• Transactions / App Data
+
+🔑 API:
+API za a ƙara ne idan app ɗin yana buƙatar
+backend ko wani external service.
+
+🚀 NEXT STEP:
+Za mu iya amfani da wannan tsarin
+mu fara gina UI na app ɗin.
+
+━━━━━━━━━━━━━━━━━━━━
+Creator App AI Offline Mode`;
+
+
+  return {
+    text: result,
+    features: features
+  };
+
+}
+
+
+/*
+========================================
+SHOW RESULT
+========================================
+*/
+
+function showResult(
+  text,
+  appName,
+  category,
+  features
+) {
+
+  const result =
+    document.getElementById("result");
+
+  const resultBox =
+    document.getElementById("resultBox");
+
+  const preview =
+    document.getElementById("preview");
+
+
+  resultBox.textContent =
+    text;
+
+
+  /*
+    SIMPLE APP PREVIEW
+  */
+
+  const isBank =
+    category === "Banking";
+
+
+  const buttons =
+    isBank
+      ? [
+          "💰 Balance",
+          "💳 Deposit",
+          "💸 Transfer",
+          "📤 Withdraw",
+          "📜 Transactions"
+        ]
+      : [
+          "🏠 Home",
+          "👤 Profile",
+          "⚙️ Settings",
+          "🔔 Notifications"
+        ];
+
+
+  preview.innerHTML = `
+
+    <div class="preview-header">
+
+      <strong>
+        ${escapeHtml(appName)}
+      </strong>
+
+      <br>
+
+      <small>
+        App Preview
+      </small>
+
+    </div>
+
+
+    <div class="preview-body">
+
+      <h3>
+        Welcome to ${escapeHtml(appName)}
+      </h3>
+
+      ${buttons.map(
+        button =>
+          `<span class="preview-button">
+             ${button}
+           </span>`
+      ).join("")}
+
+    </div>
+
+  `;
+
+
+  result.style.display =
+    "block";
+
+
+  result.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+/*
+========================================
+SECURITY
+========================================
+*/
+
+function escapeHtml(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    text;
+
+  return div.innerHTML;
+
+}
+
+</script>
 
 </body>
 </html>
