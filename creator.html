@@ -1,623 +1,301 @@
 <!DOCTYPE html>
 <html lang="ha">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Creator App AI</title>
+  <title>Creator App AI</title>
 
-<style>
-*{
-  box-sizing:border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f3f6fb;
-  color:#172033;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
 
-.header{
-  background:linear-gradient(135deg,#1261d6,#6c3cff);
-  color:white;
-  padding:28px 18px;
-  text-align:center;
-}
+    .header {
+      background: #1261d6;
+      color: white;
+      padding: 22px 18px;
+      text-align: center;
+    }
 
-.logo{
-  font-size:48px;
-}
+    .header .icon {
+      font-size: 45px;
+    }
 
-.header h1{
-  margin:8px 0;
-  font-size:30px;
-}
+    .header h1 {
+      margin: 8px 0 5px;
+      font-size: 28px;
+    }
 
-.header p{
-  margin:0;
-}
+    .header p {
+      margin: 0;
+      opacity: 0.9;
+    }
 
-.container{
-  width:100%;
-  max-width:760px;
-  margin:25px auto;
-  padding:0 15px;
-}
+    .container {
+      max-width: 700px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
 
-.card{
-  background:white;
-  border-radius:18px;
-  padding:22px;
-  margin-bottom:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
 
-h2{
-  margin-top:0;
-  color:#1261d6;
-}
+    .card h2 {
+      margin-top: 0;
+      color: #1261d6;
+    }
 
-label{
-  display:block;
-  font-weight:bold;
-  margin:18px 0 8px;
-}
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 15px 0 8px;
+    }
 
-input,
-textarea,
-select{
-  width:100%;
-  padding:14px;
-  border:1px solid #ccd4e2;
-  border-radius:10px;
-  font-size:16px;
-  background:white;
-  color:#172033;
-  outline:none;
-}
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd3df;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
 
-textarea{
-  min-height:140px;
-  resize:vertical;
-}
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
 
-input:focus,
-textarea:focus,
-select:focus{
-  border-color:#1261d6;
-  box-shadow:0 0 0 3px rgba(18,97,214,.1);
-}
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #1261d6;
+    }
 
-.features{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
 
-.feature{
-  margin:0;
-  padding:13px;
-  border:1px solid #d8deea;
-  border-radius:10px;
-  background:#f8faff;
-  display:flex;
-  align-items:center;
-  gap:9px;
-  cursor:pointer;
-}
+    .feature {
+      border: 1px solid #d9deea;
+      padding: 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      background: #fafbfe;
+      margin: 0;
+      font-weight: normal;
+    }
 
-.feature input{
-  width:auto;
-  margin:0;
-}
+    .feature:hover {
+      border-color: #1261d6;
+      background: #f0f6ff;
+    }
 
-.create-btn{
-  width:100%;
-  margin-top:22px;
-  padding:16px;
-  border:0;
-  border-radius:11px;
-  background:linear-gradient(135deg,#1261d6,#6c3cff);
-  color:white;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .feature input {
+      width: auto;
+      margin-right: 7px;
+    }
 
-.create-btn:disabled{
-  opacity:.6;
-}
+    .button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #1261d6;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.loading{
-  display:none;
-  text-align:center;
-  margin-top:18px;
-  color:#1261d6;
-  font-weight:bold;
-}
+    .button:hover {
+      background: #0d4fae;
+    }
 
-.error{
-  display:none;
-  margin-top:15px;
-  padding:13px;
-  border-radius:10px;
-  background:#fff0f0;
-  color:#c40000;
-}
+    .button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
 
-.result{
-  display:none;
-}
+    .loading {
+      display: none;
+      margin-top: 15px;
+      padding: 14px;
+      text-align: center;
+      background: #eef5ff;
+      color: #1261d6;
+      border-radius: 10px;
+      font-weight: bold;
+    }
 
-.result-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
+    #result {
+      display: none;
+    }
 
-.download-btn{
-  border:0;
-  background:#168a45;
-  color:white;
-  padding:11px 15px;
-  border-radius:9px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .success {
+      color: #087f3e;
+      font-weight: bold;
+    }
 
-.preview{
-  margin-top:15px;
-  border:1px solid #d9dfeb;
-  border-radius:12px;
-  overflow:hidden;
-  background:#111;
-}
+    .error {
+      color: #d00000;
+      background: #fff0f0;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      display: none;
+    }
 
-.preview iframe{
-  width:100%;
-  height:500px;
-  border:0;
-  background:white;
-}
+    .result-box {
+      background: #f7f9fc;
+      border: 1px solid #dce2ed;
+      border-radius: 10px;
+      padding: 15px;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
 
-.code-box{
-  margin-top:15px;
-  background:#101522;
-  color:#d9e2f2;
-  padding:15px;
-  border-radius:10px;
-  overflow:auto;
-  max-height:350px;
-  white-space:pre-wrap;
-  font-family:monospace;
-  font-size:13px;
-}
+    .code-section {
+      margin-top: 18px;
+    }
 
-.back{
-  display:block;
-  text-align:center;
-  margin:25px 0;
-  color:#1261d6;
-  text-decoration:none;
-  font-weight:bold;
-}
+    .code-section h3 {
+      color: #1261d6;
+      margin-bottom: 8px;
+    }
 
-@media(max-width:550px){
-  .features{
-    grid-template-columns:1fr;
-  }
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 13px;
+      line-height: 1.5;
+    }
 
-  .header h1{
-    font-size:25px;
-  }
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
 
-  .preview iframe{
-    height:450px;
-  }
-}
-</style>
+    .action-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 12px;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: bold;
+      background: #1261d6;
+      color: white;
+    }
+
+    .action-btn:hover {
+      background: #0d4fae;
+    }
+
+    .preview {
+      margin-top: 20px;
+      border: 1px solid #dce2ed;
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .preview-header {
+      padding: 12px;
+      background: #eef4ff;
+      color: #1261d6;
+      font-weight: bold;
+    }
+
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: 0;
+      background: white;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 25px 0;
+      color: #1261d6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 500px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      iframe {
+        height: 450px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="header">
+  <div class="header">
 
-  <div class="logo">🤖</div>
+    <div class="icon">🛠️</div>
 
-  <h1>Creator App AI</h1>
+    <h1>Creator App AI</h1>
 
-  <p>Gina app tare da taimakon AI</p>
-
-</header>
-
-
-<div class="container">
-
-  <div class="card">
-
-    <h2>🚀 Ƙirƙiri Sabon App</h2>
-
-    <p>
-      Bayyana app ɗin da kake son ƙirƙira.
-      Creator App AI zai taimaka maka ƙirƙirar frontend ɗin app.
-    </p>
-
-
-    <label for="appName">
-      Sunan App
-    </label>
-
-    <input
-      id="appName"
-      type="text"
-      placeholder="Misali: Ai9974"
-    >
-
-
-    <label for="description">
-      Menene app ɗin zai yi?
-    </label>
-
-    <textarea
-      id="description"
-      placeholder="Misali: Ina son app din da zai haɗa video irin na Runway..."
-    ></textarea>
-
-
-    <label for="category">
-      Nau'in App
-    </label>
-
-    <select id="category">
-
-      <option value="General App">
-        General App
-      </option>
-
-      <option value="Banking App">
-        Banking App
-      </option>
-
-      <option value="Business App">
-        Business App
-      </option>
-
-      <option value="Social Media App">
-        Social Media App
-      </option>
-
-      <option value="Education App">
-        Education App
-      </option>
-
-      <option value="Entertainment App">
-        Entertainment App
-      </option>
-
-      <option value="AI App">
-        AI App
-      </option>
-
-      <option value="Video Generator App">
-        Video Generator App
-      </option>
-
-    </select>
-
-
-    <label>
-      Abubuwan da kake so a cikin app
-    </label>
-
-
-    <div class="features">
-
-      <label class="feature">
-        <input type="checkbox" value="Login" class="featureCheck">
-        Login
-      </label>
-
-      <label class="feature">
-        <input type="checkbox" value="Dashboard" class="featureCheck">
-        Dashboard
-      </label>
-
-      <label class="feature">
-        <input type="checkbox" value="Database" class="featureCheck">
-        Database
-      </label>
-
-      <label class="feature">
-        <input type="checkbox" value="Chat AI" class="featureCheck">
-        Chat AI
-      </label>
-
-      <label class="feature">
-        <input type="checkbox" value="Payment" class="featureCheck">
-        Payment
-      </label>
-
-      <label class="feature">
-        <input type="checkbox" value="User Profile" class="featureCheck">
-        User Profile
-      </label>
-
-      <label class="feature">
-        <input type="checkbox" value="Notifications" class="featureCheck">
-        Notifications
-      </label>
-
-      <label class="feature">
-        <input type="checkbox" value="API" class="featureCheck">
-        API
-      </label>
-
-    </div>
-
-
-    <button
-      id="createButton"
-      class="create-btn"
-      onclick="createApp()"
-    >
-      ✨ Fara Ƙirƙirar App
-    </button>
-
-
-    <div id="loading" class="loading">
-      🤖 Creator App AI yana ƙirƙirar app ɗinka...
-    </div>
-
-
-    <div id="error" class="error"></div>
+    <p>Gina app tare da taimakon AI</p>
 
   </div>
 
 
-  <div id="result" class="card result">
+  <div class="container">
 
-    <div class="result-header">
+    <!-- CREATE APP -->
 
-      <h2>📱 An Ƙirƙiri App ɗinka</h2>
+    <div class="card">
 
-      <button
-        class="download-btn"
-        onclick="downloadApp()"
-      >
-        ⬇️ Sauke App
-      </button>
+      <h2>🚀 Ƙirƙiri sabon app</h2>
 
-    </div>
+      <p>
+        Bayyana app ɗin da kake son ƙirƙira.
+        Creator App AI zai taimaka maka ƙirƙirar frontend ɗin app ɗin.
+      </p>
 
 
-    <div id="appInfo"></div>
+      <label for="appName">
+        Sunan App
+      </label>
 
-
-    <div class="preview">
-
-      <iframe
-        id="previewFrame"
-        sandbox="allow-scripts allow-forms"
-      ></iframe>
-
-    </div>
-
-
-    <h3>HTML</h3>
-
-    <div
-      id="htmlCode"
-      class="code-box"
-    ></div>
-
-
-    <h3>CSS</h3>
-
-    <div
-      id="cssCode"
-      class="code-box"
-    ></div>
-
-
-    <h3>JavaScript</h3>
-
-    <div
-      id="jsCode"
-      class="code-box"
-    ></div>
-
-  </div>
-
-
-  <a
-    class="back"
-    href="dashboard.html"
-  >
-    ⬅ Komawa Dashboard
-  </a>
-
-</div>
-
-
-<script>
-
-let generatedApp = {
-  html:"",
-  css:"",
-  js:""
-};
-
-
-async function createApp(){
-
-  const appName =
-    document.getElementById("appName").value.trim();
-
-  const description =
-    document.getElementById("description").value.trim();
-
-  const category =
-    document.getElementById("category").value;
-
-  const button =
-    document.getElementById("createButton");
-
-  const loading =
-    document.getElementById("loading");
-
-  const errorBox =
-    document.getElementById("error");
-
-  const result =
-    document.getElementById("result");
-
-
-  errorBox.style.display="none";
-  result.style.display="none";
-
-
-  if(!appName){
-
-    showError("Rubuta sunan app ɗinka.");
-
-    return;
-  }
-
-
-  if(!description){
-
-    showError(
-      "Bayyana abin da app ɗin zai yi."
-    );
-
-    return;
-  }
-
-
-  const selectedFeatures =
-    Array.from(
-      document.querySelectorAll(
-        ".featureCheck:checked"
-      )
-    ).map(
-      item => item.value
-    );
-
-
-  const features =
-    selectedFeatures.length
-      ? selectedFeatures.join(", ")
-      : "Babu takamaiman features";
-
-
-  const prompt = `
-
-Kai ne Creator App AI.
-
-Ka ƙirƙiri cikakken frontend application.
-
-SUNAN APP:
-${appName}
-
-NAU'IN APP:
-${category}
-
-BAYANIN APP:
-${description}
-
-FEATURES:
-${features}
-
-Ka ƙirƙiri application mai kyau,
-responsive kuma mai aiki a Android.
-
-Idan app ɗin yana buƙatar API,
-yi frontend demo idan babu API na gaske.
-
-Ka dawo da:
-
-html
-css
-js
-
-`;
-
-  button.disabled=true;
-
-  button.textContent=
-    "🤖 Ana ƙirƙirar...";
-
-  loading.style.display="block";
-
-
-  try{
-
-    /*
-      IMPORTANT:
-      Wannan endpoint ɗin dole ne
-      ya kasance:
-
-      /api/create-app
-    */
-
-    const response =
-      await fetch(
-        "/api/create-app",
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-            prompt:prompt
-          })
-        }
-      );
-
-
-    const data =
-      await response.json()
-      .catch(
-        ()=>({})
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "Backend error: "+
-        response.status
-      );
-
-    }
-
-
-    if(
-      typeof data.html !== "string" ||
-      typeof data.css !== "string" ||
-      typeof data.js !== "string"
-    ){
-
-      throw new Error(
-        "AI bai dawo da HTML, CSS da JS daidai ba."
-      );
-
-    }
-
-
-    generatedApp={
-      html:data.html,
-      css:data.css,
-      js:data.js
-    };
-
-
-    /*
-     
+      <input
+        id="appName"
+        type="text
