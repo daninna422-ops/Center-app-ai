@@ -176,7 +176,7 @@ Ka dawo da JSON kawai mai:
     button.disabled = false;
 
     button.textContent =
-      "✨🇳🇬 Fara Ƙirƙirar App";
+      "✨ Fara Ƙirƙirar App";
 
     loading.style.display = "none";
   }
