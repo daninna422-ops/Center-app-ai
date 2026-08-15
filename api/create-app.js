@@ -181,3 +181,19 @@ Ka dawo da JSON kawai mai:
     loading.style.display = "none";
   }
 }
+document.addEventListener("DOMContentLoaded", function () {
+
+  const createAppBtn =
+    document.getElementById("createAppBtn");
+
+  if (createAppBtn) {
+
+    createAppBtn.addEventListener("click", function () {
+
+      window.location.href = "creator.html";
+
+    });
+
+  }
+
+});
