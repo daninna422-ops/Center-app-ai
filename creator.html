@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ha">
 <head>
@@ -11,6 +12,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -19,9 +24,9 @@
     }
 
     .header {
-      background: #1261d6;
+      background: linear-gradient(135deg, #1261d6, #673ab7);
       color: white;
-      padding: 25px 18px;
+      padding: 28px 18px;
       text-align: center;
     }
 
@@ -37,10 +42,11 @@
     .header p {
       margin: 0;
       font-size: 16px;
+      opacity: .95;
     }
 
     .container {
-      max-width: 700px;
+      max-width: 850px;
       margin: 25px auto;
       padding: 0 15px;
     }
@@ -50,7 +56,7 @@
       padding: 22px;
       margin-bottom: 20px;
       border-radius: 16px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
     }
 
     .card h2 {
@@ -74,10 +80,11 @@
       border-radius: 9px;
       font-size: 16px;
       outline: none;
+      font-family: inherit;
     }
 
     textarea {
-      min-height: 140px;
+      min-height: 150px;
       resize: vertical;
     }
 
@@ -85,6 +92,7 @@
     textarea:focus,
     select:focus {
       border-color: #1261d6;
+      box-shadow: 0 0 0 3px rgba(18,97,214,.08);
     }
 
     .features {
@@ -103,6 +111,12 @@
       border-radius: 9px;
       background: #fafbfe;
       cursor: pointer;
+      transition: .2s;
+    }
+
+    .feature:hover {
+      border-color: #1261d6;
+      background: #f4f8ff;
     }
 
     .feature input {
@@ -116,22 +130,40 @@
       padding: 15px;
       border: none;
       border-radius: 10px;
-      background: #1261d6;
+      background: linear-gradient(135deg, #1261d6, #673ab7);
       color: white;
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
+      transition: .2s;
+    }
+
+    .create-btn:hover {
+      transform: translateY(-1px);
     }
 
     .create-btn:disabled {
       background: #999;
       cursor: not-allowed;
+      transform: none;
     }
 
     .error {
-      color: #d00000;
+      color: #a40000;
       background: #fff0f0;
-      padding: 12px;
+      border: 1px solid #ffcaca;
+      padding: 13px;
+      border-radius: 8px;
+      margin-top: 15px;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .success {
+      color: #086b35;
+      background: #edfff4;
+      border: 1px solid #b9efce;
+      padding: 13px;
       border-radius: 8px;
       margin-top: 15px;
       display: none;
@@ -142,10 +174,35 @@
       color: #1261d6;
       margin-top: 15px;
       display: none;
+      padding: 15px;
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 4px solid #dce8ff;
+      border-top-color: #1261d6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     #result {
       display: none;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .result-box {
@@ -156,22 +213,78 @@
       white-space: pre-wrap;
       line-height: 1.7;
       text-align: left;
-      overflow-x: auto;
-      font-family: monospace;
-      font-size: 13px;
+      margin-top: 15px;
+      max-height: 250px;
+      overflow: auto;
     }
 
-    .preview-btn {
+    .preview-title {
+      margin-top: 25px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #1261d6;
+    }
+
+    .preview-frame {
       width: 100%;
-      margin-top: 12px;
-      padding: 14px;
+      height: 600px;
+      border: 1px solid #dce2ed;
+      border-radius: 12px;
+      background: white;
+      display: block;
+    }
+
+    .download-area {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #f1f6ff;
+      border: 1px solid #d7e5ff;
+    }
+
+    .download-area h3 {
+      margin-top: 0;
+      color: #1261d6;
+    }
+
+    .download-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .download-btn {
       border: none;
-      border-radius: 10px;
-      background: #16803c;
-      color: white;
-      font-size: 16px;
+      border-radius: 9px;
+      padding: 13px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
+      background: #1261d6;
+      color: white;
+    }
+
+    .download-btn.zip {
+      background: #673ab7;
+      grid-column: 1 / -1;
+      font-size: 17px;
+      padding: 15px;
+    }
+
+    .download-btn:hover {
+      opacity: .9;
+    }
+
+    .download-btn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    .files-info {
+      margin-top: 12px;
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
     .back {
@@ -183,607 +296,36 @@
       font-weight: bold;
     }
 
-    @media (max-width: 500px) {
+    .clear-btn {
+      background: #fff;
+      color: #d00000;
+      border: 1px solid #ffcaca;
+      padding: 9px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+
       .features {
         grid-template-columns: 1fr;
+      }
+
+      .download-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .download-btn.zip {
+        grid-column: auto;
+      }
+
+      .preview-frame {
+        height: 520px;
       }
 
       .header h1 {
         font-size: 25px;
       }
     }
-  </style>
-</head>
-
-<body>
-
-  <div class="header">
-
-    <div class="robot">🛠️</div>
-
-    <h1>Creator App AI</h1>
-
-    <p>Gina app tare da taimakon AI</p>
-
-  </div>
-
-
-  <div class="container">
-
-    <div class="card">
-
-      <h2>🚀 Ƙirƙiri Sabon App</h2>
-
-      <p>
-        Bayyana app ɗin da kake son ƙirƙira.
-        Creator App AI zai taimaka maka ƙirƙirar frontend ɗin app ɗin.
-      </p>
-
-
-      <label class="title" for="appName">
-        Sunan App
-      </label>
-
-      <input
-        id="appName"
-        type="text"
-        placeholder="Misali: Mubarak Bank"
-      >
-
-
-      <label class="title" for="description">
-        Menene app ɗin zai yi?
-      </label>
-
-      <textarea
-        id="description"
-        placeholder="Misali: Ina son app na banki mai login, balance, transfer da transaction history."
-      ></textarea>
-
-
-      <label class="title" for="category">
-        Nau'in App
-      </label>
-
-      <select id="category">
-
-        <option value="General App">
-          General App
-        </option>
-
-        <option value="Banking App">
-          Banking App
-        </option>
-
-        <option value="Business App">
-          Business App
-        </option>
-
-        <option value="Social Media App">
-          Social Media App
-        </option>
-
-        <option value="Education App">
-          Education App
-        </option>
-
-        <option value="Entertainment App">
-          Entertainment App
-        </option>
-
-        <option value="AI App">
-          AI App
-        </option>
-
-      </select>
-
-
-      <label class="title">
-        Abubuwan da kake so a cikin app
-      </label>
-
-
-      <div class="features">
-
-        <label class="feature">
-          <input
-            type="checkbox"
-            value="Login"
-            class="featureCheck"
-          >
-          Login
-        </label>
-
-        <label class="feature">
-          <input
-            type="checkbox"
-            value="Dashboard"
-            class="featureCheck"
-          >
-          Dashboard
-        </label>
-
-        <label class="feature">
-          <input
-            type="checkbox"
-            value="Database"
-            class="featureCheck"
-          >
-          Database
-        </label>
-
-        <label class="feature">
-          <input
-            type="checkbox"
-            value="Chat AI"
-            class="featureCheck"
-          >
-          Chat AI
-        </label>
-
-        <label class="feature">
-          <input
-            type="checkbox"
-            value="Payment"
-            class="featureCheck"
-          >
-          Payment
-        </label>
-
-        <label class="feature">
-          <input
-            type="checkbox"
-            value="User Profile"
-            class="featureCheck"
-          >
-          User Profile
-        </label>
-
-        <label class="feature">
-          <input
-            type="checkbox"
-            value="Notifications"
-            class="featureCheck"
-          >
-          Notifications
-        </label>
-
-        <label class="feature">
-          <input
-            type="checkbox"
-            value="API"
-            class="featureCheck"
-          >
-          API
-        </label>
-
-      </div>
-
-
-      <button
-        id="createButton"
-        class="create-btn"
-        onclick="createApp()"
-      >
-        ✨ Fara Ƙirƙirar App
-      </button>
-
-
-      <div id="loading" class="loading">
-        🤖 Creator App AI yana ƙirƙirar app ɗinka...
-      </div>
-
-
-      <div id="error" class="error"></div>
-
-    </div>
-
-
-    <div
-      id="result"
-      class="card"
-    >
-
-      <h2>📱 An Ƙirƙiri App ɗinka</h2>
-
-      <div
-        id="resultBox"
-        class="result-box"
-      ></div>
-
-      <button
-        id="previewButton"
-        class="preview-btn"
-        onclick="previewApp()"
-      >
-        👁️ Duba Preview
-      </button>
-
-    </div>
-
-
-    <a
-      class="back"
-      href="dashboard.html"
-    >
-      ⬅ Komawa Dashboard
-    </a>
-
-  </div>
-
-
-  <script>
-
-    let generatedApp = {
-      html: "",
-      css: "",
-      js: ""
-    };
-
-
-    async function createApp() {
-
-      const appName =
-        document.getElementById("appName").value.trim();
-
-      const description =
-        document.getElementById("description").value.trim();
-
-      const category =
-        document.getElementById("category").value;
-
-      const button =
-        document.getElementById("createButton");
-
-      const loading =
-        document.getElementById("loading");
-
-      const errorBox =
-        document.getElementById("error");
-
-      const result =
-        document.getElementById("result");
-
-      const resultBox =
-        document.getElementById("resultBox");
-
-
-      errorBox.style.display = "none";
-      errorBox.textContent = "";
-
-      result.style.display = "none";
-
-
-      if (!appName) {
-
-        showError(
-          "Rubuta sunan app ɗinka."
-        );
-
-        return;
-      }
-
-
-      if (!description) {
-
-        showError(
-          "Bayyana abin da app ɗin zai yi."
-        );
-
-        return;
-      }
-
-
-      const selectedFeatures =
-        Array.from(
-          document.querySelectorAll(
-            ".featureCheck:checked"
-          )
-        ).map(
-          checkbox => checkbox.value
-        );
-
-
-      const features =
-        selectedFeatures.length > 0
-          ? selectedFeatures.join(", ")
-          : "Babu takamaiman features";
-
-
-      const prompt = `
-Kai ne Creator App AI na Center App AI.
-
-Mai amfani yana son ƙirƙirar application.
-
-SUNAN APP:
-${appName}
-
-NAU'IN APP:
-${category}
-
-BAYANIN APP:
-${description}
-
-FEATURES:
-${features}
-
-KA'IDOJI:
-
-1. Ƙirƙiri cikakken frontend application.
-
-2. Application ɗin ya kasance modern,
-   professional kuma responsive ga Android.
-
-3. HTML ya kasance page body kawai.
-   Kada ka saka html, head ko body tags.
-
-4. CSS ya ƙunshi duk styling da ake bukata.
-
-5. JavaScript ya ƙunshi functionality
-   da application ɗin yake bukata.
-
-6. Buttons da forms su yi aiki.
-
-7. Kada ka yi amfani da external libraries
-   sai idan ya zama dole.
-
-8. Idan application ɗin yana buƙatar backend,
-   database, payment ko API wanda ba a bayar ba,
-   ƙirƙiri frontend DEMO kawai.
-
-9. Kada ka ƙirƙiri real banking transactions
-   ko real payment transactions.
-
-10. Ka dawo da JSON kawai.
-
-JSON ɗin dole ya kasance da fields guda uku:
-
-{
-  "html": "...",
-  "css": "...",
-  "js": "..."
-}
-
-Ka tabbatar JSON ɗin valid ne.
-
-Ka samar da app ɗin yanzu.
-`;
-
-
-      button.disabled = true;
-
-      button.textContent =
-        "Ana ƙirƙirawa...";
-
-      loading.style.display =
-        "block";
-
-
-      try {
-
-        const response =
-          await fetch(
-            "/api/create-app",
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type": "application/json"
-              },
-
-              body: JSON.stringify({
-                prompt: prompt
-              })
-            }
-          );
-
-
-        const data =
-          await response.json().catch(
-            () => ({})
-          );
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            data.error ||
-            "Backend ya dawo da error: " +
-            response.status
-          );
-
-        }
-
-
-        if (
-          typeof data.html !== "string" ||
-          typeof data.css !== "string" ||
-          typeof data.js !== "string"
-        ) {
-
-          throw new Error(
-            "AI bai dawo da HTML, CSS da JavaScript daidai ba."
-          );
-
-        }
-
-
-        generatedApp.html =
-          data.html;
-
-        generatedApp.css =
-          data.css;
-
-        generatedApp.js =
-          data.js;
-
-
-        resultBox.textContent =
-`APP: ${appName}
-
-================ HTML ================
-
-${data.html}
-
-
-================ CSS ================
-
-${data.css}
-
-
-================ JAVASCRIPT ================
-
-${data.js}`;
-
-
-        result.style.display =
-          "block";
-
-
-        result.scrollIntoView({
-          behavior: "smooth"
-        });
-
-
-      } catch (error) {
-
-        showError(
-          error.message ||
-          "An samu matsala wajen ƙirƙirar app."
-        );
-
-      } finally {
-
-        button.disabled =
-          false;
-
-        button.textContent =
-          "✨ Fara Ƙirƙirar App";
-
-        loading.style.display =
-          "none";
-
-      }
-
-    }
-
-
-    function previewApp() {
-
-      if (
-        !generatedApp.html ||
-        !generatedApp.css
-      ) {
-
-        showError(
-          "Babu app da aka ƙirƙira tukuna."
-        );
-
-        return;
-      }
-
-
-      const previewWindow =
-        window.open(
-          "",
-          "_blank"
-        );
-
-
-      if (!previewWindow) {
-
-        showError(
-          "Browser ya hana buɗe Preview. Ka ba browser izinin buɗe sabon shafi."
-        );
-
-        return;
-      }
-
-
-      const safeHTML =
-        generatedApp.html;
-
-      const safeCSS =
-        generatedApp.css;
-
-      const safeJS =
-        generatedApp.js;
-
-
-      previewWindow.document.open();
-
-
-      previewWindow.document.write(`
-<!DOCTYPE html>
-<html lang="ha">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>App Preview</title>
-
-  <style>
-
-    ${safeCSS}
-
-  </style>
-
-</head>
-
-<body>
-
-  ${safeHTML}
-
-  <script>
-
-    try {
-
-      ${safeJS}
-
-    } catch (error) {
-
-      console.error(
-        "Preview JavaScript Error:",
-        error
-      );
-
-    }
-
-  <\/script>
-
-</body>
-
-</html>
-      `);
-
-
-      previewWindow.document.close();
-
-    }
-
-
-    function showError(message) {
-
-      const errorBox =
-        document.getElementById(
-          "error"
-        );
-
-      errorBox.textContent =
-        "Error: " + message;
-
-      errorBox.style.display =
-        "block";
-
-    }
-
-  </script>
-
-</body>
-</html>
+  </style
