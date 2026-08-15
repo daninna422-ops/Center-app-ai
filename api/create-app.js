@@ -1,431 +1,183 @@
-export default async function handler(req, res) {
+async function createApp() {
 
-  // =========================
-  // CORS
-  // =========================
+  const appName =
+    document.getElementById("appName").value.trim();
 
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "*"
-  );
+  const description =
+    document.getElementById("description").value.trim();
 
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "POST, OPTIONS"
-  );
+  const category =
+    document.getElementById("category").value;
 
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type"
-  );
+  const button =
+    document.getElementById("createButton");
 
+  const loading =
+    document.getElementById("loading");
 
-  // =========================
-  // OPTIONS
-  // =========================
+  const errorBox =
+    document.getElementById("error");
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
+  const result =
+    document.getElementById("result");
+
+  if (!appName) {
+    showError("Rubuta sunan app ɗinka.");
+    return;
   }
 
-
-  // =========================
-  // METHOD
-  // =========================
-
-  if (req.method !== "POST") {
-
-    return res.status(405).json({
-      error: "Method not allowed"
-    });
-
+  if (!description) {
+    showError("Bayyana abin da app ɗin zai yi.");
+    return;
   }
 
+  const selectedFeatures =
+    Array.from(
+      document.querySelectorAll(".featureCheck:checked")
+    ).map(x => x.value);
+
+  const features =
+    selectedFeatures.length
+      ? selectedFeatures.join(", ")
+      : "Babu takamaiman features";
+
+  const prompt = `
+Kai ne Creator App AI.
+
+Ka ƙirƙiri frontend application bisa wannan bayanin.
+
+SUNAN APP:
+${appName}
+
+NAU'IN APP:
+${category}
+
+BAYANIN APP:
+${description}
+
+FEATURES:
+${features}
+
+Ka ƙirƙiri:
+1. HTML
+2. CSS
+3. JavaScript
+
+Application ya zama modern, professional,
+responsive ga Android kuma buttons su yi aiki.
+
+Idan yana buƙatar API wanda ba a bayar ba,
+yi DEMO frontend kawai.
+
+Kada ka saka API key a frontend.
+
+Ka dawo da JSON kawai mai:
+
+{
+  "html": "...",
+  "css": "...",
+  "js": "..."
+}
+`;
+
+  button.disabled = true;
+  button.textContent = "🤖 Ana ƙirƙirar...";
+  loading.style.display = "block";
+  errorBox.style.display = "none";
+  result.style.display = "none";
 
   try {
 
-    // =========================
-    // USER PROMPT
-    // =========================
+    const response = await fetch("/api/create-app", {
+      method: "POST",
 
-    const prompt =
-      typeof req.body?.prompt === "string"
-        ? req.body.prompt.trim()
-        : "";
-
-
-    if (!prompt) {
-
-      return res.status(400).json({
-        error:
-          "An aika da babu bayanin app."
-      });
-
-    }
-
-
-    // =========================
-    // GEMINI API KEY
-    // =========================
-
-    const apiKey =
-      process.env.GEMINI_API_KEY;
-
-
-    if (!apiKey) {
-
-      return res.status(500).json({
-        error:
-          "GEMINI_API_KEY ba a saita shi a Vercel ba."
-      });
-
-    }
-
-
-    // =========================
-    // SYSTEM PROMPT
-    // =========================
-
-    const systemPrompt = `
-Kai ne Center App AI.
-
-Kai ƙwararren AI ne wajen ƙirƙirar frontend web applications.
-
-Mai amfani zai bayyana irin application ɗin da yake son ginawa.
-
-Mai amfani zai iya amfani da Hausa ko English.
-
-Ka ƙirƙiri cikakken frontend application bisa bayaninsa.
-
-APPLICATION REQUEST:
-
-${prompt}
-
-MUHIMMAN KA'IDOJI:
-
-1. HTML:
-   - Dawo da body content kawai.
-   - Kada ka saka <html>, <head>, ko <body>.
-
-2. CSS:
-   - Saka duk styling da application yake bukata.
-
-3. JavaScript:
-   - Saka duk functionality da application yake bukata.
-
-4. Application ya zama:
-   - Modern
-   - Professional
-   - Responsive ga Android
-   - Mai sauƙin amfani
-
-5. Buttons da forms su yi aiki idan zai yiwu.
-
-6. Idan application yana buƙatar backend,
-   database, authentication, payment, AI API,
-   video API ko wani external API wanda ba a bayar ba,
-   ƙirƙiri DEMO frontend kawai.
-
-7. Kada ka saka API key a frontend.
-
-8. Idan mai amfani ya nemi AI video generator,
-   ƙirƙiri interface mai:
-   - Prompt input
-   - Generate button
-   - Loading state
-   - Video preview area
-   - Aspect ratio
-   - Duration
-   - History/projects idan ya dace
-
-9. Kada ka yi ƙarya cewa an ƙirƙiri real video
-   idan babu real video-generation API.
-
-10. Idan mai amfani ya yi Hausa,
-    yi amfani da Hausa a interface.
-
-11. Kada ka dawo da markdown.
-
-12. Kada ka dawo da bayani a wajen JSON.
-
-13. Dole ne response ya dace da JSON Schema da aka bayar.
-`;
-
-
-    // =========================
-    // JSON SCHEMA
-    // =========================
-
-    const responseSchema = {
-
-      type: "object",
-
-      properties: {
-
-        html: {
-          type: "string",
-          description:
-            "HTML body content only. Do not include html, head, or body tags."
-        },
-
-        css: {
-          type: "string",
-          description:
-            "Complete CSS required by the application."
-        },
-
-        js: {
-          type: "string",
-          description:
-            "Complete client-side JavaScript required by the application."
-        }
-
+      headers: {
+        "Content-Type": "application/json"
       },
 
-      required: [
-        "html",
-        "css",
-        "js"
-      ]
-
-    };
-
-
-    // =========================
-    // GEMINI REQUEST
-    // =========================
-
-    const response =
-      await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
-        {
-
-          method: "POST",
-
-          headers: {
-
-            "Content-Type":
-              "application/json",
-
-            "x-goog-api-key":
-              apiKey
-
-          },
-
-          body: JSON.stringify({
-
-            contents: [
-
-              {
-
-                role: "user",
-
-                parts: [
-
-                  {
-                    text:
-                      systemPrompt
-                  }
-
-                ]
-
-              }
-
-            ],
-
-            generationConfig: {
-
-              responseMimeType:
-                "application/json",
-
-              responseJsonSchema:
-                responseSchema,
-
-              temperature:
-                0.2,
-
-              maxOutputTokens:
-                16000
-
-            }
-
-          })
-
-        }
-      );
-
-
-    // =========================
-    // READ GEMINI RESPONSE
-    // =========================
-
-    const data =
-      await response.json();
-
-
-    // =========================
-    // GEMINI ERROR
-    // =========================
-
-    if (!response.ok) {
-
-      console.error(
-        "GEMINI API ERROR:",
-        JSON.stringify(data)
-      );
-
-
-      return res.status(
-        response.status
-      ).json({
-
-        error:
-          data?.error?.message ||
-          "Gemini API error"
-
-      });
-
-    }
-
-
-    // =========================
-    // GET GENERATED TEXT
-    // =========================
-
-    const text =
-      data
-        ?.candidates?.[0]
-        ?.content?.parts?.[0]
-        ?.text;
-
-
-    if (!text) {
-
-      console.error(
-        "EMPTY GEMINI RESPONSE:",
-        JSON.stringify(data)
-      );
-
-
-      return res.status(500).json({
-
-        error:
-          "Gemini bai dawo da application code ba."
-
-      });
-
-    }
-
-
-    // =========================
-    // PARSE JSON
-    // =========================
-
-    let app;
-
-
-    try {
-
-      app =
-        JSON.parse(
-          text.trim()
-        );
-
-    } catch (error) {
-
-      console.error(
-        "JSON PARSE ERROR:",
-        error
-      );
-
-      console.error(
-        "RAW GEMINI RESPONSE:",
-        text
-      );
-
-
-      return res.status(500).json({
-
-        error:
-          "AI ta dawo da JSON mara inganci.",
-
-        details:
-          "An samu response daga Gemini amma bai dace da JSON format ba."
-
-      });
-
-    }
-
-
-    // =========================
-    // VALIDATE
-    // =========================
-
-    if (
-      typeof app !== "object" ||
-      app === null
-    ) {
-
-      return res.status(500).json({
-
-        error:
-          "AI ta dawo da bayanan da ba su dace ba."
-
-      });
-
-    }
-
-
-    if (
-      typeof app.html !== "string" ||
-      typeof app.css !== "string" ||
-      typeof app.js !== "string"
-    ) {
-
-      return res.status(500).json({
-
-        error:
-          "AI bai dawo da HTML, CSS da JavaScript guda uku ba."
-
-      });
-
-    }
-
-
-    // =========================
-    // SUCCESS
-    // =========================
-
-    return res.status(200).json({
-
-      html:
-        app.html,
-
-      css:
-        app.css,
-
-      js:
-        app.js
-
+      body: JSON.stringify({
+        prompt: prompt
+      })
     });
 
+    const rawText = await response.text();
+
+    let data = {};
+
+    try {
+      data = JSON.parse(rawText);
+    } catch (e) {
+      throw new Error(
+        "Server bai dawo da JSON ba. Response: " +
+        rawText.substring(0, 300)
+      );
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        data.error ||
+        "Backend error: HTTP " + response.status
+      );
+    }
+
+    if (
+      typeof data.html !== "string" ||
+      typeof data.css !== "string" ||
+      typeof data.js !== "string"
+    ) {
+      throw new Error(
+        "AI bai dawo da HTML, CSS da JavaScript ba."
+      );
+    }
+
+    generatedApp = {
+      html: data.html,
+      css: data.css,
+      js: data.js
+    };
+
+    document.getElementById("htmlCode").textContent =
+      data.html;
+
+    document.getElementById("cssCode").textContent =
+      data.css;
+
+    document.getElementById("jsCode").textContent =
+      data.js;
+
+    document.getElementById("appInfo").innerHTML =
+      "<p><strong>APP:</strong> " +
+      escapeHtml(appName) +
+      "</p>";
+
+    showPreview(
+      data.html,
+      data.css,
+      data.js
+    );
+
+    result.style.display = "block";
+
+    result.scrollIntoView({
+      behavior: "smooth"
+    });
 
   } catch (error) {
 
-    console.error(
-      "CREATE APP ERROR:",
-      error
+    console.error("CREATE APP ERROR:", error);
+
+    showError(
+      error.message ||
+      "An samu matsala wajen ƙirƙirar app."
     );
 
+  } finally {
 
-    return res.status(500).json({
+    button.disabled = false;
 
-      error:
-        error?.message ||
-        "An samu matsala a server."
+    button.textContent =
+      "✨🇳🇬 Fara Ƙirƙirar App";
 
-    });
-
+    loading.style.display = "none";
   }
-
 }
