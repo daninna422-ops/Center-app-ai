@@ -73,7 +73,6 @@
       border-radius: 9px;
       font-size: 16px;
       outline: none;
-      font-family: Arial, sans-serif;
     }
 
     textarea {
@@ -100,13 +99,6 @@
       border-radius: 9px;
       cursor: pointer;
       background: #fafbfe;
-      margin: 0;
-      font-weight: normal;
-    }
-
-    .feature:hover {
-      border-color: #1261d6;
-      background: #f0f6ff;
     }
 
     .feature input {
@@ -136,19 +128,18 @@
       cursor: not-allowed;
     }
 
-    .loading {
-      display: none;
-      margin-top: 15px;
-      padding: 14px;
-      text-align: center;
-      background: #eef5ff;
-      color: #1261d6;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
     #result {
       display: none;
+    }
+
+    .result-box {
+      background: #f7f9fc;
+      border: 1px solid #dce2ed;
+      border-radius: 10px;
+      padding: 15px;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      text-align: left;
     }
 
     .success {
@@ -158,86 +149,8 @@
 
     .error {
       color: #d00000;
-      background: #fff0f0;
-      padding: 12px;
-      border-radius: 8px;
       margin-top: 15px;
-      display: none;
-    }
-
-    .result-box {
-      background: #f7f9fc;
-      border: 1px solid #dce2ed;
-      border-radius: 10px;
-      padding: 15px;
-      line-height: 1.6;
-      overflow-x: auto;
-    }
-
-    .code-section {
-      margin-top: 18px;
-    }
-
-    .code-section h3 {
-      color: #1261d6;
-      margin-bottom: 8px;
-    }
-
-    pre {
-      background: #111827;
-      color: #e5e7eb;
-      padding: 15px;
-      border-radius: 10px;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    .action-btn {
-      flex: 1;
-      min-width: 140px;
-      padding: 12px;
-      border: none;
-      border-radius: 9px;
-      cursor: pointer;
-      font-weight: bold;
-      background: #1261d6;
-      color: white;
-    }
-
-    .action-btn:hover {
-      background: #0d4fae;
-    }
-
-    .preview {
-      margin-top: 20px;
-      border: 1px solid #dce2ed;
-      border-radius: 12px;
-      overflow: hidden;
-      background: white;
-    }
-
-    .preview-header {
-      padding: 12px;
-      background: #eef4ff;
-      color: #1261d6;
-      font-weight: bold;
-    }
-
-    iframe {
-      width: 100%;
-      height: 500px;
-      border: 0;
-      background: white;
+      text-align: center;
     }
 
     .back {
@@ -253,14 +166,6 @@
       .features {
         grid-template-columns: 1fr;
       }
-
-      .card {
-        padding: 17px;
-      }
-
-      iframe {
-        height: 450px;
-      }
     }
   </style>
 </head>
@@ -268,19 +173,15 @@
 <body>
 
   <div class="header">
-
     <div class="icon">🛠️</div>
 
     <h1>Creator App AI</h1>
 
     <p>Gina app tare da taimakon AI</p>
-
   </div>
 
 
   <div class="container">
-
-    <!-- CREATE APP -->
 
     <div class="card">
 
@@ -288,7 +189,7 @@
 
       <p>
         Bayyana app ɗin da kake son ƙirƙira.
-        Creator App AI zai taimaka maka ƙirƙirar frontend ɗin app ɗin.
+        Creator App AI zai taimaka maka tsara shi.
       </p>
 
 
@@ -298,4 +199,351 @@
 
       <input
         id="appName"
-        type="text
+        type="text"
+        placeholder="Misali: Mubarak Bank"
+      >
+
+
+      <label for="appDescription">
+        Menene app ɗin zai yi?
+      </label>
+
+      <textarea
+        id="appDescription"
+        placeholder="Misali: Ina son app na banki wanda zai samu login, balance, transfer da transaction history."
+      ></textarea>
+
+
+      <label for="category">
+        Nau'in App
+      </label>
+
+      <select id="category">
+
+        <option value="General">
+          General App
+        </option>
+
+        <option value="Banking">
+          Banking
+        </option>
+
+        <option value="Business">
+          Business
+        </option>
+
+        <option value="Social Media">
+          Social Media
+        </option>
+
+        <option value="Education">
+          Education
+        </option>
+
+        <option value="Entertainment">
+          Entertainment
+        </option>
+
+        <option value="AI">
+          AI App
+        </option>
+
+      </select>
+
+
+      <label>
+        Features da kake so
+      </label>
+
+
+      <div class="features">
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Login"
+            class="featureCheck"
+          >
+          Login
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Dashboard"
+            class="featureCheck"
+          >
+          Dashboard
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Database"
+            class="featureCheck"
+          >
+          Database
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Chat AI"
+            class="featureCheck"
+          >
+          Chat AI
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Payment"
+            class="featureCheck"
+          >
+          Payment
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="User Profile"
+            class="featureCheck"
+          >
+          User Profile
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="Notifications"
+            class="featureCheck"
+          >
+          Notifications
+        </label>
+
+        <label class="feature">
+          <input
+            type="checkbox"
+            value="API"
+            class="featureCheck"
+          >
+          API
+        </label>
+
+      </div>
+
+
+      <button
+        class="button"
+        id="createButton"
+        onclick="createApp()"
+      >
+        ✨ Fara Ƙirƙirar App
+      </button>
+
+      <div
+        id="error"
+        class="error"
+      ></div>
+
+    </div>
+
+
+    <div
+      class="card"
+      id="result"
+    >
+
+      <h2>📱 Tsarin App ɗinka</h2>
+
+      <p class="success">
+        An shirya bayanan app ɗinka.
+      </p>
+
+      <div
+        id="resultBox"
+        class="result-box"
+      ></div>
+
+    </div>
+
+
+    <a
+      class="back"
+      href="dashboard.html"
+    >
+      ⬅ Komawa Dashboard
+    </a>
+
+  </div>
+
+
+  <script>
+
+    async function createApp() {
+
+      const appName =
+        document.getElementById("appName").value.trim();
+
+      const description =
+        document.getElementById("appDescription").value.trim();
+
+      const category =
+        document.getElementById("category").value;
+
+      const button =
+        document.getElementById("createButton");
+
+      const errorBox =
+        document.getElementById("error");
+
+      const result =
+        document.getElementById("result");
+
+      const resultBox =
+        document.getElementById("resultBox");
+
+
+      errorBox.textContent = "";
+
+      if (!appName) {
+
+        errorBox.textContent =
+          "Rubuta sunan app ɗinka.";
+
+        return;
+      }
+
+
+      if (!description) {
+
+        errorBox.textContent =
+          "Bayyana abin da app ɗin zai yi.";
+
+        return;
+      }
+
+
+      const selectedFeatures =
+        Array.from(
+          document.querySelectorAll(".featureCheck:checked")
+        )
+        .map(item => item.value);
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "Ana shirya app ɗinka...";
+
+
+      try {
+
+        const features =
+          selectedFeatures.length > 0
+            ? selectedFeatures.join(", ")
+            : "Babu takamaiman features";
+
+
+        const prompt = `
+Kai ne Creator App AI.
+
+Mai amfani yana son ƙirƙirar app.
+
+Sunan app:
+${appName}
+
+Nau'in app:
+${category}
+
+Bayani:
+${description}
+
+Features:
+${features}
+
+Ka tsara masa taƙaitaccen tsarin app ɗin da ya haɗa da:
+
+1. Sunan app
+2. Manufar app
+3. Muhimman pages
+4. Features
+5. Database da ake bukata
+6. APIs da ake bukata
+7. Matakan gina app
+
+Ka amsa da Hausa cikin sauƙi.
+`;
+
+
+        const response =
+          await fetch(
+            "/api/chat",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json"
+              },
+
+              body: JSON.stringify({
+                message: prompt
+              })
+            }
+          );
+
+
+        const data =
+          await response.json().catch(
+            () => ({})
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            "An samu kuskure daga backend."
+          );
+        }
+
+
+        if (!data.reply) {
+
+          throw new Error(
+            "AI bai dawo da amsa ba."
+          );
+        }
+
+
+        resultBox.textContent =
+          data.reply;
+
+        result.style.display =
+          "block";
+
+
+        result.scrollIntoView({
+          behavior: "smooth"
+        });
+
+
+      } catch (error) {
+
+        errorBox.textContent =
+          error.message;
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "✨ Fara Ƙirƙirar App";
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
