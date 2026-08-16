@@ -1,8 +1,8 @@
 export default async function handler(req, res) {
 
-  // ==========================================
+  // =========================
   // CORS
-  // ==========================================
+  // =========================
 
   res.setHeader(
     "Access-Control-Allow-Origin",
@@ -19,21 +19,13 @@ export default async function handler(req, res) {
     "Content-Type"
   );
 
-
-  // ==========================================
-  // OPTIONS
-  // ==========================================
-
   if (req.method === "OPTIONS") {
-    return res.status(200).json({
-      success: true
-    });
+    return res.status(200).end();
   }
 
-
-  // ==========================================
+  // =========================
   // METHOD
-  // ==========================================
+  // =========================
 
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -41,35 +33,18 @@ export default async function handler(req, res) {
     });
   }
 
-
   try {
 
-    // ==========================================
-    // READ BODY SAFELY
-    // ==========================================
+    // =========================
+    // GET MESSAGE
+    // =========================
 
-    let body = req.body || {};
-
-    if (typeof body === "string") {
-      try {
-        body = JSON.parse(body);
-      } catch (e) {
-        return res.status(400).json({
-          error: "Request body ba JSON bane."
-        });
-      }
-    }
-
+    const body = req.body || {};
 
     const message =
       typeof body.message === "string"
         ? body.message.trim()
         : "";
-
-
-    // ==========================================
-    // CHECK MESSAGE
-    // ==========================================
 
     if (!message) {
       return res.status(400).json({
@@ -77,97 +52,137 @@ export default async function handler(req, res) {
       });
     }
 
-
-    // ==========================================
-    // GEMINI API KEY
-    // ==========================================
+    // =========================
+    // API KEY
+    // =========================
 
     const apiKey =
       process.env.GEMINI_API_KEY;
 
-
     if (!apiKey) {
-
-      console.error(
-        "GEMINI_API_KEY is missing"
-      );
-
       return res.status(500).json({
         error:
           "GEMINI_API_KEY ba a saita shi a Vercel Environment Variables ba."
       });
     }
 
-
-    // ==========================================
+    // =========================
     // GEMINI MODEL
-    // ==========================================
+    // =========================
 
     const model =
       "gemini-3.6-flash";
 
-
     const endpoint =
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
-
-    // ==========================================
+    // =========================
     // AI INSTRUCTION
-    // ==========================================
+    // =========================
 
     const prompt = `
-Kai ne Center App AI.
+Kai ne Creator App AI.
 
-Ka kasance AI mai taimakon mai amfani wajen tsara
-da fahimtar application.
+Aikinka shi ne taimaka wa mai amfani tsara application.
 
 Ka amsa da harshen da mai amfani ya yi amfani da shi.
 
-Idan Hausa ne, ka amsa da Hausa.
-Idan Turanci ne, ka amsa da Turanci.
+Idan Hausa ne, ka yi Hausa.
+Idan Turanci ne, ka yi Turanci.
 
 Ka kasance mai sauƙin fahimta.
 
-Idan mai amfani yana magana game da ƙirƙirar app,
-ka taimaka masa wajen tattara requirements kamar:
+MUHIMMIN ABU:
 
-- Sunan app
-- Nau'in app
-- Masu amfani
-- Features
+Mai amfani yana son gina application.
+
+Ka fara da fahimtar application ɗin.
+
+Idan bai bayyana sunan app ba,
+ka tambaye shi sunan app.
+
+Idan bai bayyana babban aikin app ba,
+ka tambaye shi.
+
+Ka tambayi requirements a hankali,
+ba sai ka yi tambayoyi masu yawa lokaci guda ba.
+
+Idan app ɗin banking ne,
+ka tambayi abubuwa kamar:
+
+- Sunan bankin/app
 - Login
 - Phone number
 - OTP
-- Database
-- Payment
-- API
+- Balance
+- Deposit
+- Withdraw
+- Transfer
+- Transaction history
+- Profile
 - Notifications
-- Location
 - Admin dashboard
-- User dashboard
-- Logo
-- Images
-- Sauran requirements
+- Database
+- Payment/API
 
-Kada ka yi iƙirarin cewa an gina APK
+Idan app ɗin taxi ne,
+ka tambayi:
+
+- Rider
+- Driver
+- Location
+- GPS
+- Booking
+- Fare
+- Payment
+- Trip history
+
+Idan app ɗin e-commerce ne,
+ka tambayi:
+
+- Products
+- Cart
+- Checkout
+- Payment
+- Orders
+- Users
+- Admin
+
+Kada ka ƙirƙiri real transaction.
+
+Idan babu real API,
+ka bayyana cewa DEMO ne.
+
+Kada ka nemi secret API key a chat.
+
+Kada ka yi iƙirarin cewa APK ya riga ya kasance
 idan ba a yi build ba.
 
-Kada ka nemi secret API key a cikin chat.
+A yanzu muna bin wannan tsarin:
 
-Ga saƙon mai amfani:
+REQUIREMENTS
+→ APP PLAN
+→ APP BUILDER
+→ PREVIEW
+→ BUILD
+
+USER MESSAGE:
 
 ${message}
 `;
 
-
-    // ==========================================
-    // CALL GEMINI
-    // ==========================================
+    // =========================
+    // REQUEST GEMINI
+    // =========================
 
     let response;
     let data;
 
-    try {
+    for (
+      let attempt = 1;
+      attempt <= 2;
+      attempt++
+    ) {
 
       response = await fetch(
         endpoint,
@@ -200,137 +215,88 @@ ${message}
         }
       );
 
-    } catch (fetchError) {
+      const raw =
+        await response.text();
 
-      console.error(
-        "GEMINI FETCH ERROR:",
-        fetchError
-      );
+      try {
+        data =
+          raw
+            ? JSON.parse(raw)
+            : {};
+      } catch (e) {
 
-      return res.status(502).json({
-        error:
-          "Ba a iya haɗuwa da Gemini API ba.",
-        details:
-          fetchError?.message ||
-          "Network error"
-      });
+        console.error(
+          "Gemini returned non JSON:",
+          raw
+        );
+
+        data = {
+          error: {
+            message:
+              raw ||
+              "Gemini ya dawo da response mara kyau."
+          }
+        };
+      }
+
+      if (response.ok) {
+        break;
+      }
+
+      if (
+        (
+          response.status === 429 ||
+          response.status === 500 ||
+          response.status === 502 ||
+          response.status === 503 ||
+          response.status === 504
+        ) &&
+        attempt < 2
+      ) {
+
+        await new Promise(
+          resolve =>
+            setTimeout(resolve, 2000)
+        );
+
+        continue;
+      }
+
+      break;
     }
 
-
-    // ==========================================
-    // READ GEMINI RESPONSE
-    // ==========================================
-
-    const rawText =
-      await response.text();
-
-
-    try {
-
-      data =
-        rawText
-          ? JSON.parse(rawText)
-          : {};
-
-    } catch (parseError) {
-
-      console.error(
-        "GEMINI RETURNED NON-JSON:",
-        rawText
-      );
-
-      return res.status(502).json({
-        error:
-          "Gemini API ta dawo da bayanan da ba JSON ba.",
-        details:
-          rawText.substring(0, 500)
-      });
-    }
-
-
-    // ==========================================
+    // =========================
     // GEMINI ERROR
-    // ==========================================
+    // =========================
 
-    if (!response.ok) {
+    if (!response || !response.ok) {
 
       console.error(
-        "GEMINI API ERROR:",
+        "GEMINI ERROR:",
         JSON.stringify(data)
       );
 
-
-      const geminiMessage =
+      const errorMessage =
         data?.error?.message ||
-        "Gemini API error";
-
-
-      if (response.status === 401) {
-
-        return res.status(401).json({
-          error:
-            "Gemini API key ba daidai ba ne ko ya ƙare.",
-          details:
-            geminiMessage
-        });
-
-      }
-
-
-      if (response.status === 403) {
-
-        return res.status(403).json({
-          error:
-            "Gemini API key ba shi da permission ko an hana wannan request.",
-          details:
-            geminiMessage
-        });
-
-      }
-
-
-      if (response.status === 429) {
-
-        return res.status(429).json({
-          error:
-            "Gemini quota ya cika ko an yi requests da yawa. Ka sake gwadawa daga baya.",
-          details:
-            geminiMessage
-        });
-
-      }
-
+        "Gemini API error.";
 
       return res.status(
-        response.status >= 400 &&
-        response.status < 600
-          ? response.status
-          : 500
+        response?.status || 500
       ).json({
-
-        error:
-          geminiMessage
-
+        error: errorMessage
       });
     }
 
-
-    // ==========================================
-    // GET AI TEXT
-    // ==========================================
+    // =========================
+    // GET AI REPLY
+    // =========================
 
     const reply =
       data
         ?.candidates?.[0]
-        ?.content?.parts
-        ?.map(part => part?.text || "")
-        ?.join("")
-        ?.trim();
-
-
-    // ==========================================
-    // EMPTY RESPONSE
-    // ==========================================
+        ?.content
+        ?.parts?.[0]
+        ?.text;
 
     if (!reply) {
 
@@ -345,43 +311,25 @@ ${message}
       });
     }
 
-
-    // ==========================================
+    // =========================
     // SUCCESS
-    // ==========================================
+    // =========================
 
     return res.status(200).json({
-
-      success: true,
-
-      reply: reply
-
+      reply: reply.trim()
     });
-
 
   } catch (error) {
 
-    // ==========================================
-    // SERVER ERROR
-    // ==========================================
-
     console.error(
-      "CENTER APP CHAT ERROR:",
+      "CHAT SERVER ERROR:",
       error
     );
 
-
     return res.status(500).json({
-
       error:
-        "An samu matsala a backend. Ka sake gwadawa.",
-
-      details:
         error?.message ||
-        "Unknown server error"
-
+        "An samu matsala a backend."
     });
-
   }
-
 }
