@@ -1,335 +1,160 @@
 export default async function handler(req, res) {
+// Allow only POST
+if (req.method !== "POST") {
+return res.status(405).json({
+error: "Method not allowed"
+});
+}
 
-  // =========================
-  // CORS
-  // =========================
+try {
+const { message } = req.body || {};
 
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "*"
-  );
+// Check message  
+if (!message || typeof message !== "string") {  
+  return res.status(400).json({  
+    error: "An aika da babu saƙo."  
+  });  
+}  
 
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "POST, OPTIONS"
-  );
+// Get Gemini API key from Vercel Environment Variables  
+const apiKey = process.env.GEMINI_API_KEY;  
 
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type"
-  );
+if (!apiKey) {  
+  return res.status(500).json({  
+    error:  
+      "GEMINI_API_KEY ba a saita shi a Vercel Environment Variables ba."  
+  });  
+}  
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
+// Current Gemini model  
+const model = "gemini-3.6-flash";  
 
-  // =========================
-  // METHOD
-  // =========================
+const url =  
+  `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;  
 
-  if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Method not allowed"
-    });
-  }
+// Instruction for Center App AI  
+const prompt = `
 
-  try {
+Kai ne Center App AI.
 
-    // =========================
-    // GET MESSAGE
-    // =========================
+Ka amsa wa mai amfani cikin harshen da ya yi amfani da shi.
 
-    const body = req.body || {};
+Idan ya yi Hausa, ka amsa da Hausa.
+Idan ya yi Turanci, ka amsa da Turanci.
 
-    const message =
-      typeof body.message === "string"
-        ? body.message.trim()
-        : "";
+Ka kasance mai taimako, mai sauƙin fahimta, kuma kada ka ƙara bayanan da ba a nema ba.
 
-    if (!message) {
-      return res.status(400).json({
-        error: "An aika da babu saƙo."
-      });
-    }
-
-    // =========================
-    // API KEY
-    // =========================
-
-    const apiKey =
-      process.env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      return res.status(500).json({
-        error:
-          "GEMINI_API_KEY ba a saita shi a Vercel Environment Variables ba."
-      });
-    }
-
-    // =========================
-    // GEMINI MODEL
-    // =========================
-
-    const model =
-      "gemini-3.6-flash";
-
-    const endpoint =
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
-
-    // =========================
-    // AI INSTRUCTION
-    // =========================
-
-    const prompt = `
-Kai ne Creator App AI.
-
-Aikinka shi ne taimaka wa mai amfani tsara application.
-
-Ka amsa da harshen da mai amfani ya yi amfani da shi.
-
-Idan Hausa ne, ka yi Hausa.
-Idan Turanci ne, ka yi Turanci.
-
-Ka kasance mai sauƙin fahimta.
-
-MUHIMMIN ABU:
-
-Mai amfani yana son gina application.
-
-Ka fara da fahimtar application ɗin.
-
-Idan bai bayyana sunan app ba,
-ka tambaye shi sunan app.
-
-Idan bai bayyana babban aikin app ba,
-ka tambaye shi.
-
-Ka tambayi requirements a hankali,
-ba sai ka yi tambayoyi masu yawa lokaci guda ba.
-
-Idan app ɗin banking ne,
-ka tambayi abubuwa kamar:
-
-- Sunan bankin/app
-- Login
-- Phone number
-- OTP
-- Balance
-- Deposit
-- Withdraw
-- Transfer
-- Transaction history
-- Profile
-- Notifications
-- Admin dashboard
-- Database
-- Payment/API
-
-Idan app ɗin taxi ne,
-ka tambayi:
-
-- Rider
-- Driver
-- Location
-- GPS
-- Booking
-- Fare
-- Payment
-- Trip history
-
-Idan app ɗin e-commerce ne,
-ka tambayi:
-
-- Products
-- Cart
-- Checkout
-- Payment
-- Orders
-- Users
-- Admin
-
-Kada ka ƙirƙiri real transaction.
-
-Idan babu real API,
-ka bayyana cewa DEMO ne.
-
-Kada ka nemi secret API key a chat.
-
-Kada ka yi iƙirarin cewa APK ya riga ya kasance
-idan ba a yi build ba.
-
-A yanzu muna bin wannan tsarin:
-
-REQUIREMENTS
-→ APP PLAN
-→ APP BUILDER
-→ PREVIEW
-→ BUILD
-
-USER MESSAGE:
+Mai amfani ya ce:
 
 ${message}
 `;
 
-    // =========================
-    // REQUEST GEMINI
-    // =========================
+// Try up to 2 times for temporary server overload  
+let response;  
+let data;  
 
-    let response;
-    let data;
+for (let attempt = 1; attempt <= 2; attempt++) {  
+  response = await fetch(url, {  
+    method: "POST",  
 
-    for (
-      let attempt = 1;
-      attempt <= 2;
-      attempt++
-    ) {
+    headers: {  
+      "Content-Type": "application/json"  
+    },  
 
-      response = await fetch(
-        endpoint,
-        {
-          method: "POST",
+    body: JSON.stringify({  
+      contents: [  
+        {  
+          parts: [  
+            {  
+              text: prompt  
+            }  
+          ]  
+        }  
+      ]  
+    })  
+  });  
 
-          headers: {
-            "Content-Type":
-              "application/json",
+  data = await response.json().catch(() => ({}));  
 
-            "x-goog-api-key":
-              apiKey
-          },
+  // Success  
+  if (response.ok) {  
+    break;  
+  }  
 
-          body: JSON.stringify({
+  // Retry only temporary errors  
+  if (  
+    (response.status === 429 ||  
+      response.status === 500 ||  
+      response.status === 502 ||  
+      response.status === 503 ||  
+      response.status === 504) &&  
+    attempt < 2  
+  ) {  
+    await new Promise(resolve =>  
+      setTimeout(resolve, 2500)  
+    );  
 
-            contents: [
-              {
-                role: "user",
+    continue;  
+  }  
 
-                parts: [
-                  {
-                    text: prompt
-                  }
-                ]
-              }
-            ]
+  break;  
+}  
 
-          })
-        }
-      );
+// Gemini returned an error  
+if (!response.ok) {  
+  const geminiError =  
+    data?.error?.message ||  
+    "Gemini API ya dawo da kuskure.";  
 
-      const raw =
-        await response.text();
+  // Quota / rate limit  
+  if (response.status === 429) {  
+    return res.status(429).json({  
+      error:  
+        "Gemini quota ya cika ko an samu yawan requests. Ka sake gwadawa daga baya."  
+    });  
+  }  
 
-      try {
-        data =
-          raw
-            ? JSON.parse(raw)
-            : {};
-      } catch (e) {
+  // Temporary overload  
+  if (  
+    response.status === 500 ||  
+    response.status === 502 ||  
+    response.status === 503 ||  
+    response.status === 504  
+  ) {  
+    return res.status(503).json({  
+      error:  
+        "Gemini yana cikin cunkoso a yanzu. Ka sake gwadawa bayan ɗan lokaci."  
+    });  
+  }  
 
-        console.error(
-          "Gemini returned non JSON:",
-          raw
-        );
+  return res.status(response.status).json({  
+    error: geminiError  
+  });  
+}  
 
-        data = {
-          error: {
-            message:
-              raw ||
-              "Gemini ya dawo da response mara kyau."
-          }
-        };
-      }
+// Get AI response  
+const reply =  
+  data?.candidates?.[0]?.content?.parts?.[0]?.text;  
 
-      if (response.ok) {
-        break;
-      }
+if (!reply) {  
+  return res.status(500).json({  
+    error:  
+      "Gemini bai dawo da amsa ba."  
+  });  
+}  
 
-      if (
-        (
-          response.status === 429 ||
-          response.status === 500 ||
-          response.status === 502 ||
-          response.status === 503 ||
-          response.status === 504
-        ) &&
-        attempt < 2
-      ) {
+// Send reply to chat.html / creator.html  
+return res.status(200).json({  
+  reply: reply  
+});
 
-        await new Promise(
-          resolve =>
-            setTimeout(resolve, 2000)
-        );
+} catch (error) {
+console.error("Center App AI error:", error);
 
-        continue;
-      }
+return res.status(500).json({  
+  error:  
+    "An samu matsala a backend. Ka sake gwadawa."  
+});
 
-      break;
-    }
-
-    // =========================
-    // GEMINI ERROR
-    // =========================
-
-    if (!response || !response.ok) {
-
-      console.error(
-        "GEMINI ERROR:",
-        JSON.stringify(data)
-      );
-
-      const errorMessage =
-        data?.error?.message ||
-        "Gemini API error.";
-
-      return res.status(
-        response?.status || 500
-      ).json({
-        error: errorMessage
-      });
-    }
-
-    // =========================
-    // GET AI REPLY
-    // =========================
-
-    const reply =
-      data
-        ?.candidates?.[0]
-        ?.content
-        ?.parts?.[0]
-        ?.text;
-
-    if (!reply) {
-
-      console.error(
-        "EMPTY GEMINI RESPONSE:",
-        JSON.stringify(data)
-      );
-
-      return res.status(500).json({
-        error:
-          "Gemini bai dawo da amsa ba."
-      });
-    }
-
-    // =========================
-    // SUCCESS
-    // =========================
-
-    return res.status(200).json({
-      reply: reply.trim()
-    });
-
-  } catch (error) {
-
-    console.error(
-      "CHAT SERVER ERROR:",
-      error
-    );
-
-    return res.status(500).json({
-      error:
-        error?.message ||
-        "An samu matsala a backend."
-    });
-  }
+}
 }
