@@ -36,7 +36,7 @@
 
     .header p {
       margin: 0;
-      opacity: 0.9;
+      opacity: .9;
     }
 
     .container {
@@ -50,7 +50,7 @@
       border-radius: 18px;
       padding: 22px;
       margin-bottom: 18px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
     }
 
     .card h2 {
@@ -131,8 +131,12 @@
       color: #1261d6;
     }
 
-    .danger {
-      background: #d62828;
+    .green {
+      background: #087f46;
+    }
+
+    .dark {
+      background: #172033;
     }
 
     .upload-area {
@@ -188,6 +192,38 @@
       color: #c40000;
     }
 
+    .preview {
+      display: none;
+    }
+
+    .preview-frame {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #d7deea;
+      border-radius: 14px;
+      background: white;
+    }
+
+    .code-box {
+      background: #111827;
+      color: #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      overflow: auto;
+      max-height: 300px;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .build-info {
+      background: #eef5ff;
+      border-left: 4px solid #1261d6;
+      padding: 14px;
+      border-radius: 10px;
+      line-height: 1.6;
+    }
+
     .back {
       display: block;
       text-align: center;
@@ -208,13 +244,13 @@
 <body>
 
   <div class="header">
-
     <div class="logo">🛠️🤖</div>
 
     <h1>Creator App AI</h1>
 
-    <p>Ka bayyana app ɗinka, AI zai taimaka maka tsara shi.</p>
-
+    <p>
+      Ka bayyana app ɗinka, AI zai taimaka maka tsara shi.
+    </p>
   </div>
 
 
@@ -230,13 +266,14 @@
 
         <p>
           Babu buƙatar ka san programming.
-          Ka gaya wa Creator App AI irin app ɗin da kake son ginawa.
+          Ka gaya wa Creator App AI irin app ɗin
+          da kake son ginawa.
         </p>
 
         <p>
-          AI zai yi maka tambayoyi domin fahimtar app ɗin,
-          kamar features, users, login, database, API, payment,
-          logo da sauran abubuwan da app ɗin yake bukata.
+          AI zai taimaka wajen tsara features,
+          pages, database, login, API da sauran
+          abubuwan da app ɗin yake bukata.
         </p>
 
         <p>
@@ -255,10 +292,7 @@
 
       <h2>🤖 AI Interview</h2>
 
-      <div
-        id="chatBox"
-        class="chat-box"
-      >
+      <div id="chatBox" class="chat-box">
 
         <div class="message ai">
 
@@ -268,8 +302,8 @@
 
           Wane irin app kake son ƙirƙira?
 
-          Ka bayyana min app ɗin da kake so da kalmominka.
-          Ba sai ka san programming ba.
+          Ka bayyana min app ɗin da kake so
+          da kalmominka.
 
         </div>
 
@@ -278,7 +312,7 @@
 
       <textarea
         id="message"
-        placeholder="Misali: Ina son app na taxi wanda mutane zasu iya neman mota..."
+        placeholder="Misali: Ina son app na taxi..."
       ></textarea>
 
 
@@ -298,23 +332,20 @@
       </button>
 
 
-      <div
-        id="status"
-        class="status"
-      ></div>
+      <div id="status" class="status"></div>
 
     </div>
 
 
-    <!-- UPLOADS -->
+    <!-- UPLOAD -->
 
     <div class="card">
 
       <h2>📎 Abubuwan da App ɗin yake bukata</h2>
 
       <p class="small">
-        Idan AI ya bukaci logo, hoto ko wani file,
-        za ka iya zaɓar shi a nan.
+        Za ka iya zaɓar logo ko wasu files
+        da za a yi amfani da su daga baya.
       </p>
 
 
@@ -359,27 +390,16 @@
 
       </div>
 
-      <p class="small">
-        ⚠️ Kada ka upload BVN, NIN, password, API key ko
-        wani sirrin banki a wannan matakin. Za mu gina
-        secure integration kafin a haɗa irin waɗannan bayanai.
-      </p>
-
     </div>
 
 
     <!-- PROJECT SUMMARY -->
 
-    <div
-      id="summary"
-      class="card summary"
-    >
+    <div id="summary" class="card summary">
 
       <h2>📱 Project Summary</h2>
 
-      <div
-        id="summaryContent"
-      ></div>
+      <div id="summaryContent"></div>
 
 
       <button
@@ -390,10 +410,120 @@
 
 
       <button
-        onclick="prepareBuild()"
+        class="green"
+        onclick="startAppBuilder()"
       >
-        🏗️ Shirya App Builder
+        🏗️ Fara App Builder
       </button>
+
+    </div>
+
+
+    <!-- APP BUILDER -->
+
+    <div id="builder" class="card" style="display:none;">
+
+      <h2>🏗️ App Builder</h2>
+
+      <div class="build-info">
+
+        <strong>Project ɗinka yana shirye.</strong>
+
+        <br><br>
+
+        Creator App AI ya samar da
+        HTML, CSS da JavaScript.
+
+        <br><br>
+
+        Mataki na gaba shi ne Preview
+        da kuma Build zuwa Android APK.
+
+      </div>
+
+
+      <button
+        class="green"
+        onclick="generateAppFromProject()"
+      >
+        ⚡ Ƙirƙiri App Yanzu
+      </button>
+
+
+      <button
+        class="secondary"
+        onclick="scrollToPreview()"
+      >
+        👁️ Je zuwa Preview
+      </button>
+
+    </div>
+
+
+    <!-- PREVIEW -->
+
+    <div id="preview" class="card preview">
+
+      <h2>📱 App Preview</h2>
+
+      <p class="small">
+        Wannan shi ne preview na app ɗin da AI ya ƙirƙira.
+      </p>
+
+
+      <iframe
+        id="previewFrame"
+        class="preview-frame"
+        sandbox="allow-scripts"
+      ></iframe>
+
+
+      <button
+        class="green"
+        onclick="downloadGeneratedApp()"
+      >
+        📥 Download App HTML
+      </button>
+
+
+      <button
+        class="dark"
+        onclick="saveGeneratedApp()"
+      >
+        💾 Ajiye Generated App
+      </button>
+
+    </div>
+
+
+    <!-- CODE -->
+
+    <div id="codeResult" class="card" style="display:none;">
+
+      <h2>💻 Generated Code</h2>
+
+      <h3>HTML</h3>
+
+      <div
+        id="htmlCode"
+        class="code-box"
+      ></div>
+
+
+      <h3>CSS</h3>
+
+      <div
+        id="cssCode"
+        class="code-box"
+      ></div>
+
+
+      <h3>JavaScript</h3>
+
+      <div
+        id="jsCode"
+        class="code-box"
+      ></div>
 
     </div>
 
@@ -408,185 +538,153 @@
   </div>
 
 
-  <script>
+<script>
 
-    /*
-      =====================================================
-      CREATOR APP AI
-      =====================================================
+/* =========================================
+   BACKEND
+========================================= */
 
-      API ɗin yana cikin Vercel:
+const CHAT_BACKEND =
+  "/api/chat";
 
-      /api/chat
-
-      Ba a saka GEMINI_API_KEY a frontend ba.
-    */
+const CREATE_APP_BACKEND =
+  "/api/create-app";
 
 
-    const BACKEND_URL = "/api/chat";
+/* =========================================
+   PROJECT
+========================================= */
+
+let conversation = [];
+
+let project = {
+
+  appName: "",
+
+  description: "",
+
+  category: "",
+
+  users: [],
+
+  features: [],
+
+  pages: [],
+
+  database: [],
+
+  apis: [],
+
+  payments: [],
+
+  authentication: [],
+
+  files: [],
+
+  extraRequirements: ""
+
+};
 
 
-    let conversation = [];
+/* =========================================
+   GENERATED APP
+========================================= */
 
-    let project = {
+let generatedApp = {
 
-      appName: "",
+  html: "",
 
-      description: "",
+  css: "",
 
-      category: "",
+  js: ""
 
-      users: [],
-
-      features: [],
-
-      pages: [],
-
-      database: [],
-
-      apis: [],
-
-      payments: [],
-
-      authentication: [],
-
-      files: [],
-
-      extraRequirements: ""
-
-    };
+};
 
 
-    /*
-      =====================================================
-      SEND MESSAGE
-      =====================================================
-    */
+/* =========================================
+   SEND CHAT
+========================================= */
 
-    async function sendMessage() {
+async function sendMessage() {
 
-      const input =
-        document.getElementById("message");
+  const input =
+    document.getElementById(
+      "message"
+    );
 
-      const button =
-        document.getElementById("sendButton");
+  const button =
+    document.getElementById(
+      "sendButton"
+    );
 
-      const message =
-        input.value.trim();
-
-
-      if (!message) {
-
-        showStatus(
-          "Rubuta saƙonka tukuna.",
-          "error"
-        );
-
-        return;
-      }
+  const message =
+    input.value.trim();
 
 
-      addMessage(
-        "user",
-        message
-      );
+  if (!message) {
+
+    showStatus(
+      "Rubuta saƙonka tukuna.",
+      "error"
+    );
+
+    return;
+
+  }
 
 
-      input.value = "";
-
-      button.disabled = true;
-
-      button.textContent =
-        "🤖 AI yana tunani...";
+  addMessage(
+    "user",
+    message
+  );
 
 
-      try {
+  input.value = "";
 
-        /*
-          Wannan prompt yana gaya wa AI
-          cewa shi ne Creator App AI.
-        */
+  button.disabled = true;
 
-        const creatorPrompt = `
+  button.textContent =
+    "🤖 AI yana tunani...";
 
-Kai ne "Creator App AI", wani AI App Builder.
 
-Aikin ka ba wai bada code kawai ba ne.
+  try {
 
-Aikin ka shi ne taimaka wa mai amfani ya tsara
-kowane irin application da yake son ginawa.
+    const creatorPrompt = `
 
-Mai amfani zai iya son:
+Kai ne Creator App AI.
 
-- Banking app
-- Wallet
-- E-commerce
-- Social media
-- Education
-- Taxi
-- Delivery
-- Hospital
-- Business
-- Movie
-- Entertainment
-- AI app
-- News
-- Game
-- Real estate
-- ko kowane irin app.
+Aikin ka shi ne taimaka wa mai amfani
+ya tsara application.
 
-MUHIMMIN TSARI:
+Ka yi magana da Hausa idan mai amfani
+ya yi Hausa.
 
-1. Ka fara fahimtar irin app ɗin da yake so.
+Ka tambayi tambaya ɗaya ko kaɗan
+a lokaci guda.
 
-2. Ka tambaye shi tambaya ɗaya ko kaɗan a lokaci guda,
-   kada ka jefa masa tambayoyi masu yawa lokaci guda.
+Ka tattara:
 
-3. Ka tambayi abubuwan da app ɗin yake bukata
-   bisa irin app ɗin.
+- Sunan app
+- Masu amfani
+- Features
+- Pages
+- Login
+- Phone number
+- OTP
+- Database
+- Payment
+- API
+- Notifications
+- Location
+- Admin dashboard
+- User dashboard
+- Logo
+- Sauran requirements
 
-4. Tambayoyin na iya kasancewa:
+Kada ka yi iƙirarin cewa an gina APK
+idan ba a yi Android build ba.
 
-- Menene sunan app?
-- Waɗanne mutane za su yi amfani da shi?
-- Menene babban aikin app?
-- Login?
-- Phone number?
-- OTP?
-- Database?
-- Payment?
-- API?
-- Notifications?
-- Location/GPS?
-- Admin dashboard?
-- User dashboard?
-- Logo?
-- Images?
-- Documents?
-- Sauran requirements?
-
-5. Kada ka tambayi BVN, NIN, ID card ko wasu sensitive
-   documents sai idan aikin app ɗin yana bukatar
-   official verification.
-
-6. Idan ana buƙatar API, ka gaya wa mai amfani
-   cewa za a haɗa shi ta secure backend.
-   Kada ka nemi mai amfani ya saka secret API key
-   cikin chat idan za a iya amfani da secure integration.
-
-7. Idan an gama tattara requirements,
-   ka nuna PROJECT SUMMARY.
-
-8. Kada ka yi iƙirarin cewa an riga an gina APK
-   idan ba a yi build ba.
-
-9. A wannan matakin manufarmu ita ce:
-   REQUIREMENTS → APP PLAN → APP BUILDER.
-
-10. Ka yi magana da Hausa idan mai amfani ya yi Hausa.
-    Ka yi Turanci idan mai amfani ya yi Turanci.
-
-Bayanin project na yanzu:
+Bayanin project:
 
 ${JSON.stringify(project)}
 
@@ -594,631 +692,1113 @@ Conversation:
 
 ${JSON.stringify(conversation)}
 
-Sabon saƙon mai amfani:
+Sabon saƙon:
 
 ${message}
 
-Ka amsa kai tsaye ga mai amfani.
+Ka amsa kai tsaye.
 `;
 
 
-        const response =
-          await fetch(
-            BACKEND_URL,
-            {
-              method: "POST",
+    const response =
+      await fetch(
+        CHAT_BACKEND,
+        {
+          method: "POST",
 
-              headers: {
-                "Content-Type": "application/json"
-              },
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
 
-              body: JSON.stringify({
-                message: creatorPrompt
-              })
-            }
-          );
-
-
-        const data =
-          await response.json()
-            .catch(() => ({}));
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            data.error ||
-            "HTTP Error: " +
-            response.status
-          );
-
+          body: JSON.stringify({
+            message:
+              creatorPrompt
+          })
         }
+      );
 
 
-        if (!data.reply) {
-
-          throw new Error(
-            "AI bai dawo da amsa ba."
-          );
-
-        }
+    const data =
+      await response.json()
+        .catch(() => ({}));
 
 
-        const reply =
-          data.reply;
+    if (!response.ok) {
 
-
-        conversation.push({
-
-          role: "user",
-
-          text: message
-
-        });
-
-
-        conversation.push({
-
-          role: "ai",
-
-          text: reply
-
-        });
-
-
-        addMessage(
-          "ai",
-          reply
-        );
-
-
-        /*
-          Gwada gano wasu bayanai daga
-          amsar AI domin summary.
-        */
-
-        updateProjectFromConversation(
-          message,
-          reply
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Creator App AI:",
-          error
-        );
-
-
-        addMessage(
-          "ai",
-          "❌ An samu matsala: " +
-          error.message
-        );
-
-
-        showStatus(
-          error.message,
-          "error"
-        );
-
-      } finally {
-
-        button.disabled = false;
-
-        button.textContent =
-          "Aika 🚀";
-
-      }
+      throw new Error(
+        data.error ||
+        "HTTP Error: " +
+        response.status
+      );
 
     }
 
 
-    /*
-      =====================================================
-      ADD MESSAGE
-      =====================================================
-    */
+    if (!data.reply) {
 
-    function addMessage(
-      type,
-      text
-    ) {
-
-      const chatBox =
-        document.getElementById("chatBox");
-
-
-      const div =
-        document.createElement("div");
-
-
-      div.className =
-        "message " +
-        (type === "ai"
-          ? "ai"
-          : "user");
-
-
-      const title =
-        type === "ai"
-          ? "🤖 Creator App AI"
-          : "👤 Kai";
-
-
-      div.innerHTML =
-        "<strong>" +
-        title +
-        "</strong>" +
-        escapeHtml(text);
-
-
-      chatBox.appendChild(div);
-
-
-      chatBox.scrollTop =
-        chatBox.scrollHeight;
+      throw new Error(
+        "AI bai dawo da amsa ba."
+      );
 
     }
 
 
-    /*
-      =====================================================
-      PROJECT INFORMATION
-      =====================================================
-    */
+    conversation.push({
 
-    function updateProjectFromConversation(
-      userMessage,
-      aiReply
+      role: "user",
+
+      text: message
+
+    });
+
+
+    conversation.push({
+
+      role: "ai",
+
+      text: data.reply
+
+    });
+
+
+    addMessage(
+      "ai",
+      data.reply
+    );
+
+
+    updateProjectFromConversation(
+      message
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    addMessage(
+      "ai",
+      "❌ An samu matsala: " +
+      error.message
+    );
+
+
+    showStatus(
+      error.message,
+      "error"
+    );
+
+
+  } finally {
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "Aika 🚀";
+
+  }
+
+}
+
+
+/* =========================================
+   ADD MESSAGE
+========================================= */
+
+function addMessage(
+  type,
+  text
+) {
+
+  const chatBox =
+    document.getElementById(
+      "chatBox"
+    );
+
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.className =
+    "message " +
+    (
+      type === "ai"
+        ? "ai"
+        : "user"
+    );
+
+
+  const title =
+    type === "ai"
+      ? "🤖 Creator App AI"
+      : "👤 Kai";
+
+
+  const strong =
+    document.createElement(
+      "strong"
+    );
+
+
+  strong.textContent =
+    title;
+
+
+  const content =
+    document.createElement(
+      "div"
+    );
+
+
+  content.textContent =
+    text;
+
+
+  div.appendChild(
+    strong
+  );
+
+  div.appendChild(
+    content
+  );
+
+
+  chatBox.appendChild(
+    div
+  );
+
+
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
+
+}
+
+
+/* =========================================
+   PROJECT DETECTION
+========================================= */
+
+function updateProjectFromConversation(
+  message
+) {
+
+  if (!project.description) {
+
+    project.description =
+      message;
+
+  }
+
+
+  const lower =
+    message.toLowerCase();
+
+
+  if (
+    lower.includes("bank")
+  ) {
+
+    project.category =
+      "Banking";
+
+  }
+
+  else if (
+    lower.includes("taxi")
+  ) {
+
+    project.category =
+      "Taxi / Transport";
+
+  }
+
+  else if (
+    lower.includes("shop") ||
+    lower.includes("shopping")
+  ) {
+
+    project.category =
+      "E-commerce";
+
+  }
+
+  else if (
+    lower.includes("school") ||
+    lower.includes("education")
+  ) {
+
+    project.category =
+      "Education";
+
+  }
+
+  else if (
+    lower.includes("hospital")
+  ) {
+
+    project.category =
+      "Healthcare";
+
+  }
+
+  else if (
+    lower.includes("social")
+  ) {
+
+    project.category =
+      "Social Media";
+
+  }
+
+  else if (
+    lower.includes("ai")
+  ) {
+
+    project.category =
+      "AI";
+
+  }
+
+
+  showSummary();
+
+}
+
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+function showSummary() {
+
+  const summary =
+    document.getElementById(
+      "summary"
+    );
+
+  const content =
+    document.getElementById(
+      "summaryContent"
+    );
+
+
+  content.innerHTML = `
+
+    <div class="summary-item">
+
+      <strong>Bayani:</strong><br>
+
+      ${escapeHtml(
+        project.description ||
+        "Ana tattarawa..."
+      )}
+
+    </div>
+
+
+    <div class="summary-item">
+
+      <strong>Nau'in App:</strong><br>
+
+      ${escapeHtml(
+        project.category ||
+        "AI zai gano."
+      )}
+
+    </div>
+
+
+    <div class="summary-item">
+
+      <strong>Conversation:</strong><br>
+
+      ${conversation.length}
+      messages
+
+    </div>
+
+  `;
+
+
+  summary.style.display =
+    "block";
+
+}
+
+
+/* =========================================
+   SAVE PROJECT
+========================================= */
+
+function saveProject() {
+
+  const data = {
+
+    ...project,
+
+    conversation:
+      conversation,
+
+    savedAt:
+      new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "creatorAppProject",
+    JSON.stringify(data)
+  );
+
+
+  showStatus(
+    "✅ An ajiye project ɗin.",
+    "success"
+  );
+
+}
+
+
+/* =========================================
+   START APP BUILDER
+========================================= */
+
+function startAppBuilder() {
+
+  saveProject();
+
+
+  const builder =
+    document.getElementById(
+      "builder"
+    );
+
+
+  builder.style.display =
+    "block";
+
+
+  builder.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================
+   GENERATE APP
+========================================= */
+
+async function generateAppFromProject() {
+
+  const button =
+    event.currentTarget;
+
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "🤖 AI yana ƙirƙirar app...";
+
+
+  try {
+
+    const prompt = `
+
+Sunan App:
+${project.appName || "My App"}
+
+Category:
+${project.category}
+
+Description:
+${project.description}
+
+Conversation:
+${JSON.stringify(conversation)}
+
+Create a complete modern responsive
+frontend application.
+
+Return JSON only:
+
+{
+  "html": "...",
+  "css": "...",
+  "js": "..."
+}
+
+HTML must contain only body content.
+
+Do not include html/head/body tags.
+
+Do not include API keys.
+
+If an external API is missing,
+make the feature a DEMO.
+
+`;
+
+
+    const response =
+      await fetch(
+        CREATE_APP_BACKEND,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            prompt:
+              prompt
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Create App Error"
+      );
+
+    }
+
+
+    if (
+      typeof data.html !==
+      "string" ||
+      typeof data.css !==
+      "string" ||
+      typeof data.js !==
+      "string"
     ) {
 
-      /*
-        Wannan simple parser ne na farko.
-        Daga baya za mu mayar da shi
-        zuwa real structured AI output.
-      */
+      throw new Error(
+        "AI bai dawo da HTML, CSS da JS ba."
+      );
+
+    }
 
 
-      if (!project.description) {
+    generatedApp = {
 
-        project.description =
-          userMessage;
+      html:
+        data.html,
 
+      css:
+        data.css,
+
+      js:
+        data.js
+
+    };
+
+
+    showPreview();
+
+
+    showCode();
+
+
+    showStatus(
+      "✅ An ƙirƙiri app ɗin.",
+      "success"
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "GENERATE APP ERROR:",
+      error
+    );
+
+
+    showStatus(
+      "❌ " +
+      error.message,
+      "error"
+    );
+
+
+  } finally {
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "⚡ Ƙirƙiri App Yanzu";
+
+  }
+
+}
+
+
+/* =========================================
+   SHOW PREVIEW
+========================================= */
+
+function showPreview() {
+
+  const preview =
+    document.getElementById(
+      "preview"
+    );
+
+
+  const frame =
+    document.getElementById(
+      "previewFrame"
+    );
+
+
+  const documentContent = `
+
+<!DOCTYPE html>
+
+<html lang="ha">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<style>
+
+${generatedApp.css}
+
+</style>
+
+</head>
+
+<body>
+
+${generatedApp.html}
+
+<script>
+
+${generatedApp.js}
+
+<\/script>
+
+</body>
+
+</html>
+
+`;
+
+
+  frame.srcdoc =
+    documentContent;
+
+
+  preview.style.display =
+    "block";
+
+
+  preview.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================
+   SHOW CODE
+========================================= */
+
+function showCode() {
+
+  const box =
+    document.getElementById(
+      "codeResult"
+    );
+
+
+  document.getElementById(
+    "htmlCode"
+  ).textContent =
+    generatedApp.html;
+
+
+  document.getElementById(
+    "cssCode"
+  ).textContent =
+    generatedApp.css;
+
+
+  document.getElementById(
+    "jsCode"
+  ).textContent =
+    generatedApp.js;
+
+
+  box.style.display =
+    "block";
+
+}
+
+
+/* =========================================
+   DOWNLOAD HTML
+========================================= */
+
+function downloadGeneratedApp() {
+
+  if (
+    !generatedApp.html
+  ) {
+
+    showStatus(
+      "Da farko ka ƙirƙiri app.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const fullHtml = `
+
+<!DOCTYPE html>
+
+<html lang="ha">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Generated App</title>
+
+<style>
+
+${generatedApp.css}
+
+</style>
+
+</head>
+
+<body>
+
+${generatedApp.html}
+
+<script>
+
+${generatedApp.js}
+
+<\/script>
+
+</body>
+
+</html>
+
+`;
+
+
+  const blob =
+    new Blob(
+      [fullHtml],
+      {
+        type:
+          "text/html;charset=utf-8"
       }
+    );
 
 
-      const lower =
-        userMessage.toLowerCase();
+  const url =
+    URL.createObjectURL(
+      blob
+    );
 
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  link.href =
+    url;
+
+  link.download =
+    "center-app-generated.html";
+
+
+  document.body.appendChild(
+    link
+  );
+
+
+  link.click();
+
+
+  link.remove();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+}
+
+
+/* =========================================
+   SAVE GENERATED APP
+========================================= */
+
+function saveGeneratedApp() {
+
+  localStorage.setItem(
+    "centerAppGeneratedApp",
+    JSON.stringify(
+      generatedApp
+    )
+  );
+
+
+  showStatus(
+    "✅ An ajiye Generated App.",
+    "success"
+  );
+
+}
+
+
+/* =========================================
+   SCROLL PREVIEW
+========================================= */
+
+function scrollToPreview() {
+
+  const preview =
+    document.getElementById(
+      "preview"
+    );
+
+
+  preview.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================
+   FILE NAME
+========================================= */
+
+function showFileName(
+  inputId,
+  outputId
+) {
+
+  const input =
+    document.getElementById(
+      inputId
+    );
+
+  const output =
+    document.getElementById(
+      outputId
+    );
+
+
+  if (
+    input.files &&
+    input.files.length
+  ) {
+
+    output.textContent =
+      "An zaɓa: " +
+      input.files[0].name;
+
+  }
+
+  else {
+
+    output.textContent =
+      "";
+
+  }
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function showStatus(
+  message,
+  type
+) {
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  status.textContent =
+    message;
+
+
+  status.className =
+    "status " +
+    type;
+
+
+  status.style.display =
+    "block";
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(
+  text
+) {
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.textContent =
+    text;
+
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================================
+   NEW PROJECT
+========================================= */
+
+function startNewProject() {
+
+  if (
+    !confirm(
+      "Kana son fara sabon project?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  conversation = [];
+
+
+  project = {
+
+    appName: "",
+
+    description: "",
+
+    category: "",
+
+    users: [],
+
+    features: [],
+
+    pages: [],
+
+    database: [],
+
+    apis: [],
+
+    payments: [],
+
+    authentication: [],
+
+    files: [],
+
+    extraRequirements: ""
+
+  };
+
+
+  generatedApp = {
+
+    html: "",
+
+    css: "",
+
+    js: ""
+
+  };
+
+
+  document.getElementById(
+    "chatBox"
+  ).innerHTML = `
+
+    <div class="message ai">
+
+      <strong>
+        🤖 Creator App AI
+      </strong>
+
+      Sannu! 👋<br><br>
+
+      Wane irin app kake son ƙirƙira?
+
+    </div>
+
+  `;
+
+
+  document.getElementById(
+    "summary"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "builder"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "preview"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "codeResult"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "message"
+  ).value =
+    "";
+
+
+  showStatus(
+    "An fara sabon project.",
+    "success"
+  );
+
+}
+
+
+/* =========================================
+   ENTER KEY
+========================================= */
+
+document
+  .getElementById(
+    "message"
+  )
+  .addEventListener(
+    "keydown",
+    function(event) {
 
       if (
-        lower.includes("bank")
+        event.key === "Enter" &&
+        !event.shiftKey
       ) {
 
-        project.category =
-          "Banking";
+        event.preventDefault();
 
-      } else if (
-        lower.includes("taxi")
-      ) {
-
-        project.category =
-          "Taxi / Transport";
-
-      } else if (
-        lower.includes("shop") ||
-        lower.includes("shopping")
-      ) {
-
-        project.category =
-          "E-commerce";
-
-      } else if (
-        lower.includes("school") ||
-        lower.includes("education")
-      ) {
-
-        project.category =
-          "Education";
-
-      } else if (
-        lower.includes("hospital")
-      ) {
-
-        project.category =
-          "Healthcare";
-
-      } else if (
-        lower.includes("social")
-      ) {
-
-        project.category =
-          "Social Media";
-
-      } else if (
-        lower.includes("ai")
-      ) {
-
-        project.category =
-          "AI";
+        sendMessage();
 
       }
 
+    }
+  );
+
+
+/* =========================================
+   LOAD PROJECT
+========================================= */
+
+try {
+
+  const saved =
+    localStorage.getItem(
+      "creatorAppProject"
+    );
+
+
+  if (saved) {
+
+    const data =
+      JSON.parse(saved);
+
+
+    if (
+      data.conversation
+    ) {
+
+      conversation =
+        data.conversation;
+
+    }
+
+
+    if (
+      data.description
+    ) {
+
+      project =
+        data;
 
       showSummary();
 
     }
 
+  }
 
-    /*
-      =====================================================
-      SHOW SUMMARY
-      =====================================================
-    */
+} catch (error) {
 
-    function showSummary() {
+  console.log(
+    "No saved project."
+  );
 
-      const summary =
-        document.getElementById("summary");
+}
 
-
-      const content =
-        document.getElementById(
-          "summaryContent"
-        );
-
-
-      content.innerHTML = `
-
-        <div class="summary-item">
-          <strong>Bayani:</strong><br>
-          ${escapeHtml(
-            project.description ||
-            "Ba a kammala ba tukuna."
-          )}
-        </div>
-
-        <div class="summary-item">
-          <strong>Nau'in App:</strong><br>
-          ${escapeHtml(
-            project.category ||
-            "AI zai gano."
-          )}
-        </div>
-
-        <div class="summary-item">
-          <strong>Requirements:</strong><br>
-          Ana ci gaba da tattarawa ta AI Interview.
-        </div>
-
-      `;
-
-
-      summary.style.display =
-        "block";
-
-    }
-
-
-    /*
-      =====================================================
-      SAVE PROJECT
-      =====================================================
-    */
-
-    function saveProject() {
-
-      const projectData = {
-
-        ...project,
-
-        conversation:
-          conversation,
-
-        savedAt:
-          new Date().toISOString()
-
-      };
-
-
-      localStorage.setItem(
-        "creatorAppProject",
-        JSON.stringify(projectData)
-      );
-
-
-      showStatus(
-        "✅ An ajiye project ɗin a wannan browser.",
-        "success"
-      );
-
-    }
-
-
-    /*
-      =====================================================
-      PREPARE BUILD
-      =====================================================
-    */
-
-    function prepareBuild() {
-
-      saveProject();
-
-
-      showStatus(
-        "🏗️ An shirya project ɗin domin App Builder. Mataki na gaba zai haɗa Preview da Build.",
-        "success"
-      );
-
-    }
-
-
-    /*
-      =====================================================
-      NEW PROJECT
-      =====================================================
-    */
-
-    function startNewProject() {
-
-      if (
-        !confirm(
-          "Kana son fara sabon project?"
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      conversation = [];
-
-
-      project = {
-
-        appName: "",
-
-        description: "",
-
-        category: "",
-
-        users: [],
-
-        features: [],
-
-        pages: [],
-
-        database: [],
-
-        apis: [],
-
-        payments: [],
-
-        authentication: [],
-
-        files: [],
-
-        extraRequirements: ""
-
-      };
-
-
-      document.getElementById(
-        "chatBox"
-      ).innerHTML = `
-
-        <div class="message ai">
-
-          <strong>
-            🤖 Creator App AI
-          </strong>
-
-          Sannu! 👋
-
-          Wane irin app kake son ƙirƙira?
-
-          Ka bayyana min app ɗin da kake so da kalmominka.
-
-        </div>
-
-      `;
-
-
-      document.getElementById(
-        "summary"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "message"
-      ).value = "";
-
-
-      showStatus(
-        "An fara sabon project.",
-        "success"
-      );
-
-    }
-
-
-    /*
-      =====================================================
-      FILE NAME
-      =====================================================
-    */
-
-    function showFileName(
-      inputId,
-      outputId
-    ) {
-
-      const input =
-        document.getElementById(
-          inputId
-        );
-
-
-      const output =
-        document.getElementById(
-          outputId
-        );
-
-
-      if (
-        input.files &&
-        input.files.length > 0
-      ) {
-
-        output.textContent =
-          "An zaɓa: " +
-          input.files[0].name;
-
-      } else {
-
-        output.textContent =
-          "";
-
-      }
-
-    }
-
-
-    /*
-      =====================================================
-      STATUS
-      =====================================================
-    */
-
-    function showStatus(
-      message,
-      type
-    ) {
-
-      const status =
-        document.getElementById(
-          "status"
-        );
-
-
-      status.textContent =
-        message;
-
-
-      status.className =
-        "status " +
-        type;
-
-
-      status.style.display =
-        "block";
-
-    }
-
-
-    /*
-      =====================================================
-      SECURITY
-      =====================================================
-    */
-
-    function escapeHtml(
-      text
-    ) {
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.textContent =
-        text;
-
-
-      return div.innerHTML;
-
-    }
-
-
-    /*
-      =====================================================
-      ENTER KEY
-      =====================================================
-    */
-
-    document
-      .getElementById("message")
-      .addEventListener(
-        "keydown",
-        function(event) {
-
-          if (
-            event.key === "Enter" &&
-            !event.shiftKey
-          ) {
-
-            event.preventDefault();
-
-            sendMessage();
-
-          }
-
-        }
-      );
-
-
-    /*
-      =====================================================
-      LOAD SAVED PROJECT
-      =====================================================
-    */
-
-    try {
-
-      const saved =
-        localStorage.getItem(
-          "creatorAppProject"
-        );
-
-
-      if (saved) {
-
-        const data =
-          JSON.parse(saved);
-
-
-        if (data.conversation) {
-
-          conversation =
-            data.conversation;
-
-        }
-
-
-        if (data.description) {
-
-          project =
-            data;
-
-        }
-
-      }
-
-    } catch (error) {
-
-      console.log(
-        "No saved project."
-      );
-
-    }
-
-  </script>
+</script>
 
 </body>
-  </html>
+</html>
