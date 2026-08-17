@@ -25,9 +25,7 @@ export default async function handler(req, res) {
   // =========================
 
   if (req.method === "OPTIONS") {
-
     return res.status(200).end();
-
   }
 
 
@@ -36,22 +34,15 @@ export default async function handler(req, res) {
   // =========================
 
   if (req.method !== "POST") {
-
     return res.status(405).json({
       error: "Method not allowed"
     });
-
   }
 
 
   try {
 
-    // =========================
-    // GET MESSAGE
-    // =========================
-
-    const body =
-      req.body || {};
+    const body = req.body || {};
 
     const message =
       typeof body.message === "string"
@@ -60,11 +51,9 @@ export default async function handler(req, res) {
 
 
     if (!message) {
-
       return res.status(400).json({
         error: "An aika da babu saƙo."
       });
-
     }
 
 
@@ -77,19 +66,15 @@ export default async function handler(req, res) {
 
 
     if (!apiKey) {
-
       return res.status(500).json({
-
         error:
           "GEMINI_API_KEY ba a saita shi a Vercel Environment Variables ba."
-
       });
-
     }
 
 
     // =========================
-    // GEMINI MODEL
+    // MODEL
     // =========================
 
     const model =
@@ -101,53 +86,53 @@ export default async function handler(req, res) {
 
 
     // =========================
-    // CENTER APP AI PROMPT
+    // CENTER APP AI
     // =========================
 
     const systemPrompt = `
 
 Kai ne CENTER APP AI.
 
-Kai AI ne mai taimakawa mutane wajen
-tsara da ƙirƙirar KOWANE IRIN APPLICATION.
+Kai babban AI App Builder ne.
+
+Aikinka shi ne taimaka wa mai amfani
+ya tsara KOWANE IRIN APPLICATION.
 
 Ba banki kawai ba.
-
 Ba taxi kawai ba.
+Ba video kawai ba.
 
-Ba video app kawai ba.
+Mai amfani zai iya son:
 
-Mai amfani zai iya neman:
+Banking
+Wallet
+Taxi
+Delivery
+E-commerce
+Social Media
+Education
+Hospital
+Business
+Movie
+Entertainment
+AI
+Video
+News
+Real Estate
+Game
+Restaurant
+Booking
+School
+Chat
+Music
+Agriculture
+Job
+Finance
+ko KOWANE irin application.
 
-- Banking App
-- Wallet App
-- Taxi App
-- Delivery App
-- E-commerce App
-- Social Media App
-- Education App
-- Hospital App
-- Business App
-- Movie App
-- Entertainment App
-- AI App
-- Video Generator App
-- News App
-- Real Estate App
-- Game App
-- Restaurant App
-- Booking App
-- School App
-- Chat App
-- Music App
-- Agriculture App
-- Job App
-- Finance App
-- ko KOWANE irin application.
-
-==================================================
+========================================
 HARSHE
-==================================================
+========================================
 
 Idan mai amfani ya yi Hausa,
 ka amsa da Hausa.
@@ -155,98 +140,94 @@ ka amsa da Hausa.
 Idan ya yi Turanci,
 ka amsa da Turanci.
 
-==================================================
+========================================
 AI INTERVIEW
-==================================================
+========================================
 
-Manufarka ita ce ka fahimci application
-da mai amfani yake son ginawa.
+Ka taimaka wa mai amfani ya bayyana app ɗinsa.
 
-Kada ka jefa masa tambayoyi 10 lokaci guda.
+Kada ka tambayi abubuwa da yawa lokaci guda.
 
-Ka tambayi tambaya ɗaya ko biyu a hankali.
+Ka fara da tambaya ɗaya ko biyu.
 
-Ka taimaka masa ya bayyana:
+Ka taimaka wajen gano:
 
-1. Sunan app
-2. Menene app ɗin zai yi
-3. Waɗanda za su yi amfani da shi
-4. Features
-5. Pages
-6. Login/Register
-7. Phone number ko email
-8. OTP idan ana bukata
-9. Database
-10. Payment
-11. Notifications
-12. Location/GPS
-13. Admin dashboard
-14. User dashboard
-15. API
-16. Security
-17. Logo
-18. Sauran requirements
-
-==================================================
-IMPORTANT
-==================================================
-
-Kada ka saka secret API key a cikin HTML,
-CSS ko JavaScript.
-
-Kada ka nemi mai amfani ya saka
-GEMINI_API_KEY cikin frontend.
-
-Idan app ɗin yana buƙatar API,
-ka bayyana cewa za a haɗa shi ta secure backend.
-
-==================================================
-APP BUILDING
-==================================================
-
-Idan mai amfani ya fara magana game da
-gina app, ka taimaka masa tsara shi.
-
-Idan requirements ɗin ba su cika ba,
-ci gaba da tambayarsa abubuwan da ake bukata.
-
-Idan requirements sun cika,
-ka nuna masa PROJECT SUMMARY.
-
-PROJECT SUMMARY zai iya ƙunsar:
-
-- App Name
-- App Type
-- Target Users
-- Main Features
+- Sunan app
+- Nau'in app
+- Masu amfani
+- Babban aikin app
+- Features
 - Pages
-- Authentication
+- Login/Register
+- Email ko Phone
+- OTP
 - Database
 - Payment
-- APIs
 - Notifications
-- Admin
+- Location/GPS
+- Admin dashboard
+- User dashboard
+- API
 - Security
-- Other Requirements
+- Logo
+- Sauran requirements
 
-Kada ka ce an riga an samar da APK
+========================================
+APP BUILDING
+========================================
+
+Idan requirements ba su cika ba,
+ka ci gaba da tambayar mai amfani
+abubuwan da ake bukata.
+
+Idan requirements sun cika,
+ka nuna PROJECT SUMMARY.
+
+Project Summary zai iya ƙunsar:
+
+App Name
+App Type
+Target Users
+Main Features
+Pages
+Authentication
+Database
+Payment
+APIs
+Notifications
+Admin
+Security
+Other Requirements
+
+Kada ka yi iƙirarin cewa an gina APK
 idan ba a yi build ba.
 
-==================================================
+========================================
+SECURITY
+========================================
+
+Kada ka saka secret API key a frontend.
+
+Kada ka nemi GEMINI_API_KEY
+a cikin HTML ko JavaScript.
+
+Idan app yana bukatar API,
+ka bayyana cewa za a haɗa shi
+ta secure backend.
+
+========================================
 STYLE
-==================================================
+========================================
 
-Ka kasance:
+Ka kasance friendly,
+professional,
+mai sauƙin fahimta.
 
-- Friendly
-- Professional
-- Mai sauƙin fahimta
-- Short but useful
-- Kada ka cika magana mara amfani
+Kada ka cika magana mara amfani.
 
-==================================================
-USER MESSAGE
-==================================================
+========================================
+CURRENT USER MESSAGE
+========================================
 
 ${message}
 
@@ -268,61 +249,47 @@ Ka amsa wa mai amfani yanzu.
       attempt++
     ) {
 
-      response =
-        await fetch(
-          endpoint,
-          {
+      response = await fetch(
+        endpoint,
+        {
+          method: "POST",
 
-            method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
 
-            headers: {
+            "x-goog-api-key":
+              apiKey
+          },
 
-              "Content-Type":
-                "application/json",
+          body: JSON.stringify({
 
-              "x-goog-api-key":
-                apiKey
+            contents: [
 
-            },
+              {
+                role: "user",
 
-            body:
-              JSON.stringify({
-
-                contents: [
-
+                parts: [
                   {
-
-                    role: "user",
-
-                    parts: [
-
-                      {
-
-                        text:
-                          systemPrompt
-
-                      }
-
-                    ]
-
+                    text:
+                      systemPrompt
                   }
+                ]
+              }
 
-                ],
+            ],
 
-                generationConfig: {
+            generationConfig: {
 
-                  temperature:
-                    0.7,
+              temperature: 0.7,
 
-                  maxOutputTokens:
-                    4096
+              maxOutputTokens: 4096
 
-                }
+            }
 
-              })
-
-          }
-        );
+          })
+        }
+      );
 
 
       data =
@@ -330,53 +297,36 @@ Ka amsa wa mai amfani yanzu.
           .catch(() => ({}));
 
 
-      // SUCCESS
-
       if (response.ok) {
-
         break;
-
       }
 
 
-      // RETRY TEMPORARY ERRORS
-
       if (
-
         (
           response.status === 429 ||
           response.status === 500 ||
           response.status === 502 ||
           response.status === 503 ||
           response.status === 504
-        )
-
-        &&
-
+        ) &&
         attempt < 2
-
       ) {
 
         await new Promise(
           resolve =>
-            setTimeout(
-              resolve,
-              2000
-            )
+            setTimeout(resolve, 2000)
         );
 
         continue;
-
       }
 
-
       break;
-
     }
 
 
     // =========================
-    // GEMINI ERROR
+    // ERROR
     // =========================
 
     if (!response.ok) {
@@ -387,34 +337,26 @@ Ka amsa wa mai amfani yanzu.
       );
 
 
-      if (
-        response.status === 429
-      ) {
+      if (response.status === 429) {
 
         return res.status(429).json({
-
           error:
             "Gemini quota ya cika. Ka sake gwadawa daga baya."
-
         });
 
       }
 
 
       if (
-
         response.status === 500 ||
         response.status === 502 ||
         response.status === 503 ||
         response.status === 504
-
       ) {
 
         return res.status(503).json({
-
           error:
             "Gemini yana cikin cunkoso yanzu. Ka sake gwadawa bayan ɗan lokaci."
-
         });
 
       }
@@ -434,7 +376,7 @@ Ka amsa wa mai amfani yanzu.
 
 
     // =========================
-    // GET AI RESPONSE
+    // GET REPLY
     // =========================
 
     const reply =
@@ -453,17 +395,15 @@ Ka amsa wa mai amfani yanzu.
 
 
       return res.status(500).json({
-
         error:
           "Gemini bai dawo da amsa ba."
-
       });
 
     }
 
 
     // =========================
-    // SEND TO FRONTEND
+    // SUCCESS
     // =========================
 
     return res.status(200).json({
