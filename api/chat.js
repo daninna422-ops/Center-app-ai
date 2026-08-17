@@ -1,8 +1,8 @@
 export default async function handler(req, res) {
 
-  // =========================
+  // ==========================================
   // CORS
-  // =========================
+  // ==========================================
 
   res.setHeader(
     "Access-Control-Allow-Origin",
@@ -20,18 +20,18 @@ export default async function handler(req, res) {
   );
 
 
-  // =========================
+  // ==========================================
   // OPTIONS
-  // =========================
+  // ==========================================
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
 
 
-  // =========================
+  // ==========================================
   // ONLY POST
-  // =========================
+  // ==========================================
 
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -41,6 +41,10 @@ export default async function handler(req, res) {
 
 
   try {
+
+    // ========================================
+    // GET REQUEST BODY
+    // ========================================
 
     const body = req.body || {};
 
@@ -57,25 +61,31 @@ export default async function handler(req, res) {
     }
 
 
-    // =========================
+    // ========================================
     // GEMINI API KEY
-    // =========================
+    // ========================================
 
     const apiKey =
       process.env.GEMINI_API_KEY;
 
 
     if (!apiKey) {
+
+      console.error(
+        "GEMINI_API_KEY is missing."
+      );
+
       return res.status(500).json({
         error:
           "GEMINI_API_KEY ba a saita shi a Vercel Environment Variables ba."
       });
+
     }
 
 
-    // =========================
-    // MODEL
-    // =========================
+    // ========================================
+    // GEMINI MODEL
+    // ========================================
 
     const model =
       "gemini-2.5-flash";
@@ -85,50 +95,48 @@ export default async function handler(req, res) {
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
 
-    // =========================
-    // CENTER APP AI
-    // =========================
+    // ========================================
+    // CENTER APP AI INSTRUCTION
+    // ========================================
 
     const systemPrompt = `
 
 Kai ne CENTER APP AI.
 
-Kai babban AI App Builder ne.
-
-Aikinka shi ne taimaka wa mai amfani
-ya tsara KOWANE IRIN APPLICATION.
+Kai AI App Builder ne mai taimakawa
+mai amfani wajen tsara KOWANE IRIN APPLICATION.
 
 Ba banki kawai ba.
 Ba taxi kawai ba.
 Ba video kawai ba.
 
-Mai amfani zai iya son:
+Mai amfani zai iya neman:
 
-Banking
-Wallet
-Taxi
-Delivery
-E-commerce
-Social Media
-Education
-Hospital
-Business
-Movie
-Entertainment
-AI
-Video
-News
-Real Estate
-Game
-Restaurant
-Booking
-School
-Chat
-Music
-Agriculture
-Job
-Finance
-ko KOWANE irin application.
+- Banking App
+- Wallet App
+- E-commerce App
+- Taxi App
+- Delivery App
+- Social Media App
+- Education App
+- School App
+- Hospital App
+- Business App
+- Finance App
+- Restaurant App
+- Booking App
+- News App
+- Entertainment App
+- Movie App
+- Music App
+- AI App
+- Video App
+- Game App
+- Real Estate App
+- Agriculture App
+- Job App
+- Chat App
+- ko KOWANE irin app.
 
 ========================================
 HARSHE
@@ -140,50 +148,54 @@ ka amsa da Hausa.
 Idan ya yi Turanci,
 ka amsa da Turanci.
 
+Kada ka canza harshen mai amfani
+sai idan ya nema.
+
 ========================================
 AI INTERVIEW
 ========================================
 
-Ka taimaka wa mai amfani ya bayyana app ɗinsa.
+Manufarka ita ce fahimtar app
+da mai amfani yake son ginawa.
 
-Kada ka tambayi abubuwa da yawa lokaci guda.
+Kada ka jefa tambayoyi da yawa lokaci guda.
 
-Ka fara da tambaya ɗaya ko biyu.
+Ka tambayi tambaya daya ko biyu
+a kowane lokaci.
 
 Ka taimaka wajen gano:
 
-- Sunan app
-- Nau'in app
-- Masu amfani
-- Babban aikin app
-- Features
-- Pages
-- Login/Register
-- Email ko Phone
-- OTP
-- Database
-- Payment
-- Notifications
-- Location/GPS
-- Admin dashboard
-- User dashboard
-- API
-- Security
-- Logo
-- Sauran requirements
+1. Sunan app
+2. Nau'in app
+3. Masu amfani
+4. Babban aikin app
+5. Features
+6. Pages
+7. Login/Register
+8. Phone number ko Email
+9. OTP
+10. Database
+11. Payment
+12. Notifications
+13. Location/GPS
+14. Admin dashboard
+15. User dashboard
+16. API
+17. Security
+18. Logo
+19. Sauran requirements
 
 ========================================
 APP BUILDING
 ========================================
 
-Idan requirements ba su cika ba,
-ka ci gaba da tambayar mai amfani
-abubuwan da ake bukata.
+Idan mai amfani bai gama bayyana app ɗinsa ba,
+ka ci gaba da yi masa tambayoyin da ake bukata.
 
 Idan requirements sun cika,
-ka nuna PROJECT SUMMARY.
+ka samar da PROJECT SUMMARY.
 
-Project Summary zai iya ƙunsar:
+PROJECT SUMMARY zai iya ƙunsar:
 
 App Name
 App Type
@@ -199,34 +211,37 @@ Admin
 Security
 Other Requirements
 
-Kada ka yi iƙirarin cewa an gina APK
-idan ba a yi build ba.
-
 ========================================
-SECURITY
+IMPORTANT
 ========================================
 
-Kada ka saka secret API key a frontend.
+Kada ka saka secret API key a HTML,
+CSS ko JavaScript.
 
-Kada ka nemi GEMINI_API_KEY
-a cikin HTML ko JavaScript.
+Kada ka tambayi mai amfani
+ya saka GEMINI_API_KEY cikin frontend.
 
-Idan app yana bukatar API,
-ka bayyana cewa za a haɗa shi
+Idan application yana bukatar external API,
+ka bayyana cewa za a haɗa API ɗin
 ta secure backend.
+
+Kada ka yi iƙirarin cewa an riga an gina APK
+idan ba a yi build ba.
 
 ========================================
 STYLE
 ========================================
 
-Ka kasance friendly,
-professional,
-mai sauƙin fahimta.
+Ka kasance:
 
-Kada ka cika magana mara amfani.
+- Friendly
+- Professional
+- Mai sauƙin fahimta
+- Short but useful
+- Ka guji magana mara amfani
 
 ========================================
-CURRENT USER MESSAGE
+USER MESSAGE
 ========================================
 
 ${message}
@@ -235,12 +250,12 @@ Ka amsa wa mai amfani yanzu.
 `;
 
 
-    // =========================
+    // ========================================
     // CALL GEMINI
-    // =========================
+    // ========================================
 
-    let response;
-    let data;
+    let response = null;
+    let data = null;
 
 
     for (
@@ -249,47 +264,83 @@ Ka amsa wa mai amfani yanzu.
       attempt++
     ) {
 
-      response = await fetch(
-        endpoint,
-        {
-          method: "POST",
+      try {
 
-          headers: {
-            "Content-Type":
-              "application/json",
+        response = await fetch(
+          endpoint,
+          {
+            method: "POST",
 
-            "x-goog-api-key":
-              apiKey
-          },
+            headers: {
+              "Content-Type":
+                "application/json",
 
-          body: JSON.stringify({
+              "x-goog-api-key":
+                apiKey
+            },
 
-            contents: [
+            body: JSON.stringify({
 
-              {
-                role: "user",
+              contents: [
 
-                parts: [
-                  {
-                    text:
-                      systemPrompt
-                  }
-                ]
+                {
+                  role: "user",
+
+                  parts: [
+
+                    {
+                      text:
+                        systemPrompt
+                    }
+
+                  ]
+
+                }
+
+              ],
+
+              generationConfig: {
+
+                temperature:
+                  0.7,
+
+                maxOutputTokens:
+                  4096
+
               }
 
-            ],
+            })
 
-            generationConfig: {
+          }
+        );
 
-              temperature: 0.7,
+      } catch (fetchError) {
 
-              maxOutputTokens: 4096
+        console.error(
+          "Gemini fetch error:",
+          fetchError
+        );
 
-            }
+        if (attempt < 2) {
 
-          })
+          await new Promise(
+            resolve =>
+              setTimeout(
+                resolve,
+                2000
+              )
+          );
+
+          continue;
+
         }
-      );
+
+        return res.status(502).json({
+          error:
+            "An kasa haɗa Center App AI da Gemini server."
+        });
+
+      }
 
 
       data =
@@ -297,139 +348,55 @@ Ka amsa wa mai amfani yanzu.
           .catch(() => ({}));
 
 
+      // ======================================
+      // SUCCESS
+      // ======================================
+
       if (response.ok) {
         break;
       }
 
 
+      // ======================================
+      // TEMPORARY ERROR
+      // ======================================
+
       if (
+
         (
           response.status === 429 ||
           response.status === 500 ||
           response.status === 502 ||
           response.status === 503 ||
           response.status === 504
-        ) &&
+        )
+
+        &&
+
         attempt < 2
+
       ) {
 
         await new Promise(
           resolve =>
-            setTimeout(resolve, 2000)
+            setTimeout(
+              resolve,
+              2500
+            )
         );
 
         continue;
+
       }
+
 
       break;
-    }
-
-
-    // =========================
-    // ERROR
-    // =========================
-
-    if (!response.ok) {
-
-      console.error(
-        "GEMINI ERROR:",
-        JSON.stringify(data)
-      );
-
-
-      if (response.status === 429) {
-
-        return res.status(429).json({
-          error:
-            "Gemini quota ya cika. Ka sake gwadawa daga baya."
-        });
-
-      }
-
-
-      if (
-        response.status === 500 ||
-        response.status === 502 ||
-        response.status === 503 ||
-        response.status === 504
-      ) {
-
-        return res.status(503).json({
-          error:
-            "Gemini yana cikin cunkoso yanzu. Ka sake gwadawa bayan ɗan lokaci."
-        });
-
-      }
-
-
-      return res.status(
-        response.status
-      ).json({
-
-        error:
-          data?.error?.message ||
-          "Gemini API error."
-
-      });
 
     }
 
 
-    // =========================
-    // GET REPLY
-    // =========================
+    // ========================================
+    // GEMINI ERROR
+    // ========================================
 
-    const reply =
-      data
-        ?.candidates?.[0]
-        ?.content?.parts?.[0]
-        ?.text;
-
-
-    if (!reply) {
-
-      console.error(
-        "EMPTY GEMINI RESPONSE:",
-        JSON.stringify(data)
-      );
-
-
-      return res.status(500).json({
-        error:
-          "Gemini bai dawo da amsa ba."
-      });
-
-    }
-
-
-    // =========================
-    // SUCCESS
-    // =========================
-
-    return res.status(200).json({
-
-      reply:
-        reply.trim()
-
-    });
-
-
-  } catch (error) {
-
-    console.error(
-      "CENTER APP AI ERROR:",
-      error
-    );
-
-
-    return res.status(500).json({
-
-      error:
-        error?.message ||
-        "An samu matsala a server."
-
-    });
-
-  }
-
-}
+    if (!response
