@@ -25,7 +25,9 @@ body.dark{
   color:#fff;
 }
 
-button,input,textarea{
+button,
+input,
+textarea{
   font-family:inherit;
 }
 
@@ -286,6 +288,7 @@ button{
   padding:20px 14px;
   text-align:left;
   box-shadow:0 4px 18px rgba(0,0,0,.08);
+  transition:.15s;
 }
 
 .dashboard-card:active{
@@ -460,6 +463,7 @@ textarea:focus{
   border:1px solid #ccd5e2;
   border-radius:10px;
   font-size:16px;
+  outline:none;
 }
 
 /* =========================
@@ -519,8 +523,27 @@ textarea:focus{
 }
 
 /* =========================
-   DARK
+   DARK MODE
 ========================= */
+
+body.dark .auth-card{
+  background:#1b2333;
+  color:#fff;
+}
+
+body.dark .auth-subtitle{
+  color:#aeb8ca;
+}
+
+body.dark .input-group input{
+  background:#101522;
+  color:#fff;
+  border-color:#3b465c;
+}
+
+body.dark .auth-tab{
+  background:#293449;
+}
 
 body.dark .card,
 body.dark .dashboard-card,
@@ -583,6 +606,10 @@ body.dark .download-info{
   .brand-text strong{
     font-size:16px;
   }
+
+  .auth-card{
+    padding:24px 18px;
+  }
 }
 </style>
 </head>
@@ -612,6 +639,7 @@ body.dark .download-info{
       <button
         id="loginTab"
         class="auth-tab active"
+        type="button"
         onclick="showLogin()"
       >
         Login
@@ -620,6 +648,7 @@ body.dark .download-info{
       <button
         id="registerTab"
         class="auth-tab"
+        type="button"
         onclick="showRegister()"
       >
         Register
@@ -633,11 +662,14 @@ body.dark .download-info{
 
       <div class="input-group">
 
-        <label>Email</label>
+        <label for="loginEmail">
+          Email
+        </label>
 
         <input
           id="loginEmail"
           type="email"
+          autocomplete="email"
           placeholder="example@gmail.com"
         >
 
@@ -645,11 +677,14 @@ body.dark .download-info{
 
       <div class="input-group">
 
-        <label>Password</label>
+        <label for="loginPassword">
+          Password
+        </label>
 
         <input
           id="loginPassword"
           type="password"
+          autocomplete="current-password"
           placeholder="Password"
         >
 
@@ -658,6 +693,7 @@ body.dark .download-info{
       <button
         id="loginButton"
         class="primary-button"
+        type="button"
         onclick="loginUser()"
       >
         🔐 Login
@@ -674,11 +710,14 @@ body.dark .download-info{
 
       <div class="input-group">
 
-        <label>Sunanka</label>
+        <label for="registerName">
+          Sunanka
+        </label>
 
         <input
           id="registerName"
           type="text"
+          autocomplete="name"
           placeholder="Rubuta sunanka"
         >
 
@@ -686,11 +725,14 @@ body.dark .download-info{
 
       <div class="input-group">
 
-        <label>Email</label>
+        <label for="registerEmail">
+          Email
+        </label>
 
         <input
           id="registerEmail"
           type="email"
+          autocomplete="email"
           placeholder="example@gmail.com"
         >
 
@@ -698,11 +740,14 @@ body.dark .download-info{
 
       <div class="input-group">
 
-        <label>Password</label>
+        <label for="registerPassword">
+          Password
+        </label>
 
         <input
           id="registerPassword"
           type="password"
+          autocomplete="new-password"
           placeholder="Aƙalla haruffa 6"
         >
 
@@ -711,6 +756,7 @@ body.dark .download-info{
       <button
         id="registerButton"
         class="primary-button"
+        type="button"
         onclick="registerUser()"
       >
         📝 Create Account
@@ -721,6 +767,7 @@ body.dark .download-info{
     <div
       id="authMessage"
       class="auth-message"
+      role="alert"
     ></div>
 
   </div>
@@ -763,6 +810,7 @@ body.dark .download-info{
 
     <button
       class="logout-small"
+      type="button"
       onclick="logoutUser()"
     >
       Logout
@@ -792,7 +840,8 @@ body.dark .download-info{
   <div class="welcome-card">
 
     <h2>
-      Barka da zuwa, <span id="welcomeName">User</span> 👋
+      Barka da zuwa,
+      <span id="welcomeName">User</span> 👋
     </h2>
 
     <p>
@@ -807,6 +856,7 @@ body.dark .download-info{
 
     <button
       class="dashboard-card"
+      type="button"
       onclick="openPage('chatPage')"
     >
 
@@ -827,6 +877,7 @@ body.dark .download-info{
 
     <button
       class="dashboard-card"
+      type="button"
       onclick="openPage('projectsPage')"
     >
 
@@ -847,6 +898,7 @@ body.dark .download-info{
 
     <button
       class="dashboard-card"
+      type="button"
       onclick="openPage('settingsPage')"
     >
 
@@ -867,6 +919,7 @@ body.dark .download-info{
 
     <button
       class="dashboard-card"
+      type="button"
       onclick="openPage('downloadPage')"
     >
 
@@ -899,6 +952,7 @@ body.dark .download-info{
 
     <button
       class="primary-button"
+      type="button"
       onclick="openPage('chatPage')"
     >
       💬 Fara Chat da AI
@@ -920,6 +974,7 @@ body.dark .download-info{
 
   <button
     class="back-button"
+    type="button"
     onclick="openPage('dashboardPage')"
   >
     ← Dashboard
@@ -944,7 +999,7 @@ body.dark .download-info{
       <div class="message ai">
 
         <strong>
-          🤖 Creator App AI
+          🤖 Center App AI
         </strong>
 
         Sannu! 👋
@@ -981,6 +1036,7 @@ body.dark .download-info{
     <button
       id="sendButton"
       class="send-button"
+      type="button"
       onclick="sendMessage()"
     >
       Aika 🚀
@@ -1002,6 +1058,7 @@ body.dark .download-info{
 
   <button
     class="back-button"
+    type="button"
     onclick="openPage('dashboardPage')"
   >
     ← Dashboard
@@ -1020,6 +1077,7 @@ body.dark .download-info{
 
     <button
       class="primary-button"
+      type="button"
       onclick="newProject()"
     >
       🆕 Fara Sabon Project
@@ -1055,6 +1113,7 @@ body.dark .download-info{
 
   <button
     class="back-button"
+    type="button"
     onclick="openPage('dashboardPage')"
   >
     ← Dashboard
@@ -1071,1084 +1130,4 @@ body.dark .download-info{
 
   <div class="card">
 
-    <div class="setting-row">
-
-      <span class="setting-label">
-        Sunan Account
-      </span>
-
-      <input
-        id="settingsName"
-        class="setting-input"
-        type="text"
-        placeholder="Sunanka"
-      >
-
-    </div>
-
-
-    <div class="setting-row">
-
-      <span class="setting-label">
-        Email
-      </span>
-
-      <div
-        id="settingsEmail"
-        style="color:#667085;"
-      ></div>
-
-    </div>
-
-
-    <div class="setting-row">
-
-      <span class="setting-label">
-        Dark Mode
-      </span>
-
-      <button
-        class="primary-button"
-        onclick="toggleDarkMode()"
-      >
-        🌙 Canza Theme
-      </button>
-
-    </div>
-
-
-    <button
-      class="primary-button"
-      onclick="saveSettings()"
-    >
-      💾 Ajiye Settings
-    </button>
-
-
-    <button
-      class="primary-button"
-      style="background:#dc3545;"
-      onclick="logoutUser()"
-    >
-      🚪 Logout
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     DOWNLOAD
-================================================== -->
-
-<section
-  id="downloadPage"
-  class="page hidden"
->
-
-  <button
-    class="back-button"
-    onclick="openPage('dashboardPage')"
-  >
-    ← Dashboard
-  </button>
-
-
-  <div class="card download-box">
-
-    <div class="download-icon">
-      📲
-    </div>
-
-    <h2>
-      Download App
-    </h2>
-
-    <p>
-      Anan za a nuna apps da aka shirya
-      domin build zuwa Android APK.
-    </p>
-
-
-    <div class="download-info">
-
-      <strong>
-        ⚠️ Muhimmi
-      </strong>
-
-      <br><br>
-
-      A yanzu Center App AI yana tattara
-      requirements kuma yana tsara application.
-
-      <br><br>
-
-      Mataki na gaba shi ne haɗa
-      App Builder/Android Build.
-
-    </div>
-
-    <button
-      class="primary-button"
-      onclick="showBuildMessage()"
-    >
-      ⚡ Ƙirƙiri App Yanzu
-    </button>
-
-  </div>
-
-</section>
-
-</main>
-
-</section>
-
-
-<script type="module">
-
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  updateProfile
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  getDoc,
-  setDoc,
-  updateDoc,
-  doc,
-  query,
-  orderBy,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
-
-const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyDaeiQk55PVBPdxVm1T6TbTpk6TadZzE3c",
-
-  authDomain:
-    "center-app-ai.firebaseapp.com",
-
-  projectId:
-    "center-app-ai",
-
-  storageBucket:
-    "center-app-ai.firebasestorage.app",
-
-  messagingSenderId:
-    "885493707552",
-
-  appId:
-    "1:885493707552:web:3987b74d77771cd3031d45",
-
-  measurementId:
-    "G-1DJ1RKQ074"
-
-};
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getFirestore(app);
-
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-let currentUser = null;
-
-let currentProjectId = null;
-
-let conversation = [];
-
-
-/*
- IMPORTANT:
- chat.js yana cikin:
-
- /api/chat.js
-
-Saboda haka URL ɗin shine:
- /api/chat
-*/
-
-const BACKEND_URL = "/api/chat";
-
-
-/* =====================================================
-   AUTH TABS
-===================================================== */
-
-window.showLogin = function(){
-
-  document
-    .getElementById("loginForm")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("registerForm")
-    .classList.add("hidden");
-
-  document
-    .getElementById("loginTab")
-    .classList.add("active");
-
-  document
-    .getElementById("registerTab")
-    .classList.remove("active");
-
-  clearAuthMessage();
-
-};
-
-
-window.showRegister = function(){
-
-  document
-    .getElementById("loginForm")
-    .classList.add("hidden");
-
-  document
-    .getElementById("registerForm")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("loginTab")
-    .classList.remove("active");
-
-  document
-    .getElementById("registerTab")
-    .classList.add("active");
-
-  clearAuthMessage();
-
-};
-
-
-/* =====================================================
-   AUTH MESSAGE
-===================================================== */
-
-function authMessage(
-  message,
-  type
-){
-
-  const box =
-    document.getElementById(
-      "authMessage"
-    );
-
-  box.textContent =
-    message;
-
-  box.className =
-    "auth-message " + type;
-
-}
-
-
-function clearAuthMessage(){
-
-  const box =
-    document.getElementById(
-      "authMessage"
-    );
-
-  box.textContent = "";
-
-  box.className =
-    "auth-message";
-
-}
-
-
-/* =====================================================
-   REGISTER
-===================================================== */
-
-window.registerUser =
-async function(){
-
-  const name =
-    document
-      .getElementById("registerName")
-      .value
-      .trim();
-
-  const email =
-    document
-      .getElementById("registerEmail")
-      .value
-      .trim();
-
-  const password =
-    document
-      .getElementById("registerPassword")
-      .value;
-
-
-  if(!name){
-
-    authMessage(
-      "Rubuta sunanka.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if(!email){
-
-    authMessage(
-      "Rubuta email ɗinka.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if(password.length < 6){
-
-    authMessage(
-      "Password ya zama aƙalla haruffa 6.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const button =
-    document.getElementById(
-      "registerButton"
-    );
-
-  button.disabled = true;
-
-  button.textContent =
-    "Ana ƙirƙirar account...";
-
-
-  try{
-
-    const credential =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-    await updateProfile(
-      credential.user,
-      {
-        displayName:
-          name
-      }
-    );
-
-
-    await setDoc(
-      doc(
-        db,
-        "users",
-        credential.user.uid
-      ),
-      {
-        name:name,
-        email:email,
-        createdAt:
-          serverTimestamp()
-      },
-      {
-        merge:true
-      }
-    );
-
-
-    authMessage(
-      "✅ An ƙirƙiri account. Ana shigar da kai...",
-      "success"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "REGISTER ERROR:",
-      error
-    );
-
-    authMessage(
-      firebaseErrorMessage(error),
-      "error"
-    );
-
-  }finally{
-
-    button.disabled = false;
-
-    button.textContent =
-      "📝 Create Account";
-
-  }
-
-};
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-window.loginUser =
-async function(){
-
-  const email =
-    document
-      .getElementById("loginEmail")
-      .value
-      .trim();
-
-  const password =
-    document
-      .getElementById("loginPassword")
-      .value;
-
-
-  if(!email || !password){
-
-    authMessage(
-      "Cika Email da Password.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const button =
-    document.getElementById(
-      "loginButton"
-    );
-
-  button.disabled = true;
-
-  button.textContent =
-    "Ana shiga...";
-
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-
-    authMessage(
-      "✅ Login ya yi nasara.",
-      "success"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "LOGIN ERROR:",
-      error
-    );
-
-    authMessage(
-      firebaseErrorMessage(error),
-      "error"
-    );
-
-  }finally{
-
-    button.disabled = false;
-
-    button.textContent =
-      "🔐 Login";
-
-  }
-
-};
-
-
-/* =====================================================
-   FIREBASE ERROR TRANSLATION
-===================================================== */
-
-function firebaseErrorMessage(error){
-
-  const code =
-    error?.code || "";
-
-
-  if(
-    code.includes(
-      "invalid-credential"
-    ) ||
-    code.includes(
-      "wrong-password"
-    ) ||
-    code.includes(
-      "user-not-found"
-    )
-  ){
-
-    return "❌ Email ko Password ba daidai ba.";
-
-  }
-
-
-  if(
-    code.includes(
-      "email-already-in-use"
-    )
-  ){
-
-    return "❌ Wannan email an riga an yi amfani da shi.";
-
-  }
-
-
-  if(
-    code.includes(
-      "weak-password"
-    )
-  ){
-
-    return "❌ Password ya yi rauni. Yi amfani da aƙalla haruffa 6.";
-
-  }
-
-
-  if(
-    code.includes(
-      "invalid-email"
-    )
-  ){
-
-    return "❌ Email ɗin ba daidai ba ne.";
-
-  }
-
-
-  if(
-    code.includes(
-      "network-request-failed"
-    )
-  ){
-
-    return "❌ Babu network. Ka duba internet ɗinka.";
-
-  }
-
-
-  return (
-    "❌ " +
-    (
-      error?.message ||
-      "An samu kuskuren Firebase."
-    )
-  );
-
-}
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-onAuthStateChanged(
-  auth,
-  async function(user){
-
-    if(user){
-
-      currentUser =
-        user;
-
-
-      document
-        .getElementById("authScreen")
-        .classList.add("hidden");
-
-      document
-        .getElementById("appScreen")
-        .classList.remove("hidden");
-
-
-      const name =
-        user.displayName ||
-        user.email?.split("@")[0] ||
-        "User";
-
-
-      document
-        .getElementById("welcomeName")
-        .textContent =
-        name;
-
-
-      document
-        .getElementById("settingsName")
-        .value =
-        name;
-
-
-      document
-        .getElementById("settingsEmail")
-        .textContent =
-        user.email || "";
-
-
-      await loadProjects();
-
-
-    }else{
-
-      currentUser =
-        null;
-
-      document
-        .getElementById("authScreen")
-        .classList.remove("hidden");
-
-      document
-        .getElementById("appScreen")
-        .classList.add("hidden");
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-window.logoutUser =
-async function(){
-
-  try{
-
-    await signOut(auth);
-
-    currentProjectId =
-      null;
-
-    conversation =
-      [];
-
-    showLogin();
-
-  }catch(error){
-
-    console.error(
-      "LOGOUT ERROR:",
-      error
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   PAGE NAVIGATION
-===================================================== */
-
-window.openPage =
-function(pageId){
-
-  const pages = [
-    "dashboardPage",
-    "chatPage",
-    "projectsPage",
-    "settingsPage",
-    "downloadPage"
-  ];
-
-
-  pages.forEach(
-    function(id){
-
-      const page =
-        document.getElementById(id);
-
-      if(page){
-
-        page.classList.add(
-          "hidden"
-        );
-
-      }
-
-    }
-  );
-
-
-  const target =
-    document.getElementById(
-      pageId
-    );
-
-
-  if(target){
-
-    target.classList.remove(
-      "hidden"
-    );
-
-  }
-
-
-  if(
-    pageId === "projectsPage"
-  ){
-
-    loadProjects();
-
-  }
-
-};
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-function showStatus(
-  message,
-  type
-){
-
-  const box =
-    document.getElementById(
-      "globalStatus"
-    );
-
-
-  box.textContent =
-    message;
-
-
-  box.className =
-    "status " + type;
-
-
-  setTimeout(
-    function(){
-
-      box.className =
-        "status";
-
-    },
-    5000
-  );
-
-}
-
-
-/* =====================================================
-   CREATE PROJECT
-===================================================== */
-
-async function createProject(){
-
-  if(!currentUser){
-
-    throw new Error(
-      "Sai ka fara login."
-    );
-
-  }
-
-
-  const projectsRef =
-    collection(
-      db,
-      "users",
-      currentUser.uid,
-      "projects"
-    );
-
-
-  const ref =
-    await addDoc(
-      projectsRef,
-      {
-
-        title:
-          "Sabon Project",
-
-        conversation:
-          [],
-
-        createdAt:
-          serverTimestamp(),
-
-        updatedAt:
-          serverTimestamp()
-
-      }
-    );
-
-
-  currentProjectId =
-    ref.id;
-
-
-  conversation =
-    [];
-
-
-  return ref.id;
-
-}
-
-
-/* =====================================================
-   NEW PROJECT
-===================================================== */
-
-window.newProject =
-async function(){
-
-  try{
-
-    await createProject();
-
-
-    renderConversation();
-
-
-    openPage(
-      "chatPage"
-    );
-
-
-    showStatus(
-      "🆕 An fara sabon project.",
-      "success"
-    );
-
-
-    await loadProjects();
-
-
-  }catch(error){
-
-    console.error(
-      "NEW PROJECT:",
-      error
-    );
-
-    showStatus(
-      "❌ " +
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   LOAD PROJECTS
-===================================================== */
-
-async function loadProjects(){
-
-  if(!currentUser){
-
-    return;
-
-  }
-
-
-  const list =
-    document.getElementById(
-      "projectsList"
-    );
-
-
-  if(!list){
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    "<p>🔄 Ana ɗauko projects...</p>";
-
-
-  try{
-
-    const projectsRef =
-      collection(
-        db,
-        "users",
-        currentUser.uid,
-        "projects"
-      );
-
-
-    const q =
-      query(
-        projectsRef,
-        orderBy(
-          "updatedAt",
-          "desc"
-        )
-      );
-
-
-    const snapshot =
-      await getDocs(q);
-
-
-    list.innerHTML =
-      "";
-
-
-    if(snapshot.empty){
-
-      list.innerHTML =
-        "<p>Ba ka da project tukuna.</p>";
-
-      return;
-
-    }
-
-
-    snapshot.forEach(
-      function(item){
-
-        const data =
-          item.data();
-
-
-        const div =
-          document.createElement(
-            "div"
-          );
-
-
-        div.className =
-          "project-item";
-
-
-        const title =
-          data.title ||
-          "Sabon Project";
-
-
-        let dateText =
-          "Project";
-
-
-        if(
-          data.updatedAt &&
-          data.updatedAt.toDate
-        ){
-
-          dateText =
-            data.updatedAt
-              .toDate()
-              .toLocaleString();
-
-        }
-
-
-        div.innerHTML = `
-
-          <div class="project-title">
-            📱 ${escapeHtml(title)}
-          </div>
-
-          <div class="project-date">
-            ${escapeHtml(dateText)}
-          </div>
-
-        `;
-
-
-        div.onclick =
-          function(){
-
-            openProject(
-              item.id,
-              data
-            );
-
-          };
-
-
-        list.appendChild(
-          div
-        );
-
-      }
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "LOAD PROJECTS:",
-      error
-    );
-
-
-    list.innerHTML =
-      "<p>❌ Ba a iya ɗauko projects ba.</p>";
-
-  }
-
-}
-
-
-/* =====================================================
-   OPEN PROJECT
+    <div class="
