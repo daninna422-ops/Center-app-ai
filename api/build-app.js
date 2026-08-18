@@ -1,8 +1,7 @@
 export default async function handler(req, res) {
-
-  // ==============================
+  // ==========================================
   // CORS
-  // ==============================
+  // ==========================================
 
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -18,23 +17,21 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // ==============================
-  // METHOD
-  // ==============================
-
   if (req.method !== "POST") {
     return res.status(405).json({
+      success: false,
       error: "Method not allowed"
     });
   }
 
   try {
-
-    // ==============================
-    // GET DATA
-    // ==============================
-
     const body = req.body || {};
+
+    const appName =
+      typeof body.appName === "string" &&
+      body.appName.trim()
+        ? body.appName.trim()
+        : "Center App";
 
     const html =
       typeof body.html === "string"
@@ -51,73 +48,29 @@ export default async function handler(req, res) {
         ? body.js
         : "";
 
-    const appName =
-      typeof body.appName === "string"
-        ? body.appName.trim()
-        : "My App";
-
-
-    // ==============================
-    // CHECK
-    // ==============================
-
-    if (!html) {
+    if (!html && !css && !js) {
       return res.status(400).json({
-        error: "HTML bai zo ba."
+        success: false,
+        error: "Babu app code da za a build."
       });
     }
 
-    if (!css) {
-      return res.status(400).json({
-        error: "CSS bai zo ba."
-      });
-    }
-
-    if (!js) {
-      return res.status(400).json({
-        error: "JavaScript bai zo ba."
-      });
-    }
-
-
-    // ==============================
-    // CREATE COMPLETE HTML APP
-    // ==============================
+    // ==========================================
+    // CREATE COMPLETE HTML
+    // ==========================================
 
     const completeHTML = `<!DOCTYPE html>
 <html lang="ha">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<meta
-  name="theme-color"
-  content="#1261d6"
->
-
-<meta
-  name="mobile-web-app-capable"
-  content="yes"
->
-
-<meta
-  name="apple-mobile-web-app-capable"
-  content="yes"
->
-
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1261d6">
 <title>${escapeHTML(appName)}</title>
 
 <style>
-
 ${css}
-
 </style>
-
 </head>
 
 <body>
@@ -125,97 +78,76 @@ ${css}
 ${html}
 
 <script>
-
 ${js}
-
 </script>
 
 </body>
 </html>`;
 
+    // ==========================================
+    // DATA URL
+    // ==========================================
 
-    // ==============================
-    // RETURN BUILD
-    // ==============================
+    const encoded =
+      Buffer
+        .from(completeHTML, "utf8")
+        .toString("base64");
+
+    const downloadUrl =
+      `data:text/html;base64,${encoded}`;
+
+    // ==========================================
+    // RESPONSE
+    // ==========================================
 
     return res.status(200).json({
-
       success: true,
 
-      appName: appName,
+      appName,
+
+      format: "html",
+
+      readyForAndroidBuild: true,
 
       files: {
-
-        "index.html":
-          completeHTML,
-
-        "style.css":
-          css,
-
-        "app.js":
-          js
-
+        "index.html": completeHTML
       },
 
       preview: completeHTML,
 
+      downloadUrl,
+
       message:
-        "An shirya application successfully."
-
+        "An shirya app ɗin. Za a iya buɗe ko sauke generated HTML. Android APK yana buƙatar Android build service."
     });
-
 
   } catch (error) {
 
     console.error(
-      "BUILD APP ERROR:",
+      "BUILD ERROR:",
       error
     );
 
     return res.status(500).json({
-
+      success: false,
       error:
-        error?.message ||
-        "An samu matsala wajen build app."
-
+        "An samu matsala yayin shirya app.",
+      details:
+        error.message
     });
-
   }
-
 }
 
 
-// =================================
+// ==========================================
 // ESCAPE HTML
-// =================================
+// ==========================================
 
 function escapeHTML(value) {
-
   return String(value)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
