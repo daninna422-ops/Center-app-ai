@@ -1365,11 +1365,127 @@ function showCode() {
    DOWNLOAD HTML
 ========================================= */
 
-function downloadGeneratedApp() {
+async function downloadGeneratedApp() {
 
-  if (
-    !generatedApp.html
-  ) {
+  if (!generatedApp || !generatedApp.html) {
+
+    showStatus(
+      "Da farko ka ƙirƙiri app.",
+      "error"
+    );
+
+    return;
+  }
+
+  try {
+
+    showStatus(
+      "⏳ Ana shirya app...",
+      "success"
+    );
+
+    const response = await fetch(
+      "/api/build-app",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+          appName:
+            project?.appName ||
+            "Center App",
+
+          html:
+            generatedApp.html,
+
+          css:
+            generatedApp.css || "",
+
+          js:
+            generatedApp.js || ""
+
+        })
+      }
+    );
+
+    const data =
+      await response.json();
+
+    if (
+      !response.ok ||
+      !data.success
+    ) {
+
+      throw new Error(
+        data.error ||
+        "Build ya kasa."
+      );
+
+    }
+
+    // ======================================
+    // DOWNLOAD GENERATED APP
+    // ======================================
+
+    if (data.downloadUrl) {
+
+      const link =
+        document.createElement("a");
+
+      link.href =
+        data.downloadUrl;
+
+      link.download =
+        (
+          project?.appName ||
+          "center-app"
+        )
+        .replace(
+          /[^a-z0-9_-]/gi,
+          "-"
+        )
+        .toLowerCase()
+        +
+        ".html";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      showStatus(
+        "✅ An shirya app ɗinka kuma an sauke shi.",
+        "success"
+      );
+
+      return;
+    }
+
+    throw new Error(
+      "Ba a samu download link ba."
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Build/Download error:",
+      error
+    );
+
+    showStatus(
+      "❌ An samu matsala: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+  }
 
     showStatus(
       "Da farko ka ƙirƙiri app.",
