@@ -1,27 +1,115 @@
 <!DOCTYPE html>
 <html lang="ha">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Center App AI Builder</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator App AI</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;font-family:Arial,sans-serif;background:#eef3f9;color:#172033}button,input,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
-.auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#1261d6,#062e73)}.auth-card{width:100%;max-width:430px;background:#fff;border-radius:24px;padding:28px 22px;box-shadow:0 18px 60px #0005}.logo{text-align:center;font-size:55px}.auth h1{text-align:center;color:#1261d6}.muted{color:#667085;line-height:1.5}.field{margin:13px 0}.field label{display:block;font-weight:bold;margin-bottom:6px;font-size:14px}.field input,.field textarea{width:100%;padding:13px;border:1px solid #ccd5e2;border-radius:11px;outline:0}.primary{width:100%;border:0;border-radius:11px;padding:14px;background:#1261d6;color:#fff;font-weight:bold;margin-top:7px}.secondary{border:0;background:#e8eef7;color:#1261d6;padding:11px;border-radius:10px;font-weight:bold}.msg{padding:11px;border-radius:10px;margin-top:12px;text-align:center}.err{background:#fff0f0;color:#b00000}.ok{background:#eafff1;color:#08783e}
-.top{position:sticky;top:0;z-index:10;background:linear-gradient(135deg,#1261d6,#0645a5);color:#fff;padding:14px}.topin{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{font-weight:bold;font-size:19px}.small{font-size:12px;opacity:.75}.logout{border:0;background:#ffffff22;color:#fff;padding:9px 12px;border-radius:9px}.wrap{max-width:1100px;margin:auto;padding:18px 14px 50px}.grid{display:grid;grid-template-columns:360px 1fr;gap:16px}.card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 5px 20px #00000012;margin-bottom:16px}h2,h3{margin-top:0;color:#1261d6}textarea{resize:vertical;min-height:135px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.status{padding:11px;border-radius:10px;margin-bottom:12px;display:none}.status.show{display:block}.status.ok{background:#eafff1;color:#08783e}.status.bad{background:#fff0f0;color:#b00000}.preview-wrap{background:#dfe7f1;border-radius:18px;padding:18px;min-height:650px}.preview-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.phone{width:100%;max-width:390px;margin:auto;background:#fff;border:8px solid #172033;border-radius:30px;overflow:hidden;min-height:610px;box-shadow:0 12px 35px #0003}.phonebar{height:34px;background:#172033;color:#fff;text-align:center;padding:8px;font-size:11px}.apphead{background:linear-gradient(135deg,#1261d6,#0645a5);color:#fff;padding:20px 17px}.apphead h2{color:#fff;margin:0 0 6px}.appbody{padding:15px}.appnav{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.tile{border:0;background:#f2f6fb;border-radius:14px;padding:16px;text-align:left}.tile b{display:block;margin-top:6px}.bottomnav{display:flex;gap:5px;padding:10px;border-top:1px solid #ddd}.bottomnav button{flex:1;border:0;background:#fff;padding:8px;font-size:11px}.chat{max-height:260px;overflow:auto;background:#f7faff;border:1px solid #e4eaf2;border-radius:12px;padding:10px}.bubble{padding:10px;margin:7px 0;border-radius:11px;white-space:pre-wrap;line-height:1.45}.bai{background:#e8f1ff;border-left:3px solid #1261d6}.buser{background:#eee;text-align:right}.projects{max-height:300px;overflow:auto}.project{padding:12px;background:#f5f7fb;border:1px solid #dde4ee;border-radius:10px;margin:7px 0}.project b{color:#1261d6}.badges{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.badge{background:#e8f1ff;color:#1261d6;border-radius:20px;padding:6px 9px;font-size:12px}
-@media(max-width:850px){.grid{grid-template-columns:1fr}.preview-wrap{min-height:auto}.phone{min-height:570px}}
-</style></head><body>
-<section id="auth" class="auth"><div class="auth-card"><div class="logo">🤖</div><h1>Center App AI</h1><p class="muted" style="text-align:center">AI App Builder — tsara app, gani preview, sannan ajiye project.</p><div id="loginBox"><div class="field"><label>Email</label><input id="le" type="email" placeholder="example@gmail.com"></div><div class="field"><label>Password</label><input id="lp" type="password" placeholder="Password"></div><button class="primary" onclick="login()">🔐 Login</button><p style="text-align:center"><button class="secondary" onclick="showReg()">Create Account</button></p></div><div id="regBox" class="hidden"><div class="field"><label>Suna</label><input id="rn" placeholder="Sunanka"></div><div class="field"><label>Email</label><input id="re" type="email" placeholder="example@gmail.com"></div><div class="field"><label>Password</label><input id="rp" type="password" placeholder="Aƙalla 6"></div><button class="primary" onclick="register()">📝 Create Account</button><p style="text-align:center"><button class="secondary" onclick="showLogin()">Na riga ina da account</button></p></div><div id="authMsg"></div></div></section>
-<section id="app" class="hidden"><header class="top"><div class="topin"><div><div class="brand">🤖 Center App AI Builder</div><div class="small">Visual App Builder</div></div><div id="email" class="small"></div><button class="logout" onclick="logout()">Logout</button></div></header><div class="wrap"><div id="status" class="status"></div><div class="grid"><div><div class="card"><h2>🏗️ Gina App</h2><p class="muted">Rubuta irin app ɗin da kake so. Builder zai samar da tsarin shafuka da live preview.</p><div class="field"><label>Sunan App</label><input id="appName" value="My App"></div><div class="field"><label>Bayani</label><textarea id="prompt" placeholder="Misali: Ina son app na kasuwanci mai login, products, cart, payment da admin dashboard."></textarea></div><button class="primary" onclick="buildApp()">🚀 Gina App</button><div class="actions" style="margin-top:8px"><button class="secondary" onclick="newApp()">🆕 Sabon</button><button class="secondary" onclick="saveProject()">💾 Ajiye</button></div><div class="badges" id="features"></div></div><div class="card"><h3>🤖 AI Assistant</h3><div id="chat" class="chat"><div class="bubble bai"><b>Center App AI</b><br>Sannu! Ka bayyana min app ɗin da kake son ginawa. Zan tsara maka preview.</div></div><div class="field"><textarea id="chatInput" style="min-height:75px" placeholder="Misali: ƙara page na profile"></textarea></div><button class="primary" onclick="askBuilder()">Aika</button></div><div class="card"><h3>📁 Projects</h3><div id="projects" class="projects">Ana ɗauko projects...</div></div></div><div><div class="card"><div class="preview-head"><div><h2 style="margin:0">📱 Live Preview</h2><span class="small">Preview na UI ɗin app.</span></div><button class="secondary" onclick="openPreviewTab()">↗ Preview</button></div><div class="preview-wrap"><div id="phone" class="phone"></div></div></div></div></div></div></section>
-<script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut,updateProfile}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";import{getFirestore,collection,addDoc,getDocs,doc,setDoc,serverTimestamp,query,orderBy}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-const firebaseConfig={apiKey:"AIzaSyDaeiQk55PVBPdxVm1T6TbTpk6TadZzE3c",authDomain:"center-app-ai.firebaseapp.com",projectId:"center-app-ai",storageBucket:"center-app-ai.firebasestorage.app",messagingSenderId:"885493707552",appId:"1:885493707552:web:3987b74d77771cd3031d45",measurementId:"G-1DJ1RKQ074"};const fb=initializeApp(firebaseConfig),auth=getAuth(fb),db=getFirestore(fb);let user=null,state={name:"My App",prompt:"",features:["Home"],pages:["Home"]};const $=id=>document.getElementById(id);
-function msg(t,ok=false){$("status").textContent=t;$("status").className="status show "+(ok?"ok":"bad");setTimeout(()=>$("status").className="status",5000)}function authMsg(t,ok=false){$("authMsg").textContent=t;$("authMsg").className="msg "+(ok?"ok":"err")};window.showReg=()=>{$("loginBox").classList.add("hidden");$("regBox").classList.remove("hidden")};window.showLogin=()=>{$("regBox").classList.add("hidden");$("loginBox").classList.remove("hidden")};
-window.register=async()=>{try{const n=$("rn").value.trim(),e=$("re").value.trim(),p=$("rp").value;if(!n||!e||p.length<6)throw Error("Cika suna, email, da password mai aƙalla haruffa 6.");const c=await createUserWithEmailAndPassword(auth,e,p);await updateProfile(c.user,{displayName:n});await setDoc(doc(db,"users",c.user.uid),{name:n,email:e,createdAt:serverTimestamp()},{merge:true});authMsg("An ƙirƙiri account.",true)}catch(e){authMsg(e.message)}};window.login=async()=>{try{await signInWithEmailAndPassword(auth,$("le").value.trim(),$("lp").value);authMsg("An shiga.",true)}catch(e){authMsg(e.message)}};window.logout=()=>signOut(auth);
-onAuthStateChanged(auth,async u=>{user=u;if(u){$("auth").classList.add("hidden");$("app").classList.remove("hidden");$("email").textContent=u.email||"";await loadProjects();newApp()}else{$("auth").classList.remove("hidden");$("app").classList.add("hidden")}});
-function detect(text){const t=text.toLowerCase(),f=["Home"],p=["Home"];const add=x=>{if(!f.includes(x))f.push(x);if(!p.includes(x))p.push(x)};if(/login|register|sign in|account/.test(t))add("Login");if(/product|kasuw|shop|e-commerce|store/.test(t)){add("Products");add("Cart")};if(/payment|biyan|wallet|bank/.test(t))add("Payment");if(/admin/.test(t))add("Admin");if(/profile/.test(t))add("Profile");if(/chat|social|message/.test(t))add("Chat");if(/booking|reservation/.test(t))add("Booking");if(/taxi|delivery/.test(t)){add("Map");add("Orders")};if(/news|labarai/.test(t))add("News");if(/school|education|makaranta/.test(t))add("Courses");if(/hospital|clinic/.test(t))add("Appointments");if(/video|movie|film/.test(t))add("Videos");if(f.length===1)add("Dashboard");return{features:f,pages:p}}
-window.buildApp=()=>{const prompt=$("prompt").value.trim();if(!prompt){msg("Rubuta bayanin app tukuna.");return}state.name=$("appName").value.trim()||"My App";state.prompt=prompt;const d=detect(prompt);state.features=d.features;state.pages=d.pages;render();addChat("user",prompt);addChat("ai",`Na fahimci app ɗin "${state.name}". Na tsara preview da pages/features: ${state.pages.join(", ")}. Ka iya cewa “ƙara ...” domin mu faɗaɗa shi.`);msg("✅ An gina visual preview.",true)};
-function render(){$("features").innerHTML=state.features.map(x=>`<span class="badge">${esc(x)}</span>`).join("");const icons=["🏠","🔐","🛍️","🛒","💳","👤","💬","📅","🗺️","📰","📚","🏥","🎬","⚙️"];const tiles=state.pages.map((x,i)=>`<button class="tile" onclick="pageNotice('${esc(x)}')">${icons[i%icons.length]}<b>${esc(x)}</b><span class="small">Buɗe ${esc(x)}</span></button>`).join("");$("phone").innerHTML=`<div class="phonebar">Center App AI Preview</div><div class="apphead"><h2>${esc(state.name)}</h2><div>Welcome 👋</div></div><div class="appbody"><div style="background:#f4f7fb;padding:13px;border-radius:12px;margin-bottom:12px"><b>App Dashboard</b><br><span class="small">An gina preview daga bayaninka.</span></div><div class="appnav">${tiles}</div></div><div class="bottomnav">${state.pages.slice(0,4).map(x=>`<button onclick="pageNotice('${esc(x)}')">◉ ${esc(x)}</button>`).join("")}</div>`};window.pageNotice=x=>msg("Preview: "+x,true);function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-window.newApp=()=>{state={name:"My App",prompt:"",features:["Home"],pages:["Home"]};$("appName").value="My App";$("prompt").value="";render()};window.askBuilder=()=>{const q=$("chatInput").value.trim();if(!q)return;addChat("user",q);const low=q.toLowerCase();if(/ƙara|kara|add/.test(low)){const d=detect(q);d.pages.forEach(x=>{if(!state.pages.includes(x))state.pages.push(x)});d.features.forEach(x=>{if(!state.features.includes(x))state.features.push(x)});render();addChat("ai","Na ƙara abin da ka nema a preview.");msg("✅ An sabunta app preview.",true)}else addChat("ai","Ka gaya min feature ɗin da kake son ƙara, misali: ƙara payment page ko admin dashboard.");$("chatInput").value=""};function addChat(type,text){const d=document.createElement("div");d.className="bubble "+(type==="ai"?"bai":"buser");d.innerHTML=type==="ai"?`<b>Center App AI</b><br>${esc(text)}`:esc(text);$("chat").appendChild(d);$("chat").scrollTop=$("chat").scrollHeight}
-window.saveProject=async()=>{if(!user){msg("Da farko ka yi Login.");return}try{await addDoc(collection(db,"users",user.uid,"projects"),{name:state.name,prompt:state.prompt,features:state.features,pages:state.pages,createdAt:serverTimestamp()});await loadProjects();msg("✅ An ajiye project a Firebase.",true)}catch(e){msg("❌ "+e.message)}};
-async function loadProjects(){if(!user)return;const box=$("projects");box.textContent="Ana ɗauko projects...";try{const q=query(collection(db,"users",user.uid,"projects"),orderBy("createdAt","desc")),s=await getDocs(q);box.innerHTML="";if(s.empty){box.innerHTML="<p class='muted'>Babu project tukuna.</p>";return}s.forEach(x=>{const d=x.data(),el=document.createElement("div");el.className="project";el.innerHTML=`<b>📱 ${esc(d.name||"My App")}</b><br><span class="small">${esc(d.pages?.join(", ")||"Home")}</span>`;el.onclick=()=>{state={name:d.name||"My App",prompt:d.prompt||"",features:d.features||["Home"],pages:d.pages||["Home"]};$("appName").value=state.name;$("prompt").value=state.prompt;render();msg("An buɗe project.",true)};box.appendChild(el)})}catch(e){box.textContent="❌ "+e.message}}
-window.openPreviewTab=()=>{const w=window.open("","_blank");if(!w)return;w.document.write(`<html><head><title>${esc(state.name)}</title></head><body style="margin:0;background:#dfe7f1;padding:20px;font-family:Arial">${$("phone").outerHTML}</body></html>`);w.document.close()};render();
-</script></body></html>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.topbar{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#1261d6,#0645a5);color:#fff;padding:14px}
+.topbar-inner{max-width:900px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}.brand-icon{font-size:30px}.brand strong{display:block;font-size:18px}.brand small{opacity:.85}
+.container{max-width:900px;margin:auto;padding:18px 14px 50px}.welcome{background:linear-gradient(135deg,#1261d6,#0645a5);color:#fff;border-radius:22px;padding:24px;margin-bottom:18px}
+.welcome h1{margin:0 0 8px;font-size:27px}.welcome p{margin:0;line-height:1.6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.menu-card{border:0;background:#fff;border-radius:18px;padding:22px 16px;text-align:left;box-shadow:0 4px 18px #00000012}
+.menu-icon{font-size:34px;margin-bottom:10px}.menu-card strong{display:block;font-size:17px;margin-bottom:6px}.menu-card span{color:#667085;font-size:13px;line-height:1.45}
+.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 4px 18px #00000010}
+.back{border:0;background:#e8eef7;color:#1261d6;padding:10px 14px;border-radius:10px;font-weight:bold;margin-bottom:14px}
+.title{color:#1261d6;margin:0 0 7px}.subtitle{color:#667085;line-height:1.6}
+textarea,input,select{width:100%;border:1px solid #ccd5e2;border-radius:12px;padding:13px;outline:none;background:#fff}
+textarea{min-height:120px;resize:vertical}.primary,.secondary{width:100%;border:0;padding:14px;border-radius:11px;font-weight:bold;margin-top:9px}
+.primary{background:#1261d6;color:#fff}.secondary{background:#edf2f8;color:#1261d6}
+.status{padding:12px;border-radius:10px;margin:12px 0;font-weight:bold}.success{background:#e9fff1;color:#08783e}.error{background:#fff0f0;color:#c40000}
+.chatbox{height:430px;overflow:auto;padding:8px;background:#fafcff;border:1px solid #edf0f5;border-radius:13px}
+.msg{padding:13px;margin:10px 0;border-radius:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word}.msg.ai{background:#edf4ff;border-left:4px solid #1261d6}.msg.user{background:#f0f0f0;border-right:4px solid #777}.msg b{display:block;margin-bottom:5px}
+.project{background:#f6f8fc;border:1px solid #e0e6ef;border-radius:12px;padding:15px;margin:9px 0}.project h3{color:#1261d6;margin:0 0 6px}
+.badge{display:inline-block;background:#eaf2ff;color:#1261d6;padding:5px 8px;border-radius:20px;font-size:12px;margin:3px}.req{padding:10px;border-left:4px solid #1261d6;background:#f7f9fd;margin:8px 0;border-radius:8px}
+.note{color:#667085;font-size:13px;line-height:1.6;margin-top:14px}
+body.dark{background:#101522;color:#fff}body.dark .card,body.dark .menu-card{background:#1b2333;color:#fff}
+body.dark .subtitle,body.dark .menu-card span,body.dark .note{color:#aeb8ca}
+body.dark textarea,body.dark input,body.dark select{background:#101522;color:#fff;border-color:#3b465c}
+body.dark .back,body.dark .secondary{background:#293449;color:#fff}body.dark .project{background:#1b2333;border-color:#303a4d}
+@media(max-width:600px){.grid{grid-template-columns:1fr 1fr}.chatbox{height:390px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<div class="brand"><div class="brand-icon">🤖</div><div><strong>Creator App AI</strong><small>AI App Builder</small></div></div>
+<button class="secondary" style="width:auto;margin:0;background:#ffffff22;color:#fff" onclick="toggleDark()">🌙</button>
+</div></header>
+
+<main class="container">
+<section id="dashboard">
+<div class="welcome"><h1>🛠️🤖 Creator App AI</h1><p>Ka bayyana app ɗinka. AI zai taimaka maka tsara features, pages, database, API da sauran buƙatu.</p></div>
+<div class="grid">
+<button class="menu-card" onclick="openPage('center')"><div class="menu-icon">🚀</div><strong>Center App AI</strong><span>Rubuta irin app ɗin da kake son ginawa.</span></button>
+<button class="menu-card" onclick="openPage('chat')"><div class="menu-icon">💬</div><strong>Chat</strong><span>Chat daban domin tattaunawa da AI.</span></button>
+<button class="menu-card" onclick="openPage('projects')"><div class="menu-icon">📁</div><strong>Projects</strong><span>Duba da sarrafa apps ɗinka.</span></button>
+<button class="menu-card" onclick="openPage('settings')"><div class="menu-icon">⚙️</div><strong>Settings</strong><span>Language, theme da sauran saituna.</span></button>
+</div></section>
+
+<section id="center" class="hidden">
+<button class="back" onclick="openPage('dashboard')">← Dashboard</button>
+<h1 class="title">🚀 Center App AI</h1><p class="subtitle">Rubuta app ɗin da kake so. AI zai tsara pages, features da abubuwan da ake buƙata.</p>
+<div class="card"><textarea id="appIdea" placeholder='Misali: "Ina son app na taxi wanda zai haɗa direbobi da fasinjoji..."'></textarea>
+<button class="primary" onclick="analyzeApp()">🤖 Tsara App</button><div id="centerStatus"></div></div>
+<div id="planCard" class="card hidden"><h2 class="title">📋 Tsarin App</h2><div id="plan"></div>
+<button class="primary" onclick="saveProject()">💾 Ajiye Project</button><button class="secondary" onclick="requestBuild()">📦 Nemi Gina APK</button>
+<div class="note">Don APK na gaske sai an haɗa backend/build server; HTML kaɗai ba zai iya compiler Android APK ba.</div></div>
+</section>
+
+<section id="chat" class="hidden">
+<button class="back" onclick="openPage('dashboard')">← Dashboard</button><h1 class="title">💬 Chat</h1><p class="subtitle">Tattaunawa da AI daban da App Planner.</p>
+<div class="card"><div id="chatbox" class="chatbox"><div class="msg ai"><b>🤖 Creator App AI</b>Sannu! 👋 Me kake son sani ko ginawa?</div></div>
+<textarea id="chatInput" placeholder="Rubuta saƙonka..."></textarea><button class="primary" onclick="sendChat()">Aika 🚀</button></div>
+</section>
+
+<section id="projects" class="hidden">
+<button class="back" onclick="openPage('dashboard')">← Dashboard</button><h1 class="title">📁 Projects</h1><p class="subtitle">Apps ɗin da ka adana a wannan browser.</p>
+<div class="card"><button class="primary" onclick="openPage('center')">🆕 Sabon Project</button></div><div id="projectsList"></div>
+</section>
+
+<section id="settings" class="hidden">
+<button class="back" onclick="openPage('dashboard')">← Dashboard</button><h1 class="title">⚙️ Settings</h1>
+<div class="card"><label>Sunanka</label><input id="userName" placeholder="Rubuta sunanka"><button class="primary" onclick="saveSettings()">💾 Ajiye</button></div>
+<div class="card"><h3>🌍 Language</h3><select id="language"><option>Hausa</option><option>English</option></select></div>
+</section>
+</main>
+
+<script>
+const PK="creator_app_ai_projects",SK="creator_app_ai_settings";let currentPlan=null;
+function openPage(id){["dashboard","center","chat","projects","settings"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");if(id==="projects")renderProjects()}
+function toggleDark(){document.body.classList.toggle("dark");localStorage.setItem("creator_dark",document.body.classList.contains("dark")?"1":"0")}
+if(localStorage.getItem("creator_dark")==="1")document.body.classList.add("dark");
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function status(id,t,c){document.getElementById(id).innerHTML='<div class="status '+c+'">'+esc(t)+'</div>'}
+function analyzeApp(){let idea=document.getElementById("appIdea").value.trim();if(!idea){status("centerStatus","Rubuta bayanin app ɗinka da farko.","error");return}currentPlan=makePlan(idea);document.getElementById("planCard").classList.remove("hidden");document.getElementById("plan").innerHTML=renderPlan(currentPlan);document.getElementById("centerStatus").innerHTML=""}
+function makePlan(idea){
+let t=idea.toLowerCase(),f=["Home/Dashboard","User Profile","Notifications","Search","Settings"],p=["Welcome","Home / Dashboard","Profile","Settings"],r=[];
+if(/login|rijista|register|account|user/.test(t)){f.push("Login / Register");p.push("Login / Register")}
+if(/payment|biyan|kuɗi|kudi|wallet|bank/.test(t)){f.push("Payment / Wallet");r.push("Payment provider/API da ya dace da ƙasar app.");}
+if(/taxi|uber|delivery|map|location|direba|driver/.test(t)){f.push("Maps / Location","Driver / Delivery");r.push("Maps/Location API da API key.");}
+if(/chat|saƙo|sako|social/.test(t)){f.push("Chat / Messaging");r.push("Realtime database/backend domin chat na gaske.");}
+if(/ai|artificial intelligence/.test(t)){f.push("AI Assistant");r.push("AI API key + secure backend.");}
+if(/shop|kasuw|e-commerce|store|product/.test(t)){f.push("Products","Cart","Orders");p.push("Products","Cart","Orders");r.push("Database + payment integration idan ana karɓar kuɗi.");}
+if(/hospital|clinic|asibiti|magani|medicine/.test(t)){f.push("Appointments","Records","Medicine/Services");r.push("A tabbatar da privacy/licensing na ƙasar da app zai yi aiki.");}
+if(/booking|hotel|reservation/.test(t)){f.push("Booking","History")}
+if(/admin|staff|ma'aikata/.test(t)){f.push("Admin Dashboard");p.push("Admin Dashboard");r.push("Admin authentication da database rules.")}
+if(!r.length)r.push("Database idan app ɗin zai adana bayanai.","Secure backend idan app ɗin yana amfani da sirrin API keys.");
+return{idea,features:[...new Set(f)],pages:[...new Set(p)],requirements:[...new Set(r)],createdAt:new Date().toISOString()}
+}
+function renderPlan(x){return '<div class="req"><b>💡 App:</b><br>'+esc(x.idea)+'</div><h3>📱 Pages</h3>'+x.pages.map(a=>'<span class="badge">'+esc(a)+'</span>').join("")+'<h3>⚡ Features</h3>'+x.features.map(a=>'<span class="badge">'+esc(a)+'</span>').join("")+'<h3>🔑 Abubuwan da ake buƙata</h3>'+x.requirements.map(a=>'<div class="req">'+esc(a)+'</div>').join("")}
+function saveProject(){if(!currentPlan)return;let a=JSON.parse(localStorage.getItem(PK)||"[]");a.unshift({id:Date.now(),title:currentPlan.idea.slice(0,42),...currentPlan});localStorage.setItem(PK,JSON.stringify(a));status("centerStatus","An ajiye project.","success")}
+function renderProjects(){let a=JSON.parse(localStorage.getItem(PK)||"[]"),l=document.getElementById("projectsList");if(!a.length){l.innerHTML='<div class="card">Babu project tukuna.</div>';return}l.innerHTML=a.map(x=>'<div class="project"><h3>📱 '+esc(x.title)+'</h3><small>'+new Date(x.createdAt).toLocaleString()+'</small><p>'+esc(x.idea)+'</p><button class="secondary" onclick="openSaved('+x.id+')">Duba Project</button><button class="secondary" onclick="deleteProject('+x.id+')">🗑️ Goge</button></div>').join("")}
+function openSaved(id){let a=JSON.parse(localStorage.getItem(PK)||"[]"),x=a.find(z=>z.id===id);if(!x)return;currentPlan=x;document.getElementById("appIdea").value=x.idea;document.getElementById("plan").innerHTML=renderPlan(x);document.getElementById("planCard").classList.remove("hidden");openPage("center")}
+function deleteProject(id){let a=JSON.parse(localStorage.getItem(PK)||"[]").filter(x=>x.id!==id);localStorage.setItem(PK,JSON.stringify(a));renderProjects()}
+function addMsg(c,n,t){let d=document.createElement("div");d.className="msg "+c;d.innerHTML="<b>"+esc(n)+"</b>"+esc(t);document.getElementById("chatbox").appendChild(d)}
+async function sendChat(){let i=document.getElementById("chatInput"),t=i.value.trim();if(!t)return;addMsg("user","👤 Kai",t);i.value="";addMsg("ai","🤖 Creator App AI","Ina tunani...");let b=document.getElementById("chatbox"),last=b.lastElementChild;try{let r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:t})});if(!r.ok)throw Error("HTTP "+r.status);let d=await r.json();last.innerHTML="<b>🤖 Creator App AI</b>"+esc(d.reply||d.message||"Babu amsa.")}catch(e){last.innerHTML="<b>🤖 Creator App AI</b>"+esc(localReply(t))}b.scrollTop=b.scrollHeight}
+function localReply(t){let x=t.toLowerCase();if(x.includes("slm")||x.includes("salam"))return"Wa alaikumus salam! 👋 Me kake son ginawa yau?";if(x.includes("app"))return"Madalla. Ka bayyana min irin app ɗin, users ɗinsa da features ɗinsa, zan taimaka maka tsara shi.";return"Na fahimta. Ka ƙara bayani game da abin da kake son app ɗin ya yi."}
+function requestBuild(){if(!currentPlan){alert("Da farko ka tsara app.");return}alert("📦 Build request an shirya. Don APK na gaske sai an haɗa backend/build server da Android build system.")}
+function saveSettings(){localStorage.setItem(SK,JSON.stringify({name:document.getElementById("userName").value.trim(),language:document.getElementById("language").value}));alert("✅ An ajiye settings.")}
+(()=>{let s=JSON.parse(localStorage.getItem(SK)||"{}");document.getElementById("userName").value=s.name||"";if(s.language)document.getElementById("language").value=s.language})()
+</script>
+</body>
+  </html>
