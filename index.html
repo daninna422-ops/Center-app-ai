@@ -20,12 +20,13 @@ html,body{
   color:#172033;
 }
 
-body.dark{
-  background:#101522;
-  color:#fff;
+body{
+  transition:.25s;
 }
 
-button,input,textarea{
+button,
+input,
+textarea{
   font-family:inherit;
 }
 
@@ -38,7 +39,7 @@ button{
 }
 
 /* =========================
-   AUTH
+   LOGIN / REGISTER
 ========================= */
 
 .auth-screen{
@@ -47,13 +48,14 @@ button{
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:linear-gradient(135deg,#1261d6,#06377f);
+  background:
+    radial-gradient(circle at top,#2b7de9 0,#1261d6 35%,#06377f 100%);
 }
 
 .auth-card{
   width:100%;
   max-width:430px;
-  background:#fff;
+  background:white;
   border-radius:24px;
   padding:28px 22px;
   box-shadow:0 15px 50px rgba(0,0,0,.25);
@@ -61,21 +63,21 @@ button{
 
 .auth-logo{
   text-align:center;
-  font-size:60px;
+  font-size:58px;
 }
 
 .auth-title{
   text-align:center;
+  margin:8px 0 5px;
   color:#1261d6;
-  margin:8px 0;
   font-size:30px;
 }
 
 .auth-subtitle{
   text-align:center;
   color:#667085;
+  margin:0 0 25px;
   line-height:1.5;
-  margin-bottom:25px;
 }
 
 .auth-tabs{
@@ -96,7 +98,7 @@ button{
 
 .auth-tab.active{
   background:#1261d6;
-  color:#fff;
+  color:white;
 }
 
 .input-group{
@@ -110,33 +112,41 @@ button{
   font-size:14px;
 }
 
-.input-group input{
+.input-group input,
+.setting-input,
+textarea{
   width:100%;
   border:1px solid #ccd5e2;
   border-radius:11px;
   padding:13px;
   font-size:16px;
   outline:none;
+  background:white;
+  color:#172033;
 }
 
-.input-group input:focus{
+.input-group input:focus,
+.setting-input:focus,
+textarea:focus{
   border-color:#1261d6;
+  box-shadow:0 0 0 3px rgba(18,97,214,.1);
 }
 
 .primary-button{
   width:100%;
   border:0;
   background:#1261d6;
-  color:#fff;
+  color:white;
   padding:14px;
   border-radius:11px;
   font-size:16px;
   font-weight:bold;
-  margin-top:8px;
+  margin-top:5px;
 }
 
 .primary-button:disabled{
-  background:#999;
+  background:#9aa4b2;
+  cursor:not-allowed;
 }
 
 .auth-message{
@@ -146,6 +156,7 @@ button{
   border-radius:10px;
   text-align:center;
   line-height:1.5;
+  font-size:14px;
 }
 
 .auth-message.error{
@@ -161,16 +172,20 @@ button{
 }
 
 /* =========================
-   TOP BAR
+   APP
 ========================= */
+
+#appScreen{
+  min-height:100vh;
+}
 
 .topbar{
   background:linear-gradient(135deg,#1261d6,#0645a5);
   color:white;
-  padding:15px;
+  padding:16px;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:20;
   box-shadow:0 3px 15px rgba(0,0,0,.15);
 }
 
@@ -180,52 +195,67 @@ button{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
+  gap:12px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:10px;
+  min-width:0;
 }
 
 .brand-icon{
-  font-size:30px;
+  font-size:31px;
+}
+
+.brand-text{
+  min-width:0;
 }
 
 .brand-text strong{
   display:block;
-  font-size:18px;
+  font-size:19px;
 }
 
 .brand-text span{
   display:block;
+  font-size:12px;
+  opacity:.85;
+}
+
+.user-email{
   font-size:11px;
   opacity:.85;
+  max-width:180px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .logout-small{
   border:0;
   background:rgba(255,255,255,.15);
-  color:#fff;
+  color:white;
   padding:9px 12px;
   border-radius:9px;
   font-weight:bold;
 }
 
 /* =========================
-   PAGE
+   PAGES
 ========================= */
 
 .page{
   max-width:850px;
-  margin:auto;
-  padding:20px 14px 50px;
+  margin:0 auto;
+  padding:20px 14px 40px;
 }
 
 .page-title{
+  margin:0;
   color:#1261d6;
-  margin:0 0 7px;
+  font-size:25px;
 }
 
 .page-subtitle{
@@ -234,6 +264,9 @@ button{
 }
 
 .back-button{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
   border:0;
   background:#e8eef7;
   color:#1261d6;
@@ -243,24 +276,17 @@ button{
   margin-bottom:15px;
 }
 
-.card{
-  background:#fff;
-  border-radius:18px;
-  padding:18px;
-  margin-bottom:16px;
-  box-shadow:0 4px 18px rgba(0,0,0,.08);
-}
-
 /* =========================
    DASHBOARD
 ========================= */
 
 .welcome-card{
   background:linear-gradient(135deg,#1261d6,#0645a5);
-  color:#fff;
+  color:white;
   border-radius:20px;
-  padding:23px;
+  padding:22px;
   margin-bottom:18px;
+  box-shadow:0 8px 25px rgba(18,97,214,.25);
 }
 
 .welcome-card h2{
@@ -269,23 +295,25 @@ button{
 
 .welcome-card p{
   margin:0;
+  opacity:.9;
   line-height:1.6;
-  opacity:.92;
 }
 
 .dashboard-buttons{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(2,1fr);
   gap:14px;
+  margin-bottom:18px;
 }
 
 .dashboard-card{
   border:0;
-  background:#fff;
+  background:white;
   border-radius:18px;
   padding:20px 14px;
   text-align:left;
   box-shadow:0 4px 18px rgba(0,0,0,.08);
+  transition:.2s;
 }
 
 .dashboard-card:active{
@@ -300,7 +328,7 @@ button{
 .dashboard-card strong{
   display:block;
   font-size:17px;
-  margin-bottom:6px;
+  margin-bottom:5px;
 }
 
 .dashboard-card span{
@@ -309,15 +337,14 @@ button{
   line-height:1.4;
 }
 
-.dashboard-ai{
-  margin-top:18px;
-  background:#fff;
+.chat-dashboard-card{
+  background:white;
   border-radius:20px;
-  padding:20px;
+  padding:18px;
   box-shadow:0 4px 18px rgba(0,0,0,.08);
 }
 
-.dashboard-ai h2{
+.chat-dashboard-card h2{
   margin-top:0;
   color:#1261d6;
 }
@@ -326,8 +353,8 @@ button{
    CHAT
 ========================= */
 
-.chat-card{
-  background:#fff;
+.chat-page-card{
+  background:white;
   border-radius:18px;
   padding:15px;
   box-shadow:0 4px 18px rgba(0,0,0,.08);
@@ -338,8 +365,8 @@ button{
   overflow-y:auto;
   padding:7px;
   background:#fafcff;
-  border:1px solid #edf0f5;
   border-radius:13px;
+  border:1px solid #edf0f5;
 }
 
 .message{
@@ -348,7 +375,7 @@ button{
   border-radius:13px;
   line-height:1.6;
   white-space:pre-wrap;
-  word-break:break-word;
+  word-wrap:break-word;
 }
 
 .message strong{
@@ -366,29 +393,22 @@ button{
   border-right:4px solid #777;
 }
 
-textarea{
-  width:100%;
-  min-height:95px;
+.chat-input{
   margin-top:12px;
-  padding:13px;
-  border:1px solid #ccd5e2;
-  border-radius:11px;
-  font-size:16px;
-  resize:vertical;
-  outline:none;
 }
 
-textarea:focus{
-  border-color:#1261d6;
+.chat-input textarea{
+  min-height:90px;
+  resize:vertical;
 }
 
 .send-button{
   width:100%;
   border:0;
-  background:#1261d6;
-  color:#fff;
-  padding:14px;
   border-radius:11px;
+  background:#1261d6;
+  color:white;
+  padding:14px;
   font-size:16px;
   font-weight:bold;
   margin-top:9px;
@@ -402,13 +422,21 @@ textarea:focus{
   display:none;
   text-align:center;
   color:#1261d6;
-  padding:10px;
   font-weight:bold;
+  padding:10px;
 }
 
 /* =========================
    PROJECTS
 ========================= */
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
 
 .projects-list{
   max-height:600px;
@@ -424,15 +452,19 @@ textarea:focus{
   cursor:pointer;
 }
 
+.project-item:hover{
+  border-color:#1261d6;
+}
+
 .project-title{
-  color:#1261d6;
   font-weight:bold;
+  color:#1261d6;
   margin-bottom:5px;
 }
 
 .project-date{
-  color:#777;
   font-size:12px;
+  color:#777;
 }
 
 /* =========================
@@ -449,17 +481,26 @@ textarea:focus{
 }
 
 .setting-label{
-  display:block;
   font-weight:bold;
-  margin-bottom:6px;
+  display:block;
+  margin-bottom:5px;
 }
 
-.setting-input{
+.setting-description{
+  color:#667085;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.danger-button{
   width:100%;
-  padding:13px;
-  border:1px solid #ccd5e2;
-  border-radius:10px;
-  font-size:16px;
+  border:0;
+  background:#dc3545;
+  color:white;
+  padding:14px;
+  border-radius:11px;
+  font-weight:bold;
+  margin-top:12px;
 }
 
 /* =========================
@@ -468,7 +509,7 @@ textarea:focus{
 
 .download-box{
   text-align:center;
-  padding:30px 18px;
+  padding:25px 15px;
 }
 
 .download-icon{
@@ -484,13 +525,25 @@ textarea:focus{
   line-height:1.6;
 }
 
+.download-button{
+  width:100%;
+  border:0;
+  background:#1261d6;
+  color:white;
+  padding:15px;
+  border-radius:11px;
+  font-weight:bold;
+  font-size:16px;
+  margin-top:10px;
+}
+
 .download-info{
   background:#f4f7fb;
   border-radius:12px;
-  padding:15px;
+  padding:14px;
   text-align:left;
-  line-height:1.6;
   margin-top:18px;
+  line-height:1.6;
 }
 
 /* =========================
@@ -501,7 +554,7 @@ textarea:focus{
   display:none;
   padding:12px;
   border-radius:10px;
-  margin:12px 0;
+  margin-bottom:14px;
   text-align:center;
   font-weight:bold;
 }
@@ -519,20 +572,28 @@ textarea:focus{
 }
 
 /* =========================
-   DARK
+   DARK MODE
 ========================= */
+
+body.dark{
+  background:#101522;
+  color:white;
+}
 
 body.dark .card,
 body.dark .dashboard-card,
-body.dark .dashboard-ai,
-body.dark .chat-card{
+body.dark .chat-dashboard-card,
+body.dark .chat-page-card,
+body.dark .project-item{
   background:#1b2333;
-  color:#fff;
+  color:white;
 }
 
 body.dark .page-subtitle,
 body.dark .dashboard-card span,
-body.dark .download-box p{
+body.dark .setting-description,
+body.dark .download-box p,
+body.dark .project-date{
   color:#aeb8ca;
 }
 
@@ -545,25 +606,17 @@ body.dark .message.user{
   background:#293449;
 }
 
-body.dark textarea,
-body.dark .setting-input{
+body.dark .input-group input,
+body.dark .setting-input,
+body.dark textarea{
   background:#101522;
-  color:#fff;
+  color:white;
   border-color:#3b465c;
-}
-
-body.dark .project-item{
-  background:#1b2333;
-  color:#fff;
 }
 
 body.dark .back-button{
   background:#293449;
-  color:#fff;
-}
-
-body.dark .download-info{
-  background:#1b2333;
+  color:white;
 }
 
 /* =========================
@@ -583,6 +636,11 @@ body.dark .download-info{
   .brand-text strong{
     font-size:16px;
   }
+
+  .user-email{
+    display:none;
+  }
+
 }
 </style>
 </head>
@@ -627,6 +685,7 @@ body.dark .download-info{
 
     </div>
 
+
     <!-- LOGIN -->
 
     <div id="loginForm">
@@ -636,24 +695,28 @@ body.dark .download-info{
         <label>Email</label>
 
         <input
-          id="loginEmail"
           type="email"
+          id="loginEmail"
           placeholder="example@gmail.com"
+          autocomplete="email"
         >
 
       </div>
+
 
       <div class="input-group">
 
         <label>Password</label>
 
         <input
-          id="loginPassword"
           type="password"
+          id="loginPassword"
           placeholder="Password"
+          autocomplete="current-password"
         >
 
       </div>
+
 
       <button
         id="loginButton"
@@ -665,48 +728,52 @@ body.dark .download-info{
 
     </div>
 
+
     <!-- REGISTER -->
 
-    <div
-      id="registerForm"
-      class="hidden"
-    >
+    <div id="registerForm" class="hidden">
 
       <div class="input-group">
 
         <label>Sunanka</label>
 
         <input
-          id="registerName"
           type="text"
+          id="registerName"
           placeholder="Rubuta sunanka"
+          autocomplete="name"
         >
 
       </div>
+
 
       <div class="input-group">
 
         <label>Email</label>
 
         <input
-          id="registerEmail"
           type="email"
+          id="registerEmail"
           placeholder="example@gmail.com"
+          autocomplete="email"
         >
 
       </div>
+
 
       <div class="input-group">
 
         <label>Password</label>
 
         <input
-          id="registerPassword"
           type="password"
+          id="registerPassword"
           placeholder="Aƙalla haruffa 6"
+          autocomplete="new-password"
         >
 
       </div>
+
 
       <button
         id="registerButton"
@@ -717,6 +784,7 @@ body.dark .download-info{
       </button>
 
     </div>
+
 
     <div
       id="authMessage"
@@ -729,478 +797,500 @@ body.dark .download-info{
 
 
 <!-- ==================================================
-     APP
+     APP SCREEN
 ================================================== -->
 
-<section
-  id="appScreen"
-  class="hidden"
->
+<section id="appScreen" class="hidden">
 
-<header class="topbar">
+  <!-- TOP BAR -->
 
-  <div class="topbar-inner">
+  <header class="topbar">
 
-    <div class="brand">
+    <div class="topbar-inner">
 
-      <div class="brand-icon">
-        🤖
-      </div>
+      <div class="brand">
 
-      <div class="brand-text">
+        <div class="brand-icon">
+          🤖
+        </div>
 
-        <strong>
-          Center App AI
-        </strong>
+        <div class="brand-text">
 
-        <span>
-          AI App Builder
-        </span>
+          <strong>
+            Center App AI
+          </strong>
 
-      </div>
+          <span>
+            AI App Builder
+          </span>
 
-    </div>
-
-    <button
-      class="logout-small"
-      onclick="logoutUser()"
-    >
-      Logout
-    </button>
-
-  </div>
-
-</header>
-
-
-<div
-  id="globalStatus"
-  class="status"
-  style="max-width:850px;margin:12px auto 0;"
-></div>
-
-
-<!-- ==================================================
-     DASHBOARD
-================================================== -->
-
-<section
-  id="dashboardPage"
-  class="page"
->
-
-  <div class="welcome-card">
-
-    <h2>
-      Barka da zuwa, <span id="welcomeName">User</span> 👋
-    </h2>
-
-    <p>
-      Center App AI zai taimaka maka tsara
-      da gina kowane irin application.
-    </p>
-
-  </div>
-
-
-  <div class="dashboard-buttons">
-
-    <button
-      class="dashboard-card"
-      onclick="openPage('chatPage')"
-    >
-
-      <div class="dashboard-icon">
-        🤖
-      </div>
-
-      <strong>
-        Center App AI
-      </strong>
-
-      <span>
-        Yi magana da AI domin tsara app ɗinka.
-      </span>
-
-    </button>
-
-
-    <button
-      class="dashboard-card"
-      onclick="openPage('projectsPage')"
-    >
-
-      <div class="dashboard-icon">
-        📁
-      </div>
-
-      <strong>
-        Projects
-      </strong>
-
-      <span>
-        Duba tsoffin projects da conversations.
-      </span>
-
-    </button>
-
-
-    <button
-      class="dashboard-card"
-      onclick="openPage('settingsPage')"
-    >
-
-      <div class="dashboard-icon">
-        ⚙️
-      </div>
-
-      <strong>
-        Settings
-      </strong>
-
-      <span>
-        Sarrafa account da theme.
-      </span>
-
-    </button>
-
-
-    <button
-      class="dashboard-card"
-      onclick="openPage('downloadPage')"
-    >
-
-      <div class="dashboard-icon">
-        📲
-      </div>
-
-      <strong>
-        Download App
-      </strong>
-
-      <span>
-        Duba apps da aka shirya domin build.
-      </span>
-
-    </button>
-
-  </div>
-
-
-  <div class="dashboard-ai">
-
-    <h2>
-      🤖 Center App AI
-    </h2>
-
-    <p>
-      Fara da bayyana irin app ɗin da kake son ginawa.
-    </p>
-
-    <button
-      class="primary-button"
-      onclick="openPage('chatPage')"
-    >
-      💬 Fara Chat da AI
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     CHAT PAGE
-================================================== -->
-
-<section
-  id="chatPage"
-  class="page hidden"
->
-
-  <button
-    class="back-button"
-    onclick="openPage('dashboardPage')"
-  >
-    ← Dashboard
-  </button>
-
-  <h1 class="page-title">
-    🤖 Center App AI
-  </h1>
-
-  <p class="page-subtitle">
-    Bayyana kowane irin app da kake son ginawa.
-  </p>
-
-
-  <div class="chat-card">
-
-    <div
-      id="chatBox"
-      class="chat-box"
-    >
-
-      <div class="message ai">
-
-        <strong>
-          🤖 Creator App AI
-        </strong>
-
-        Sannu! 👋
-
-        Wane irin app kake son ƙirƙira?
-
-        Ka bayyana min app ɗin da kake so da kalmominka.
-
-        Zan iya taimaka maka da KOWANE irin app:
-        Banking, Taxi, E-commerce, Social Media,
-        Education, AI, Video, News, Hospital,
-        Business, Entertainment, Game, Booking,
-        ko wani irin application.
+        </div>
 
       </div>
 
-    </div>
 
+      <div class="user-email" id="userEmail">
+      </div>
 
-    <div
-      id="chatLoading"
-      class="loading"
-    >
-      🤖 AI yana tunani...
-    </div>
-
-
-    <textarea
-      id="message"
-      placeholder="Misali: Ina son ƙirƙirar app na kasuwanci..."
-    ></textarea>
-
-
-    <button
-      id="sendButton"
-      class="send-button"
-      onclick="sendMessage()"
-    >
-      Aika 🚀
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     PROJECTS
-================================================== -->
-
-<section
-  id="projectsPage"
-  class="page hidden"
->
-
-  <button
-    class="back-button"
-    onclick="openPage('dashboardPage')"
-  >
-    ← Dashboard
-  </button>
-
-  <h1 class="page-title">
-    📁 Projects
-  </h1>
-
-  <p class="page-subtitle">
-    Tsoffin projects da conversations ɗinka.
-  </p>
-
-
-  <div class="card">
-
-    <button
-      class="primary-button"
-      onclick="newProject()"
-    >
-      🆕 Fara Sabon Project
-    </button>
-
-  </div>
-
-
-  <div class="card">
-
-    <div
-      id="projectsList"
-      class="projects-list"
-    >
-      <p>
-        🔄 Ana ɗauko projects...
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     SETTINGS
-================================================== -->
-
-<section
-  id="settingsPage"
-  class="page hidden"
->
-
-  <button
-    class="back-button"
-    onclick="openPage('dashboardPage')"
-  >
-    ← Dashboard
-  </button>
-
-  <h1 class="page-title">
-    ⚙️ Settings
-  </h1>
-
-  <p class="page-subtitle">
-    Sarrafa account ɗinka.
-  </p>
-
-
-  <div class="card">
-
-    <div class="setting-row">
-
-      <span class="setting-label">
-        Sunan Account
-      </span>
-
-      <input
-        id="settingsName"
-        class="setting-input"
-        type="text"
-        placeholder="Sunanka"
-      >
-
-    </div>
-
-
-    <div class="setting-row">
-
-      <span class="setting-label">
-        Email
-      </span>
-
-      <div
-        id="settingsEmail"
-        style="color:#667085;"
-      ></div>
-
-    </div>
-
-
-    <div class="setting-row">
-
-      <span class="setting-label">
-        Dark Mode
-      </span>
 
       <button
-        class="primary-button"
-        onclick="toggleDarkMode()"
+        class="logout-small"
+        onclick="logoutUser()"
       >
-        🌙 Canza Theme
+        Logout
       </button>
 
     </div>
 
+  </header>
 
-    <button
-      class="primary-button"
-      onclick="saveSettings()"
+
+  <!-- STATUS -->
+
+  <main>
+
+    <div
+      id="globalStatus"
+      class="status"
+      style="max-width:850px;margin:15px auto 0;padding-left:14px;padding-right:14px;"
+    ></div>
+
+
+    <!-- ==========================================
+         DASHBOARD
+    =========================================== -->
+
+    <section
+      id="dashboardPage"
+      class="page"
     >
-      💾 Ajiye Settings
-    </button>
+
+      <div class="welcome-card">
+
+        <h2>
+          Barka da zuwa, <span id="welcomeName">User</span> 👋
+        </h2>
+
+        <p>
+          Center App AI zai taimaka maka tsara
+          da gina kowane irin application.
+        </p>
+
+      </div>
 
 
-    <button
-      class="primary-button"
-      style="background:#dc3545;"
-      onclick="logoutUser()"
+      <!-- MAIN DASHBOARD BUTTONS -->
+
+      <div class="dashboard-buttons">
+
+        <button
+          class="dashboard-card"
+          onclick="openPage('chatPage')"
+        >
+
+          <div class="dashboard-icon">
+            🤖
+          </div>
+
+          <strong>
+            Center App AI
+          </strong>
+
+          <span>
+            Yi magana da AI kuma ka bayyana app ɗin da kake son ginawa.
+          </span>
+
+        </button>
+
+
+        <button
+          class="dashboard-card"
+          onclick="openPage('projectsPage')"
+        >
+
+          <div class="dashboard-icon">
+            📁
+          </div>
+
+          <strong>
+            Projects
+          </strong>
+
+          <span>
+            Duba tsoffin projects da conversations ɗinka.
+          </span>
+
+        </button>
+
+
+        <button
+          class="dashboard-card"
+          onclick="openPage('settingsPage')"
+        >
+
+          <div class="dashboard-icon">
+            ⚙️
+          </div>
+
+          <strong>
+            Settings
+          </strong>
+
+          <span>
+            Gyara bayanan account da tsarin app.
+          </span>
+
+        </button>
+
+
+        <button
+          class="dashboard-card"
+          onclick="openPage('downloadPage')"
+        >
+
+          <div class="dashboard-icon">
+            📲
+          </div>
+
+          <strong>
+            Download App
+          </strong>
+
+          <span>
+            Duba apps ɗin da aka shirya domin build/download.
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- CENTER APP AI INSIDE DASHBOARD -->
+
+      <div class="chat-dashboard-card">
+
+        <h2>
+          🤖 Center App AI
+        </h2>
+
+        <p>
+          Fara da bayyana irin app ɗin da kake son ginawa.
+        </p>
+
+        <button
+          class="primary-button"
+          onclick="openPage('chatPage')"
+        >
+          💬 Fara Chat da AI
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         CHAT PAGE
+    =========================================== -->
+
+    <section
+      id="chatPage"
+      class="page hidden"
     >
-      🚪 Logout
-    </button>
 
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     DOWNLOAD
-================================================== -->
-
-<section
-  id="downloadPage"
-  class="page hidden"
->
-
-  <button
-    class="back-button"
-    onclick="openPage('dashboardPage')"
-  >
-    ← Dashboard
-  </button>
+      <button
+        class="back-button"
+        onclick="openPage('dashboardPage')"
+      >
+        ← Dashboard
+      </button>
 
 
-  <div class="card download-box">
+      <h1 class="page-title">
+        🤖 Center App AI
+      </h1>
 
-    <div class="download-icon">
-      📲
-    </div>
-
-    <h2>
-      Download App
-    </h2>
-
-    <p>
-      Anan za a nuna apps da aka shirya
-      domin build zuwa Android APK.
-    </p>
+      <p class="page-subtitle">
+        Bayyana kowane irin app da kake son ginawa.
+      </p>
 
 
-    <div class="download-info">
+      <div class="chat-page-card">
 
-      <strong>
-        ⚠️ Muhimmi
-      </strong>
+        <div
+          id="chatBox"
+          class="chat-box"
+        >
 
-      <br><br>
+          <div class="message ai">
 
-      A yanzu Center App AI yana tattara
-      requirements kuma yana tsara application.
+            <strong>
+              🤖 Creator App AI
+            </strong>
 
-      <br><br>
+            Sannu! 👋
 
-      Mataki na gaba shi ne haɗa
-      App Builder/Android Build.
+            Wane irin app kake son ƙirƙira?
 
-    </div>
+            Ka bayyana min app ɗin da kake so da kalmominka.
 
-    <button
-      class="primary-button"
-      onclick="showBuildMessage()"
+            Zan iya taimaka maka da kowane irin app:
+            Banking, Taxi, E-commerce, Social Media,
+            Education, AI, Video, News, Hospital,
+            Business, Entertainment, Game, Booking,
+            ko wani irin application.
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="chatLoading"
+          class="loading"
+        >
+          🤖 AI yana tunani...
+        </div>
+
+
+        <div class="chat-input">
+
+          <textarea
+            id="message"
+            placeholder="Misali: Ina son ƙirƙirar app na kasuwanci..."
+          ></textarea>
+
+
+          <button
+            id="sendButton"
+            class="send-button"
+            onclick="sendMessage()"
+          >
+            Aika 🚀
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         PROJECTS PAGE
+    =========================================== -->
+
+    <section
+      id="projectsPage"
+      class="page hidden"
     >
-      ⚡ Ƙirƙiri App Yanzu
-    </button>
 
-  </div>
+      <button
+        class="back-button"
+        onclick="openPage('dashboardPage')"
+      >
+        ← Dashboard
+      </button>
 
-</section>
 
-</main>
+      <h1 class="page-title">
+        📁 Projects
+      </h1>
+
+      <p class="page-subtitle">
+        Anan ne za ka ga tsoffin projects da conversations ɗinka.
+      </p>
+
+
+      <div class="card">
+
+        <button
+          class="primary-button"
+          onclick="newProject()"
+        >
+          🆕 Fara Sabon Project
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <div
+          id="projectsList"
+          class="projects-list"
+        >
+
+          <p>
+            🔄 Ana ɗauko projects...
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         SETTINGS PAGE
+    =========================================== -->
+
+    <section
+      id="settingsPage"
+      class="page hidden"
+    >
+
+      <button
+        class="back-button"
+        onclick="openPage('dashboardPage')"
+      >
+        ← Dashboard
+      </button>
+
+
+      <h1 class="page-title">
+        ⚙️ Settings
+      </h1>
+
+      <p class="page-subtitle">
+        Sarrafa account da yadda Center App AI yake aiki.
+      </p>
+
+
+      <div class="card">
+
+        <div class="setting-row">
+
+          <span class="setting-label">
+            Sunan Account
+          </span>
+
+          <input
+            id="settingsName"
+            class="setting-input"
+            type="text"
+            placeholder="Sunanka"
+          >
+
+        </div>
+
+
+        <div class="setting-row">
+
+          <span class="setting-label">
+            Email
+          </span>
+
+          <div
+            id="settingsEmail"
+            class="setting-description"
+          >
+          </div>
+
+        </div>
+
+
+        <div class="setting-row">
+
+          <span class="setting-label">
+            Dark Mode
+          </span>
+
+          <p class="setting-description">
+            Canza launin Center App AI zuwa dark mode.
+          </p>
+
+          <button
+            class="primary-button"
+            onclick="toggleDarkMode()"
+          >
+            🌙 Canza Theme
+          </button>
+
+        </div>
+
+
+        <button
+          class="primary-button"
+          onclick="saveSettings()"
+        >
+          💾 Ajiye Settings
+        </button>
+
+
+        <button
+          class="danger-button"
+          onclick="logoutUser()"
+        >
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         DOWNLOAD PAGE
+    =========================================== -->
+
+    <section
+      id="downloadPage"
+      class="page hidden"
+    >
+
+      <button
+        class="back-button"
+        onclick="openPage('dashboardPage')"
+      >
+        ← Dashboard
+      </button>
+
+
+      <div class="card download-box">
+
+        <div class="download-icon">
+          📲
+        </div>
+
+        <h1 class="page-title">
+          Download App
+        </h1>
+
+        <p>
+          Wannan wajen zai nuna maka apps da aka shirya
+          domin build zuwa Android APK.
+        </p>
+
+
+        <div class="download-info">
+
+          <strong>
+            ⚠️ Muhimmi
+          </strong>
+
+          <br><br>
+
+          A yanzu Center App AI yana tattara requirements
+          da tsara application. Ba za mu yi iƙirarin cewa
+          an samar da APK ba sai an haɗa ainihin build system.
+
+        </div>
+
+
+        <button
+          class="download-button"
+          onclick="showBuildMessage()"
+        >
+          ⚡ Ƙirƙiri App Yanzu
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
 
 </section>
 
@@ -1228,11 +1318,11 @@ import {
   getFirestore,
   collection,
   addDoc,
+  updateDoc,
+  doc,
   getDocs,
   getDoc,
   setDoc,
-  updateDoc,
-  doc,
   query,
   orderBy,
   serverTimestamp
@@ -1295,23 +1385,96 @@ let conversation = [];
 
 
 /*
- IMPORTANT:
- chat.js yana cikin:
+IMPORTANT:
 
- /api/chat.js
+This must point to your Vercel backend.
 
-Saboda haka URL ɗin shine:
- /api/chat
+If your Vercel website is the same website
+where this index.html is hosted, keep:
+
+/api/chat
+
+If the backend is on another domain, change it
+to the complete backend URL.
 */
 
 const BACKEND_URL = "/api/chat";
 
 
 /* =====================================================
-   AUTH TABS
+   AUTH STATE
 ===================================================== */
 
-window.showLogin = function(){
+onAuthStateChanged(
+  auth,
+  async function(user){
+
+    if(user){
+
+      currentUser =
+        user;
+
+      document
+        .getElementById("authScreen")
+        .classList.add("hidden");
+
+      document
+        .getElementById("appScreen")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("userEmail")
+        .textContent =
+        user.email || "";
+
+
+      document
+        .getElementById("welcomeName")
+        .textContent =
+        user.displayName ||
+        "User";
+
+
+      document
+        .getElementById("settingsName")
+        .value =
+        user.displayName || "";
+
+
+      document
+        .getElementById("settingsEmail")
+        .textContent =
+        user.email || "";
+
+
+      await loadProjects();
+
+    }else{
+
+      currentUser =
+        null;
+
+      document
+        .getElementById("authScreen")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("appScreen")
+        .classList.add("hidden");
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
+
+window.showLogin =
+function(){
 
   document
     .getElementById("loginForm")
@@ -1320,6 +1483,7 @@ window.showLogin = function(){
   document
     .getElementById("registerForm")
     .classList.add("hidden");
+
 
   document
     .getElementById("loginTab")
@@ -1329,12 +1493,18 @@ window.showLogin = function(){
     .getElementById("registerTab")
     .classList.remove("active");
 
+
   clearAuthMessage();
 
 };
 
 
-window.showRegister = function(){
+/* =====================================================
+   SHOW REGISTER
+===================================================== */
+
+window.showRegister =
+function(){
 
   document
     .getElementById("loginForm")
@@ -1344,8 +1514,1578 @@ window.showRegister = function(){
     .getElementById("registerForm")
     .classList.remove("hidden");
 
+
   document
     .getElementById("loginTab")
     .classList.remove("active");
 
-  
+  document
+    .getElementById("registerTab")
+    .classList.add("active");
+
+
+  clearAuthMessage();
+
+};
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+window.registerUser =
+async function(){
+
+  const name =
+    document
+      .getElementById("registerName")
+      .value
+      .trim();
+
+  const email =
+    document
+      .getElementById("registerEmail")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("registerPassword")
+      .value;
+
+
+  if(!name){
+
+    showAuthMessage(
+      "Rubuta sunanka.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!email){
+
+    showAuthMessage(
+      "Rubuta email ɗinka.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(password.length < 6){
+
+    showAuthMessage(
+      "Password dole ya kasance aƙalla haruffa 6.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "registerButton"
+    );
+
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "⏳ Ana ƙirƙirar account...";
+
+
+  try{
+
+    const credential =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    await updateProfile(
+      credential.user,
+      {
+        displayName:
+          name
+      }
+    );
+
+
+    await setDoc(
+      doc(
+        db,
+        "users",
+        credential.user.uid
+      ),
+      {
+        name:
+          name,
+
+        email:
+          email,
+
+        createdAt:
+          serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+
+    showAuthMessage(
+      "✅ An ƙirƙiri account. Ana shiga...",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "REGISTER ERROR:",
+      error
+    );
+
+
+    showAuthMessage(
+      firebaseAuthError(error),
+      "error"
+    );
+
+  }finally{
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "📝 Create Account";
+
+  }
+
+};
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+window.loginUser =
+async function(){
+
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
+
+  if(!email || !password){
+
+    showAuthMessage(
+      "Cika email da password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "loginButton"
+    );
+
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "⏳ Ana shiga...";
+
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+
+    showAuthMessage(
+      "✅ An shiga successfully.",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
+
+
+    showAuthMessage(
+      firebaseAuthError(error),
+      "error"
+    );
+
+  }finally{
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "🔐 Login";
+
+  }
+
+};
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+window.logoutUser =
+async function(){
+
+  try{
+
+    await signOut(auth);
+
+    currentUser =
+      null;
+
+    currentProjectId =
+      null;
+
+    conversation =
+      [];
+
+    openPage(
+      "dashboardPage"
+    );
+
+  }catch(error){
+
+    showGlobalStatus(
+      "❌ Ba a iya logout ba: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   FIREBASE ERROR TRANSLATION
+===================================================== */
+
+function firebaseAuthError(error){
+
+  const code =
+    error?.code || "";
+
+
+  if(
+    code ===
+    "auth/email-already-in-use"
+  ){
+
+    return "Wannan email ɗin yana da account. Yi Login.";
+
+  }
+
+
+  if(
+    code ===
+    "auth/invalid-email"
+  ){
+
+    return "Email ɗin ba daidai ba ne.";
+
+  }
+
+
+  if(
+    code ===
+    "auth/weak-password"
+  ){
+
+    return "Password ɗin bai da ƙarfi. Yi amfani da aƙalla haruffa 6.";
+
+  }
+
+
+  if(
+    code ===
+    "auth/invalid-credential" ||
+    code ===
+    "auth/wrong-password" ||
+    code ===
+    "auth/user-not-found"
+  ){
+
+    return "Email ko password ba daidai ba ne.";
+
+  }
+
+
+  if(
+    code ===
+    "auth/too-many-requests"
+  ){
+
+    return "An samu login requests da yawa. Ka sake gwadawa daga baya.";
+
+  }
+
+
+  if(
+    code ===
+    "auth/network-request-failed"
+  ){
+
+    return "Matsalar internet. Ka duba network ɗinka.";
+
+  }
+
+
+  return error?.message ||
+    "An samu matsala wajen authentication.";
+
+}
+
+
+/* =====================================================
+   AUTH MESSAGE
+===================================================== */
+
+function showAuthMessage(
+  message,
+  type
+){
+
+  const box =
+    document.getElementById(
+      "authMessage"
+    );
+
+
+  box.textContent =
+    message;
+
+  box.className =
+    "auth-message " +
+    type;
+
+}
+
+
+function clearAuthMessage(){
+
+  const box =
+    document.getElementById(
+      "authMessage"
+    );
+
+  box.textContent =
+    "";
+
+  box.className =
+    "auth-message";
+
+}
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+window.openPage =
+function(pageId){
+
+  const pages =
+    document.querySelectorAll(
+      ".page"
+    );
+
+
+  pages.forEach(
+    function(page){
+
+      page.classList.add(
+        "hidden"
+      );
+
+    }
+  );
+
+
+  const page =
+    document.getElementById(
+      pageId
+    );
+
+
+  if(page){
+
+    page.classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+
+  if(
+    pageId ===
+    "projectsPage"
+  ){
+
+    loadProjects();
+
+  }
+
+};
+
+
+/* =====================================================
+   CREATE FIRESTORE PROJECT
+===================================================== */
+
+async function createFirestoreProject(){
+
+  if(!currentUser){
+
+    throw new Error(
+      "Sai an shiga account kafin fara project."
+    );
+
+  }
+
+
+  const projectsRef =
+    collection(
+      db,
+      "users",
+      currentUser.uid,
+      "projects"
+    );
+
+
+  const ref =
+    await addDoc(
+      projectsRef,
+      {
+
+        title:
+          "Sabon Project",
+
+        conversation:
+          [],
+
+        createdAt:
+          serverTimestamp(),
+
+        updatedAt:
+          serverTimestamp()
+
+      }
+    );
+
+
+  currentProjectId =
+    ref.id;
+
+
+  return ref.id;
+
+}
+
+
+/* =====================================================
+   SAVE CONVERSATION
+===================================================== */
+
+async function saveConversation(){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+
+  if(!currentProjectId){
+
+    await createFirestoreProject();
+
+  }
+
+
+  const projectRef =
+    doc(
+      db,
+      "users",
+      currentUser.uid,
+      "projects",
+      currentProjectId
+    );
+
+
+  let title =
+    "Sabon Project";
+
+
+  const firstUser =
+    conversation.find(
+      function(item){
+
+        return item.role === "user";
+
+      }
+    );
+
+
+  if(firstUser){
+
+    title =
+      firstUser.text
+        .substring(0,60);
+
+  }
+
+
+  await updateDoc(
+    projectRef,
+    {
+
+      title:
+        title,
+
+      conversation:
+        conversation,
+
+      updatedAt:
+        serverTimestamp()
+
+    }
+  );
+
+
+  await loadProjects();
+
+}
+
+
+/* =====================================================
+   LOAD PROJECTS
+===================================================== */
+
+async function loadProjects(){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+
+  const list =
+    document.getElementById(
+      "projectsList"
+    );
+
+
+  if(!list){
+
+    return;
+
+  }
+
+
+  try{
+
+    list.innerHTML =
+      "<p>🔄 Ana ɗauko projects...</p>";
+
+
+    const projectsRef =
+      collection(
+        db,
+        "users",
+        currentUser.uid,
+        "projects"
+      );
+
+
+    const q =
+      query(
+        projectsRef,
+        orderBy(
+          "updatedAt",
+          "desc"
+        )
+      );
+
+
+    const snapshot =
+      await getDocs(q);
+
+
+    list.innerHTML =
+      "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+        "<p>📭 Babu project tukuna. Fara sabon project daga Chat.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(
+      function(item){
+
+        const data =
+          item.data();
+
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+
+        div.className =
+          "project-item";
+
+
+        const title =
+          data.title ||
+          "Sabon Project";
+
+
+        const date =
+          data.updatedAt &&
+          typeof data.updatedAt.toDate ===
+          "function"
+            ? data.updatedAt.toDate()
+            : null;
+
+
+        div.innerHTML = `
+
+          <div class="project-title">
+            📱 ${escapeHtml(title)}
+          </div>
+
+          <div class="project-date">
+            ${
+              date
+                ? date.toLocaleString()
+                : "Sabon project"
+            }
+          </div>
+
+        `;
+
+
+        div.onclick =
+          function(){
+
+            openSavedProject(
+              item.id,
+              data
+            );
+
+          };
+
+
+        list.appendChild(
+          div
+        );
+
+      }
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "LOAD PROJECTS ERROR:",
+      error
+    );
+
+
+    list.innerHTML =
+      `<p>❌ Ba a iya ɗauko projects ba.<br>${escapeHtml(error.message)}</p>`;
+
+  }
+
+}
+
+
+/* =====================================================
+   OPEN SAVED PROJECT
+===================================================== */
+
+function openSavedProject(
+  projectId,
+  data
+){
+
+  currentProjectId =
+    projectId;
+
+
+  conversation =
+    Array.isArray(
+      data.conversation
+    )
+      ? data.conversation
+      : [];
+
+
+  renderConversation();
+
+
+  openPage(
+    "chatPage"
+  );
+
+
+  showGlobalStatus(
+    "✅ An buɗe project ɗin.",
+    "success"
+  );
+
+}
+
+
+/* =====================================================
+   RENDER CONVERSATION
+===================================================== */
+
+function renderConversation(){
+
+  const chatBox =
+    document.getElementById(
+      "chatBox"
+    );
+
+
+  if(!chatBox){
+
+    return;
+
+  }
+
+
+  chatBox.innerHTML =
+    "";
+
+
+  if(!conversation.length){
+
+    addMessage(
+      "ai",
+      "Sannu! 👋 Wane irin app kake son ƙirƙira?"
+    );
+
+    return;
+
+  }
+
+
+  conversation.forEach(
+    function(item){
+
+      addMessage(
+        item.role === "ai"
+          ? "ai"
+          : "user",
+        item.text
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ADD MESSAGE
+===================================================== */
+
+function addMessage(
+  type,
+  text
+){
+
+  const chatBox =
+    document.getElementById(
+      "chatBox"
+    );
+
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.className =
+    "message " +
+    type;
+
+
+  const title =
+    type === "ai"
+      ? "🤖 Creator App AI"
+      : "👤 Kai";
+
+
+  const strong =
+    document.createElement(
+      "strong"
+    );
+
+
+  strong.textContent =
+    title;
+
+
+  const content =
+    document.createElement(
+      "div"
+    );
+
+
+  content.textContent =
+    text;
+
+
+  div.appendChild(
+    strong
+  );
+
+  div.appendChild(
+    content
+  );
+
+
+  chatBox.appendChild(
+    div
+  );
+
+
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
+
+}
+
+
+/* =====================================================
+   SEND MESSAGE
+===================================================== */
+
+window.sendMessage =
+async function(){
+
+  const input =
+    document.getElementById(
+      "message"
+    );
+
+  const button =
+    document.getElementById(
+      "sendButton"
+    );
+
+  const loading =
+    document.getElementById(
+      "chatLoading"
+    );
+
+
+  const message =
+    input.value.trim();
+
+
+  if(!message){
+
+    showGlobalStatus(
+      "Rubuta saƙonka tukuna.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!currentUser){
+
+    showGlobalStatus(
+      "Da farko ka yi Login.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Create project before sending
+    the first message.
+  */
+
+  try{
+
+    if(!currentProjectId){
+
+      await createFirestoreProject();
+
+    }
+
+  }catch(error){
+
+    showGlobalStatus(
+      error.message,
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  addMessage(
+    "user",
+    message
+  );
+
+
+  conversation.push({
+
+    role:
+      "user",
+
+    text:
+      message
+
+  });
+
+
+  input.value =
+    "";
+
+
+  button.disabled =
+    true;
+
+  loading.style.display =
+    "block";
+
+
+  try{
+
+    /*
+      The AI is instructed to understand
+      ANY type of application.
+    */
+
+    const prompt = `
+
+Kai ne Center App AI / Creator App AI.
+
+Aikinka shi ne taimaka wa mai amfani
+ya tsara KOWANE IRIN APPLICATION.
+
+Ba banki ko taxi kawai ba.
+
+Mai amfani zai iya son:
+Banking, Wallet, Taxi, Delivery,
+E-commerce, Social Media, Education,
+Hospital, Business, Entertainment,
+Movie, AI, Video, News, Real Estate,
+Game, Booking, Restaurant, School,
+Chat App, Marketplace, Productivity,
+ko KOWANE IRIN APP.
+
+Ka yi magana da harshen mai amfani.
+
+Idan Hausa ne, ka amsa da Hausa.
+Idan Turanci ne, ka amsa da Turanci.
+
+Ka fara da fahimtar abin da yake so.
+
+Ka tambayi tambayoyi a hankali,
+ba ka jefa tambayoyi masu yawa lokaci guda.
+
+Tattara abubuwa kamar:
+
+- App name
+- App purpose
+- Users
+- Features
+- Pages
+- Login/Register
+- Database
+- Payment
+- API
+- Notifications
+- Admin dashboard
+- User dashboard
+- Security
+- Design
+- Other requirements
+
+Idan user ya bayyana app,
+ka taimaka masa ya tsara shi.
+
+Kada ka yi iƙirarin cewa an riga an samar
+da APK ko an haɗa API idan ba a haɗa su ba.
+
+Kada ka nemi secret API key a cikin chat.
+
+Conversation na project:
+
+${JSON.stringify(conversation)}
+
+Sabon saƙon mai amfani:
+
+${message}
+
+Ka ba shi amsa mai taimako kai tsaye.
+`;
+
+
+    const response =
+      await fetch(
+        BACKEND_URL,
+        {
+
+          method:
+            "POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              message:
+                prompt
+            })
+
+        }
+      );
+
+
+    const raw =
+      await response.text();
+
+
+    /*
+      Better error handling.
+      This prevents:
+      Unexpected token 'A'
+    */
+
+    let data = {};
+
+    try{
+
+      data =
+        JSON.parse(raw);
+
+    }catch(parseError){
+
+      throw new Error(
+        "Server bai dawo da JSON ba. HTTP " +
+        response.status +
+        ". Duba /api/chat.js da Vercel."
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Backend error HTTP " +
+        response.status
+      );
+
+    }
+
+
+    if(
+      typeof data.reply !==
+      "string"
+    ){
+
+      throw new Error(
+        "AI bai dawo da amsa ba."
+      );
+
+    }
+
+
+    const reply =
+      data.reply;
+
+
+    conversation.push({
+
+      role:
+        "ai",
+
+      text:
+        reply
+
+    });
+
+
+    addMessage(
+      "ai",
+      reply
+    );
+
+
+    /*
+      Save immediately to Firestore.
+    */
+
+    await saveConversation();
+
+
+    showGlobalStatus(
+      "✅ An ajiye conversation.",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "CHAT ERROR:",
+      error
+    );
+
+
+    /*
+      Remove nothing from saved
+      conversation. The user message
+      remains visible.
+    */
+
+    addMessage(
+      "ai",
+      "❌ An samu matsala: " +
+      error.message
+    );
+
+
+    showGlobalStatus(
+      error.message,
+      "error"
+    );
+
+
+  }finally{
+
+    button.disabled =
+      false;
+
+    loading.style.display =
+      "none";
+
+  }
+
+};
+
+
+/* =====================================================
+   NEW PROJECT
+===================================================== */
+
+window.newProject =
+async function(){
+
+  if(!currentUser){
+
+    showGlobalStatus(
+      "Da farko ka yi Login.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    currentProjectId =
+      null;
+
+    conversation =
+      [];
+
+
+    await createFirestoreProject();
+
+
+    renderConversation();
+
+
+    document
+      .getElementById("message")
+      .value =
+      "";
+
+
+    openPage(
+      "chatPage"
+    );
+
+
+    await loadProjects();
+
+
+    showGlobalStatus(
+      "🆕 An fara sabon project.",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showGlobalStatus(
+      "❌ Ba a iya fara sabon project ba: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+window.saveSettings =
+async function(){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+
+  const name =
+    document
+      .getElementById("settingsName")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    showGlobalStatus(
+      "Rubuta sunanka.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await updateProfile(
+      currentUser,
+      {
+        displayName:
+          name
+      }
+    );
+
+
+    await setDoc(
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      ),
+      {
+        name:
+          name,
+
+        email:
+          currentUser.email
+      },
+      {
+        merge:true
+      }
+    );
+
+
+    document
+      .getElementById("welcomeName")
+      .textContent =
+      name;
+
+
+    showGlobalStatus(
+      "✅ An ajiye Settings.",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showGlobalStatus(
+      "❌ " + error.message,
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+window.toggleDarkMode =
+function(){
+
+  document.body.classList.toggle(
+    "dark"
+  );
+
+
+  const dark =
+    document.body.classList.contains(
+      "dark"
+    );
+
+
+  localStorage.setItem(
+    "centerAppDarkMode",
+    dark
+      ? "true"
+      : "false"
+  );
+
+};
+
+
+/* Load theme */
+
+if(
+  localStorage.getItem(
+    "centerAppDarkMode"
+  ) === "true"
+){
+
+  document.body.classList.add(
+    "dark"
+  );
+
+}
+
+
+/* =====================================================
+   DOWNLOAD / BUILD MESSAGE
+===================================================== */
+
+window.showBuildMessage =
+function(){
+
+  showGlobalStatus(
+    "🏗️ App Builder zai kasance mataki na gaba. Da zarar an haɗa build system, za a iya samar da Android APK.",
+    "success"
+  );
+
+};
+
+
+/* =====================================================
+   GLOBAL STATUS
+===================================================== */
+
+function showGlobalStatus(
+  message,
+  type
+){
+
+  const box =
+    document.getElementById(
+      "globalStatus"
+    );
+
+
+  box.textContent =
+    message;
+
+
+  box.className =
+    "status " +
+    type;
+
+
+  setTimeout(
+    function(){
+
+      box.className =
+        "status";
+
+    },
+    6000
+  );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(
+  text
+){
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.textContent =
+    text;
+
+
+  return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document
+  .getElementById("message")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter" &&
+        !event.shiftKey
+      ){
+
+        event.preventDefault();
+
+        window.sendMessage();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   INITIAL CHAT
+===================================================== */
+
+function resetChat(){
+
+  conversation =
+    [];
+
+  currentProjectId =
+    null;
+
+  renderConversation();
+
+}
+
+
+/* =====================================================
+   EXPOSE FOR DEBUGGING
+===================================================== */
+
+window.CenterAppAI = {
+
+  getUser:function(){
+
+    return currentUser;
+
+  },
+
+  getProject:function(){
+
+    return currentProjectId;
+
+  }
+
+};
+
+</script>
+
+</body>
+</html>
