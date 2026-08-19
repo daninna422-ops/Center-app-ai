@@ -4,288 +4,282 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Creator App AI</title>
+<title>Creator App AI - CENTOR</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f7fb;
+color:#172033
 }
 
-html {
-  scroll-behavior: smooth;
+.header{
+background:linear-gradient(135deg,#1261d6,#0645a5);
+color:white;
+padding:25px 18px;
+text-align:center
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  color: #172033;
+.logo{font-size:48px}
+
+.header h1{
+margin:8px 0;
+font-size:29px
 }
 
-.header {
-  background: linear-gradient(135deg, #1261d6, #0645a5);
-  color: white;
-  padding: 25px 18px;
-  text-align: center;
+.header p{
+margin:0;
+opacity:.92
 }
 
-.logo {
-  font-size: 48px;
+.container{
+max-width:760px;
+margin:20px auto;
+padding:0 14px 40px
 }
 
-.header h1 {
-  margin: 8px 0;
-  font-size: 29px;
+.card{
+background:white;
+border-radius:18px;
+padding:20px;
+margin-bottom:18px;
+box-shadow:0 4px 18px rgba(0,0,0,.08)
 }
 
-.header p {
-  margin: 0;
-  opacity: .92;
+.card h2{
+color:#1261d6;
+margin-top:0
 }
 
-.container {
-  max-width: 760px;
-  margin: 20px auto;
-  padding: 0 14px 40px;
+.welcome{
+line-height:1.7
 }
 
-.card {
-  background: white;
-  border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 4px 18px rgba(0,0,0,.08);
+.chat-box{
+max-height:520px;
+overflow-y:auto;
+padding:4px;
+margin-bottom:15px
 }
 
-.card h2 {
-  color: #1261d6;
-  margin-top: 0;
+.message{
+padding:13px;
+margin:10px 0;
+border-radius:13px;
+line-height:1.6;
+white-space:pre-wrap;
+word-break:break-word
 }
 
-.welcome {
-  line-height: 1.7;
+.message.ai{
+background:#edf4ff;
+border-left:4px solid #1261d6
 }
 
-.chat-box {
-  max-height: 520px;
-  overflow-y: auto;
-  padding: 4px;
-  margin-bottom: 15px;
+.message.user{
+background:#f0f0f0;
+border-right:4px solid #777
 }
 
-.message {
-  padding: 13px;
-  margin: 10px 0;
-  border-radius: 13px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.message.ai {
-  background: #edf4ff;
-  border-left: 4px solid #1261d6;
-}
-
-.message.user {
-  background: #f0f0f0;
-  border-right: 4px solid #777;
-}
-
-.message strong {
-  display: block;
-  margin-bottom: 6px;
+.message strong{
+display:block;
+margin-bottom:6px
 }
 
 textarea,
 input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #cbd3df;
-  border-radius: 11px;
-  font-size: 16px;
-  outline: none;
+input[type="password"]{
+width:100%;
+padding:14px;
+border:1px solid #cbd3df;
+border-radius:11px;
+font-size:16px;
+outline:none
 }
 
-textarea {
-  min-height: 110px;
-  resize: vertical;
+textarea{
+min-height:110px;
+resize:vertical
 }
 
 textarea:focus,
-input:focus {
-  border-color: #1261d6;
+input:focus{
+border-color:#1261d6
 }
 
-button {
-  width: 100%;
-  border: none;
-  border-radius: 11px;
-  padding: 15px;
-  margin-top: 12px;
-  background: #1261d6;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
+button{
+width:100%;
+border:none;
+border-radius:11px;
+padding:15px;
+margin-top:12px;
+background:#1261d6;
+color:white;
+font-size:17px;
+font-weight:bold;
+cursor:pointer
 }
 
-button:disabled {
-  opacity: .6;
-  cursor: not-allowed;
+button:disabled{
+opacity:.6;
+cursor:not-allowed
 }
 
-.secondary {
-  background: #e9eef7;
-  color: #1261d6;
+.secondary{
+background:#e9eef7;
+color:#1261d6
 }
 
-.green {
-  background: #087f46;
+.green{background:#087f46}
+
+.dark{background:#172033}
+
+.orange{background:#d97706}
+
+.red{background:#c62828}
+
+.upload-area{
+border:2px dashed #b8c4d6;
+padding:18px;
+text-align:center;
+border-radius:12px;
+margin-top:14px;
+background:#fafcff
 }
 
-.dark {
-  background: #172033;
+.upload-area input{
+margin-top:12px;
+width:100%
 }
 
-.orange {
-  background: #d97706;
+.file-name{
+margin-top:9px;
+font-size:14px;
+color:#555;
+word-break:break-word
 }
 
-.red {
-  background: #c62828;
+.image-preview{
+display:none;
+max-width:160px;
+max-height:160px;
+margin:15px auto 0;
+border-radius:12px;
+object-fit:cover
 }
 
-.upload-area {
-  border: 2px dashed #b8c4d6;
-  padding: 18px;
-  text-align: center;
-  border-radius: 12px;
-  margin-top: 14px;
-  background: #fafcff;
+.summary-item{
+background:#f7f9fc;
+padding:13px;
+border-radius:9px;
+margin:9px 0;
+line-height:1.6
 }
 
-.upload-area input {
-  margin-top: 12px;
-  width: 100%;
+.summary-item strong{
+color:#1261d6
 }
 
-.file-name {
-  margin-top: 9px;
-  font-size: 14px;
-  color: #555;
-  word-break: break-word;
+.status{
+text-align:center;
+padding:12px;
+border-radius:9px;
+margin-top:12px;
+display:none;
+line-height:1.5
 }
 
-.image-preview {
-  display: none;
-  max-width: 160px;
-  max-height: 160px;
-  margin: 15px auto 0;
-  border-radius: 12px;
-  object-fit: cover;
+.success{
+background:#e9f8ef;
+color:#08783e
 }
 
-.summary-item {
-  background: #f7f9fc;
-  padding: 13px;
-  border-radius: 9px;
-  margin: 9px 0;
-  line-height: 1.6;
+.error{
+background:#fff0f0;
+color:#c40000
 }
 
-.summary-item strong {
-  color: #1261d6;
+.info{
+background:#eef5ff;
+color:#1261d6
 }
 
-.status {
-  text-align: center;
-  padding: 12px;
-  border-radius: 9px;
-  margin-top: 12px;
-  display: none;
-  line-height: 1.5;
+.preview{
+display:none
 }
 
-.success {
-  background: #e9f8ef;
-  color: #08783e;
+.preview-frame{
+width:100%;
+height:620px;
+border:1px solid #d7deea;
+border-radius:14px;
+background:white
 }
 
-.error {
-  background: #fff0f0;
-  color: #c40000;
+.code-box{
+background:#111827;
+color:#e5e7eb;
+border-radius:12px;
+padding:15px;
+overflow:auto;
+max-height:300px;
+font-size:13px;
+white-space:pre-wrap;
+word-break:break-word
 }
 
-.info {
-  background: #eef5ff;
-  color: #1261d6;
+.build-info{
+background:#eef5ff;
+border-left:4px solid #1261d6;
+padding:14px;
+border-radius:10px;
+line-height:1.7
 }
 
-.preview {
-  display: none;
+.back{
+display:block;
+text-align:center;
+margin:25px 0;
+color:#1261d6;
+text-decoration:none;
+font-weight:bold
 }
 
-.preview-frame {
-  width: 100%;
-  height: 620px;
-  border: 1px solid #d7deea;
-  border-radius: 14px;
-  background: white;
+.small{
+color:#667085;
+font-size:14px;
+line-height:1.6
 }
 
-.code-box {
-  background: #111827;
-  color: #e5e7eb;
-  border-radius: 12px;
-  padding: 15px;
-  overflow: auto;
-  max-height: 300px;
-  font-size: 13px;
-  white-space: pre-wrap;
-  word-break: break-word;
+.requirement-box{
+margin-top:14px
 }
 
-.build-info {
-  background: #eef5ff;
-  border-left: 4px solid #1261d6;
-  padding: 14px;
-  border-radius: 10px;
-  line-height: 1.7;
+.requirement-box label{
+display:block;
+font-weight:bold;
+margin-bottom:7px
 }
 
-.back {
-  display: block;
-  text-align: center;
-  margin: 25px 0;
-  color: #1261d6;
-  text-decoration: none;
-  font-weight: bold;
+.preview-note{
+padding:12px;
+border-radius:10px;
+background:#f7f9fc;
+margin:12px 0;
+line-height:1.6
 }
 
-.small {
-  color: #667085;
-  font-size: 14px;
-  line-height: 1.6;
+.loading{
+animation:pulse 1.2s infinite
 }
 
-.requirement-box {
-  margin-top: 14px;
-}
-
-.requirement-box label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 7px;
-}
-
-.preview-note {
-  padding: 12px;
-  border-radius: 10px;
-  background: #f7f9fc;
-  margin: 12px 0;
-  line-height: 1.6;
+@keyframes pulse{
+50%{opacity:.55}
 }
 </style>
 </head>
@@ -293,44 +287,48 @@ button:disabled {
 <body>
 
 <div class="header">
-  <div class="logo">🛠️🤖</div>
 
-  <h1>Creator App AI</h1>
+<div class="logo">🛠️🤖</div>
 
-  <p>
-    Ka bayyana app ɗinka, AI zai taimaka maka ƙirƙirarsa.
-  </p>
+<h1>Creator App AI</h1>
+
+<p>
+Ka bayyana app ɗinka, AI zai taimaka maka ƙirƙirarsa.
+</p>
+
 </div>
 
+
 <div class="container">
+
 
 <!-- WELCOME -->
 
 <div class="card">
 
-  <h2>🚀 Gina App ɗinka</h2>
+<h2>🚀 Gina App ɗinka</h2>
 
-  <div class="welcome">
+<div class="welcome">
 
-    <p>
-      Ka bayyana irin application ɗin da kake son ginawa.
-      Creator App AI zai taimaka maka tattara requirements,
-      tsara pages da features.
-    </p>
+<p>
+Ka bayyana irin application ɗin da kake son ginawa.
+Creator App AI zai taimaka maka tattara requirements,
+tsara pages da features.
+</p>
 
-    <p>
-      Bayan requirements sun cika,
-      za a iya amfani da <strong>App Builder</strong>
-      wajen samar da frontend.
-    </p>
+<p>
+Bayan requirements sun cika,
+za a iya amfani da <strong>App Builder</strong>
+wajen samar da frontend.
+</p>
 
-    <p>
-      <strong>Misali:</strong>
-      Ina son app na kasuwanci da login,
-      chat, projects da payment.
-    </p>
+<p>
+<strong>Misali:</strong>
+Ina son app na kasuwanci da login,
+chat, projects da payment.
+</p>
 
-  </div>
+</div>
 
 </div>
 
@@ -339,45 +337,49 @@ button:disabled {
 
 <div class="card">
 
-  <h2>🤖 AI Interview</h2>
+<h2>🤖 AI Interview</h2>
 
-  <div id="chatBox" class="chat-box">
+<div id="chatBox" class="chat-box">
 
-    <div class="message ai">
+<div class="message ai">
 
-      <strong>🤖 Creator App AI</strong>
+<strong>🤖 Creator App AI</strong>
 
-      Sannu! 👋
+Sannu! 👋
 
-      Wane irin app kake son ƙirƙira?
+Wane irin app kake son ƙirƙira?
 
-      Ka bayyana min app ɗin da kake so
-      da kalmominka.
+Ka bayyana min app ɗin da kake so
+da kalmominka.
 
-    </div>
+</div>
 
-  </div>
+</div>
 
-  <textarea
-    id="message"
-    placeholder="Misali: Ina son app na taxi..."
-  ></textarea>
 
-  <button
-    id="sendButton"
-    onclick="sendMessage()"
-  >
-    Aika 🚀
-  </button>
+<textarea
+id="message"
+placeholder="Misali: Ina son app na taxi..."
+></textarea>
 
-  <button
-    class="secondary"
-    onclick="startNewProject()"
-  >
-    🆕 Fara Sabon Project
-  </button>
 
-  <div id="status" class="status"></div>
+<button
+id="sendButton"
+onclick="sendMessage()"
+>
+Aika 🚀
+</button>
+
+
+<button
+class="secondary"
+onclick="startNewProject()"
+>
+🆕 Fara Sabon Project
+</button>
+
+
+<div id="status" class="status"></div>
 
 </div>
 
@@ -386,85 +388,89 @@ button:disabled {
 
 <div class="card">
 
-  <h2>📎 Abubuwan da App ɗin yake bukata</h2>
+<h2>📎 Abubuwan da App ɗin yake bukata</h2>
 
-  <p class="small">
-    Idan app ɗin yana bukatar logo, hoto ko document,
-    za ka iya zaɓarsa.
-  </p>
+<p class="small">
+Idan app ɗin yana bukatar logo, hoto ko wani document,
+za ka iya zaɓarsa. Za mu adana sunan file ɗin a project.
+</p>
 
-  <div class="upload-area">
 
-    <strong>🖼️ Upload Logo ko Hoto</strong>
+<div class="upload-area">
 
-    <br>
+<strong>🖼️ Upload Logo ko Hoto</strong>
 
-    <input
-      type="file"
-      id="imageFile"
-      accept="image/*"
-      onchange="handleImageUpload()"
-    >
+<br>
 
-    <img
-      id="imagePreview"
-      class="image-preview"
-      alt="Preview"
-    >
+<input
+type="file"
+id="imageFile"
+accept="image/*"
+onchange="handleImageUpload()"
+>
 
-    <div
-      id="imageName"
-      class="file-name"
-    ></div>
+<img
+id="imagePreview"
+class="image-preview"
+alt="Preview"
+>
 
-  </div>
+<div
+id="imageName"
+class="file-name"
+></div>
 
-  <div class="upload-area">
+</div>
 
-    <strong>📄 Upload Document</strong>
 
-    <br>
+<div class="upload-area">
 
-    <input
-      type="file"
-      id="documentFile"
-      accept=".pdf,.doc,.docx,.txt"
-      onchange="showFileName('documentFile','documentName')"
-    >
+<strong>📄 Upload Document</strong>
 
-    <div
-      id="documentName"
-      class="file-name"
-    ></div>
+<br>
 
-  </div>
+<input
+type="file"
+id="documentFile"
+accept=".pdf,.doc,.docx,.txt"
+onchange="showFileName('documentFile','documentName')"
+>
 
-  <div class="requirement-box">
+<div
+id="documentName"
+class="file-name"
+></div>
 
-    <label>
-      🔌 External API / ID requirement
-    </label>
+</div>
 
-    <input
-      type="text"
-      id="apiRequirement"
-      placeholder="Misali: App yana bukatar payment API"
-    >
 
-  </div>
+<div class="requirement-box">
 
-  <div class="requirement-box">
+<label>
+🔌 External API / ID requirement
+</label>
 
-    <label>
-      📝 Sauran bukata
-    </label>
+<input
+type="text"
+id="apiRequirement"
+placeholder="Misali: App yana bukatar payment API"
+>
 
-    <textarea
-      id="extraRequirement"
-      placeholder="Rubuta wani abu na musamman..."
-    ></textarea>
+</div>
 
-  </div>
+
+<div class="requirement-box">
+
+<label>
+📝 Sauran bukata
+</label>
+
+<textarea
+id="extraRequirement"
+placeholder="Rubuta wani abu na musamman da app ɗin yake bukata..."
+></textarea>
+
+</div>
 
 </div>
 
@@ -472,25 +478,27 @@ button:disabled {
 <!-- PROJECT SUMMARY -->
 
 <div
-  id="summary"
-  class="card"
-  style="display:none;"
+id="summary"
+class="card"
+style="display:none;"
 >
 
-  <h2>📱 Project Summary</h2>
+<h2>📱 Project Summary</h2>
 
-  <div id="summaryContent"></div>
+<div id="summaryContent"></div>
 
-  <button onclick="saveProject()">
-    💾 Ajiye Project
-  </button>
 
-  <button
-    class="green"
-    onclick="startAppBuilder()"
-  >
-    🏗️ Fara App Builder
-  </button>
+<button onclick="saveProject()">
+💾 Ajiye Project
+</button>
+
+
+<button
+class="green"
+onclick="startAppBuilder()"
+>
+🏗️ Fara App Builder
+</button>
 
 </div>
 
@@ -498,42 +506,50 @@ button:disabled {
 <!-- APP BUILDER -->
 
 <div
-  id="builder"
-  class="card"
-  style="display:none;"
+id="builder"
+class="card"
+style="display:none;"
 >
 
-  <h2>🏗️ App Builder</h2>
+<h2>🏗️ App Builder</h2>
 
-  <div class="build-info">
+<div class="build-info">
 
-    <strong>Project ɗinka yana shirye.</strong>
+<strong>Project ɗinka yana shirye.</strong>
 
-    <br><br>
+<br><br>
 
-    AI zai ƙirƙiri frontend ɗin app ɗinka.
+Za a aika requirements zuwa
+<strong>/api/create-app</strong>.
 
-    <br><br>
+<br><br>
 
-    Bayan preview zaka iya
-    neman gina APK.
+Idan AI ya dawo da HTML, CSS da JavaScript,
+za mu nuna Preview.
 
-  </div>
+<br><br>
 
-  <button
-    id="generateButton"
-    class="green"
-    onclick="generateAppFromProject()"
-  >
-    ⚡ Ƙirƙiri App Yanzu
-  </button>
+Bayan haka zaka iya tura generated app
+zuwa <strong>/api/build-app</strong>.
 
-  <button
-    class="secondary"
-    onclick="scrollToPreview()"
-  >
-    👁️ Je zuwa Preview
-  </button>
+</div>
+
+
+<button
+id="generateButton"
+class="green"
+onclick="generateAppFromProject()"
+>
+⚡ Ƙirƙiri App Yanzu
+</button>
+
+
+<button
+class="secondary"
+onclick="scrollToPreview()"
+>
+👁️ Je zuwa Preview
+</button>
 
 </div>
 
@@ -541,50 +557,56 @@ button:disabled {
 <!-- PREVIEW -->
 
 <div
-  id="preview"
-  class="card preview"
+id="preview"
+class="card preview"
 >
 
-  <h2>📱 App Preview</h2>
+<h2>📱 App Preview</h2>
 
-  <p class="small">
-    Wannan preview ne na frontend da AI ya samar.
-  </p>
+<p class="small">
+Wannan preview ne na frontend da AI ya samar.
+</p>
 
-  <div class="preview-note">
 
-    ⚠️ Backend, database, payment da API
-    na gaske suna buƙatar haɗin backend.
+<div class="preview-note">
 
-  </div>
+⚠️ Idan app ɗin yana bukatar backend,
+database, payment ko API na gaske,
+dole ne a haɗa waɗannan services a backend.
 
-  <iframe
-    id="previewFrame"
-    class="preview-frame"
-    sandbox="allow-scripts allow-forms"
-  ></iframe>
+</div>
 
-  <button
-    id="buildButton"
-    class="green"
-    onclick="buildAndDownloadApp()"
-  >
-    📲 Build & Download App
-  </button>
 
-  <button
-    class="dark"
-    onclick="saveGeneratedApp()"
-  >
-    💾 Ajiye Generated App
-  </button>
+<iframe
+id="previewFrame"
+class="preview-frame"
+sandbox="allow-scripts allow-forms"
+></iframe>
 
-  <button
-    class="secondary"
-    onclick="downloadHtmlBackup()"
-  >
-    📄 Sauke HTML Preview
-  </button>
+
+<button
+id="buildButton"
+class="green"
+onclick="buildAndDownloadApp()"
+>
+📲 Build & Download App
+</button>
+
+
+<button
+class="dark"
+onclick="saveGeneratedApp()"
+>
+💾 Ajiye Generated App
+</button>
+
+
+<button
+class="secondary"
+onclick="downloadHtmlBackup()"
+>
+📄 Sauke HTML Preview
+</button>
 
 </div>
 
@@ -592,33 +614,44 @@ button:disabled {
 <!-- GENERATED CODE -->
 
 <div
-  id="codeResult"
-  class="card"
-  style="display:none;"
+id="codeResult"
+class="card"
+style="display:none;"
 >
 
-  <h2>💻 Generated Code</h2>
+<h2>💻 Generated Code</h2>
 
-  <h3>HTML</h3>
+<h3>HTML</h3>
 
-  <div id="htmlCode" class="code-box"></div>
+<div
+id="htmlCode"
+class="code-box"
+></div>
 
-  <h3>CSS</h3>
 
-  <div id="cssCode" class="code-box"></div>
+<h3>CSS</h3>
 
-  <h3>JavaScript</h3>
+<div
+id="cssCode"
+class="code-box"
+></div>
 
-  <div id="jsCode" class="code-box"></div>
+
+<h3>JavaScript</h3>
+
+<div
+id="jsCode"
+class="code-box"
+></div>
 
 </div>
 
 
 <a
-  class="back"
-  href="dashboard.html"
+class="back"
+href="dashboard.html"
 >
-  ⬅ Komawa Dashboard
+⬅ Komawa Dashboard
 </a>
 
 </div>
@@ -630,46 +663,49 @@ button:disabled {
    BACKEND ENDPOINTS
 ========================================= */
 
-const CHAT_BACKEND = "/api/chat";
+const CHAT_BACKEND =
+"/api/chat";
 
-const CREATE_APP_BACKEND = "/api/create-app";
+const CREATE_APP_BACKEND =
+"/api/create-app";
 
-const BUILD_APP_BACKEND = "/api/build-app";
+const BUILD_APP_BACKEND =
+"/api/build-app";
 
 
 /* =========================================
    PROJECT STATE
 ========================================= */
 
-let conversation = [];
+let conversation=[];
 
-let project = {
+let project={
 
-  appName: "",
+appName:"",
 
-  description: "",
+description:"",
 
-  category: "",
+category:"",
 
-  users: [],
+users:[],
 
-  features: [],
+features:[],
 
-  pages: [],
+pages:[],
 
-  database: [],
+database:[],
 
-  apis: [],
+apis:[],
 
-  payments: [],
+payments:[],
 
-  authentication: [],
+authentication:[],
 
-  files: [],
+files:[],
 
-  apiRequirement: "",
+apiRequirement:"",
 
-  extraRequirements: ""
+extraRequirements:""
 
 };
 
@@ -678,13 +714,13 @@ let project = {
    GENERATED APP
 ========================================= */
 
-let generatedApp = {
+let generatedApp={
 
-  html: "",
+html:"",
 
-  css: "",
+css:"",
 
-  js: ""
+js:""
 
 };
 
@@ -693,47 +729,52 @@ let generatedApp = {
    SEND MESSAGE
 ========================================= */
 
-async function sendMessage() {
+async function sendMessage(){
 
-  const input =
-    document.getElementById("message");
+const input=
+document.getElementById("message");
 
-  const button =
-    document.getElementById("sendButton");
+const button=
+document.getElementById("sendButton");
 
-  const message =
-    input.value.trim();
+const message=
+input.value.trim();
 
-  if (!message) {
 
-    showStatus(
-      "Rubuta saƙonka tukuna.",
-      "error"
-    );
+if(!message){
 
-    return;
+showStatus(
+"Rubuta saƙonka tukuna.",
+"error"
+);
 
-  }
+return;
 
-  addMessage(
-    "user",
-    message
-  );
+}
 
-  input.value = "";
 
-  button.disabled = true;
+addMessage(
+"user",
+message
+);
 
-  button.textContent =
-    "🤖 AI yana tunani...";
 
-  try {
+input.value="";
 
-    const creatorPrompt = `
+button.disabled=true;
+
+button.textContent=
+"🤖 AI yana tunani...";
+
+
+try{
+
+const creatorPrompt=`
 
 Kai ne Creator App AI.
 
-Kana taimakawa mai amfani tsara application.
+Kana taimakawa mai amfani tsara
+application.
 
 Idan mai amfani ya yi Hausa,
 ka amsa da Hausa.
@@ -781,94 +822,114 @@ Sabon saƙon mai amfani:
 ${message}
 
 Ka amsa kai tsaye kuma cikin sauƙin fahimta.
+
 `;
 
-    const response =
-      await fetch(
-        CHAT_BACKEND,
-        {
-          method: "POST",
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+const response=
+await fetch(
+CHAT_BACKEND,
+{
 
-          body: JSON.stringify({
-            message: creatorPrompt
-          })
-        }
-      );
+method:"POST",
 
-    const data =
-      await response
-        .json()
-        .catch(() => ({}));
+headers:{
+"Content-Type":
+"application/json"
+},
 
-    if (!response.ok) {
+body:JSON.stringify({
+message:creatorPrompt
+})
 
-      throw new Error(
-        data.error ||
-        "HTTP Error: " +
-        response.status
-      );
+}
+);
 
-    }
 
-    if (!data.reply) {
+const data=
+await response
+.json()
+.catch(()=>({}));
 
-      throw new Error(
-        "AI bai dawo da amsa ba."
-      );
 
-    }
+if(!response.ok){
 
-    conversation.push({
-      role: "user",
-      text: message
-    });
+throw new Error(
+data.error ||
+"HTTP Error: "+
+response.status
+);
 
-    conversation.push({
-      role: "ai",
-      text: data.reply
-    });
+}
 
-    addMessage(
-      "ai",
-      data.reply
-    );
 
-    updateProjectFromConversation(
-      message
-    );
+if(!data.reply){
 
-  }
+throw new Error(
+"AI bai dawo da amsa ba."
+);
 
-  catch (error) {
+}
 
-    console.error(error);
 
-    addMessage(
-      "ai",
-      "❌ An samu matsala: " +
-      error.message
-    );
+conversation.push({
 
-    showStatus(
-      error.message,
-      "error"
-    );
+role:"user",
 
-  }
+text:message
 
-  finally {
+});
 
-    button.disabled = false;
 
-    button.textContent =
-      "Aika 🚀";
+conversation.push({
 
-  }
+role:"ai",
+
+text:data.reply
+
+});
+
+
+addMessage(
+"ai",
+data.reply
+);
+
+
+updateProjectFromConversation(
+message
+);
+
+
+}
+
+catch(error){
+
+console.error(error);
+
+
+addMessage(
+"ai",
+"❌ An samu matsala: "+
+error.message
+);
+
+
+showStatus(
+error.message,
+"error"
+);
+
+}
+
+finally{
+
+button.disabled=false;
+
+button.textContent=
+"Aika 🚀";
+
+}
 
 }
 
@@ -877,44 +938,71 @@ Ka amsa kai tsaye kuma cikin sauƙin fahimta.
    ADD MESSAGE
 ========================================= */
 
-function addMessage(type, text) {
+function addMessage(
+type,
+text
+){
 
-  const chatBox =
-    document.getElementById("chatBox");
+const chatBox=
+document.getElementById(
+"chatBox"
+);
 
-  const div =
-    document.createElement("div");
 
-  div.className =
-    "message " +
-    (
-      type === "ai"
-        ? "ai"
-        : "user"
-    );
+const div=
+document.createElement(
+"div"
+);
 
-  const strong =
-    document.createElement("strong");
 
-  strong.textContent =
-    type === "ai"
-      ? "🤖 Creator App AI"
-      : "👤 Kai";
+div.className=
+"message "+
+(
+type==="ai"
+?"ai"
+:"user"
+);
 
-  const content =
-    document.createElement("div");
 
-  content.textContent =
-    text;
+const strong=
+document.createElement(
+"strong"
+);
 
-  div.appendChild(strong);
 
-  div.appendChild(content);
+strong.textContent=
+type==="ai"
+?"🤖 Creator App AI"
+:"👤 Kai";
 
-  chatBox.appendChild(div);
 
-  chatBox.scrollTop =
-    chatBox.scrollHeight;
+const content=
+document.createElement(
+"div"
+);
+
+
+content.textContent=
+text;
+
+
+div.appendChild(
+strong
+);
+
+
+div.appendChild(
+content
+);
+
+
+chatBox.appendChild(
+div
+);
+
+
+chatBox.scrollTop=
+chatBox.scrollHeight;
 
 }
 
@@ -923,98 +1011,105 @@ function addMessage(type, text) {
    UPDATE PROJECT
 ========================================= */
 
-function updateProjectFromConversation(message) {
+function updateProjectFromConversation(
+message
+){
 
-  if (!project.description) {
+if(!project.description){
 
-    project.description =
-      message;
+project.description=
+message;
 
-  }
+}
 
-  const lower =
-    message.toLowerCase();
 
-  if (
-    lower.includes("bank") ||
-    lower.includes("wallet")
-  ) {
+const lower=
+message.toLowerCase();
 
-    project.category =
-      "Finance / Banking";
 
-  }
+if(
+lower.includes("bank") ||
+lower.includes("wallet")
+){
 
-  else if (
-    lower.includes("taxi") ||
-    lower.includes("transport")
-  ) {
+project.category=
+"Finance / Banking";
 
-    project.category =
-      "Taxi / Transport";
+}
 
-  }
+else if(
+lower.includes("taxi") ||
+lower.includes("transport")
+){
 
-  else if (
-    lower.includes("shop") ||
-    lower.includes("shopping") ||
-    lower.includes("ecommerce")
-  ) {
+project.category=
+"Taxi / Transport";
 
-    project.category =
-      "E-commerce";
+}
 
-  }
+else if(
+lower.includes("shop") ||
+lower.includes("shopping") ||
+lower.includes("ecommerce")
+){
 
-  else if (
-    lower.includes("school") ||
-    lower.includes("education")
-  ) {
+project.category=
+"E-commerce";
 
-    project.category =
-      "Education";
+}
 
-  }
+else if(
+lower.includes("school") ||
+lower.includes("education")
+){
 
-  else if (
-    lower.includes("hospital") ||
-    lower.includes("clinic")
-  ) {
+project.category=
+"Education";
 
-    project.category =
-      "Healthcare";
+}
 
-  }
+else if(
+lower.includes("hospital") ||
+lower.includes("clinic")
+){
 
-  else if (
-    lower.includes("social")
-  ) {
+project.category=
+"Healthcare";
 
-    project.category =
-      "Social Media";
+}
 
-  }
+else if(
+lower.includes("social")
+){
 
-  else if (
-    lower.includes("ai")
-  ) {
+project.category=
+"Social Media";
 
-    project.category =
-      "AI";
+}
 
-  }
+else if(
+lower.includes("ai")
+){
 
-  project.apiRequirement =
-    document.getElementById(
-      "apiRequirement"
-    ).value.trim();
+project.category=
+"AI";
 
-  project.extraRequirements =
-    document.getElementById(
-      "extraRequirement"
-    ).value.trim();
+}
 
-  showSummary();
+
+project.apiRequirement=
+document.getElementById(
+"apiRequirement"
+).value.trim();
+
+
+project.extraRequirements=
+document.getElementById(
+"extraRequirement"
+).value.trim();
+
+
+showSummary();
 
 }
 
@@ -1023,72 +1118,81 @@ function updateProjectFromConversation(message) {
    SHOW SUMMARY
 ========================================= */
 
-function showSummary() {
+function showSummary(){
 
-  const summary =
-    document.getElementById("summary");
+const summary=
+document.getElementById(
+"summary"
+);
 
-  const content =
-    document.getElementById(
-      "summaryContent"
-    );
 
-  content.innerHTML = `
+const content=
+document.getElementById(
+"summaryContent"
+);
 
-    <div class="summary-item">
 
-      <strong>📝 Bayani:</strong><br>
+content.innerHTML=`
 
-      ${escapeHtml(
-        project.description ||
-        "Ana tattarawa..."
-      )}
+<div class="summary-item">
 
-    </div>
+<strong>📝 Bayani:</strong><br>
 
-    <div class="summary-item">
+${escapeHtml(
+project.description ||
+"Ana tattarawa..."
+)}
 
-      <strong>📱 Nau'in App:</strong><br>
+</div>
 
-      ${escapeHtml(
-        project.category ||
-        "AI zai gano."
-      )}
 
-    </div>
+<div class="summary-item">
 
-    <div class="summary-item">
+<strong>📱 Nau'in App:</strong><br>
 
-      <strong>💬 Conversation:</strong><br>
+${escapeHtml(
+project.category ||
+"AI zai gano."
+)}
 
-      ${conversation.length}
-      messages
+</div>
 
-    </div>
 
-    <div class="summary-item">
+<div class="summary-item">
 
-      <strong>🔌 API Requirement:</strong><br>
+<strong>💬 Conversation:</strong><br>
 
-      ${escapeHtml(
-        project.apiRequirement ||
-        "Babu"
-      )}
+${conversation.length}
+messages
 
-    </div>
+</div>
 
-    <div class="summary-item">
 
-      <strong>📎 Files:</strong><br>
+<div class="summary-item">
 
-      ${project.files.length || 0}
+<strong>🔌 API Requirement:</strong><br>
 
-    </div>
+${escapeHtml(
+project.apiRequirement ||
+"Babu"
+)}
 
-  `;
+</div>
 
-  summary.style.display =
-    "block";
+
+<div class="summary-item">
+
+<strong>📎 Files:</strong><br>
+
+${project.files.length || 0}
+
+</div>
+
+`;
+
+
+summary.style.display=
+"block";
 
 }
 
@@ -1097,38 +1201,42 @@ function showSummary() {
    SAVE PROJECT
 ========================================= */
 
-function saveProject() {
+function saveProject(){
 
-  project.apiRequirement =
-    document.getElementById(
-      "apiRequirement"
-    ).value.trim();
+project.apiRequirement=
+document.getElementById(
+"apiRequirement"
+).value.trim();
 
-  project.extraRequirements =
-    document.getElementById(
-      "extraRequirement"
-    ).value.trim();
 
-  const data = {
+project.extraRequirements=
+document.getElementById(
+"extraRequirement"
+).value.trim();
 
-    ...project,
 
-    conversation,
+const data={
 
-    savedAt:
-      new Date().toISOString()
+...project,
 
-  };
+conversation,
 
-  localStorage.setItem(
-    "creatorAppProject",
-    JSON.stringify(data)
-  );
+savedAt:
+new Date().toISOString()
 
-  showStatus(
-    "✅ An ajiye project ɗin.",
-    "success"
-  );
+};
+
+
+localStorage.setItem(
+"creatorAppProject",
+JSON.stringify(data)
+);
+
+
+showStatus(
+"✅ An ajiye project ɗin.",
+"success"
+);
 
 }
 
@@ -1137,21 +1245,24 @@ function saveProject() {
    START BUILDER
 ========================================= */
 
-function startAppBuilder() {
+function startAppBuilder(){
 
-  saveProject();
+saveProject();
 
-  const builder =
-    document.getElementById(
-      "builder"
-    );
 
-  builder.style.display =
-    "block";
+const builder=
+document.getElementById(
+"builder"
+);
 
-  builder.scrollIntoView({
-    behavior: "smooth"
-  });
+
+builder.style.display=
+"block";
+
+
+builder.scrollIntoView({
+behavior:"smooth"
+});
 
 }
 
@@ -1160,23 +1271,26 @@ function startAppBuilder() {
    GENERATE APP
 ========================================= */
 
-async function generateAppFromProject() {
+async function generateAppFromProject(){
 
-  const button =
-    document.getElementById(
-      "generateButton"
-    );
+const button=
+document.getElementById(
+"generateButton"
+);
 
-  button.disabled = true;
 
-  button.textContent =
-    "🤖 AI yana ƙirƙirar app...";
+button.disabled=true;
 
-  try {
+button.textContent=
+"🤖 AI yana ƙirƙirar app...";
 
-    saveProject();
 
-    const prompt = `
+try{
+
+saveProject();
+
+
+const prompt=`
 
 Sunan App:
 ${project.appName || "My App"}
@@ -1202,12 +1316,14 @@ ${JSON.stringify(project.files)}
 Create a complete modern responsive
 frontend application for Android phones.
 
+The application should be self-contained.
+
 Return JSON only:
 
 {
-  "html": "...",
-  "css": "...",
-  "js": "..."
+"html":"...",
+"css":"...",
+"js":"..."
 }
 
 Rules:
@@ -1224,97 +1340,1130 @@ Rules:
 
 `;
 
-    const response =
-      await fetch(
-        CREATE_APP_BACKEND,
-        {
-          method: "POST",
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+const response=
+await fetch(
+CREATE_APP_BACKEND,
+{
 
-          body: JSON.stringify({
-            prompt
-          })
-        }
-      );
+method:"POST",
 
-    const data =
-      await response
-        .json()
-        .catch(() => ({}));
+headers:{
+"Content-Type":
+"application/json"
+},
 
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Create App Error: " +
-        response.status
-      );
-
-    }
-
-    if (
-      typeof data.html !== "string" ||
-      typeof data.css !== "string" ||
-      typeof data.js !== "string"
-    ) {
-
-      throw new Error(
-        "AI bai dawo da HTML, CSS da JavaScript ba."
-      );
-
-    }
-
-    generatedApp = {
-
-      html: data.html,
-
-      css: data.css,
-
-      js: data.js
-
-    };
-
-    localStorage.setItem(
-      "centerAppGeneratedApp",
-      JSON.stringify(generatedApp)
-    );
-
-    showPreview();
-
-    showCode();
-
-    showStatus(
-      "✅ An ƙirƙiri app ɗin.",
-      "success"
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "GENERATE APP ERROR:",
-      error
-    );
-
-    showStatus(
-      "❌ " + error.message,
-      "error"
-    );
-
-  }
-
-  finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "⚡ Ƙirƙiri App Yanzu";
-
-  }
+body:JSON.stringify({
+prompt
+})
 
 }
+);
+
+
+const data=
+await response
+.json()
+.catch(()=>({}));
+
+
+if(!response.ok){
+
+throw new Error(
+data.error ||
+"Create App Error: "+
+response.status
+);
+
+}
+
+
+if(
+typeof data.html!=="string" ||
+typeof data.css!=="string" ||
+typeof data.js!=="string"
+){
+
+throw new Error(
+"AI bai dawo da HTML, CSS da JavaScript ba."
+);
+
+}
+
+
+generatedApp={
+
+html:data.html,
+
+css:data.css,
+
+js:data.js
+
+};
+
+
+localStorage.setItem(
+"centerAppGeneratedApp",
+JSON.stringify(
+generatedApp
+)
+);
+
+
+showPreview();
+
+showCode();
+
+
+showStatus(
+"✅ An ƙirƙiri app ɗin.",
+"success"
+);
+
+}
+
+catch(error){
+
+console.error(
+"GENERATE APP ERROR:",
+error
+);
+
+
+showStatus(
+"❌ "+error.message,
+"error"
+);
+
+}
+
+finally{
+
+button.disabled=false;
+
+button.textContent=
+"⚡ Ƙirƙiri App Yanzu";
+
+}
+
+}
+
+
+/* =========================================
+   SHOW PREVIEW
+========================================= */
+
+function showPreview(){
+
+const preview=
+document.getElementById(
+"preview"
+);
+
+
+const frame=
+document.getElementById(
+"previewFrame"
+);
+
+
+const fullDocument=`
+
+<!DOCTYPE html>
+
+<html lang="ha">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<style>
+
+${generatedApp.css}
+
+</style>
+
+</head>
+
+<body>
+
+${generatedApp.html}
+
+<script>
+
+${generatedApp.js}
+
+<\/script>
+
+</body>
+
+</html>
+
+`;
+
+
+frame.srcdoc=
+fullDocument;
+
+
+preview.style.display=
+"block";
+
+
+preview.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
+   SHOW CODE
+========================================= */
+
+function showCode(){
+
+const box=
+document.getElementById(
+"codeResult"
+);
+
+
+document.getElementById(
+"htmlCode"
+).textContent=
+generatedApp.html;
+
+
+document.getElementById(
+"cssCode"
+).textContent=
+generatedApp.css;
+
+
+document.getElementById(
+"jsCode"
+).textContent=
+generatedApp.js;
+
+
+box.style.display=
+"block";
+
+}
+
+
+/* =========================================
+   BUILD REAL APP
+========================================= */
+
+async function buildAndDownloadApp(){
+
+if(
+!generatedApp ||
+!generatedApp.html
+){
+
+showStatus(
+"Da farko ka ƙirƙiri app.",
+"error"
+);
+
+return;
+
+}
+
+
+const button=
+document.getElementById(
+"buildButton"
+);
+
+
+button.disabled=true;
+
+button.textContent=
+"🏗️ Ana build app...";
+
+
+try{
+
+const appName=
+project.appName ||
+"Center App";
+
+
+const response=
+await fetch(
+BUILD_APP_BACKEND,
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
+
+appName,
+
+html:
+generatedApp.html,
+
+css:
+generatedApp.css,
+
+js:
+generatedApp.js,
+
+project
+
+})
+
+}
+);
+
+
+const data=
+await response
+.json()
+.catch(()=>({}));
+
+
+if(!response.ok){
+
+throw new Error(
+data.error ||
+"Build Error: "+
+response.status
+);
+
+}
+
+
+const downloadUrl=
+data.downloadUrl ||
+data.apkUrl ||
+data.url;
+
+
+if(!downloadUrl){
+
+throw new Error(
+"Build ya kammala amma server bai dawo da download URL ba."
+);
+
+}
+
+
+const link=
+document.createElement(
+"a"
+);
+
+
+link.href=
+downloadUrl;
+
+
+link.target=
+"_blank";
+
+
+link.rel=
+"noopener";
+
+
+document.body.appendChild(
+link
+);
+
+
+link.click();
+
+
+link.remove();
+
+
+showStatus(
+"✅ Build ya kammala. An buɗe download link ɗin.",
+"success"
+);
+
+}
+
+catch(error){
+
+console.error(
+"BUILD ERROR:",
+error
+);
+
+
+showStatus(
+"❌ "+error.message,
+"error"
+);
+
+}
+
+finally{
+
+button.disabled=false;
+
+button.textContent=
+"📲 Build & Download App";
+
+}
+
+}
+
+
+/* =========================================
+   HTML BACKUP DOWNLOAD
+========================================= */
+
+function downloadHtmlBackup(){
+
+if(
+!generatedApp ||
+!generatedApp.html
+){
+
+showStatus(
+"Da farko ka ƙirƙiri app.",
+"error"
+);
+
+return;
+
+}
+
+
+const fullHtml=`
+
+<!DOCTYPE html>
+
+<html lang="ha">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+${escapeHtml(
+project.appName ||
+"Generated App"
+)}
+</title>
+
+<style>
+
+${generatedApp.css}
+
+</style>
+
+</head>
+
+<body>
+
+${generatedApp.html}
+
+<script>
+
+${generatedApp.js}
+
+<\/script>
+
+</body>
+
+</html>
+
+`;
+
+
+const blob=
+new Blob(
+[fullHtml],
+{
+type:
+"text/html;charset=utf-8"
+}
+);
+
+
+const url=
+URL.createObjectURL(
+blob
+);
+
+
+const link=
+document.createElement(
+"a"
+);
+
+
+link.href=
+url;
+
+
+link.download=
+(
+project.appName ||
+"center-app"
+)
+.replace(
+/[^a-z0-9_-]/gi,
+"-"
+)
+.toLowerCase()
++
+".html";
+
+
+document.body.appendChild(
+link
+);
+
+
+link.click();
+
+
+link.remove();
+
+
+URL.revokeObjectURL(
+url
+);
+
+}
+
+
+/* =========================================
+   SAVE GENERATED APP
+========================================= */
+
+function saveGeneratedApp(){
+
+if(
+!generatedApp ||
+!generatedApp.html
+){
+
+showStatus(
+"Babu generated app da za a ajiye.",
+"error"
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+"centerAppGeneratedApp",
+JSON.stringify(
+generatedApp
+)
+);
+
+
+showStatus(
+"✅ An ajiye Generated App.",
+"success"
+);
+
+}
+
+
+/* =========================================
+   SCROLL PREVIEW
+========================================= */
+
+function scrollToPreview(){
+
+const preview=
+document.getElementById(
+"preview"
+);
+
+
+if(
+preview.style.display===
+"none"
+){
+
+showStatus(
+"Da farko ka ƙirƙiri app.",
+"info"
+);
+
+return;
+
+}
+
+
+preview.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
+   IMAGE UPLOAD
+========================================= */
+
+function handleImageUpload(){
+
+const input=
+document.getElementById(
+"imageFile"
+);
+
+
+const preview=
+document.getElementById(
+"imagePreview"
+);
+
+
+const name=
+document.getElementById(
+"imageName"
+);
+
+
+if(
+!input.files ||
+!input.files.length
+){
+
+preview.style.display=
+"none";
+
+name.textContent=
+"";
+
+return;
+
+}
+
+
+const file=
+input.files[0];
+
+
+name.textContent=
+"An zaɓa: "+
+file.name;
+
+
+project.files.push({
+
+name:
+file.name,
+
+type:
+file.type,
+
+size:
+file.size
+
+});
+
+
+const reader=
+new FileReader();
+
+
+reader.onload=
+function(event){
+
+preview.src=
+event.target.result;
+
+preview.style.display=
+"block";
+
+};
+
+
+reader.readAsDataURL(
+file
+);
+
+}
+
+
+/* =========================================
+   FILE NAME
+========================================= */
+
+function showFileName(
+inputId,
+outputId
+){
+
+const input=
+document.getElementById(
+inputId
+);
+
+
+const output=
+document.getElementById(
+outputId
+);
+
+
+if(
+input.files &&
+input.files.length
+){
+
+const file=
+input.files[0];
+
+
+output.textContent=
+"An zaɓa: "+
+file.name;
+
+
+project.files.push({
+
+name:
+file.name,
+
+type:
+file.type,
+
+size:
+file.size
+
+});
+
+}
+
+else{
+
+output.textContent=
+"";
+
+}
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function showStatus(
+message,
+type
+){
+
+const status=
+document.getElementById(
+"status"
+);
+
+
+status.textContent=
+message;
+
+
+status.className=
+"status "+
+type;
+
+
+status.style.display=
+"block";
+
+
+clearTimeout(
+window.statusTimer
+);
+
+
+window.statusTimer=
+setTimeout(
+function(){
+
+status.style.display=
+"none";
+
+},
+7000
+);
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(
+text
+){
+
+const div=
+document.createElement(
+"div"
+);
+
+
+div.textContent=
+String(
+text || ""
+);
+
+
+return div.innerHTML;
+
+}
+
+
+/* =========================================
+   NEW PROJECT
+========================================= */
+
+function startNewProject(){
+
+if(
+!confirm(
+"Kana son fara sabon project?"
+)
+){
+
+return;
+
+}
+
+
+conversation=[];
+
+
+project={
+
+appName:"",
+
+description:"",
+
+category:"",
+
+users:[],
+
+features:[],
+
+pages:[],
+
+database:[],
+
+apis:[],
+
+payments:[],
+
+authentication:[],
+
+files:[],
+
+apiRequirement:"",
+
+extraRequirements:""
+
+};
+
+
+generatedApp={
+
+html:"",
+
+css:"",
+
+js:""
+
+};
+
+
+document.getElementById(
+"chatBox"
+).innerHTML=`
+
+<div class="message ai">
+
+<strong>
+🤖 Creator App AI
+</strong>
+
+Sannu! 👋<br><br>
+
+Wane irin app kake son ƙirƙira?
+
+</div>
+
+`;
+
+
+document.getElementById(
+"summary"
+).style.display=
+"none";
+
+
+document.getElementById(
+"builder"
+).style.display=
+"none";
+
+
+document.getElementById(
+"preview"
+).style.display=
+"none";
+
+
+document.getElementById(
+"codeResult"
+).style.display=
+"none";
+
+
+document.getElementById(
+"message"
+).value=
+"";
+
+
+document.getElementById(
+"apiRequirement"
+).value=
+"";
+
+
+document.getElementById(
+"extraRequirement"
+).value=
+"";
+
+
+localStorage.removeItem(
+"creatorAppProject"
+);
+
+
+localStorage.removeItem(
+"centerAppGeneratedApp"
+);
+
+
+showStatus(
+"An fara sabon project.",
+"success"
+);
+
+}
+
+
+/* =========================================
+   ENTER KEY
+========================================= */
+
+document
+.getElementById("message")
+.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key==="Enter" &&
+!event.shiftKey
+){
+
+event.preventDefault();
+
+sendMessage();
+
+}
+
+}
+);
+
+
+/* =========================================
+   LOAD SAVED PROJECT
+========================================= */
+
+try{
+
+const saved=
+localStorage.getItem(
+"creatorAppProject"
+);
+
+
+if(saved){
+
+const data=
+JSON.parse(saved);
+
+
+if(
+data &&
+typeof data==="object"
+){
+
+project={
+
+...project,
+
+...data
+
+};
+
+}
+
+
+if(
+Array.isArray(
+data.conversation
+)
+){
+
+conversation=
+data.conversation;
+
+
+const chatBox=
+document.getElementById(
+"chatBox"
+);
+
+
+for(
+const item
+of conversation
+){
+
+if(
+item &&
+item.text
+){
+
+addMessage(
+
+item.role==="ai"
+?"ai"
+:"user",
+
+item.text
+
+);
+
+}
+
+}
+
+}
+
+
+document.getElementById(
+"apiRequirement"
+).value=
+project.apiRequirement ||
+"";
+
+
+document.getElementById(
+"extraRequirement"
+).value=
+project.extraRequirements ||
+"";
+
+
+if(
+project.description
+){
+
+showSummary();
+
+}
+
+}
+
+}
+
+catch(error){
+
+console.log(
+"No saved project."
+);
+
+}
+
+
+/* =========================================
+   LOAD GENERATED APP
+========================================= */
+
+try{
+
+const savedGenerated=
+localStorage.getItem(
+"centerAppGeneratedApp"
+);
+
+
+if(savedGenerated){
+
+const data=
+JSON.parse(
+savedGenerated
+);
+
+
+if(
+data &&
+typeof data.html==="string" &&
+typeof data.css==="string" &&
+typeof data.js==="string"
+){
+
+generatedApp=
+data;
+
+}
+
+}
+
+}
+
+catch(error){
+
+console.log(
+"No generated app saved."
+);
+
+}
+
+</script>
+
+</body>
+</html>
