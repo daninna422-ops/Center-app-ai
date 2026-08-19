@@ -187,10 +187,6 @@ button:disabled {
   object-fit: cover;
 }
 
-.summary {
-  display: none;
-}
-
 .summary-item {
   background: #f7f9fc;
   padding: 13px;
@@ -291,23 +287,12 @@ button:disabled {
   margin: 12px 0;
   line-height: 1.6;
 }
-
-.loading {
-  animation: pulse 1.2s infinite;
-}
-
-@keyframes pulse {
-  50% {
-    opacity: .55;
-  }
-}
 </style>
 </head>
 
 <body>
 
 <div class="header">
-
   <div class="logo">🛠️🤖</div>
 
   <h1>Creator App AI</h1>
@@ -315,16 +300,11 @@ button:disabled {
   <p>
     Ka bayyana app ɗinka, AI zai taimaka maka ƙirƙirarsa.
   </p>
-
 </div>
-
 
 <div class="container">
 
-
-<!-- =====================================
-     WELCOME
-===================================== -->
+<!-- WELCOME -->
 
 <div class="card">
 
@@ -355,9 +335,7 @@ button:disabled {
 </div>
 
 
-<!-- =====================================
-     AI CHAT
-===================================== -->
+<!-- AI CHAT -->
 
 <div class="card">
 
@@ -380,12 +358,10 @@ button:disabled {
 
   </div>
 
-
   <textarea
     id="message"
     placeholder="Misali: Ina son app na taxi..."
   ></textarea>
-
 
   <button
     id="sendButton"
@@ -394,7 +370,6 @@ button:disabled {
     Aika 🚀
   </button>
 
-
   <button
     class="secondary"
     onclick="startNewProject()"
@@ -402,25 +377,21 @@ button:disabled {
     🆕 Fara Sabon Project
   </button>
 
-
   <div id="status" class="status"></div>
 
 </div>
 
 
-<!-- =====================================
-     REQUIREMENTS / FILES
-===================================== -->
+<!-- FILES -->
 
 <div class="card">
 
   <h2>📎 Abubuwan da App ɗin yake bukata</h2>
 
   <p class="small">
-    Idan app ɗin yana bukatar logo, hoto ko wani document,
-    za ka iya zaɓarsa. Za mu adana sunan file ɗin a project.
+    Idan app ɗin yana bukatar logo, hoto ko document,
+    za ka iya zaɓarsa.
   </p>
-
 
   <div class="upload-area">
 
@@ -448,7 +419,6 @@ button:disabled {
 
   </div>
 
-
   <div class="upload-area">
 
     <strong>📄 Upload Document</strong>
@@ -469,7 +439,6 @@ button:disabled {
 
   </div>
 
-
   <div class="requirement-box">
 
     <label>
@@ -484,7 +453,6 @@ button:disabled {
 
   </div>
 
-
   <div class="requirement-box">
 
     <label>
@@ -493,7 +461,7 @@ button:disabled {
 
     <textarea
       id="extraRequirement"
-      placeholder="Rubuta wani abu na musamman da app ɗin yake bukata..."
+      placeholder="Rubuta wani abu na musamman..."
     ></textarea>
 
   </div>
@@ -501,26 +469,21 @@ button:disabled {
 </div>
 
 
-<!-- =====================================
-     PROJECT SUMMARY
-===================================== -->
+<!-- PROJECT SUMMARY -->
 
 <div
   id="summary"
   class="card"
+  style="display:none;"
 >
 
   <h2>📱 Project Summary</h2>
 
   <div id="summaryContent"></div>
 
-
-  <button
-    onclick="saveProject()"
-  >
+  <button onclick="saveProject()">
     💾 Ajiye Project
   </button>
-
 
   <button
     class="green"
@@ -532,9 +495,7 @@ button:disabled {
 </div>
 
 
-<!-- =====================================
-     APP BUILDER
-===================================== -->
+<!-- APP BUILDER -->
 
 <div
   id="builder"
@@ -550,21 +511,14 @@ button:disabled {
 
     <br><br>
 
-    Za a aika requirements zuwa
-    <strong>/api/create-app</strong>.
+    AI zai ƙirƙiri frontend ɗin app ɗinka.
 
     <br><br>
 
-    Idan AI ya dawo da HTML, CSS da JavaScript,
-    za mu nuna Preview.
-
-    <br><br>
-
-    Bayan haka zaka iya tura generated app
-    zuwa <strong>/api/build-app</strong>.
+    Bayan preview zaka iya
+    neman gina APK.
 
   </div>
-
 
   <button
     id="generateButton"
@@ -573,7 +527,6 @@ button:disabled {
   >
     ⚡ Ƙirƙiri App Yanzu
   </button>
-
 
   <button
     class="secondary"
@@ -585,9 +538,7 @@ button:disabled {
 </div>
 
 
-<!-- =====================================
-     PREVIEW
-===================================== -->
+<!-- PREVIEW -->
 
 <div
   id="preview"
@@ -600,22 +551,18 @@ button:disabled {
     Wannan preview ne na frontend da AI ya samar.
   </p>
 
-
   <div class="preview-note">
 
-    ⚠️ Idan app ɗin yana bukatar backend,
-    database, payment ko API na gaske,
-    dole ne a haɗa waɗannan services a backend.
+    ⚠️ Backend, database, payment da API
+    na gaske suna buƙatar haɗin backend.
 
   </div>
-
 
   <iframe
     id="previewFrame"
     class="preview-frame"
     sandbox="allow-scripts allow-forms"
   ></iframe>
-
 
   <button
     id="buildButton"
@@ -625,14 +572,12 @@ button:disabled {
     📲 Build & Download App
   </button>
 
-
   <button
     class="dark"
     onclick="saveGeneratedApp()"
   >
     💾 Ajiye Generated App
   </button>
-
 
   <button
     class="secondary"
@@ -644,9 +589,7 @@ button:disabled {
 </div>
 
 
-<!-- =====================================
-     GENERATED CODE
-===================================== -->
+<!-- GENERATED CODE -->
 
 <div
   id="codeResult"
@@ -658,26 +601,15 @@ button:disabled {
 
   <h3>HTML</h3>
 
-  <div
-    id="htmlCode"
-    class="code-box"
-  ></div>
-
+  <div id="htmlCode" class="code-box"></div>
 
   <h3>CSS</h3>
 
-  <div
-    id="cssCode"
-    class="code-box"
-  ></div>
-
+  <div id="cssCode" class="code-box"></div>
 
   <h3>JavaScript</h3>
 
-  <div
-    id="jsCode"
-    class="code-box"
-  ></div>
+  <div id="jsCode" class="code-box"></div>
 
 </div>
 
@@ -772,7 +704,6 @@ async function sendMessage() {
   const message =
     input.value.trim();
 
-
   if (!message) {
 
     showStatus(
@@ -784,12 +715,10 @@ async function sendMessage() {
 
   }
 
-
   addMessage(
     "user",
     message
   );
-
 
   input.value = "";
 
@@ -798,15 +727,13 @@ async function sendMessage() {
   button.textContent =
     "🤖 AI yana tunani...";
 
-
   try {
 
     const creatorPrompt = `
 
 Kai ne Creator App AI.
 
-Kana taimakawa mai amfani tsara
-application.
+Kana taimakawa mai amfani tsara application.
 
 Idan mai amfani ya yi Hausa,
 ka amsa da Hausa.
@@ -854,15 +781,12 @@ Sabon saƙon mai amfani:
 ${message}
 
 Ka amsa kai tsaye kuma cikin sauƙin fahimta.
-
 `;
-
 
     const response =
       await fetch(
         CHAT_BACKEND,
         {
-
           method: "POST",
 
           headers: {
@@ -871,19 +795,15 @@ Ka amsa kai tsaye kuma cikin sauƙin fahimta.
           },
 
           body: JSON.stringify({
-            message:
-              creatorPrompt
+            message: creatorPrompt
           })
-
         }
       );
-
 
     const data =
       await response
         .json()
         .catch(() => ({}));
-
 
     if (!response.ok) {
 
@@ -895,7 +815,6 @@ Ka amsa kai tsaye kuma cikin sauƙin fahimta.
 
     }
 
-
     if (!data.reply) {
 
       throw new Error(
@@ -904,35 +823,24 @@ Ka amsa kai tsaye kuma cikin sauƙin fahimta.
 
     }
 
-
     conversation.push({
-
       role: "user",
-
       text: message
-
     });
-
 
     conversation.push({
-
       role: "ai",
-
       text: data.reply
-
     });
-
 
     addMessage(
       "ai",
       data.reply
     );
 
-
     updateProjectFromConversation(
       message
     );
-
 
   }
 
@@ -940,13 +848,11 @@ Ka amsa kai tsaye kuma cikin sauƙin fahimta.
 
     console.error(error);
 
-
     addMessage(
       "ai",
       "❌ An samu matsala: " +
       error.message
     );
-
 
     showStatus(
       error.message,
@@ -971,22 +877,13 @@ Ka amsa kai tsaye kuma cikin sauƙin fahimta.
    ADD MESSAGE
 ========================================= */
 
-function addMessage(
-  type,
-  text
-) {
+function addMessage(type, text) {
 
   const chatBox =
-    document.getElementById(
-      "chatBox"
-    );
-
+    document.getElementById("chatBox");
 
   const div =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   div.className =
     "message " +
@@ -996,42 +893,25 @@ function addMessage(
         : "user"
     );
 
-
   const strong =
-    document.createElement(
-      "strong"
-    );
-
+    document.createElement("strong");
 
   strong.textContent =
     type === "ai"
       ? "🤖 Creator App AI"
       : "👤 Kai";
 
-
   const content =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   content.textContent =
     text;
 
+  div.appendChild(strong);
 
-  div.appendChild(
-    strong
-  );
+  div.appendChild(content);
 
-  div.appendChild(
-    content
-  );
-
-
-  chatBox.appendChild(
-    div
-  );
-
+  chatBox.appendChild(div);
 
   chatBox.scrollTop =
     chatBox.scrollHeight;
@@ -1043,9 +923,7 @@ function addMessage(
    UPDATE PROJECT
 ========================================= */
 
-function updateProjectFromConversation(
-  message
-) {
+function updateProjectFromConversation(message) {
 
   if (!project.description) {
 
@@ -1054,10 +932,8 @@ function updateProjectFromConversation(
 
   }
 
-
   const lower =
     message.toLowerCase();
-
 
   if (
     lower.includes("bank") ||
@@ -1128,18 +1004,15 @@ function updateProjectFromConversation(
 
   }
 
-
   project.apiRequirement =
     document.getElementById(
       "apiRequirement"
     ).value.trim();
 
-
   project.extraRequirements =
     document.getElementById(
       "extraRequirement"
     ).value.trim();
-
 
   showSummary();
 
@@ -1153,15 +1026,12 @@ function updateProjectFromConversation(
 function showSummary() {
 
   const summary =
-    document.getElementById(
-      "summary"
-    );
+    document.getElementById("summary");
 
   const content =
     document.getElementById(
       "summaryContent"
     );
-
 
   content.innerHTML = `
 
@@ -1176,7 +1046,6 @@ function showSummary() {
 
     </div>
 
-
     <div class="summary-item">
 
       <strong>📱 Nau'in App:</strong><br>
@@ -1188,7 +1057,6 @@ function showSummary() {
 
     </div>
 
-
     <div class="summary-item">
 
       <strong>💬 Conversation:</strong><br>
@@ -1197,7 +1065,6 @@ function showSummary() {
       messages
 
     </div>
-
 
     <div class="summary-item">
 
@@ -1210,7 +1077,6 @@ function showSummary() {
 
     </div>
 
-
     <div class="summary-item">
 
       <strong>📎 Files:</strong><br>
@@ -1220,7 +1086,6 @@ function showSummary() {
     </div>
 
   `;
-
 
   summary.style.display =
     "block";
@@ -1239,12 +1104,10 @@ function saveProject() {
       "apiRequirement"
     ).value.trim();
 
-
   project.extraRequirements =
     document.getElementById(
       "extraRequirement"
     ).value.trim();
-
 
   const data = {
 
@@ -1257,12 +1120,10 @@ function saveProject() {
 
   };
 
-
   localStorage.setItem(
     "creatorAppProject",
     JSON.stringify(data)
   );
-
 
   showStatus(
     "✅ An ajiye project ɗin.",
@@ -1280,16 +1141,13 @@ function startAppBuilder() {
 
   saveProject();
 
-
   const builder =
     document.getElementById(
       "builder"
     );
 
-
   builder.style.display =
     "block";
-
 
   builder.scrollIntoView({
     behavior: "smooth"
@@ -1309,17 +1167,14 @@ async function generateAppFromProject() {
       "generateButton"
     );
 
-
   button.disabled = true;
 
   button.textContent =
     "🤖 AI yana ƙirƙirar app...";
 
-
   try {
 
     saveProject();
-
 
     const prompt = `
 
@@ -1347,8 +1202,6 @@ ${JSON.stringify(project.files)}
 Create a complete modern responsive
 frontend application for Android phones.
 
-The application should be self-contained.
-
 Return JSON only:
 
 {
@@ -1371,12 +1224,10 @@ Rules:
 
 `;
 
-
     const response =
       await fetch(
         CREATE_APP_BACKEND,
         {
-
           method: "POST",
 
           headers: {
@@ -1387,16 +1238,13 @@ Rules:
           body: JSON.stringify({
             prompt
           })
-
         }
       );
-
 
     const data =
       await response
         .json()
         .catch(() => ({}));
-
 
     if (!response.ok) {
 
@@ -1407,7 +1255,6 @@ Rules:
       );
 
     }
-
 
     if (
       typeof data.html !== "string" ||
@@ -1421,33 +1268,24 @@ Rules:
 
     }
 
-
     generatedApp = {
 
-      html:
-        data.html,
+      html: data.html,
 
-      css:
-        data.css,
+      css: data.css,
 
-      js:
-        data.js
+      js: data.js
 
     };
 
-
     localStorage.setItem(
       "centerAppGeneratedApp",
-      JSON.stringify(
-        generatedApp
-      )
+      JSON.stringify(generatedApp)
     );
-
 
     showPreview();
 
     showCode();
-
 
     showStatus(
       "✅ An ƙirƙiri app ɗin.",
@@ -1463,10 +1301,8 @@ Rules:
       error
     );
 
-
     showStatus(
-      "❌ " +
-      error.message,
+      "❌ " + error.message,
       "error"
     );
 
@@ -1482,1236 +1318,3 @@ Rules:
   }
 
 }
-
-
-/* =========================================
-   SHOW PREVIEW
-========================================= */
-
-function showPreview() {
-
-  const preview =
-    document.getElementById(
-      "preview"
-    );
-
-  const frame =
-    document.getElementById(
-      "previewFrame"
-    );
-
-
-  const fullDocument = `
-
-<!DOCTYPE html>
-
-<html lang="ha">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<style>
-
-${generatedApp.css}
-
-</style>
-
-</head>
-
-<body>
-
-${generatedApp.html}
-
-<script>
-
-${generatedApp.js}
-
-<\/script>
-
-</body>
-
-</html>
-
-`;
-
-
-  frame.srcdoc =
-    fullDocument;
-
-
-  preview.style.display =
-    "block";
-
-
-  preview.scrollIntoView({
-    behavior: "smooth"
-  });
-
-}
-
-
-/* =========================================
-   SHOW CODE
-========================================= */
-
-function showCode() {
-
-  const box =
-    document.getElementById(
-      "codeResult"
-    );
-
-
-  document.getElementById(
-    "htmlCode"
-  ).textContent =
-    generatedApp.html;
-
-
-  document.getElementById(
-    "cssCode"
-  ).textContent =
-    generatedApp.css;
-
-
-  document.getElementById(
-    "jsCode"
-  ).textContent =
-    generatedApp.js;
-
-
-  box.style.display =
-    "block";
-
-}
-
-
-/* =========================================
-   BUILD REAL APP
-========================================= */
-
-async function buildAndDownloadApp() {
-
-  if (!generatedApp || !generatedApp.html) {
-    showStatus(
-      "❌ Da farko ka danna 'Ƙirƙiri App Yanzu'.",
-      "error"
-    );
-    return;
-  }
-
-  const button = document.getElementById("buildButton");
-
-  button.disabled = true;
-  button.textContent = "🏗️ Ana gina App...";
-
-  try {
-
-    // Tabbatar project ya samu latest requirements
-    project.apiRequirement =
-      document.getElementById("apiRequirement").value.trim();
-
-    project.extraRequirements =
-      document.getElementById("extraRequirement").value.trim();
-
-    const response = await fetch(BUILD_APP_BACKEND, {
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json"
-      },
-
-      body: JSON.stringify({
-
-        appName:
-          project.appName ||
-          "Creator App",
-
-        html:
-          generatedApp.html,
-
-        css:
-          generatedApp.css,
-
-        js:
-          generatedApp.js,
-
-        project: {
-          ...project,
-
-          conversation:
-            conversation
-        }
-
-      })
-    });
-
-    const contentType =
-      response.headers.get("content-type") || "";
-
-    /*
-      Server zai iya dawo da JSON
-      ko kuma APK file kai tsaye.
-    */
-
-    if (
-      contentType.includes("application/json")
-    ) {
-
-      const data =
-        await response.json();
-
-      if (!response.ok) {
-
-        throw new Error(
-          data.error ||
-          data.message ||
-          "Build server ya samu matsala."
-        );
-
-      }
-
-      const downloadUrl =
-        data.downloadUrl ||
-        data.apkUrl ||
-        data.url ||
-        data.download;
-
-      if (!downloadUrl) {
-
-        throw new Error(
-          "Build ya amsa, amma bai dawo da APK download link ba."
-        );
-
-      }
-
-      // Buɗe APK/download link
-      const link =
-        document.createElement("a");
-
-      link.href =
-        downloadUrl;
-
-      link.target =
-        "_blank";
-
-      link.rel =
-        "noopener noreferrer";
-
-      document.body.appendChild(link);
-
-      link.click();
-
-      link.remove();
-
-      showStatus(
-        "✅ An gama build. Ana buɗe download ɗin yanzu.",
-        "success"
-      );
-
-      return;
-    }
-
-    /*
-      Idan server ya dawo da APK kai tsaye
-    */
-
-    if (
-      contentType.includes("application/vnd.android.package-archive") ||
-      contentType.includes("application/octet-stream")
-    ) {
-
-      const blob =
-        await response.blob();
-
-      const url =
-        URL.createObjectURL(blob);
-
-      const link =
-        document.createElement("a");
-
-      link.href =
-        url;
-
-      link.download =
-        (
-          project.appName ||
-          "creator-app"
-        )
-          .replace(
-            /[^a-z0-9_-]/gi,
-            "-"
-          )
-          .toLowerCase() +
-        ".apk";
-
-      document.body.appendChild(link);
-
-      link.click();
-
-      link.remove();
-
-      setTimeout(() => {
-        URL.revokeObjectURL(url);
-      }, 3000);
-
-      showStatus(
-        "✅ An gama gina APK. An fara saukewa.",
-        "success"
-      );
-
-      return;
-    }
-
-    throw new Error(
-      "Server ya dawo da bayanan da ba a gane su ba."
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "BUILD APP ERROR:",
-      error
-    );
-
-    showStatus(
-      "❌ Build bai yi nasara ba: " +
-      error.message,
-      "error"
-    );
-
-  }
-
-  finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "📲 Build & Download App";
-
-  }
-
-  }
-
-  if (
-    !generatedApp ||
-    !generatedApp.html
-  ) {
-
-    showStatus(
-      "Da farko ka ƙirƙiri app.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const button =
-    document.getElementById(
-      "buildButton"
-    );
-
-
-  button.disabled = true;
-
-  button.textContent =
-    "🏗️ Ana build app...";
-
-
-  try {
-
-    const appName =
-      project.appName ||
-      "Center App";
-
-
-    const response =
-      await fetch(
-        BUILD_APP_BACKEND,
-        {
-
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-
-            appName,
-
-            html:
-              generatedApp.html,
-
-            css:
-              generatedApp.css,
-
-            js:
-              generatedApp.js,
-
-            project: project
-
-          })
-
-        }
-      );
-
-
-    const data =
-      await response
-        .json()
-        .catch(() => ({}));
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Build Error: " +
-        response.status
-      );
-
-    }
-
-
-    /*
-      Endpoint ɗin build na iya dawo da
-      ɗaya daga cikin waɗannan:
-
-      downloadUrl
-      apkUrl
-      url
-    */
-
-    const downloadUrl =
-      data.downloadUrl ||
-      data.apkUrl ||
-      data.url;
-
-
-    if (!downloadUrl) {
-
-      throw new Error(
-        "Build ya kammala amma server bai dawo da download URL ba."
-      );
-
-    }
-
-
-    /*
-      Idan server ya samar da APK,
-      zai sauke APK.
-
-      Idan server ya samar da HTML,
-      zai sauke HTML.
-    */
-
-    const link =
-      document.createElement(
-        "a"
-      );
-
-
-    link.href =
-      downloadUrl;
-
-
-    link.target =
-      "_blank";
-
-
-    link.rel =
-      "noopener";
-
-
-    document.body.appendChild(
-      link
-    );
-
-
-    link.click();
-
-
-    link.remove();
-
-
-    showStatus(
-      "✅ Build ya kammala. An buɗe download link ɗin.",
-      "success"
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "BUILD ERROR:",
-      error
-    );
-
-
-    showStatus(
-      "❌ " +
-      error.message,
-      "error"
-    );
-
-  }
-
-  finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "📲 Build & Download App";
-
-  }
-
-}
-
-
-/* =========================================
-   HTML BACKUP DOWNLOAD
-========================================= */
-
-function downloadHtmlBackup() {
-
-  if (
-    !generatedApp ||
-    !generatedApp.html
-  ) {
-
-    showStatus(
-      "Da farko ka ƙirƙiri app.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const fullHtml = `
-
-<!DOCTYPE html>
-
-<html lang="ha">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>
-${escapeHtml(
-  project.appName ||
-  "Generated App"
-)}
-</title>
-
-<style>
-
-${generatedApp.css}
-
-</style>
-
-</head>
-
-<body>
-
-${generatedApp.html}
-
-<script>
-
-${generatedApp.js}
-
-<\/script>
-
-</body>
-
-</html>
-
-`;
-
-
-  const blob =
-    new Blob(
-      [fullHtml],
-      {
-        type:
-          "text/html;charset=utf-8"
-      }
-    );
-
-
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-
-  const link =
-    document.createElement(
-      "a"
-    );
-
-
-  link.href =
-    url;
-
-
-  link.download =
-    (
-      project.appName ||
-      "center-app"
-    )
-      .replace(
-        /[^a-z0-9_-]/gi,
-        "-"
-      )
-      .toLowerCase()
-    +
-    ".html";
-
-
-  document.body.appendChild(
-    link
-  );
-
-
-  link.click();
-
-
-  link.remove();
-
-
-  URL.revokeObjectURL(
-    url
-  );
-
-}
-
-
-/* =========================================
-   SAVE GENERATED APP
-========================================= */
-
-function saveGeneratedApp() {
-
-  if (
-    !generatedApp ||
-    !generatedApp.html
-  ) {
-
-    showStatus(
-      "Babu generated app da za a ajiye.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  localStorage.setItem(
-    "centerAppGeneratedApp",
-    JSON.stringify(
-      generatedApp
-    )
-  );
-
-
-  showStatus(
-    "✅ An ajiye Generated App.",
-    "success"
-  );
-
-}
-
-
-/* =========================================
-   SCROLL PREVIEW
-========================================= */
-
-function scrollToPreview() {
-
-  const preview =
-    document.getElementById(
-      "preview"
-    );
-
-
-  if (
-    preview.style.display ===
-    "none"
-  ) {
-
-    showStatus(
-      "Da farko ka ƙirƙiri app.",
-      "info"
-    );
-
-    return;
-
-  }
-
-
-  preview.scrollIntoView({
-    behavior: "smooth"
-  });
-
-}
-
-
-/* =========================================
-   IMAGE UPLOAD
-========================================= */
-
-function handleImageUpload() {
-
-  const input =
-    document.getElementById(
-      "imageFile"
-    );
-
-
-  const preview =
-    document.getElementById(
-      "imagePreview"
-    );
-
-
-  const name =
-    document.getElementById(
-      "imageName"
-    );
-
-
-  if (
-    !input.files ||
-    !input.files.length
-  ) {
-
-    preview.style.display =
-      "none";
-
-    name.textContent =
-      "";
-
-    return;
-
-  }
-
-
-  const file =
-    input.files[0];
-
-
-  name.textContent =
-    "An zaɓa: " +
-    file.name;
-
-
-  project.files.push({
-
-    name:
-      file.name,
-
-    type:
-      file.type,
-
-    size:
-      file.size
-
-  });
-
-
-  const reader =
-    new FileReader();
-
-
-  reader.onload =
-    function(event) {
-
-      preview.src =
-        event.target.result;
-
-      preview.style.display =
-        "block";
-
-    };
-
-
-  reader.readAsDataURL(
-    file
-  );
-
-}
-
-
-/* =========================================
-   FILE NAME
-========================================= */
-
-function showFileName(
-  inputId,
-  outputId
-) {
-
-  const input =
-    document.getElementById(
-      inputId
-    );
-
-
-  const output =
-    document.getElementById(
-      outputId
-    );
-
-
-  if (
-    input.files &&
-    input.files.length
-  ) {
-
-    const file =
-      input.files[0];
-
-
-    output.textContent =
-      "An zaɓa: " +
-      file.name;
-
-
-    project.files.push({
-
-      name:
-        file.name,
-
-      type:
-        file.type,
-
-      size:
-        file.size
-
-    });
-
-  }
-
-  else {
-
-    output.textContent =
-      "";
-
-  }
-
-}
-
-
-/* =========================================
-   STATUS
-========================================= */
-
-function showStatus(
-  message,
-  type
-) {
-
-  const status =
-    document.getElementById(
-      "status"
-    );
-
-
-  status.textContent =
-    message;
-
-
-  status.className =
-    "status " +
-    type;
-
-
-  status.style.display =
-    "block";
-
-
-  clearTimeout(
-    window.statusTimer
-  );
-
-
-  window.statusTimer =
-    setTimeout(
-      function() {
-
-        status.style.display =
-          "none";
-
-      },
-      7000
-    );
-
-}
-
-
-/* =========================================
-   ESCAPE HTML
-========================================= */
-
-function escapeHtml(
-  text
-) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-
-  div.textContent =
-    String(text || "");
-
-
-  return div.innerHTML;
-
-}
-
-
-/* =========================================
-   NEW PROJECT
-========================================= */
-
-function startNewProject() {
-
-  if (
-    !confirm(
-      "Kana son fara sabon project?"
-    )
-  ) {
-
-    return;
-
-  }
-
-
-  conversation = [];
-
-
-  project = {
-
-    appName: "",
-
-    description: "",
-
-    category: "",
-
-    users: [],
-
-    features: [],
-
-    pages: [],
-
-    database: [],
-
-    apis: [],
-
-    payments: [],
-
-    authentication: [],
-
-    files: [],
-
-    apiRequirement: "",
-
-    extraRequirements: ""
-
-  };
-
-
-  generatedApp = {
-
-    html: "",
-
-    css: "",
-
-    js: ""
-
-  };
-
-
-  document.getElementById(
-    "chatBox"
-  ).innerHTML = `
-
-    <div class="message ai">
-
-      <strong>
-        🤖 Creator App AI
-      </strong>
-
-      Sannu! 👋<br><br>
-
-      Wane irin app kake son ƙirƙira?
-
-    </div>
-
-  `;
-
-
-  document.getElementById(
-    "summary"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "builder"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "preview"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "codeResult"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "message"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "apiRequirement"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "extraRequirement"
-  ).value =
-    "";
-
-
-  showStatus(
-    "An fara sabon project.",
-    "success"
-  );
-
-}
-
-
-/* =========================================
-   ENTER KEY
-========================================= */
-
-document
-  .getElementById("message")
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-      if (
-        event.key === "Enter" &&
-        !event.shiftKey
-      ) {
-
-        event.preventDefault();
-
-        sendMessage();
-
-      }
-
-    }
-  );
-
-
-/* =========================================
-   LOAD SAVED PROJECT
-========================================= */
-
-try {
-
-  const saved =
-    localStorage.getItem(
-      "creatorAppProject"
-    );
-
-
-  if (saved) {
-
-    const data =
-      JSON.parse(saved);
-
-
-    if (
-      data &&
-      typeof data === "object"
-    ) {
-
-      project = {
-
-        ...project,
-
-        ...data
-
-      };
-
-    }
-
-
-    if (
-      Array.isArray(
-        data.conversation
-      )
-    ) {
-
-      conversation =
-        data.conversation;
-
-
-      /*
-        Kada muhimman conversation
-        ya bace bayan refresh.
-      */
-
-      const chatBox =
-        document.getElementById(
-          "chatBox"
-        );
-
-
-      for (
-        const item
-        of conversation
-      ) {
-
-        if (
-          item &&
-          item.text
-        ) {
-
-          addMessage(
-
-            item.role === "ai"
-              ? "ai"
-              : "user",
-
-            item.text
-
-          );
-
-        }
-
-      }
-
-    }
-
-
-    document.getElementById(
-      "apiRequirement"
-    ).value =
-      project.apiRequirement ||
-      "";
-
-
-    document.getElementById(
-      "extraRequirement"
-    ).value =
-      project.extraRequirements ||
-      "";
-
-
-    if (
-      project.description
-    ) {
-
-      showSummary();
-
-    }
-
-  }
-
-}
-
-catch (error) {
-
-  console.log(
-    "No saved project."
-  );
-
-}
-
-
-/* =========================================
-   LOAD GENERATED APP
-========================================= */
-
-try {
-
-  const savedGenerated =
-    localStorage.getItem(
-      "centerAppGeneratedApp"
-    );
-
-
-  if (savedGenerated) {
-
-    const data =
-      JSON.parse(
-        savedGenerated
-      );
-
-
-    if (
-      data &&
-      typeof data.html === "string" &&
-      typeof data.css === "string" &&
-      typeof data.js === "string"
-    ) {
-
-      generatedApp =
-        data;
-
-    }
-
-  }
-
-}
-
-catch (error) {
-
-  console.log(
-    "No generated app saved."
-  );
-
-}
-
-</script>
-
-</body>
-</html>
