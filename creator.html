@@ -1598,6 +1598,209 @@ function showCode() {
 
 async function buildAndDownloadApp() {
 
+  if (!generatedApp || !generatedApp.html) {
+    showStatus(
+      "❌ Da farko ka danna 'Ƙirƙiri App Yanzu'.",
+      "error"
+    );
+    return;
+  }
+
+  const button = document.getElementById("buildButton");
+
+  button.disabled = true;
+  button.textContent = "🏗️ Ana gina App...";
+
+  try {
+
+    // Tabbatar project ya samu latest requirements
+    project.apiRequirement =
+      document.getElementById("apiRequirement").value.trim();
+
+    project.extraRequirements =
+      document.getElementById("extraRequirement").value.trim();
+
+    const response = await fetch(BUILD_APP_BACKEND, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+
+        appName:
+          project.appName ||
+          "Creator App",
+
+        html:
+          generatedApp.html,
+
+        css:
+          generatedApp.css,
+
+        js:
+          generatedApp.js,
+
+        project: {
+          ...project,
+
+          conversation:
+            conversation
+        }
+
+      })
+    });
+
+    const contentType =
+      response.headers.get("content-type") || "";
+
+    /*
+      Server zai iya dawo da JSON
+      ko kuma APK file kai tsaye.
+    */
+
+    if (
+      contentType.includes("application/json")
+    ) {
+
+      const data =
+        await response.json();
+
+      if (!response.ok) {
+
+        throw new Error(
+          data.error ||
+          data.message ||
+          "Build server ya samu matsala."
+        );
+
+      }
+
+      const downloadUrl =
+        data.downloadUrl ||
+        data.apkUrl ||
+        data.url ||
+        data.download;
+
+      if (!downloadUrl) {
+
+        throw new Error(
+          "Build ya amsa, amma bai dawo da APK download link ba."
+        );
+
+      }
+
+      // Buɗe APK/download link
+      const link =
+        document.createElement("a");
+
+      link.href =
+        downloadUrl;
+
+      link.target =
+        "_blank";
+
+      link.rel =
+        "noopener noreferrer";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      showStatus(
+        "✅ An gama build. Ana buɗe download ɗin yanzu.",
+        "success"
+      );
+
+      return;
+    }
+
+    /*
+      Idan server ya dawo da APK kai tsaye
+    */
+
+    if (
+      contentType.includes("application/vnd.android.package-archive") ||
+      contentType.includes("application/octet-stream")
+    ) {
+
+      const blob =
+        await response.blob();
+
+      const url =
+        URL.createObjectURL(blob);
+
+      const link =
+        document.createElement("a");
+
+      link.href =
+        url;
+
+      link.download =
+        (
+          project.appName ||
+          "creator-app"
+        )
+          .replace(
+            /[^a-z0-9_-]/gi,
+            "-"
+          )
+          .toLowerCase() +
+        ".apk";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 3000);
+
+      showStatus(
+        "✅ An gama gina APK. An fara saukewa.",
+        "success"
+      );
+
+      return;
+    }
+
+    throw new Error(
+      "Server ya dawo da bayanan da ba a gane su ba."
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "BUILD APP ERROR:",
+      error
+    );
+
+    showStatus(
+      "❌ Build bai yi nasara ba: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+  finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "📲 Build & Download App";
+
+  }
+
+  }
+
   if (
     !generatedApp ||
     !generatedApp.html
