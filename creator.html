@@ -14,42 +14,41 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f7fb;
+      background: #f3f6fb;
       color: #172033;
     }
 
-    .header {
+    .top {
       background: #1261d6;
       color: white;
-      padding: 25px 18px;
+      padding: 25px 15px;
       text-align: center;
     }
 
     .robot {
-      font-size: 48px;
+      font-size: 45px;
     }
 
-    .header h1 {
+    .top h1 {
       margin: 8px 0;
-      font-size: 29px;
     }
 
-    .header p {
+    .top p {
       margin: 0;
     }
 
     .container {
-      max-width: 720px;
-      margin: 25px auto;
+      max-width: 850px;
+      margin: 20px auto;
       padding: 0 15px;
     }
 
     .card {
       background: white;
+      padding: 20px;
       border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 18px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
     }
 
     h2 {
@@ -60,7 +59,7 @@
     label {
       display: block;
       font-weight: bold;
-      margin: 15px 0 8px;
+      margin: 15px 0 7px;
     }
 
     input,
@@ -71,134 +70,246 @@
       border: 1px solid #ccd3df;
       border-radius: 9px;
       font-size: 16px;
-      outline: none;
+      font-family: inherit;
     }
 
     textarea {
-      min-height: 150px;
+      min-height: 140px;
       resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #1261d6;
     }
 
     .features {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
+      margin-top: 10px;
     }
 
     .feature {
-      background: #f8faff;
-      border: 1px solid #dce2ed;
-      padding: 12px;
+      border: 1px solid #d9dfeb;
       border-radius: 9px;
+      padding: 12px;
+      cursor: pointer;
+      background: #fafbfd;
     }
 
     .feature input {
       width: auto;
+      margin-right: 7px;
     }
 
-    .button {
+    .create {
       width: 100%;
-      margin-top: 20px;
-      padding: 15px;
-      border: none;
+      border: 0;
       border-radius: 10px;
+      padding: 16px;
+      margin-top: 20px;
       background: #1261d6;
       color: white;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .button:disabled {
+    .create:disabled {
       background: #999;
     }
 
-    .status {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 8px;
-      display: none;
-    }
-
-    .ai-status {
-      background: #eaf2ff;
-      color: #1261d6;
-    }
-
-    .offline-status {
-      background: #fff7df;
-      color: #8a6500;
-    }
-
     .error {
-      background: #ffecec;
-      color: #c00000;
+      color: #d00000;
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .status {
+      display: none;
       padding: 12px;
       margin-top: 15px;
-      border-radius: 8px;
-      display: none;
-    }
-
-    #result {
-      display: none;
-    }
-
-    .result-box {
-      background: #f7f9fc;
-      border: 1px solid #dce2ed;
-      border-radius: 10px;
-      padding: 18px;
-      line-height: 1.7;
-      white-space: pre-wrap;
-    }
-
-    .app-preview {
-      margin-top: 20px;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      overflow: hidden;
-      background: white;
-    }
-
-    .preview-header {
-      background: #1261d6;
-      color: white;
-      padding: 20px;
+      background: #eef5ff;
+      border-radius: 9px;
       text-align: center;
     }
 
-    .preview-body {
+    /* APP PREVIEW */
+
+    #previewSection {
+      display: none;
+    }
+
+    .preview-wrap {
+      background: #20242c;
+      padding: 25px 15px;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone {
+      width: 340px;
+      max-width: 100%;
+      min-height: 590px;
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,.35);
+      position: relative;
+    }
+
+    .phone-top {
+      height: 28px;
+      background: #111;
+    }
+
+    .app-header {
+      background: #1261d6;
+      color: white;
       padding: 20px;
     }
 
-    .preview-button {
-      display: inline-block;
-      padding: 10px 14px;
-      margin: 5px;
-      border-radius: 8px;
+    .app-header h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .app-header p {
+      margin: 7px 0 0;
+      opacity: .9;
+      font-size: 13px;
+    }
+
+    .app-content {
+      padding: 18px;
+    }
+
+    .balance {
+      background: #eef5ff;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .balance small {
+      color: #667085;
+    }
+
+    .balance strong {
+      display: block;
+      font-size: 27px;
+      margin-top: 7px;
+      color: #1261d6;
+    }
+
+    .app-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .app-button {
+      padding: 16px 8px;
+      border: 1px solid #dce2ec;
+      background: white;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .app-button:hover {
+      background: #eef5ff;
+    }
+
+    .login-screen {
+      padding: 25px 18px;
+    }
+
+    .login-screen h3 {
+      text-align: center;
+      color: #1261d6;
+      font-size: 25px;
+    }
+
+    .login-screen input {
+      margin-top: 10px;
+    }
+
+    .login-btn {
+      width: 100%;
+      border: 0;
       background: #1261d6;
       color: white;
-      font-size: 14px;
+      padding: 14px;
+      border-radius: 9px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .bottom-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      border-top: 1px solid #ddd;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .bottom-nav div {
+      text-align: center;
+      color: #555;
+    }
+
+    .bottom-nav .active {
+      color: #1261d6;
+      font-weight: bold;
+    }
+
+    .code-box {
+      background: #111827;
+      color: #d1fae5;
+      padding: 15px;
+      border-radius: 10px;
+      max-height: 300px;
+      overflow: auto;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 12px;
+      display: none;
+    }
+
+    .secondary {
+      width: 100%;
+      padding: 13px;
+      margin-top: 12px;
+      border: 1px solid #1261d6;
+      color: #1261d6;
+      background: white;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .back {
       display: block;
       text-align: center;
-      margin: 25px 0;
       color: #1261d6;
       text-decoration: none;
       font-weight: bold;
+      margin: 25px 0;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 520px) {
       .features {
         grid-template-columns: 1fr;
+      }
+
+      .phone {
+        width: 100%;
       }
     }
   </style>
@@ -206,54 +317,51 @@
 
 <body>
 
-  <div class="header">
+  <div class="top">
 
-    <div class="robot">🤖</div>
+    <div class="robot">🛠️</div>
 
     <h1>Creator App AI</h1>
 
-    <p>Gina app tare da taimakon AI</p>
+    <p>Rubuta ra'ayin app ɗinka, mu gina maka preview</p>
 
   </div>
 
 
   <div class="container">
 
+    <!-- FORM -->
+
     <div class="card">
 
-      <h2>🚀 Ƙirƙiri sabon app</h2>
+      <h2>🚀 Ƙirƙiri App</h2>
 
-      <p>
-        Bayyana app ɗin da kake son ginawa.
-        AI zai taimaka, kuma idan Gemini baya aiki,
-        Offline Creator zai ci gaba da tsara app ɗin.
-      </p>
-
-
-      <label>Sunan App</label>
+      <label for="appName">
+        Sunan App
+      </label>
 
       <input
         id="appName"
         type="text"
-        placeholder="Misali: OpeyB+"
+        placeholder="Misali: Mubarak Bank"
       >
 
 
-      <label>Bayyana App ɗinka</label>
+      <label for="description">
+        Menene app ɗin zai yi?
+      </label>
 
       <textarea
-        id="appDescription"
-        placeholder="Misali: Ina son app din Banki ne mai suna OpeyB+. Ya zama shafi fari, maballai da gumaka su zama blue..."
+        id="description"
+        placeholder="Misali: Ina son app na banki mai login, balance, transfer da transaction history."
       ></textarea>
 
 
-      <label>Nau'in App</label>
+      <label for="category">
+        Nau'in App
+      </label>
 
       <select id="category">
-
-        <option value="General">
-          General App
-        </option>
 
         <option value="Banking">
           🏦 Banking
@@ -263,8 +371,8 @@
           💼 Business
         </option>
 
-        <option value="Social Media">
-          📱 Social Media
+        <option value="Social">
+          👥 Social Media
         </option>
 
         <option value="Education">
@@ -279,66 +387,56 @@
           🤖 AI App
         </option>
 
+        <option value="General">
+          📱 General App
+        </option>
+
       </select>
 
 
-      <label>Features</label>
+      <label>
+        Features
+      </label>
 
       <div class="features">
 
         <label class="feature">
-          <input type="checkbox"
-                 value="Login"
-                 class="featureCheck">
-          👤 Login
+          <input type="checkbox" class="featureCheck" value="Login">
+          🔐 Login
         </label>
 
         <label class="feature">
-          <input type="checkbox"
-                 value="Dashboard"
-                 class="featureCheck">
+          <input type="checkbox" class="featureCheck" value="Dashboard">
           🏠 Dashboard
         </label>
 
         <label class="feature">
-          <input type="checkbox"
-                 value="Database"
-                 class="featureCheck">
+          <input type="checkbox" class="featureCheck" value="Database">
           🗄️ Database
         </label>
 
         <label class="feature">
-          <input type="checkbox"
-                 value="Chat AI"
-                 class="featureCheck">
-          🤖 Chat AI
-        </label>
-
-        <label class="feature">
-          <input type="checkbox"
-                 value="Payment"
-                 class="featureCheck">
+          <input type="checkbox" class="featureCheck" value="Payment">
           💳 Payment
         </label>
 
         <label class="feature">
-          <input type="checkbox"
-                 value="User Profile"
-                 class="featureCheck">
+          <input type="checkbox" class="featureCheck" value="Chat AI">
+          🤖 Chat AI
+        </label>
+
+        <label class="feature">
+          <input type="checkbox" class="featureCheck" value="Profile">
           👤 Profile
         </label>
 
         <label class="feature">
-          <input type="checkbox"
-                 value="Notifications"
-                 class="featureCheck">
+          <input type="checkbox" class="featureCheck" value="Notifications">
           🔔 Notifications
         </label>
 
         <label class="feature">
-          <input type="checkbox"
-                 value="API"
-                 class="featureCheck">
+          <input type="checkbox" class="featureCheck" value="API">
           🔑 API
         </label>
 
@@ -346,679 +444,599 @@
 
 
       <button
-        class="button"
+        class="create"
         id="createButton"
-        onclick="createApp()">
-
-        ✨ Fara Ƙirƙirar App
-
+        onclick="createApp()"
+      >
+        ✨ Ƙirƙiri App
       </button>
 
 
       <div
+        class="status"
         id="status"
-        class="status">
+      >
+        🤖 AI yana tsara app ɗinka...
       </div>
 
 
       <div
+        class="error"
         id="error"
-        class="error">
-      </div>
+      ></div>
 
     </div>
 
 
+    <!-- PREVIEW -->
+
     <div
       class="card"
-      id="result">
+      id="previewSection"
+    >
 
-      <h2>📱 Tsarin App ɗinka</h2>
+      <h2>📱 App Preview</h2>
 
-      <div
-        id="resultBox"
-        class="result-box">
+      <p>
+        Wannan shi ne preview na app ɗin da Creator App AI ya tsara.
+      </p>
+
+
+      <div class="preview-wrap">
+
+        <div class="phone">
+
+          <div class="phone-top"></div>
+
+          <div
+            id="phoneContent"
+          ></div>
+
+          <div class="bottom-nav">
+
+            <div class="active">
+              🏠<br>Home
+            </div>
+
+            <div>
+              📊<br>Dashboard
+            </div>
+
+            <div>
+              👤<br>Profile
+            </div>
+
+            <div>
+              ⚙️<br>Settings
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
 
-      <div
-        id="preview"
-        class="app-preview">
-      </div>
+      <button
+        class="secondary"
+        onclick="toggleCode()"
+      >
+        💻 Nuna Generated Code
+      </button>
+
+
+      <pre
+        id="codeBox"
+        class="code-box"
+      ></pre>
 
     </div>
 
 
     <a
       class="back"
-      href="dashboard.html">
-
-      ⬅ Komawa Dashboard
-
+      href="dashboard.html"
+    >
+      ⬅️ Komawa Dashboard
     </a>
 
   </div>
 
 
-<script>
+  <script>
 
-async function createApp() {
-
-  const appName =
-    document.getElementById("appName")
-      .value.trim();
-
-  const description =
-    document.getElementById("appDescription")
-      .value.trim();
-
-  const category =
-    document.getElementById("category")
-      .value;
-
-  const button =
-    document.getElementById("createButton");
-
-  const status =
-    document.getElementById("status");
-
-  const error =
-    document.getElementById("error");
-
-  const result =
-    document.getElementById("result");
-
-  const resultBox =
-    document.getElementById("resultBox");
-
-  const preview =
-    document.getElementById("preview");
+    const BACKEND_URL = "/api/chat";
 
 
-  status.style.display = "none";
-  error.style.display = "none";
+    async function createApp() {
+
+      const appName =
+        document.getElementById("appName").value.trim();
+
+      const description =
+        document.getElementById("description").value.trim();
+
+      const category =
+        document.getElementById("category").value;
+
+      const button =
+        document.getElementById("createButton");
+
+      const status =
+        document.getElementById("status");
+
+      const error =
+        document.getElementById("error");
+
+      const preview =
+        document.getElementById("previewSection");
 
 
-  if (!appName) {
+      error.textContent = "";
 
-    error.textContent =
-      "Rubuta sunan app ɗinka.";
+      if (!appName) {
+        error.textContent =
+          "Rubuta sunan app.";
+        return;
+      }
 
-    error.style.display = "block";
-
-    return;
-  }
-
-
-  if (!description) {
-
-    error.textContent =
-      "Bayyana abin da app ɗin zai yi.";
-
-    error.style.display = "block";
-
-    return;
-  }
+      if (!description) {
+        error.textContent =
+          "Bayyana abin da app ɗin zai yi.";
+        return;
+      }
 
 
-  const selectedFeatures =
-    Array.from(
-      document.querySelectorAll(".featureCheck:checked")
-    ).map(item => item.value);
+      const features =
+        Array.from(
+          document.querySelectorAll(
+            ".featureCheck:checked"
+          )
+        ).map(
+          item => item.value
+        );
 
 
-  button.disabled = true;
+      button.disabled = true;
 
-  button.textContent =
-    "⏳ Ana ƙirƙira...";
+      status.style.display = "block";
 
-
-  /*
-    ========================================
-    TRY AI FIRST
-    ========================================
-  */
-
-  try {
-
-    status.className =
-      "status ai-status";
-
-    status.textContent =
-      "🤖 Ana neman taimakon AI...";
-
-    status.style.display =
-      "block";
+      status.textContent =
+        "🤖 AI yana tsara app ɗinka...";
 
 
-    const prompt = `
+      const prompt = `
 Kai ne Creator App AI.
 
-Ka taimaka wa mai amfani tsara app.
+Ka taimaka wajen ƙirƙirar tsarin app.
 
-Sunan App:
+Sunan app:
 ${appName}
 
-Nau'in App:
+Nau'in app:
 ${category}
 
-Bayani:
+Abin da mai amfani yake so:
 ${description}
 
 Features:
-${selectedFeatures.join(", ") || "Babu"}
+${features.length ? features.join(", ") : "Basic features"}
 
-Ka ba da cikakken tsarin app cikin Hausa.
-
-Ka bayyana:
-1. Sunan app
-2. Manufarsa
-3. Launin UI
-4. Pages
-5. Buttons
-6. Icons
-7. Features
-8. Database
-9. APIs
-10. Matakan gina app.
-
-Idan app ɗin banki ne,
-ka yi la'akari da Login, Balance,
-Deposit, Withdraw, Transfer,
-Transaction History da Profile.
+Ka fahimci ra'ayin app ɗin sannan ka ba da taƙaitaccen bayani.
+Ka yi amfani da Hausa.
 `;
 
 
-    const response =
-      await fetch(
-        "/api/chat",
-        {
-          method: "POST",
+      try {
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+        /*
+          AI REQUEST
+        */
 
-          body: JSON.stringify({
-            message: prompt
-          })
+        const response =
+          await fetch(
+            BACKEND_URL,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                message: prompt
+              })
+            }
+          );
+
+
+        const data =
+          await response.json()
+          .catch(
+            () => ({})
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            "Backend Error: " +
+            response.status
+          );
         }
-      );
 
 
-    const data =
-      await response.json()
-        .catch(() => ({}));
+        /*
+          KO AI YA AMSA KO A'A,
+          ZA MU GINA PREVIEW.
+        */
+
+        const aiReply =
+          data.reply || "";
 
 
-    if (!response.ok) {
-      throw new Error(
-        data.error ||
-        "AI backend error"
-      );
+        createPreview(
+          appName,
+          category,
+          description,
+          features,
+          aiReply
+        );
+
+
+        status.textContent =
+          "✅ An ƙirƙiri App Preview!";
+
+
+        preview.style.display =
+          "block";
+
+
+        preview.scrollIntoView({
+          behavior: "smooth"
+        });
+
+
+      } catch (err) {
+
+        /*
+          Idan Gemini quota ta ƙare,
+          har yanzu muna iya nuna
+          basic preview.
+        */
+
+        createPreview(
+          appName,
+          category,
+          description,
+          features,
+          ""
+        );
+
+
+        status.textContent =
+          "📱 An ƙirƙiri Basic App Preview.";
+
+        preview.style.display =
+          "block";
+
+        preview.scrollIntoView({
+          behavior: "smooth"
+        });
+
+        console.error(err);
+
+      } finally {
+
+        button.disabled = false;
+
+      }
+
     }
 
 
-    if (!data.reply) {
-      throw new Error(
-        "AI bai dawo da amsa ba."
-      );
-    }
-
-
-    /*
-      AI SUCCESS
-    */
-
-    showResult(
-      data.reply,
+    function createPreview(
       appName,
       category,
-      selectedFeatures
-    );
-
-
-    status.className =
-      "status ai-status";
-
-    status.textContent =
-      "🤖 AI ya tsara app ɗinka.";
-
-    status.style.display =
-      "block";
-
-
-  } catch (aiError) {
-
-    /*
-      =====================================
-      AI FAILED → OFFLINE FALLBACK
-      =====================================
-    */
-
-    console.log(
-      "AI failed, using offline fallback:",
-      aiError
-    );
-
-
-    status.className =
-      "status offline-status";
-
-    status.textContent =
-      "📴 Gemini baya samuwa yanzu. Offline Creator yana aiki.";
-
-    status.style.display =
-      "block";
-
-
-    const offlineResult =
-      offlineCreator(
-        appName,
-        description,
-        category,
-        selectedFeatures
-      );
-
-
-    showResult(
-      offlineResult.text,
-      appName,
-      category,
-      offlineResult.features
-    );
-
-  }
-
-
-  button.disabled = false;
-
-  button.textContent =
-    "✨ Fara Ƙirƙirar App";
-
-}
-
-
-/*
-========================================
-OFFLINE CREATOR
-========================================
-*/
-
-function offlineCreator(
-  appName,
-  description,
-  category,
-  selectedFeatures
-) {
-
-  const text =
-    description.toLowerCase();
-
-
-  let features =
-    [...selectedFeatures];
-
-
-  /*
-    BANK DETECTION
-  */
-
-  if (
-    category === "Banking" ||
-    text.includes("bank") ||
-    text.includes("banki")
-  ) {
-
-    const bankFeatures = [
-      "Login",
-      "Dashboard",
-      "Account Balance",
-      "Deposit",
-      "Withdraw",
-      "Transfer",
-      "Transaction History",
-      "User Profile",
-      "Notifications"
-    ];
-
-
-    bankFeatures.forEach(
-      feature => {
-
-        if (!features.includes(feature)) {
-          features.push(feature);
-        }
-
-      }
-    );
-
-  }
-
-
-  /*
-    SOCIAL MEDIA
-  */
-
-  if (
-    category === "Social Media" ||
-    text.includes("social") ||
-    text.includes("facebook") ||
-    text.includes("tiktok")
-  ) {
-
-    [
-      "Login",
-      "Home Feed",
-      "Profile",
-      "Posts",
-      "Messages",
-      "Notifications"
-    ].forEach(feature => {
-
-      if (!features.includes(feature)) {
-        features.push(feature);
-      }
-
-    });
-
-  }
-
-
-  /*
-    AI APP
-  */
-
-  if (
-    category === "AI" ||
-    text.includes("ai")
-  ) {
-
-    [
-      "Login",
-      "Chat AI",
-      "AI History",
-      "User Profile"
-    ].forEach(feature => {
-
-      if (!features.includes(feature)) {
-        features.push(feature);
-      }
-
-    });
-
-  }
-
-
-  /*
-    DEFAULT
-  */
-
-  if (features.length === 0) {
-
-    features = [
-      "Home",
-      "Dashboard",
-      "User Profile",
-      "Settings"
-    ];
-
-  }
-
-
-  let pages = [
-    "Home",
-    "Dashboard"
-  ];
-
-
-  if (features.includes("Login")) {
-    pages.unshift("Login");
-  }
-
-
-  features.forEach(feature => {
-
-    if (
-      !pages.includes(feature) &&
-      feature !== "Login"
+      description,
+      features,
+      aiReply
     ) {
 
-      pages.push(feature);
+      const phone =
+        document.getElementById(
+          "phoneContent"
+        );
+
+
+      /*
+        BANKING APP
+      */
+
+      if (
+        category === "Banking" ||
+        /bank|banki/i.test(description)
+      ) {
+
+        phone.innerHTML = `
+
+          <div class="app-header">
+
+            <h3>
+              ${escapeHtml(appName)}
+            </h3>
+
+            <p>
+              Welcome Back 👋
+            </p>
+
+          </div>
+
+
+          <div class="app-content">
+
+            <div class="balance">
+
+              <small>
+                Available Balance
+              </small>
+
+              <strong>
+                ₦25,000.00
+              </strong>
+
+            </div>
+
+
+            <div class="app-buttons">
+
+              <div
+                class="app-button"
+                onclick="demoAction('Deposit')"
+              >
+                💰<br>
+                Deposit
+              </div>
+
+              <div
+                class="app-button"
+                onclick="demoAction('Withdraw')"
+              >
+                💸<br>
+                Withdraw
+              </div>
+
+              <div
+                class="app-button"
+                onclick="demoAction('Transfer')"
+              >
+                🔄<br>
+                Transfer
+              </div>
+
+              <div
+                class="app-button"
+                onclick="demoAction('History')"
+              >
+                📜<br>
+                History
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+      /*
+        DEFAULT APP
+      */
+
+      else {
+
+        phone.innerHTML = `
+
+          <div class="app-header">
+
+            <h3>
+              ${escapeHtml(appName)}
+            </h3>
+
+            <p>
+              Your App
+            </p>
+
+          </div>
+
+
+          <div class="app-content">
+
+            <div class="balance">
+
+              <small>
+                About this app
+              </small>
+
+              <strong
+                style="font-size:18px;"
+              >
+                ${escapeHtml(
+                  description.substring(
+                    0,
+                    100
+                  )
+                )}
+              </strong>
+
+            </div>
+
+
+            <div class="app-buttons">
+
+              ${
+                features.length
+                ?
+                features.map(
+                  feature => `
+                    <div
+                      class="app-button"
+                      onclick="demoAction('${escapeHtml(feature)}')"
+                    >
+                      ${getIcon(feature)}
+                      <br>
+                      ${escapeHtml(feature)}
+                    </div>
+                  `
+                ).join("")
+                :
+                `
+                  <div class="app-button">
+                    🏠<br>Home
+                  </div>
+
+                  <div class="app-button">
+                    ⚙️<br>Settings
+                  </div>
+                `
+              }
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      /*
+        GENERATED CODE PREVIEW
+      */
+
+      const generatedCode =
+`<!DOCTYPE html>
+<html lang="ha">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+<title>${appName}</title>
+</head>
+
+<body>
+
+<h1>${appName}</h1>
+
+<p>${description}</p>
+
+<h2>Category</h2>
+<p>${category}</p>
+
+<h2>Features</h2>
+<ul>
+${
+  features
+    .map(
+      f => `<li>${f}</li>`
+    )
+    .join("\n")
+}
+
+</ul>
+
+</body>
+</html>`;
+
+
+      document.getElementById(
+        "codeBox"
+      ).textContent =
+        generatedCode;
 
     }
 
-  });
 
+    function getIcon(feature) {
 
-  /*
-    COLORS
-  */
+      const icons = {
 
-  let colors =
-    "Fari background + Blue buttons da icons";
+        "Login": "🔐",
 
+        "Dashboard": "🏠",
 
-  if (
-    text.includes("green") ||
-    text.includes("kore")
-  ) {
+        "Database": "🗄️",
 
-    colors =
-      "Fari background + Green buttons da icons";
+        "Payment": "💳",
 
-  }
+        "Chat AI": "🤖",
 
+        "Profile": "👤",
 
-  if (
-    text.includes("red") ||
-    text.includes("ja")
-  ) {
+        "Notifications": "🔔",
 
-    colors =
-      "Fari background + Red buttons da icons";
+        "API": "🔑"
 
-  }
+      };
 
+      return icons[feature] || "📱";
 
-  if (
-    text.includes("black") ||
-    text.includes("baki")
-  ) {
+    }
 
-    colors =
-      "Fari background + Black buttons da icons";
 
-  }
+    function demoAction(name) {
 
+      alert(
+        name +
+        " feature na demo ne.\n" +
+        "Za mu haɗa shi da backend/database daga baya."
+      );
 
-  const result =
+    }
 
-`CENTER APP AI
-━━━━━━━━━━━━━━━━━━━━
 
-📱 SUNAN APP:
-${appName}
+    function toggleCode() {
 
-🏷️ NAU'IN APP:
-${category}
+      const box =
+        document.getElementById(
+          "codeBox"
+        );
 
-🎯 MANUFAR APP:
-${description}
+      if (
+        box.style.display === "block"
+      ) {
 
-🎨 UI / COLORS:
-${colors}
+        box.style.display =
+          "none";
 
-📄 PAGES:
-${pages.map(
-  (page, i) =>
-    `${i + 1}. ${page}`
-).join("\n")}
+      } else {
 
-⚙️ FEATURES:
-${features.map(
-  feature =>
-    "• " + feature
-).join("\n")}
+        box.style.display =
+          "block";
 
-🔘 BUTTONS:
-• Primary Button
-• Secondary Button
-• Navigation Buttons
-• Action Buttons
+      }
 
-🔵 ICONS:
-• Home
-• User
-• Settings
-• Notifications
-• Back
-• Menu
+    }
 
-🗄️ DATABASE:
-• Users
-• Profiles
-• App Settings
-• Transactions / App Data
 
-🔑 API:
-API za a ƙara ne idan app ɗin yana buƙatar
-backend ko wani external service.
+    function escapeHtml(text) {
 
-🚀 NEXT STEP:
-Za mu iya amfani da wannan tsarin
-mu fara gina UI na app ɗin.
+      const div =
+        document.createElement(
+          "div"
+        );
 
-━━━━━━━━━━━━━━━━━━━━
-Creator App AI Offline Mode`;
+      div.textContent =
+        text || "";
 
+      return div.innerHTML;
 
-  return {
-    text: result,
-    features: features
-  };
+    }
 
-}
-
-
-/*
-========================================
-SHOW RESULT
-========================================
-*/
-
-function showResult(
-  text,
-  appName,
-  category,
-  features
-) {
-
-  const result =
-    document.getElementById("result");
-
-  const resultBox =
-    document.getElementById("resultBox");
-
-  const preview =
-    document.getElementById("preview");
-
-
-  resultBox.textContent =
-    text;
-
-
-  /*
-    SIMPLE APP PREVIEW
-  */
-
-  const isBank =
-    category === "Banking";
-
-
-  const buttons =
-    isBank
-      ? [
-          "💰 Balance",
-          "💳 Deposit",
-          "💸 Transfer",
-          "📤 Withdraw",
-          "📜 Transactions"
-        ]
-      : [
-          "🏠 Home",
-          "👤 Profile",
-          "⚙️ Settings",
-          "🔔 Notifications"
-        ];
-
-
-  preview.innerHTML = `
-
-    <div class="preview-header">
-
-      <strong>
-        ${escapeHtml(appName)}
-      </strong>
-
-      <br>
-
-      <small>
-        App Preview
-      </small>
-
-    </div>
-
-
-    <div class="preview-body">
-
-      <h3>
-        Welcome to ${escapeHtml(appName)}
-      </h3>
-
-      ${buttons.map(
-        button =>
-          `<span class="preview-button">
-             ${button}
-           </span>`
-      ).join("")}
-
-    </div>
-
-  `;
-
-
-  result.style.display =
-    "block";
-
-
-  result.scrollIntoView({
-    behavior: "smooth"
-  });
-
-}
-
-
-/*
-========================================
-SECURITY
-========================================
-*/
-
-function escapeHtml(text) {
-
-  const div =
-    document.createElement("div");
-
-  div.textContent =
-    text;
-
-  return div.innerHTML;
-
-}
-
-</script>
+  </script>
 
 </body>
 </html>
