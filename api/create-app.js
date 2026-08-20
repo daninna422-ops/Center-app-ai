@@ -1,399 +1,267 @@
-let generatedApp = {
-  html: "",
-  css: "",
-  js: ""
-};
+export default async function handler(req, res) {
 
+  /* =========================
+     METHOD
+  ========================= */
 
-/* =========================================
-   CREATE APP
-========================================= */
+  if (req.method !== "POST") {
 
-async function createApp() {
+    return res.status(405).json({
+      error: "Method not allowed"
+    });
 
-  const appName =
-    document.getElementById("appName").value.trim();
-
-  const description =
-    document.getElementById("description").value.trim();
-
-  const category =
-    document.getElementById("category").value;
-
-  const button =
-    document.getElementById("createButton");
-
-  const loading =
-    document.getElementById("loading");
-
-  const errorBox =
-    document.getElementById("error");
-
-  const result =
-    document.getElementById("result");
-
-
-  /* =========================================
-     VALIDATION
-  ========================================= */
-
-  if (!appName) {
-
-    showError(
-      "Rubuta sunan app ɗinka."
-    );
-
-    return;
   }
 
 
-  if (!description) {
+  try {
 
-    showError(
-      "Bayyana abin da app ɗin zai yi."
-    );
+    /* =========================
+       GET USER PROMPT
+    ========================= */
 
-    return;
-  }
-
-
-  /* =========================================
-     FEATURES
-  ========================================= */
-
-  const selectedFeatures =
-    Array.from(
-      document.querySelectorAll(
-        ".featureCheck:checked"
-      )
-    ).map(
-      x => x.value
-    );
+    const { prompt } =
+      req.body || {};
 
 
-  const features =
-    selectedFeatures.length
-      ? selectedFeatures.join(", ")
-      : "Babu takamaiman features";
+    if (!prompt) {
+
+      return res.status(400).json({
+        error: "An aika da babu bayanin app."
+      });
+
+    }
 
 
-  /* =========================================
-     AI PROMPT
-  ========================================= */
+    /* =========================
+       GEMINI API KEY
+    ========================= */
 
-  const prompt = `
-Kai ne Creator App AI.
+    const apiKey =
+      process.env.GEMINI_API_KEY;
 
-Ka ƙirƙiri frontend application bisa wannan bayanin.
 
-SUNAN APP:
-${appName}
+    if (!apiKey) {
 
-NAU'IN APP:
-${category}
+      return res.status(500).json({
+        error:
+          "GEMINI_API_KEY ba a saita shi a Vercel ba."
+      });
 
-BAYANIN APP:
-${description}
+    }
 
-FEATURES:
-${features}
 
-Ka ƙirƙiri:
+    /* =========================
+       AI INSTRUCTION
+    ========================= */
 
-1. HTML
-2. CSS
-3. JavaScript
+    const systemPrompt = `
 
-Application ya zama:
+You are Center App AI, an expert AI web app builder.
 
-- Modern
-- Professional
-- Responsive ga Android
-- Buttons su yi aiki
-- Navigation ta yi aiki
-- Forms su yi aiki
-- UI ya zama mai kyau
+Your job is to create a complete working frontend application from the user's description.
 
-Idan yana buƙatar API
-wanda ba a bayar ba,
-yi DEMO frontend kawai.
+The user may write in Hausa or English.
 
-Kada ka saka API key
-a frontend.
+Return ONLY valid JSON.
 
-Ka dawo da JSON kawai:
+The JSON MUST have exactly these three fields:
 
 {
   "html": "...",
   "css": "...",
   "js": "..."
 }
+
+Rules:
+
+1. HTML must contain only the page body content.
+2. Do not include <html>, <head>, or <body> tags in html.
+3. CSS must contain all required styling.
+4. JavaScript must contain all required client-side functionality.
+5. Make the application responsive for Android phones.
+6. Make the design modern and professional.
+7. Use buttons, forms, navigation and cards when appropriate.
+8. Do not use external libraries unless absolutely necessary.
+9. Do not use markdown code fences.
+10. Do not write explanations outside the JSON.
+11. Make the generated application actually work in the browser.
+12. If the user asks for a banking app, create a DEMO frontend only unless real banking APIs are provided.
+13. Never invent real payment or banking transactions.
+14. If the requested app needs a backend/API that has not been provided, create a frontend demo and clearly represent backend-dependent actions as demo functionality.
+15. Use Hausa text when the user's request is in Hausa.
+16. Escape JSON correctly.
+
+User's app request:
+
+${prompt}
+
+Now generate the application.
 `;
 
 
-  /* =========================================
-     LOADING
-  ========================================= */
-
-  button.disabled = true;
-
-  button.textContent =
-    "🤖 Ana ƙirƙirar...";
-
-  loading.style.display =
-    "block";
-
-  errorBox.style.display =
-    "none";
-
-  result.style.display =
-    "none";
-
-
-  /* =========================================
-     BACKEND REQUEST
-  ========================================= */
-
-  try {
+    /* =========================
+       GEMINI REQUEST
+    ========================= */
 
     const response =
       await fetch(
-        "/api/create-app",
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
         {
           method: "POST",
 
           headers: {
-            "Content-Type":
-              "application/json"
+            "Content-Type": "application/json",
+            "x-goog-api-key": apiKey
           },
 
           body: JSON.stringify({
-            prompt: prompt
+
+            contents: [
+              {
+                role: "user",
+
+                parts: [
+                  {
+                    text: systemPrompt
+                  }
+                ]
+              }
+            ],
+
+            generationConfig: {
+
+              responseMimeType:
+                "application/json",
+
+              maxOutputTokens:
+                12000
+
+            }
+
           })
         }
       );
 
 
-    /* =========================================
-       READ SERVER RESPONSE
-    ========================================= */
+    /* =========================
+       GEMINI RESPONSE
+    ========================= */
 
-    const rawText =
-      await response.text();
+    const data =
+      await response.json();
 
 
-    let data = {};
+    if (!response.ok) {
+
+      return res.status(
+        response.status
+      ).json({
+
+        error:
+          data?.error?.message ||
+          "Gemini API error"
+
+      });
+
+    }
+
+
+    const text =
+      data?.candidates?.[0]
+        ?.content?.parts?.[0]
+        ?.text;
+
+
+    if (!text) {
+
+      return res.status(500).json({
+
+        error:
+          "Gemini bai dawo da code ba."
+
+      });
+
+    }
+
+
+    /* =========================
+       PARSE JSON
+    ========================= */
+
+    let app;
 
 
     try {
 
-      data =
-        JSON.parse(
-          rawText
-        );
+      app =
+        JSON.parse(text);
 
-    } catch (e) {
+    } catch (parseError) {
 
-      throw new Error(
-        "Server bai dawo da JSON ba. Response: " +
-        rawText.substring(
-          0,
-          300
-        )
-      );
+      /*
+       * Sometimes AI may return
+       * JSON inside markdown.
+       */
+
+      const cleaned =
+        text
+          .replace(/^```json/i, "")
+          .replace(/^```/i, "")
+          .replace(/```$/i, "")
+          .trim();
+
+
+      try {
+
+        app =
+          JSON.parse(cleaned);
+
+      } catch (secondError) {
+
+        return res.status(500).json({
+
+          error:
+            "AI ta dawo da JSON mara inganci."
+
+        });
+
+      }
 
     }
 
 
-    /* =========================================
-       BACKEND ERROR
-    ========================================= */
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Backend error: HTTP " +
-        response.status
-      );
-
-    }
-
-
-    /* =========================================
-       VALIDATE AI RESULT
-    ========================================= */
+    /* =========================
+       VALIDATE FILES
+    ========================= */
 
     if (
-      typeof data.html !==
-      "string"
+      typeof app.html !== "string" ||
+      typeof app.css !== "string" ||
+      typeof app.js !== "string"
     ) {
 
-      throw new Error(
-        "AI bai dawo da HTML ba."
-      );
+      return res.status(500).json({
+
+        error:
+          "Generated app bai ƙunshi HTML, CSS da JS daidai ba."
+
+      });
 
     }
 
 
-    if (
-      typeof data.css !==
-      "string"
-    ) {
+    /* =========================
+       SUCCESS
+    ========================= */
 
-      throw new Error(
-        "AI bai dawo da CSS ba."
-      );
+    return res.status(200).json({
 
-    }
+      html: app.html,
 
+      css: app.css,
 
-    if (
-      typeof data.js !==
-      "string"
-    ) {
+      js: app.js
 
-      throw new Error(
-        "AI bai dawo da JavaScript ba."
-      );
-
-    }
-
-
-    /* =========================================
-       SAVE GENERATED APP
-    ========================================= */
-
-    generatedApp = {
-
-      html:
-        data.html,
-
-      css:
-        data.css,
-
-      js:
-        data.js
-
-    };
-
-
-    /* =========================================
-       SHOW HTML CODE
-    ========================================= */
-
-    const htmlCode =
-      document.getElementById(
-        "htmlCode"
-      );
-
-
-    if (htmlCode) {
-
-      htmlCode.textContent =
-        data.html;
-
-    }
-
-
-    /* =========================================
-       SHOW CSS CODE
-    ========================================= */
-
-    const cssCode =
-      document.getElementById(
-        "cssCode"
-      );
-
-
-    if (cssCode) {
-
-      cssCode.textContent =
-        data.css;
-
-    }
-
-
-    /* =========================================
-       SHOW JAVASCRIPT CODE
-    ========================================= */
-
-    const jsCode =
-      document.getElementById(
-        "jsCode"
-      );
-
-
-    if (jsCode) {
-
-      jsCode.textContent =
-        data.js;
-
-    }
-
-
-    /* =========================================
-       APP INFORMATION
-    ========================================= */
-
-    const appInfo =
-      document.getElementById(
-        "appInfo"
-      );
-
-
-    if (appInfo) {
-
-      appInfo.innerHTML =
-        `
-        <p>
-          <strong>APP:</strong>
-          ${escapeHtml(appName)}
-        </p>
-
-        <p>
-          <strong>NAU'I:</strong>
-          ${escapeHtml(category)}
-        </p>
-
-        <p>
-          <strong>STATUS:</strong>
-          ✅ An ƙirƙiri frontend
-        </p>
-        `;
-
-    }
-
-
-    /* =========================================
-       PREVIEW
-    ========================================= */
-
-    if (
-      typeof showPreview ===
-      "function"
-    ) {
-
-      showPreview(
-        data.html,
-        data.css,
-        data.js
-      );
-
-    }
-
-
-    /* =========================================
-       SHOW RESULT
-    ========================================= */
-
-    result.style.display =
-      "block";
-
-
-    result.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
     });
 
 
@@ -405,438 +273,14 @@ Ka dawo da JSON kawai:
     );
 
 
-    showError(
-      error.message ||
-      "An samu matsala wajen ƙirƙirar app."
-    );
+    return res.status(500).json({
 
+      error:
+        error?.message ||
+        "An samu matsala a server."
 
-  } finally {
-
-    /* =========================================
-       RESTORE BUTTON
-    ========================================= */
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "✨ Fara Ƙirƙirar App";
-
-
-    loading.style.display =
-      "none";
+    });
 
   }
 
-}
-
-
-/* =========================================
-   SHOW ERROR
-========================================= */
-
-function showError(message) {
-
-  const errorBox =
-    document.getElementById(
-      "error"
-    );
-
-
-  if (!errorBox) {
-
-    alert(message);
-
-    return;
-
-  }
-
-
-  errorBox.textContent =
-    "❌ " + message;
-
-
-  errorBox.style.display =
-    "block";
-
-
-  errorBox.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
-
-}
-
-
-/* =========================================
-   ESCAPE HTML
-========================================= */
-
-function escapeHtml(text) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-
-  div.textContent =
-    text;
-
-
-  return div.innerHTML;
-
-}
-
-
-/* =========================================
-   DOWNLOAD GENERATED HTML
-========================================= */
-
-function downloadGeneratedApp() {
-
-  if (
-    !generatedApp.html
-  ) {
-
-    alert(
-      "Da farko ka ƙirƙiri app."
-    );
-
-    return;
-
-  }
-
-
-  const fullHtml = `
-<!DOCTYPE html>
-
-<html lang="ha">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Generated App</title>
-
-<style>
-
-${generatedApp.css}
-
-</style>
-
-</head>
-
-<body>
-
-${generatedApp.html}
-
-<script>
-
-${generatedApp.js}
-
-<\/script>
-
-</body>
-
-</html>
-`;
-
-
-  const blob =
-    new Blob(
-      [fullHtml],
-      {
-        type:
-          "text/html;charset=utf-8"
-      }
-    );
-
-
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-
-  const link =
-    document.createElement(
-      "a"
-    );
-
-
-  link.href =
-    url;
-
-
-  link.download =
-    "generated-app.html";
-
-
-  document.body.appendChild(
-    link
-  );
-
-
-  link.click();
-
-
-  link.remove();
-
-
-  URL.revokeObjectURL(
-    url
-  );
-
-}
-
-
-/* =========================================
-   COPY GENERATED HTML
-========================================= */
-
-function copyGeneratedHTML() {
-
-  if (
-    !generatedApp.html
-  ) {
-
-    alert(
-      "Da farko ka ƙirƙiri app."
-    );
-
-    return;
-
-  }
-
-
-  const fullHtml = `
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<style>
-
-${generatedApp.css}
-
-</style>
-
-</head>
-
-<body>
-
-${generatedApp.html}
-
-<script>
-
-${generatedApp.js}
-
-<\/script>
-
-</body>
-
-</html>
-`;
-
-
-  navigator.clipboard
-    .writeText(
-      fullHtml
-    )
-    .then(
-      () => {
-
-        alert(
-          "✅ An kwafe complete app code."
-        );
-
-      }
-    )
-    .catch(
-      () => {
-
-        alert(
-          "Ba a iya kwafa code ba."
-        );
-
-      }
-    );
-
-}
-
-
-/* =========================================
-   SAVE PROJECT
-========================================= */
-
-function saveGeneratedProject() {
-
-  if (
-    !generatedApp.html
-  ) {
-
-    alert(
-      "Da farko ka ƙirƙiri app."
-    );
-
-    return;
-
-  }
-
-
-  const appNameInput =
-    document.getElementById(
-      "appName"
-    );
-
-
-  const descriptionInput =
-    document.getElementById(
-      "description"
-    );
-
-
-  const categoryInput =
-    document.getElementById(
-      "category"
-    );
-
-
-  const project = {
-
-    appName:
-      appNameInput
-        ? appNameInput.value.trim()
-        : "",
-
-    description:
-      descriptionInput
-        ? descriptionInput.value.trim()
-        : "",
-
-    category:
-      categoryInput
-        ? categoryInput.value
-        : "",
-
-    html:
-      generatedApp.html,
-
-    css:
-      generatedApp.css,
-
-    js:
-      generatedApp.js,
-
-    savedAt:
-      new Date().toISOString()
-
-  };
-
-
-  localStorage.setItem(
-    "centerAppGeneratedProject",
-    JSON.stringify(
-      project
-    )
-  );
-
-
-  alert(
-    "✅ An ajiye project ɗin."
-  );
-
-}
-
-
-/* =========================================
-   LOAD SAVED PROJECT
-========================================= */
-
-function loadGeneratedProject() {
-
-  try {
-
-    const saved =
-      localStorage.getItem(
-        "centerAppGeneratedProject"
-      );
-
-
-    if (!saved) {
-
-      return;
-
-    }
-
-
-    const project =
-      JSON.parse(
-        saved
-      );
-
-
-    if (
-      !project.html ||
-      !project.css ||
-      !project.js
-    ) {
-
-      return;
-
-    }
-
-
-    generatedApp = {
-
-      html:
-        project.html,
-
-      css:
-        project.css,
-
-      js:
-        project.js
-
-    };
-
-
-  } catch (error) {
-
-    console.error(
-      "LOAD PROJECT ERROR:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   AUTO LOAD
-========================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function() {
-
-    loadGeneratedProject();
-
-  }
-);
+        }
