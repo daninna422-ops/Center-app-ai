@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ha">
 <head>
@@ -12,10 +11,6 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -24,267 +19,173 @@
     }
 
     .header {
-      background: linear-gradient(135deg, #1261d6, #673ab7);
+      background: linear-gradient(135deg, #1261d6, #0645a5);
       color: white;
-      padding: 28px 18px;
+      padding: 25px 18px;
       text-align: center;
     }
 
-    .robot {
+    .logo {
       font-size: 50px;
     }
 
     .header h1 {
       margin: 8px 0;
-      font-size: 30px;
+      font-size: 29px;
     }
 
     .header p {
       margin: 0;
-      font-size: 16px;
-      opacity: .95;
+      opacity: 0.9;
     }
 
     .container {
-      max-width: 850px;
-      margin: 25px auto;
+      max-width: 720px;
+      margin: 22px auto;
       padding: 0 15px;
     }
 
     .card {
       background: white;
+      border-radius: 18px;
       padding: 22px;
-      margin-bottom: 20px;
-      border-radius: 16px;
-      box-shadow: 0 3px 15px rgba(0,0,0,.08);
+      margin-bottom: 18px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
     }
 
     .card h2 {
-      margin-top: 0;
       color: #1261d6;
+      margin-top: 0;
     }
 
-    label.title {
-      display: block;
-      font-weight: bold;
-      margin-top: 18px;
-      margin-bottom: 8px;
+    .welcome {
+      line-height: 1.7;
     }
 
-    input,
-    textarea,
-    select {
-      width: 100%;
+    .chat-box {
+      max-height: 520px;
+      overflow-y: auto;
+      padding: 5px;
+      margin-bottom: 15px;
+    }
+
+    .message {
       padding: 13px;
-      border: 1px solid #ccd3df;
-      border-radius: 9px;
-      font-size: 16px;
-      outline: none;
-      font-family: inherit;
+      margin: 10px 0;
+      border-radius: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .ai {
+      background: #edf4ff;
+      border-left: 4px solid #1261d6;
+    }
+
+    .user {
+      background: #f0f0f0;
+      border-right: 4px solid #777;
+    }
+
+    .message strong {
+      display: block;
+      margin-bottom: 5px;
     }
 
     textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #1261d6;
-      box-shadow: 0 0 0 3px rgba(18,97,214,.08);
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px;
-      border: 1px solid #d9deea;
-      border-radius: 9px;
-      background: #fafbfe;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .feature:hover {
-      border-color: #1261d6;
-      background: #f4f8ff;
-    }
-
-    .feature input {
-      width: auto;
-      margin: 0;
-    }
-
-    .create-btn {
       width: 100%;
-      margin-top: 22px;
-      padding: 15px;
+      min-height: 100px;
+      padding: 13px;
+      border: 1px solid #cbd3df;
+      border-radius: 10px;
+      font-size: 16px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #1261d6;
+    }
+
+    button {
+      width: 100%;
       border: none;
       border-radius: 10px;
-      background: linear-gradient(135deg, #1261d6, #673ab7);
+      padding: 15px;
+      margin-top: 12px;
+      background: #1261d6;
       color: white;
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
-      transition: .2s;
     }
 
-    .create-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .create-btn:disabled {
+    button:disabled {
       background: #999;
       cursor: not-allowed;
-      transform: none;
     }
 
-    .error {
-      color: #a40000;
-      background: #fff0f0;
-      border: 1px solid #ffcaca;
-      padding: 13px;
-      border-radius: 8px;
+    .secondary {
+      background: #e9eef7;
+      color: #1261d6;
+    }
+
+    .danger {
+      background: #d62828;
+    }
+
+    .upload-area {
+      border: 2px dashed #b8c4d6;
+      padding: 20px;
+      text-align: center;
+      border-radius: 12px;
       margin-top: 15px;
+      background: #fafcff;
+    }
+
+    .upload-area input {
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    .file-name {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .summary {
       display: none;
-      line-height: 1.6;
+    }
+
+    .summary-item {
+      background: #f7f9fc;
+      padding: 13px;
+      border-radius: 9px;
+      margin: 9px 0;
+    }
+
+    .summary-item strong {
+      color: #1261d6;
+    }
+
+    .status {
+      text-align: center;
+      padding: 12px;
+      border-radius: 9px;
+      margin-top: 12px;
+      display: none;
     }
 
     .success {
-      color: #086b35;
-      background: #edfff4;
-      border: 1px solid #b9efce;
-      padding: 13px;
-      border-radius: 8px;
-      margin-top: 15px;
-      display: none;
+      background: #e9f8ef;
+      color: #08783e;
     }
 
-    .loading {
-      text-align: center;
-      color: #1261d6;
-      margin-top: 15px;
-      display: none;
-      padding: 15px;
-    }
-
-    .spinner {
-      width: 32px;
-      height: 32px;
-      border: 4px solid #dce8ff;
-      border-top-color: #1261d6;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 10px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    #result {
-      display: none;
-    }
-
-    .result-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .result-box {
-      background: #f7f9fc;
-      border: 1px solid #dce2ed;
-      border-radius: 10px;
-      padding: 15px;
-      white-space: pre-wrap;
-      line-height: 1.7;
-      text-align: left;
-      margin-top: 15px;
-      max-height: 250px;
-      overflow: auto;
-    }
-
-    .preview-title {
-      margin-top: 25px;
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: #1261d6;
-    }
-
-    .preview-frame {
-      width: 100%;
-      height: 600px;
-      border: 1px solid #dce2ed;
-      border-radius: 12px;
-      background: white;
-      display: block;
-    }
-
-    .download-area {
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 12px;
-      background: #f1f6ff;
-      border: 1px solid #d7e5ff;
-    }
-
-    .download-area h3 {
-      margin-top: 0;
-      color: #1261d6;
-    }
-
-    .download-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .download-btn {
-      border: none;
-      border-radius: 9px;
-      padding: 13px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      background: #1261d6;
-      color: white;
-    }
-
-    .download-btn.zip {
-      background: #673ab7;
-      grid-column: 1 / -1;
-      font-size: 17px;
-      padding: 15px;
-    }
-
-    .download-btn:hover {
-      opacity: .9;
-    }
-
-    .download-btn:disabled {
-      background: #aaa;
-      cursor: not-allowed;
-    }
-
-    .files-info {
-      margin-top: 12px;
-      color: #667085;
-      font-size: 14px;
-      line-height: 1.6;
+    .error {
+      background: #fff0f0;
+      color: #c40000;
     }
 
     .back {
@@ -296,36 +197,1028 @@
       font-weight: bold;
     }
 
-    .clear-btn {
-      background: #fff;
-      color: #d00000;
-      border: 1px solid #ffcaca;
-      padding: 9px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
+    .small {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+
+    <div class="logo">🛠️🤖</div>
+
+    <h1>Creator App AI</h1>
+
+    <p>Ka bayyana app ɗinka, AI zai taimaka maka tsara shi.</p>
+
+  </div>
+
+
+  <div class="container">
+
+    <!-- WELCOME -->
+
+    <div class="card">
+
+      <h2>🚀 Gina App ɗinka</h2>
+
+      <div class="welcome">
+
+        <p>
+          Babu buƙatar ka san programming.
+          Ka gaya wa Creator App AI irin app ɗin da kake son ginawa.
+        </p>
+
+        <p>
+          AI zai yi maka tambayoyi domin fahimtar app ɗin,
+          kamar features, users, login, database, API, payment,
+          logo da sauran abubuwan da app ɗin yake bukata.
+        </p>
+
+        <p>
+          <strong>Misali:</strong>
+          "Ina son app na taxi."
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- AI INTERVIEW -->
+
+    <div class="card">
+
+      <h2>🤖 AI Interview</h2>
+
+      <div
+        id="chatBox"
+        class="chat-box"
+      >
+
+        <div class="message ai">
+
+          <strong>🤖 Creator App AI</strong>
+
+          Sannu! 👋
+
+          Wane irin app kake son ƙirƙira?
+
+          Ka bayyana min app ɗin da kake so da kalmominka.
+          Ba sai ka san programming ba.
+
+        </div>
+
+      </div>
+
+
+      <textarea
+        id="message"
+        placeholder="Misali: Ina son app na taxi wanda mutane zasu iya neman mota..."
+      ></textarea>
+
+
+      <button
+        id="sendButton"
+        onclick="sendMessage()"
+      >
+        Aika 🚀
+      </button>
+
+
+      <button
+        class="secondary"
+        onclick="startNewProject()"
+      >
+        🆕 Fara Sabon Project
+      </button>
+
+
+      <div
+        id="status"
+        class="status"
+      ></div>
+
+    </div>
+
+
+    <!-- UPLOADS -->
+
+    <div class="card">
+
+      <h2>📎 Abubuwan da App ɗin yake bukata</h2>
+
+      <p class="small">
+        Idan AI ya bukaci logo, hoto ko wani file,
+        za ka iya zaɓar shi a nan.
+      </p>
+
+
+      <div class="upload-area">
+
+        <strong>🖼️ Upload Logo ko Hoto</strong>
+
+        <br>
+
+        <input
+          type="file"
+          id="imageFile"
+          accept="image/*"
+          onchange="showFileName('imageFile','imageName')"
+        >
+
+        <div
+          id="imageName"
+          class="file-name"
+        ></div>
+
+      </div>
+
+
+      <div class="upload-area">
+
+        <strong>📄 Upload Document</strong>
+
+        <br>
+
+        <input
+          type="file"
+          id="documentFile"
+          accept=".pdf,.doc,.docx,.txt"
+          onchange="showFileName('documentFile','documentName')"
+        >
+
+        <div
+          id="documentName"
+          class="file-name"
+        ></div>
+
+      </div>
+
+      <p class="small">
+        ⚠️ Kada ka upload BVN, NIN, password, API key ko
+        wani sirrin banki a wannan matakin. Za mu gina
+        secure integration kafin a haɗa irin waɗannan bayanai.
+      </p>
+
+    </div>
+
+
+    <!-- PROJECT SUMMARY -->
+
+    <div
+      id="summary"
+      class="card summary"
+    >
+
+      <h2>📱 Project Summary</h2>
+
+      <div
+        id="summaryContent"
+      ></div>
+
+
+      <button
+        onclick="saveProject()"
+      >
+        💾 Ajiye Project
+      </button>
+
+
+      <button
+        onclick="prepareBuild()"
+      >
+        🏗️ Shirya App Builder
+      </button>
+
+    </div>
+
+
+    <a
+      class="back"
+      href="dashboard.html"
+    >
+      ⬅ Komawa Dashboard
+    </a>
+
+  </div>
+
+
+  <script>
+
+    /*
+      =====================================================
+      CREATOR APP AI
+      =====================================================
+
+      API ɗin yana cikin Vercel:
+
+      /api/chat
+
+      Ba a saka GEMINI_API_KEY a frontend ba.
+    */
+
+
+    const BACKEND_URL = "/api/chat";
+
+
+    let conversation = [];
+
+    let project = {
+
+      appName: "",
+
+      description: "",
+
+      category: "",
+
+      users: [],
+
+      features: [],
+
+      pages: [],
+
+      database: [],
+
+      apis: [],
+
+      payments: [],
+
+      authentication: [],
+
+      files: [],
+
+      extraRequirements: ""
+
+    };
+
+
+    /*
+      =====================================================
+      SEND MESSAGE
+      =====================================================
+    */
+
+    async function sendMessage() {
+
+      const input =
+        document.getElementById("message");
+
+      const button =
+        document.getElementById("sendButton");
+
+      const message =
+        input.value.trim();
+
+
+      if (!message) {
+
+        showStatus(
+          "Rubuta saƙonka tukuna.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      addMessage(
+        "user",
+        message
+      );
+
+
+      input.value = "";
+
+      button.disabled = true;
+
+      button.textContent =
+        "🤖 AI yana tunani...";
+
+
+      try {
+
+        /*
+          Wannan prompt yana gaya wa AI
+          cewa shi ne Creator App AI.
+        */
+
+        const creatorPrompt = `
+
+Kai ne "Creator App AI", wani AI App Builder.
+
+Aikin ka ba wai bada code kawai ba ne.
+
+Aikin ka shi ne taimaka wa mai amfani ya tsara
+kowane irin application da yake son ginawa.
+
+Mai amfani zai iya son:
+
+- Banking app
+- Wallet
+- E-commerce
+- Social media
+- Education
+- Taxi
+- Delivery
+- Hospital
+- Business
+- Movie
+- Entertainment
+- AI app
+- News
+- Game
+- Real estate
+- ko kowane irin app.
+
+MUHIMMIN TSARI:
+
+1. Ka fara fahimtar irin app ɗin da yake so.
+
+2. Ka tambaye shi tambaya ɗaya ko kaɗan a lokaci guda,
+   kada ka jefa masa tambayoyi masu yawa lokaci guda.
+
+3. Ka tambayi abubuwan da app ɗin yake bukata
+   bisa irin app ɗin.
+
+4. Tambayoyin na iya kasancewa:
+
+- Menene sunan app?
+- Waɗanne mutane za su yi amfani da shi?
+- Menene babban aikin app?
+- Login?
+- Phone number?
+- OTP?
+- Database?
+- Payment?
+- API?
+- Notifications?
+- Location/GPS?
+- Admin dashboard?
+- User dashboard?
+- Logo?
+- Images?
+- Documents?
+- Sauran requirements?
+
+5. Kada ka tambayi BVN, NIN, ID card ko wasu sensitive
+   documents sai idan aikin app ɗin yana bukatar
+   official verification.
+
+6. Idan ana buƙatar API, ka gaya wa mai amfani
+   cewa za a haɗa shi ta secure backend.
+   Kada ka nemi mai amfani ya saka secret API key
+   cikin chat idan za a iya amfani da secure integration.
+
+7. Idan an gama tattara requirements,
+   ka nuna PROJECT SUMMARY.
+
+8. Kada ka yi iƙirarin cewa an riga an gina APK
+   idan ba a yi build ba.
+
+9. A wannan matakin manufarmu ita ce:
+   REQUIREMENTS → APP PLAN → APP BUILDER.
+
+10. Ka yi magana da Hausa idan mai amfani ya yi Hausa.
+    Ka yi Turanci idan mai amfani ya yi Turanci.
+
+Bayanin project na yanzu:
+
+${JSON.stringify(project)}
+
+Conversation:
+
+${JSON.stringify(conversation)}
+
+Sabon saƙon mai amfani:
+
+${message}
+
+Ka amsa kai tsaye ga mai amfani.
+`;
+
+
+        const response =
+          await fetch(
+            BACKEND_URL,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json"
+              },
+
+              body: JSON.stringify({
+                message: creatorPrompt
+              })
+            }
+          );
+
+
+        const data =
+          await response.json()
+            .catch(() => ({}));
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            "HTTP Error: " +
+            response.status
+          );
+
+        }
+
+
+        if (!data.reply) {
+
+          throw new Error(
+            "AI bai dawo da amsa ba."
+          );
+
+        }
+
+
+        const reply =
+          data.reply;
+
+
+        conversation.push({
+
+          role: "user",
+
+          text: message
+
+        });
+
+
+        conversation.push({
+
+          role: "ai",
+
+          text: reply
+
+        });
+
+
+        addMessage(
+          "ai",
+          reply
+        );
+
+
+        /*
+          Gwada gano wasu bayanai daga
+          amsar AI domin summary.
+        */
+
+        updateProjectFromConversation(
+          message,
+          reply
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Creator App AI:",
+          error
+        );
+
+
+        addMessage(
+          "ai",
+          "❌ An samu matsala: " +
+          error.message
+        );
+
+
+        showStatus(
+          error.message,
+          "error"
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "Aika 🚀";
+
+      }
+
     }
 
-    @media (max-width: 600px) {
 
-      .features {
-        grid-template-columns: 1fr;
-      }
+    /*
+      =====================================================
+      ADD MESSAGE
+      =====================================================
+    */
 
-      .download-buttons {
-        grid-template-columns: 1fr;
-      }
+    function addMessage(
+      type,
+      text
+    ) {
 
-      .download-btn.zip {
-        grid-column: auto;
-      }
+      const chatBox =
+        document.getElementById("chatBox");
 
-      .preview-frame {
-        height: 520px;
-      }
 
-      .header h1 {
-        font-size: 25px;
-      }
+      const div =
+        document.createElement("div");
+
+
+      div.className =
+        "message " +
+        (type === "ai"
+          ? "ai"
+          : "user");
+
+
+      const title =
+        type === "ai"
+          ? "🤖 Creator App AI"
+          : "👤 Kai";
+
+
+      div.innerHTML =
+        "<strong>" +
+        title +
+        "</strong>" +
+        escapeHtml(text);
+
+
+      chatBox.appendChild(div);
+
+
+      chatBox.scrollTop =
+        chatBox.scrollHeight;
+
     }
-  </style
+
+
+    /*
+      =====================================================
+      PROJECT INFORMATION
+      =====================================================
+    */
+
+    function updateProjectFromConversation(
+      userMessage,
+      aiReply
+    ) {
+
+      /*
+        Wannan simple parser ne na farko.
+        Daga baya za mu mayar da shi
+        zuwa real structured AI output.
+      */
+
+
+      if (!project.description) {
+
+        project.description =
+          userMessage;
+
+      }
+
+
+      const lower =
+        userMessage.toLowerCase();
+
+
+      if (
+        lower.includes("bank")
+      ) {
+
+        project.category =
+          "Banking";
+
+      } else if (
+        lower.includes("taxi")
+      ) {
+
+        project.category =
+          "Taxi / Transport";
+
+      } else if (
+        lower.includes("shop") ||
+        lower.includes("shopping")
+      ) {
+
+        project.category =
+          "E-commerce";
+
+      } else if (
+        lower.includes("school") ||
+        lower.includes("education")
+      ) {
+
+        project.category =
+          "Education";
+
+      } else if (
+        lower.includes("hospital")
+      ) {
+
+        project.category =
+          "Healthcare";
+
+      } else if (
+        lower.includes("social")
+      ) {
+
+        project.category =
+          "Social Media";
+
+      } else if (
+        lower.includes("ai")
+      ) {
+
+        project.category =
+          "AI";
+
+      }
+
+
+      showSummary();
+
+    }
+
+
+    /*
+      =====================================================
+      SHOW SUMMARY
+      =====================================================
+    */
+
+    function showSummary() {
+
+      const summary =
+        document.getElementById("summary");
+
+
+      const content =
+        document.getElementById(
+          "summaryContent"
+        );
+
+
+      content.innerHTML = `
+
+        <div class="summary-item">
+          <strong>Bayani:</strong><br>
+          ${escapeHtml(
+            project.description ||
+            "Ba a kammala ba tukuna."
+          )}
+        </div>
+
+        <div class="summary-item">
+          <strong>Nau'in App:</strong><br>
+          ${escapeHtml(
+            project.category ||
+            "AI zai gano."
+          )}
+        </div>
+
+        <div class="summary-item">
+          <strong>Requirements:</strong><br>
+          Ana ci gaba da tattarawa ta AI Interview.
+        </div>
+
+      `;
+
+
+      summary.style.display =
+        "block";
+
+    }
+
+
+    /*
+      =====================================================
+      SAVE PROJECT
+      =====================================================
+    */
+
+    function saveProject() {
+
+      const projectData = {
+
+        ...project,
+
+        conversation:
+          conversation,
+
+        savedAt:
+          new Date().toISOString()
+
+      };
+
+
+      localStorage.setItem(
+        "creatorAppProject",
+        JSON.stringify(projectData)
+      );
+
+
+      showStatus(
+        "✅ An ajiye project ɗin a wannan browser.",
+        "success"
+      );
+
+    }
+
+
+    /*
+      =====================================================
+      PREPARE BUILD
+      =====================================================
+    */
+
+    function prepareBuild() {
+
+      saveProject();
+
+
+      showStatus(
+        "🏗️ An shirya project ɗin domin App Builder. Mataki na gaba zai haɗa Preview da Build.",
+        "success"
+      );
+
+    }
+
+
+    /*
+      =====================================================
+      NEW PROJECT
+      =====================================================
+    */
+
+    function startNewProject() {
+
+      if (
+        !confirm(
+          "Kana son fara sabon project?"
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      conversation = [];
+
+
+      project = {
+
+        appName: "",
+
+        description: "",
+
+        category: "",
+
+        users: [],
+
+        features: [],
+
+        pages: [],
+
+        database: [],
+
+        apis: [],
+
+        payments: [],
+
+        authentication: [],
+
+        files: [],
+
+        extraRequirements: ""
+
+      };
+
+
+      document.getElementById(
+        "chatBox"
+      ).innerHTML = `
+
+        <div class="message ai">
+
+          <strong>
+            🤖 Creator App AI
+          </strong>
+
+          Sannu! 👋
+
+          Wane irin app kake son ƙirƙira?
+
+          Ka bayyana min app ɗin da kake so da kalmominka.
+
+        </div>
+
+      `;
+
+
+      document.getElementById(
+        "summary"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "message"
+      ).value = "";
+
+
+      showStatus(
+        "An fara sabon project.",
+        "success"
+      );
+
+    }
+
+
+    /*
+      =====================================================
+      FILE NAME
+      =====================================================
+    */
+
+    function showFileName(
+      inputId,
+      outputId
+    ) {
+
+      const input =
+        document.getElementById(
+          inputId
+        );
+
+
+      const output =
+        document.getElementById(
+          outputId
+        );
+
+
+      if (
+        input.files &&
+        input.files.length > 0
+      ) {
+
+        output.textContent =
+          "An zaɓa: " +
+          input.files[0].name;
+
+      } else {
+
+        output.textContent =
+          "";
+
+      }
+
+    }
+
+
+    /*
+      =====================================================
+      STATUS
+      =====================================================
+    */
+
+    function showStatus(
+      message,
+      type
+    ) {
+
+      const status =
+        document.getElementById(
+          "status"
+        );
+
+
+      status.textContent =
+        message;
+
+
+      status.className =
+        "status " +
+        type;
+
+
+      status.style.display =
+        "block";
+
+    }
+
+
+    /*
+      =====================================================
+      SECURITY
+      =====================================================
+    */
+
+    function escapeHtml(
+      text
+    ) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.textContent =
+        text;
+
+
+      return div.innerHTML;
+
+    }
+
+
+    /*
+      =====================================================
+      ENTER KEY
+      =====================================================
+    */
+
+    document
+      .getElementById("message")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.key === "Enter" &&
+            !event.shiftKey
+          ) {
+
+            event.preventDefault();
+
+            sendMessage();
+
+          }
+
+        }
+      );
+
+
+    /*
+      =====================================================
+      LOAD SAVED PROJECT
+      =====================================================
+    */
+
+    try {
+
+      const saved =
+        localStorage.getItem(
+          "creatorAppProject"
+        );
+
+
+      if (saved) {
+
+        const data =
+          JSON.parse(saved);
+
+
+        if (data.conversation) {
+
+          conversation =
+            data.conversation;
+
+        }
+
+
+        if (data.description) {
+
+          project =
+            data;
+
+        }
+
+      }
+
+    } catch (error) {
+
+      console.log(
+        "No saved project."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
