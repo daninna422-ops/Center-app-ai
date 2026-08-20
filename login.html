@@ -1,49 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - Creator App AI</title>
-<link rel="stylesheet" href="style.css">
-</head>
 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
-<div class="container">
+<h2>Login</h2>
 
-<h1>🔐 Login</h1>
+<form id="loginForm">
+  <input type="email" id="email" placeholder="Email" required><br><br>
 
-<input
-id="email"
-type="email"
-placeholder="Email"
-style="width:100%;padding:12px;margin:10px 0;border-radius:8px;border:none;">
+  <input type="password" id="password" placeholder="Password" required><br><br>
 
-<input
-id="password"
-type="password"
-placeholder="Password"
-style="width:100%;padding:12px;margin:10px 0;border-radius:8px;border:none;">
+  <button type="submit">Login</button>
+</form>
 
-<button onclick="loginUser()">
-Login
-</button>
-
-<br><br>
-
-<button onclick="registerUser()">
-Create Account
-</button>
-
-<br><br>
-
-<a href="index.html">
-⬅ Back Home
-</a>
-
-</div>
-
-<script type="module" src="firebase.js"></script>
+<script type="module" src="app.js"></script>
 
 </body>
 </html>
