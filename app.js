@@ -1,14 +1,19 @@
-Create app.js
-// Creator App AI
+import { auth } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-console.log("Creator App AI Started");
+const loginForm = document.getElementById("loginForm");
 
-// Barka da zuwa
-function welcome() {
-    alert("Barka da zuwa Creator App AI 🚀");
-}
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-// Ana kiran sa idan an buɗe app
-window.onload = function () {
-    console.log("App Loaded");
-};
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Login successful!");
+    window.location.href = "dashboard.html";
+  } catch (error) {
+    alert(error.message);
+  }
+});
