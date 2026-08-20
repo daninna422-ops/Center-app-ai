@@ -1,217 +1,33 @@
 <!DOCTYPE html>
-<html lang="ha">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Center App AI - Settings</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-      transition: 0.3s;
-    }
-
-    .header {
-      background: #1261d6;
-      color: white;
-      padding: 25px 15px;
-      text-align: center;
-    }
-
-    .header .icon {
-      font-size: 45px;
-    }
-
-    .header h1 {
-      margin: 8px 0;
-      font-size: 28px;
-    }
-
-    .container {
-      max-width: 650px;
-      margin: 25px auto;
-      padding: 0 15px;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      margin-bottom: 18px;
-      border-radius: 16px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-    }
-
-    .card h2 {
-      margin-top: 0;
-      color: #1261d6;
-      font-size: 20px;
-    }
-
-    .setting {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 0;
-      border-bottom: 1px solid #e5e8ef;
-      gap: 15px;
-    }
-
-    .setting:last-child {
-      border-bottom: none;
-    }
-
-    .setting-info {
-      flex: 1;
-    }
-
-    .setting-title {
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    .setting-description {
-      color: #687386;
-      font-size: 13px;
-      margin-top: 4px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      border: 1px solid #ccd3df;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-
-    .save-button,
-    .logout-button,
-    .back-button {
-      display: block;
-      width: 100%;
-      border: none;
-      border-radius: 9px;
-      padding: 14px;
-      margin-top: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-    }
-
-    .save-button {
-      background: #1261d6;
-      color: white;
-    }
-
-    .logout-button {
-      background: #dc3545;
-      color: white;
-    }
-
-    .back-button {
-      background: #e9eef7;
-      color: #1261d6;
-    }
-
-    .switch {
-      position: relative;
-      width: 50px;
-      height: 28px;
-      flex-shrink: 0;
-    }
-
-    .switch input {
-      display: none;
-    }
-
-    .slider {
-      position: absolute;
-      inset: 0;
-      background: #bbb;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .slider:before {
-      content: "";
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      left: 3px;
-      top: 3px;
-      background: white;
-      border-radius: 50%;
-      transition: 0.3s;
-    }
-
-    .switch input:checked + .slider {
-      background: #1261d6;
-    }
-
-    .switch input:checked + .slider:before {
-      transform: translateX(22px);
-    }
-
-    .message {
-      display: none;
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 8px;
-      background: #e8fff1;
-      color: #087f3e;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    body.dark {
-      background: #101522;
-      color: white;
-    }
-
-    body.dark .card {
-      background: #1b2333;
-      color: white;
-    }
-
-    body.dark .setting {
-      border-color: #303a4d;
-    }
-
-    body.dark .setting-description {
-      color: #aeb8ca;
-    }
-
-    body.dark input,
-    body.dark select {
-      background: #101522;
-      color: white;
-      border-color: #3b465c;
-    }
-
-    body.dark .back-button {
-      background: #293449;
-      color: white;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Center App AI - Settings</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="header">
+<div class="container">
 
-    <div class="icon">⚙️</div>
+<h1>⚙️ Settings</h1>
 
-    <h1>Settings
+<p>Center App AI Settings</p>
+
+<label>OpenAI API Key</label><br>
+<input type="password" id="apiKey" placeholder="Enter your OpenAI API Key">
+
+<br><br>
+
+<button>Save Settings</button>
+
+<br><br>
+
+<a href="dashboard.html">
+<button>⬅ Back to Dashboard</button>
+</a>
+
+</div>
+
+</body>
+</html>
