@@ -482,7 +482,7 @@
         class="green"
         onclick="downloadGeneratedApp()"
       >
-        📥 Download App HTML
+        📥 Download App Html 
       </button>
 
 
@@ -518,7 +518,26 @@
       ></div>
 
 
-      <h3>JavaScript</h3>
+     document.getElementById('download-code-btn').addEventListener('click', () => {
+    // 1. Karɓo kod ɗin HTML da AI ta gina
+    const htmlCode = document.getElementById('generated-html') ? document.getElementById('generated-html').innerText : '';
+
+    if (!htmlCode) {
+        alert("Kada ka gaggawa, ƙirƙiri app tukuna kafin saukewa!");
+        return;
+    }
+
+    // 2. Mayar da shi fayil mai saukewa (.html)
+    const blob = new Blob([htmlCode], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'my-generated-app.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}); 
 
       <div
         id="jsCode"
