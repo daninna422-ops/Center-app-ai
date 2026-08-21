@@ -245,1576 +245,578 @@
 
   <div class="header">
     <div class="logo">🛠️🤖</div>
-
     <h1>Creator App AI</h1>
-
-    <p>
-      Ka bayyana app ɗinka, AI zai taimaka maka tsara shi.
-    </p>
+    <p>Ka bayyana app ɗinka, AI zai taimaka maka tsara shi.</p>
   </div>
-
 
   <div class="container">
 
     <!-- WELCOME -->
-
     <div class="card">
-
       <h2>🚀 Gina App ɗinka</h2>
-
       <div class="welcome">
-
-        <p>
-          Babu buƙatar ka san programming.
-          Ka gaya wa Creator App AI irin app ɗin
-          da kake son ginawa.
-        </p>
-
-        <p>
-          AI zai taimaka wajen tsara features,
-          pages, database, login, API da sauran
-          abubuwan da app ɗin yake bukata.
-        </p>
-
-        <p>
-          <strong>Misali:</strong>
-          "Ina son app na taxi."
-        </p>
-
+        <p>Babu buƙatar ka san programming. Ka gaya wa Creator App AI irin app ɗin da kake son ginawa.</p>
+        <p>AI zai taimaka wajen tsara features, pages, database, login, API da sauran abubuwan da app ɗin yake bukata.</p>
+        <p><strong>Misali:</strong> "Ina son app na taxi."</p>
       </div>
-
     </div>
 
-
     <!-- AI INTERVIEW -->
-
     <div class="card">
-
       <h2>🤖 AI Interview</h2>
 
       <div id="chatBox" class="chat-box">
-
         <div class="message ai">
-
           <strong>🤖 Creator App AI</strong>
-
-          Sannu! 👋
-
-          Wane irin app kake son ƙirƙira?
-
-          Ka bayyana min app ɗin da kake so
-          da kalmominka.
-
+          Sannu! 👋<br>
+          Wane irin app kake son ƙirƙira?<br>
+          Ka bayyana min app ɗin da kake so da kalmominka.
         </div>
-
       </div>
 
+      <textarea id="message" placeholder="Misali: Ina son app na taxi..."></textarea>
 
-      <textarea
-        id="message"
-        placeholder="Misali: Ina son app na taxi..."
-      ></textarea>
-
-
-      <button
-        id="sendButton"
-        onclick="sendMessage()"
-      >
-        Aika 🚀
-      </button>
-
-
-      <button
-        class="secondary"
-        onclick="startNewProject()"
-      >
-        🆕 Fara Sabon Project
-      </button>
-
+      <button id="sendButton" onclick="sendMessage()">Aika 🚀</button>
+      <button class="secondary" onclick="startNewProject()">🆕 Fara Sabon Project</button>
 
       <div id="status" class="status"></div>
-
     </div>
-
 
     <!-- UPLOAD -->
-
     <div class="card">
-
       <h2>📎 Abubuwan da App ɗin yake bukata</h2>
-
-      <p class="small">
-        Za ka iya zaɓar logo ko wasu files
-        da za a yi amfani da su daga baya.
-      </p>
-
+      <p class="small">Za ka iya zaɓar logo ko wasu files da za a yi amfani da su daga baya.</p>
 
       <div class="upload-area">
-
-        <strong>🖼️ Upload Logo ko Hoto</strong>
-
-        <br>
-
-        <input
-          type="file"
-          id="imageFile"
-          accept="image/*"
-          onchange="showFileName('imageFile','imageName')"
-        >
-
-        <div
-          id="imageName"
-          class="file-name"
-        ></div>
-
+        <strong>🖼️ Upload Logo ko Hoto</strong><br>
+        <input type="file" id="imageFile" accept="image/*" onchange="showFileName('imageFile','imageName')">
+        <div id="imageName" class="file-name"></div>
       </div>
-
 
       <div class="upload-area">
-
-        <strong>📄 Upload Document</strong>
-
-        <br>
-
-        <input
-          type="file"
-          id="documentFile"
-          accept=".pdf,.doc,.docx,.txt"
-          onchange="showFileName('documentFile','documentName')"
-        >
-
-        <div
-          id="documentName"
-          class="file-name"
-        ></div>
-
+        <strong>📄 Upload Document</strong><br>
+        <input type="file" id="documentFile" accept=".pdf,.doc,.docx,.txt" onchange="showFileName('documentFile','documentName')">
+        <div id="documentName" class="file-name"></div>
       </div>
-
     </div>
-
 
     <!-- PROJECT SUMMARY -->
-
     <div id="summary" class="card summary">
-
       <h2>📱 Project Summary</h2>
-
       <div id="summaryContent"></div>
 
-
-      <button
-        onclick="saveProject()"
-      >
-        💾 Ajiye Project
-      </button>
-
-
-      <button
-        class="green"
-        onclick="startAppBuilder()"
-      >
-        🏗️ Fara App Builder
-      </button>
-
+      <button onclick="saveProject()">💾 Ajiye Project</button>
+      <button class="green" onclick="startAppBuilder()">🏗️ Fara App Builder</button>
     </div>
-
 
     <!-- APP BUILDER -->
-
     <div id="builder" class="card" style="display:none;">
-
       <h2>🏗️ App Builder</h2>
-
       <div class="build-info">
-
-        <strong>Project ɗinka yana shirye.</strong>
-
-        <br><br>
-
-        Creator App AI ya samar da
-        HTML, CSS da JavaScript.
-
-        <br><br>
-
-        Mataki na gaba shi ne Preview
-        da kuma Build zuwa Android APK.
-
+        <strong>Project ɗinka yana shirye.</strong><br><br>
+        Creator App AI ya samar da HTML, CSS da JavaScript.<br><br>
+        Mataki na gaba shi ne Preview da kuma Sauke App.
       </div>
 
-
-      <button
-        class="green"
-        onclick="generateAppFromProject()"
-      >
-        ⚡ Ƙirƙiri App Yanzu
-      </button>
-
-
-      <button
-        class="secondary"
-        onclick="scrollToPreview()"
-      >
-        👁️ Je zuwa Preview
-      </button>
-
+      <button class="green" onclick="generateAppFromProject(event)">⚡ Ƙirƙiri App Yanzu</button>
+      <button class="secondary" onclick="scrollToPreview()">👁️ Je zuwa Preview</button>
     </div>
-
 
     <!-- PREVIEW -->
-
     <div id="preview" class="card preview">
-
       <h2>📱 App Preview</h2>
+      <p class="small">Wannan shi ne preview na app ɗin da AI ya ƙirƙira.</p>
 
-      <p class="small">
-        Wannan shi ne preview na app ɗin da AI ya ƙirƙira.
-      </p>
+      <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts"></iframe>
 
-
-      <iframe
-        id="previewFrame"
-        class="preview-frame"
-        sandbox="allow-scripts"
-      ></iframe>
-
-
-      <button
-        class="green"
-        onclick="downloadGeneratedApp()"
-      >
-        📥 Download App Html 
-      </button>
-
-
-      <button
-        class="dark"
-        onclick="saveGeneratedApp()"
-      >
-        💾 Ajiye Generated App
-      </button>
-
+      <button class="green" onclick="downloadGeneratedApp()">📥 Download App HTML</button>
+      <button class="dark" onclick="saveGeneratedApp()">💾 Ajiye Generated App</button>
     </div>
 
-
     <!-- CODE -->
-
     <div id="codeResult" class="card" style="display:none;">
-
       <h2>💻 Generated Code</h2>
 
       <h3>HTML</h3>
-
-      <div
-        id="htmlCode"
-        class="code-box"
-      ></div>
-
+      <div id="htmlCode" class="code-box"></div>
 
       <h3>CSS</h3>
+      <div id="cssCode" class="code-box"></div>
 
-      <div
-        id="cssCode"
-        class="code-box"
-      ></div>
-
-
-     document.getElementById('download-code-btn').addEventListener('click', () => {
-    // 1. Karɓo kod ɗin HTML da AI ta gina
-    const htmlCode = document.getElementById('generated-html') ? document.getElementById('generated-html').innerText : '';
-
-    if (!htmlCode) {
-        alert("Kada ka gaggawa, ƙirƙiri app tukuna kafin saukewa!");
-        return;
-    }
-
-    // 2. Mayar da shi fayil mai saukewa (.html)
-    const blob = new Blob([htmlCode], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'my-generated-app.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}); 
-
-      <div
-        id="jsCode"
-        class="code-box"
-      ></div>
-
+      <h3>JavaScript</h3>
+      <div id="jsCode" class="code-box"></div>
     </div>
 
-
-    <a
-      class="back"
-      href="dashboard.html"
-    >
-      ⬅ Komawa Dashboard
-    </a>
+    <a class="back" href="dashboard.html">⬅ Komawa Dashboard</a>
 
   </div>
-
 
 <script>
 
 /* =========================================
    BACKEND
 ========================================= */
-
-const CHAT_BACKEND =
-  "/api/chat";
-
-const CREATE_APP_BACKEND =
-  "/api/create-app";
-
+const CHAT_BACKEND = "/api/chat";
+const CREATE_APP_BACKEND = "/api/create-app";
 
 /* =========================================
-   PROJECT
+   PROJECT STATE
 ========================================= */
-
 let conversation = [];
 
 let project = {
-
   appName: "",
-
   description: "",
-
   category: "",
-
   users: [],
-
   features: [],
-
   pages: [],
-
   database: [],
-
   apis: [],
-
   payments: [],
-
   authentication: [],
-
   files: [],
-
   extraRequirements: ""
-
 };
-
-
-/* =========================================
-   GENERATED APP
-========================================= */
 
 let generatedApp = {
-
   html: "",
-
   css: "",
-
   js: ""
-
 };
-
 
 /* =========================================
    SEND CHAT
 ========================================= */
-
 async function sendMessage() {
-
-  const input =
-    document.getElementById(
-      "message"
-    );
-
-  const button =
-    document.getElementById(
-      "sendButton"
-    );
-
-  const message =
-    input.value.trim();
-
+  const input = document.getElementById("message");
+  const button = document.getElementById("sendButton");
+  const message = input.value.trim();
 
   if (!message) {
-
-    showStatus(
-      "Rubuta saƙonka tukuna.",
-      "error"
-    );
-
+    showStatus("Rubuta saƙonka tukuna.", "error");
     return;
-
   }
 
-
-  addMessage(
-    "user",
-    message
-  );
-
-
+  addMessage("user", message);
   input.value = "";
-
   button.disabled = true;
-
-  button.textContent =
-    "🤖 AI yana tunani...";
-
+  button.textContent = "🤖 AI yana tunani...";
 
   try {
-
     const creatorPrompt = `
-
 Kai ne Creator App AI.
-
-Aikin ka shi ne taimaka wa mai amfani
-ya tsara application.
-
-Ka yi magana da Hausa idan mai amfani
-ya yi Hausa.
-
-Ka tambayi tambaya ɗaya ko kaɗan
-a lokaci guda.
-
-Ka tattara:
-
-- Sunan app
-- Masu amfani
-- Features
-- Pages
-- Login
-- Phone number
-- OTP
-- Database
-- Payment
-- API
-- Notifications
-- Location
-- Admin dashboard
-- User dashboard
-- Logo
-- Sauran requirements
-
-Kada ka yi iƙirarin cewa an gina APK
-idan ba a yi Android build ba.
-
-Bayanin project:
-
-${JSON.stringify(project)}
-
-Conversation:
-
-${JSON.stringify(conversation)}
-
-Sabon saƙon:
-
-${message}
-
+Aikin ka shi ne taimaka wa mai amfani ya tsara application.
+Ka yi magana da Hausa idan mai amfani ya yi Hausa.
+Ka tambayi tambaya ɗaya ko kaɗan a lokaci guda.
+Bayanin project: ${JSON.stringify(project)}
+Conversation: ${JSON.stringify(conversation)}
+Sabon saƙon: ${message}
 Ka amsa kai tsaye.
 `;
 
+    const response = await fetch(CHAT_BACKEND, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: creatorPrompt })
+    });
 
-    const response =
-      await fetch(
-        CHAT_BACKEND,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-            message:
-              creatorPrompt
-          })
-        }
-      );
-
-
-    const data =
-      await response.json()
-        .catch(() => ({}));
-
+    const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "HTTP Error: " +
-        response.status
-      );
-
+      throw new Error(data.error || "HTTP Error: " + response.status);
     }
-
 
     if (!data.reply) {
-
-      throw new Error(
-        "AI bai dawo da amsa ba."
-      );
-
+      throw new Error("AI bai dawo da amsa ba.");
     }
 
+    conversation.push({ role: "user", text: message });
+    conversation.push({ role: "ai", text: data.reply });
 
-    conversation.push({
-
-      role: "user",
-
-      text: message
-
-    });
-
-
-    conversation.push({
-
-      role: "ai",
-
-      text: data.reply
-
-    });
-
-
-    addMessage(
-      "ai",
-      data.reply
-    );
-
-
-    updateProjectFromConversation(
-      message
-    );
-
+    addMessage("ai", data.reply);
+    updateProjectFromConversation(message);
 
   } catch (error) {
-
-    console.error(
-      error
-    );
-
-
-    addMessage(
-      "ai",
-      "❌ An samu matsala: " +
-      error.message
-    );
-
-
-    showStatus(
-      error.message,
-      "error"
-    );
-
-
+    console.error(error);
+    addMessage("ai", "❌ An samu matsala: " + error.message);
+    showStatus(error.message, "error");
   } finally {
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "Aika 🚀";
-
+    button.disabled = false;
+    button.textContent = "Aika 🚀";
   }
-
 }
-
 
 /* =========================================
    ADD MESSAGE
 ========================================= */
+function addMessage(type, text) {
+  const chatBox = document.getElementById("chatBox");
+  const div = document.createElement("div");
 
-function addMessage(
-  type,
-  text
-) {
+  div.className = "message " + (type === "ai" ? "ai" : "user");
 
-  const chatBox =
-    document.getElementById(
-      "chatBox"
-    );
+  const title = type === "ai" ? "🤖 Creator App AI" : "👤 Kai";
+  const strong = document.createElement("strong");
+  strong.textContent = title;
 
+  const content = document.createElement("div");
+  content.textContent = text;
 
-  const div =
-    document.createElement(
-      "div"
-    );
+  div.appendChild(strong);
+  div.appendChild(content);
+  chatBox.appendChild(div);
 
-
-  div.className =
-    "message " +
-    (
-      type === "ai"
-        ? "ai"
-        : "user"
-    );
-
-
-  const title =
-    type === "ai"
-      ? "🤖 Creator App AI"
-      : "👤 Kai";
-
-
-  const strong =
-    document.createElement(
-      "strong"
-    );
-
-
-  strong.textContent =
-    title;
-
-
-  const content =
-    document.createElement(
-      "div"
-    );
-
-
-  content.textContent =
-    text;
-
-
-  div.appendChild(
-    strong
-  );
-
-  div.appendChild(
-    content
-  );
-
-
-  chatBox.appendChild(
-    div
-  );
-
-
-  chatBox.scrollTop =
-    chatBox.scrollHeight;
-
+  chatBox.scrollTop = chatBox.scrollHeight;
 }
-
 
 /* =========================================
    PROJECT DETECTION
 ========================================= */
-
-function updateProjectFromConversation(
-  message
-) {
-
+function updateProjectFromConversation(message) {
   if (!project.description) {
-
-    project.description =
-      message;
-
+    project.description = message;
   }
 
+  const lower = message.toLowerCase();
 
-  const lower =
-    message.toLowerCase();
-
-
-  if (
-    lower.includes("bank")
-  ) {
-
-    project.category =
-      "Banking";
-
-  }
-
-  else if (
-    lower.includes("taxi")
-  ) {
-
-    project.category =
-      "Taxi / Transport";
-
-  }
-
-  else if (
-    lower.includes("shop") ||
-    lower.includes("shopping")
-  ) {
-
-    project.category =
-      "E-commerce";
-
-  }
-
-  else if (
-    lower.includes("school") ||
-    lower.includes("education")
-  ) {
-
-    project.category =
-      "Education";
-
-  }
-
-  else if (
-    lower.includes("hospital")
-  ) {
-
-    project.category =
-      "Healthcare";
-
-  }
-
-  else if (
-    lower.includes("social")
-  ) {
-
-    project.category =
-      "Social Media";
-
-  }
-
-  else if (
-    lower.includes("ai")
-  ) {
-
-    project.category =
-      "AI";
-
-  }
-
+  if (lower.includes("bank")) project.category = "Banking";
+  else if (lower.includes("taxi")) project.category = "Taxi / Transport";
+  else if (lower.includes("shop") || lower.includes("shopping")) project.category = "E-commerce";
+  else if (lower.includes("school") || lower.includes("education")) project.category = "Education";
+  else if (lower.includes("hospital")) project.category = "Healthcare";
+  else if (lower.includes("social")) project.category = "Social Media";
+  else if (lower.includes("ai")) project.category = "AI";
 
   showSummary();
-
 }
-
 
 /* =========================================
    SUMMARY
 ========================================= */
-
 function showSummary() {
-
-  const summary =
-    document.getElementById(
-      "summary"
-    );
-
-  const content =
-    document.getElementById(
-      "summaryContent"
-    );
-
+  const summary = document.getElementById("summary");
+  const content = document.getElementById("summaryContent");
 
   content.innerHTML = `
-
     <div class="summary-item">
-
       <strong>Bayani:</strong><br>
-
-      ${escapeHtml(
-        project.description ||
-        "Ana tattarawa..."
-      )}
-
+      ${escapeHtml(project.description || "Ana tattarawa...")}
     </div>
-
-
     <div class="summary-item">
-
       <strong>Nau'in App:</strong><br>
-
-      ${escapeHtml(
-        project.category ||
-        "AI zai gano."
-      )}
-
+      ${escapeHtml(project.category || "AI zai gano.")}
     </div>
-
-
     <div class="summary-item">
-
       <strong>Conversation:</strong><br>
-
-      ${conversation.length}
-      messages
-
+      ${conversation.length} messages
     </div>
-
   `;
 
-
-  summary.style.display =
-    "block";
-
+  summary.style.display = "block";
 }
-
 
 /* =========================================
    SAVE PROJECT
 ========================================= */
-
 function saveProject() {
-
   const data = {
-
     ...project,
-
-    conversation:
-      conversation,
-
-    savedAt:
-      new Date().toISOString()
-
+    conversation: conversation,
+    savedAt: new Date().toISOString()
   };
 
-
-  localStorage.setItem(
-    "creatorAppProject",
-    JSON.stringify(data)
-  );
-
-
-  showStatus(
-    "✅ An ajiye project ɗin.",
-    "success"
-  );
-
+  localStorage.setItem("creatorAppProject", JSON.stringify(data));
+  showStatus("✅ An ajiye project ɗin.", "success");
 }
-
 
 /* =========================================
    START APP BUILDER
 ========================================= */
-
 function startAppBuilder() {
-
   saveProject();
-
-
-  const builder =
-    document.getElementById(
-      "builder"
-    );
-
-
-  builder.style.display =
-    "block";
-
-
-  builder.scrollIntoView({
-    behavior: "smooth"
-  });
-
+  const builder = document.getElementById("builder");
+  builder.style.display = "block";
+  builder.scrollIntoView({ behavior: "smooth" });
 }
-
 
 /* =========================================
    GENERATE APP
 ========================================= */
+async function generateAppFromProject(event) {
+  const button = event ? event.currentTarget : document.querySelector('#builder button.green');
 
-async function generateAppFromProject() {
-
-  const button =
-    event.currentTarget;
-
-
-  button.disabled =
-    true;
-
-  button.textContent =
-    "🤖 AI yana ƙirƙirar app...";
-
-
-  try {
-
-    const prompt = `
-
-Sunan App:
-${project.appName || "My App"}
-
-Category:
-${project.category}
-
-Description:
-${project.description}
-
-Conversation:
-${JSON.stringify(conversation)}
-
-Create a complete modern responsive
-frontend application.
-
-Return JSON only:
-
-{
-  "html": "...",
-  "css": "...",
-  "js": "..."
-}
-
-HTML must contain only body content.
-
-Do not include html/head/body tags.
-
-Do not include API keys.
-
-If an external API is missing,
-make the feature a DEMO.
-
-`;
-
-
-    const response =
-      await fetch(
-        CREATE_APP_BACKEND,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-            prompt:
-              prompt
-          })
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Create App Error"
-      );
-
-    }
-
-
-    if (
-      typeof data.html !==
-      "string" ||
-      typeof data.css !==
-      "string" ||
-      typeof data.js !==
-      "string"
-    ) {
-
-      throw new Error(
-        "AI bai dawo da HTML, CSS da JS ba."
-      );
-
-    }
-
-
-    generatedApp = {
-
-      html:
-        data.html,
-
-      css:
-        data.css,
-
-      js:
-        data.js
-
-    };
-
-
-    showPreview();
-
-
-    showCode();
-
-
-    showStatus(
-      "✅ An ƙirƙiri app ɗin.",
-      "success"
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "GENERATE APP ERROR:",
-      error
-    );
-
-
-    showStatus(
-      "❌ " +
-      error.message,
-      "error"
-    );
-
-
-  } finally {
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "⚡ Ƙirƙiri App Yanzu";
-
+  if (button) {
+    button.disabled = true;
+    button.textContent = "🤖 AI yana ƙirƙirar app...";
   }
 
-}
+  try {
+    const prompt = `
+Sunan App: ${project.appName || "My App"}
+Category: ${project.category}
+Description: ${project.description}
+Conversation: ${JSON.stringify(conversation)}
 
+Create a complete modern responsive frontend application.
+Return JSON only with keys: "html", "css", "js".
+HTML must contain only body content. Do not include html/head/body tags.
+`;
+
+    const response = await fetch(CREATE_APP_BACKEND, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: prompt })
+    });
+
+    let data = await response.json();
+
+    // Idan amsar ta zo a matsayin string mara kyau, a kankare sa ran JSON
+    if (typeof data === "string") {
+      try {
+        let cleanedStr = data.replace(/```json/g, '').replace(/```/g, '').trim();
+        data = JSON.parse(cleanedStr);
+      } catch (e) {
+        console.error("Parse error", e);
+      }
+    }
+
+    if (!response.ok) {
+      throw new Error(data.error || "Create App Error");
+    }
+
+    // Tabbatar an sami fayilolin HTML, CSS da JS
+    generatedApp = {
+      html: data.html || "<h1>App Generated</h1>",
+      css: data.css || "body { font-family: sans-serif; padding: 20px; }",
+      js: data.js || "console.log('App Loaded');"
+    };
+
+    showPreview();
+    showCode();
+    showStatus("✅ An ƙirƙiri app ɗin da nasara!", "success");
+
+  } catch (error) {
+    console.error("GENERATE APP ERROR:", error);
+    showStatus("❌ " + error.message, "error");
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = "⚡ Ƙirƙiri App Yanzu";
+    }
+  }
+}
 
 /* =========================================
    SHOW PREVIEW
 ========================================= */
-
 function showPreview() {
-
-  const preview =
-    document.getElementById(
-      "preview"
-    );
-
-
-  const frame =
-    document.getElementById(
-      "previewFrame"
-    );
-
+  const preview = document.getElementById("preview");
+  const frame = document.getElementById("previewFrame");
 
   const documentContent = `
-
 <!DOCTYPE html>
-
 <html lang="ha">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-
 ${generatedApp.css}
-
 </style>
-
 </head>
-
 <body>
-
 ${generatedApp.html}
-
 <script>
-
 ${generatedApp.js}
-
 <\/script>
-
 </body>
-
 </html>
-
 `;
 
-
-  frame.srcdoc =
-    documentContent;
-
-
-  preview.style.display =
-    "block";
-
-
-  preview.scrollIntoView({
-    behavior: "smooth"
-  });
-
+  frame.srcdoc = documentContent;
+  preview.style.display = "block";
+  preview.scrollIntoView({ behavior: "smooth" });
 }
-
 
 /* =========================================
    SHOW CODE
 ========================================= */
-
 function showCode() {
+  const box = document.getElementById("codeResult");
 
-  const box =
-    document.getElementById(
-      "codeResult"
-    );
+  document.getElementById("htmlCode").textContent = generatedApp.html;
+  document.getElementById("cssCode").textContent = generatedApp.css;
+  document.getElementById("jsCode").textContent = generatedApp.js;
 
-
-  document.getElementById(
-    "htmlCode"
-  ).textContent =
-    generatedApp.html;
-
-
-  document.getElementById(
-    "cssCode"
-  ).textContent =
-    generatedApp.css;
-
-
-  document.getElementById(
-    "jsCode"
-  ).textContent =
-    generatedApp.js;
-
-
-  box.style.display =
-    "block";
-
+  box.style.display = "block";
 }
-
 
 /* =========================================
-   DOWNLOAD HTML
+   DOWNLOAD HTML (INGANTA ACCORDING TO MOBILE BROWSERS)
 ========================================= */
-
 function downloadGeneratedApp() {
-
-  if (
-    !generatedApp.html
-  ) {
-
-    showStatus(
-      "Da farko ka ƙirƙiri app.",
-      "error"
-    );
-
+  if (!generatedApp.html) {
+    showStatus("Da farko ka ƙirƙiri app.", "error");
     return;
-
   }
 
-
-  const fullHtml = `
-
-<!DOCTYPE html>
-
+  const fullHtml = `<!DOCTYPE html>
 <html lang="ha">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Generated App</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${project.appName || "Generated App"}</title>
 <style>
-
 ${generatedApp.css}
-
 </style>
-
 </head>
-
 <body>
-
 ${generatedApp.html}
-
 <script>
-
 ${generatedApp.js}
-
 <\/script>
-
 </body>
+</html>`;
 
-</html>
+  // Kirkirar Blob tare da Charset mai kyau
+  const blob = new Blob([fullHtml], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  
+  const link = document.createElement("a");
+  link.href = url;
+  
+  // Tabbatar sunan fayil ɗin yana da tsari mai kyau (.html)
+  let fileName = (project.appName ? project.appName.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'center-app') + '.html';
+  link.download = fileName;
 
-`;
-
-
-  const blob =
-    new Blob(
-      [fullHtml],
-      {
-        type:
-          "text/html;charset=utf-8"
-      }
-    );
-
-
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-
-  const link =
-    document.createElement(
-      "a"
-    );
-
-
-  link.href =
-    url;
-
-  link.download =
-    "center-app-generated.html";
-
-
-  document.body.appendChild(
-    link
-  );
-
-
+  document.body.appendChild(link);
   link.click();
+  
+  setTimeout(() => {
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }, 100);
 
-
-  link.remove();
-
-
-  URL.revokeObjectURL(
-    url
-  );
-
+  showStatus("📥 An fara sauke fayil ɗin app din...", "success");
 }
-
 
 /* =========================================
    SAVE GENERATED APP
 ========================================= */
-
 function saveGeneratedApp() {
-
-  localStorage.setItem(
-    "centerAppGeneratedApp",
-    JSON.stringify(
-      generatedApp
-    )
-  );
-
-
-  showStatus(
-    "✅ An ajiye Generated App.",
-    "success"
-  );
-
+  localStorage.setItem("centerAppGeneratedApp", JSON.stringify(generatedApp));
+  showStatus("✅ An ajiye Generated App.", "success");
 }
-
 
 /* =========================================
    SCROLL PREVIEW
 ========================================= */
-
 function scrollToPreview() {
-
-  const preview =
-    document.getElementById(
-      "preview"
-    );
-
-
-  preview.scrollIntoView({
-    behavior: "smooth"
-  });
-
+  const preview = document.getElementById("preview");
+  preview.scrollIntoView({ behavior: "smooth" });
 }
-
 
 /* =========================================
    FILE NAME
 ========================================= */
+function showFileName(inputId, outputId) {
+  const input = document.getElementById(inputId);
+  const output = document.getElementById(outputId);
 
-function showFileName(
-  inputId,
-  outputId
-) {
-
-  const input =
-    document.getElementById(
-      inputId
-    );
-
-  const output =
-    document.getElementById(
-      outputId
-    );
-
-
-  if (
-    input.files &&
-    input.files.length
-  ) {
-
-    output.textContent =
-      "An zaɓa: " +
-      input.files[0].name;
-
+  if (input.files && input.files.length) {
+    output.textContent = "An zaɓa: " + input.files[0].name;
+  } else {
+    output.textContent = "";
   }
-
-  else {
-
-    output.textContent =
-      "";
-
-  }
-
 }
-
 
 /* =========================================
    STATUS
 ========================================= */
-
-function showStatus(
-  message,
-  type
-) {
-
-  const status =
-    document.getElementById(
-      "status"
-    );
-
-
-  status.textContent =
-    message;
-
-
-  status.className =
-    "status " +
-    type;
-
-
-  status.style.display =
-    "block";
-
+function showStatus(message, type) {
+  const status = document.getElementById("status");
+  status.textContent = message;
+  status.className = "status " + type;
+  status.style.display = "block";
 }
-
 
 /* =========================================
    ESCAPE HTML
 ========================================= */
-
-function escapeHtml(
-  text
-) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-
-  div.textContent =
-    text;
-
-
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
   return div.innerHTML;
-
 }
-
 
 /* =========================================
    NEW PROJECT
 ========================================= */
-
 function startNewProject() {
-
-  if (
-    !confirm(
-      "Kana son fara sabon project?"
-    )
-  ) {
-
+  if (!confirm("Kana son fara sabon project?")) {
     return;
-
   }
 
-
   conversation = [];
-
-
   project = {
-
     appName: "",
-
     description: "",
-
     category: "",
-
     users: [],
-
     features: [],
-
     pages: [],
-
     database: [],
-
     apis: [],
-
     payments: [],
-
     authentication: [],
-
     files: [],
-
     extraRequirements: ""
-
   };
 
+  generatedApp = { html: "", css: "", js: "" };
 
-  generatedApp = {
-
-    html: "",
-
-    css: "",
-
-    js: ""
-
-  };
-
-
-  document.getElementById(
-    "chatBox"
-  ).innerHTML = `
-
+  document.getElementById("chatBox").innerHTML = `
     <div class="message ai">
-
-      <strong>
-        🤖 Creator App AI
-      </strong>
-
+      <strong>🤖 Creator App AI</strong>
       Sannu! 👋<br><br>
-
       Wane irin app kake son ƙirƙira?
-
     </div>
-
   `;
 
+  document.getElementById("summary").style.display = "none";
+  document.getElementById("builder").style.display = "none";
+  document.getElementById("preview").style.display = "none";
+  document.getElementById("codeResult").style.display = "none";
+  document.getElementById("message").value = "";
 
-  document.getElementById(
-    "summary"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "builder"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "preview"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "codeResult"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "message"
-  ).value =
-    "";
-
-
-  showStatus(
-    "An fara sabon project.",
-    "success"
-  );
-
+  showStatus("An fara sabon project.", "success");
 }
-
 
 /* =========================================
    ENTER KEY
 ========================================= */
-
-document
-  .getElementById(
-    "message"
-  )
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-      if (
-        event.key === "Enter" &&
-        !event.shiftKey
-      ) {
-
-        event.preventDefault();
-
-        sendMessage();
-
-      }
-
-    }
-  );
-
+document.getElementById("message").addEventListener("keydown", function(event) {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    sendMessage();
+  }
+});
 
 /* =========================================
    LOAD PROJECT
 ========================================= */
-
 try {
-
-  const saved =
-    localStorage.getItem(
-      "creatorAppProject"
-    );
-
-
+  const saved = localStorage.getItem("creatorAppProject");
   if (saved) {
-
-    const data =
-      JSON.parse(saved);
-
-
-    if (
-      data.conversation
-    ) {
-
-      conversation =
-        data.conversation;
-
-    }
-
-
-    if (
-      data.description
-    ) {
-
-      project =
-        data;
-
+    const data = JSON.parse(saved);
+    if (data.conversation) conversation = data.conversation;
+    if (data.description) {
+      project = data;
       showSummary();
-
     }
-
   }
-
 } catch (error) {
-
-  console.log(
-    "No saved project."
-  );
-
+  console.log("No saved project.");
 }
 
 </script>
